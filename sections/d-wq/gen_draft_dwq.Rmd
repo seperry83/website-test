@@ -1,0 +1,50 @@
+<!-- # Generate Draft DWQ Report -->
+
+<!-- Code to generate draft versions of the D-WQ Annual Report and related website sections. -->
+
+<!-- Press "run" once you've looked over the "Relevant Variables" section to generate draft report. -->
+
+<!-- ## Output -->
+
+<!-- Look in the "draft-website-files" folder. All files named "00-<RMD FILE NAME>.html" will open the draft website version. -->
+
+<!-- Right-click and select "view in web browser" to see. -->
+
+<!-- ## Relevant Variables -->
+
+<!-- Edit these variables as you choose. -->
+
+<!-- ```{r message = FALSE, warning = FALSE} -->
+<!-- # Do you want to download new data from EDI? -->
+<!-- download_data <- FALSE # TRUE/FALSE -->
+
+<!-- # Do you want to generate new plots? -->
+<!-- generate_new_plots <- FALSE # TRUE/FALSE -->
+
+<!-- # Do you want auto-generated text to be red in the draft report? -->
+<!-- autogen_color <- FALSE # TRUE/FALSE -->
+<!-- ``` -->
+
+<!-- ------------------------------------------------------------------------ -->
+
+<!-- # Code Starts Here ([**DO NOT TOUCH**]{.underline}) -->
+
+<!-- ```{r results = 'hide', message = FALSE, warning = FALSE} -->
+<!-- file_sources <- list.files(path = c('admin/setup_scripts/00_global_scripts','admin/setup_scripts/01_dwq_scripts'), pattern = '.R$', full.names=TRUE, recursive = TRUE) -->
+<!-- sapply(file_sources, source, .GlobalEnv) -->
+
+<!-- if(download_data){ -->
+<!--   download_dwq_data() -->
+<!-- } -->
+
+<!-- if(generate_new_plots){ -->
+<!--   func_dwq_graphs() -->
+<!-- } -->
+
+<!-- bookdown::render_book( -->
+<!--   input = 'admin/config-yaml.Rmd', -->
+<!--   output_dir = './sections/d-wq/draft-website-files', -->
+<!--   config_file = 'admin/individ-config-files/_dwq-bookdown.yml', -->
+<!--   output_format = 'bookdown::gitbook' -->
+<!-- ) -->
+<!-- ``` -->

@@ -1,0 +1,7 @@
+﻿Parameter,Units,Frequency
+Water Temperature,°C,15 minute instantaneous
+Specific Conductance,μS/cm,15 minute instantaneous
+DO,mg/L,15 minute instantaneous
+pH,unitless,15 minute instantaneous
+Turbidity,FNU,15 minute instantaneous
+Fluorescence,µg/L,15 minute instantaneous
