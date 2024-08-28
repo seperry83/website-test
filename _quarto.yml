@@ -9,10 +9,7 @@ website:
   page-footer:
     background: '#e8f1f5'
     center: |
-        ![](/admin/figures/usbr-logo.jpg){fig-alt="USBR logo" width=50px height=50px}
-        ![](/admin/figures/dwr-logo.png){fig-alt="DWR logo" width=50px height=50px}
-        ![](/admin/figures/iep-logo.jpg){fig-alt="IEP logo" width=50px height=50px}
-        ![](/admin/figures/cdfw-logo.png){fig-alt="CDFW logo" width=50px height=50px}
+        ![](/admin/figures/website-logo-EMP.png){fig-alt="DWR, USBR, CDFW, and IEP logos" height=50px}
 
   navbar:
     background: '#e8f1f5'
@@ -31,7 +28,7 @@ website:
           - text: "Continuous Water Quality"
             href: sections/c-wq/Rmd-files/00-cwq-info.qmd
           - text: "Discrete Water Quality"
-            href: sections/d-wq/Rmd-files/00-dwq-info.qmd
+            href: sections/d-wq/Rmd-files/00-dwq-report.qmd
           - text: "Benthic Invertebrates"
             href: "https://github.com/quarto-dev/quarto-cli/discussions"
           - text: "Phytoplankton"
@@ -43,39 +40,33 @@ website:
           - text: "Veliger Monitoring Program"
             href: "https://github.com/quarto-dev/quarto-cli/discussions"
       - text: "Contact Us"
-        menu:
-          - text: "General Questions"
-            href: "https://github.com/quarto-dev/quarto-cli/issues"
-          - text: "Website Help"
-            href: "https://github.com/quarto-dev/quarto-cli/discussions"
+        href: "mailto:theodore.flynn@water.ca.gov"
     # right:
     #   - text: '![](admin/figures/usbr-logo.jpg)'
     
 
-  sidebar:
-    - id: landing
-    
-    - id: cwq
-      collapse-level: 2
-      contents:
-        - section: "Continuous Water Quality"
-          contents:
-            - sections/c-wq/Rmd-files/00-cwq-info.qmd
-            - text: "Current Report"
-              href: sections/c-wq/Rmd-files/00-cwq-report.qmd
-            - text: "Archived Reports"
-              href: sections/c-wq/Rmd-files/00-cwq-archive.qmd
-
-    - id: dwq
-      collapse-level: 2
-      contents:
-        - section: "Discrete Water Quality"
-          contents:
-            - sections/d-wq/Rmd-files/00-dwq-info.qmd
-            - text: "Current Report"
-              href: sections/d-wq/Rmd-files/00-dwq-report.qmd
-            - text: "Archived Reports"
-              href: sections/d-wq/Rmd-files/00-dwq-archive.qmd
+  # sidebar:
+  #   - id: cwq
+  #     collapse-level: 2
+  #     contents:
+  #       - section: "Continuous Water Quality"
+  #         contents:
+  #           - sections/c-wq/Rmd-files/00-cwq-info.qmd
+  #           - text: "Current Report"
+  #             href: sections/c-wq/Rmd-files/00-cwq-report.qmd
+  #           - text: "Archived Reports"
+  #             href: sections/c-wq/Rmd-files/00-cwq-archive.qmd
+  # 
+  #   - id: dwq
+  #     collapse-level: 2
+  #     contents:
+  #       - section: "Discrete Water Quality"
+  #         contents:
+  #           - sections/d-wq/Rmd-files/00-dwq-info.qmd
+  #           - text: "Current Report"
+  #             href: sections/d-wq/Rmd-files/00-dwq-report.qmd
+  #           - text: "Archived Reports"
+  #             href: sections/d-wq/Rmd-files/00-dwq-archive.qmd
 
 format:
   html:

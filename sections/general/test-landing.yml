@@ -1,0 +1,13 @@
+
+- links:
+    - text: "Continuous Water Quality"
+      href: ../moretests/00-cwq-info-test.qmd
+    - text: "Discrete Water Quality"
+      href: ../moretests/00-cwq-info-test.qmd
+    - text: "Benthic Invertebrates"
+      href: ../moretests/00-cwq-info-test.qmd
+    - text: "Phytoplankton"
+      href: ../moretests/00-cwq-info-test.qmd
+    - text: ""
+    - text: "Zooplankton"
+      href: ../moretests/00-cwq-info-test.qmd
