@@ -1,5 +1,0 @@
----
-title: "Archived Reports"
----
-
-Old EMP continuous water quality reports can be found [here](https://github.com/emp-des/emp-reports/tree/gh-pages/admin/archive/c-wq).

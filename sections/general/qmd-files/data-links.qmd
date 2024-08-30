@@ -1,0 +1,70 @@
+---
+title: "Data Links"
+---
+
+## Complete Datasets 
+[**Continuous Water Quality**] <!-- (`r get_edi_url(1177)`) -->
+
+Contact: Michelle Nelson ([Michelle.Nelson\@water.ca.gov](mailto:Michelle.Nelson@water.ca.gov){.email})
+
+[**Discrete Water Quality**] <!-- (`r get_edi_url(458)`) -->
+
+Contact: Julianna Manning ([Michelle.Nelson\@water.ca.gov](mailto:Michelle.Nelson@water.ca.gov){.email})
+
+[**Benthic Invertebrates**] <!-- (`r get_edi_url(1036)`) -->
+
+Contact: Betsy Wells ([Elizabeth.Wells\@water.ca.gov](mailto:Elizabeth.Wells@water.ca.gov){.email})
+
+[**Phytoplankton**] <!-- (`r get_edi_url(1320)`) -->
+
+Contact: Tiffany Brown ([Tiffany.Brown\@water.ca.gov](mailto:Tiffany.Brown@water.ca.gov){.email})
+
+[**Zooplankton**] <!-- (`r get_edi_url(522)`) -->
+
+Contact:  Tracy Shaw (caroline.shaw@wildlife.ca.gov)
+
+## Individual Stations (Continuous Water Quality) 
+:::: {style="display: flex;"}
+
+::: {}
+[**San Joaquin River near Vernalis @ SJR Club**](https://cdec.water.ca.gov/dynamicapp/QueryF?s=SJR)  
+
+[**Sacramento River below Rio Vista Bridge**](https://cdec.water.ca.gov/dynamicapp/QueryF?s=RVB)
+
+[**Suisun Bay – Martinez**](https://cdec.water.ca.gov/dynamicapp/QueryF?s=MRZ)
+
+[**Suisun Bay – Cutoff Near Ryer**](https://cdec.water.ca.gov/dynamicapp/QueryF?s=RYC)
+
+[**Sacramento River @ Mallard Island**](https://cdec.water.ca.gov/dynamicapp/QueryF?s=MAL)
+
+[**San Joaquin River @ Antioch**](https://cdec.water.ca.gov/dynamicapp/QueryF?s=ANH)
+
+[**Franks Tract – Mid Tract**](https://cdec.water.ca.gov/dynamicapp/QueryF?s=FRK)
+
+[**SJR – Prisoner-Rough & Ready**](https://cdec.water.ca.gov/dynamicapp/QueryF?s=RRI) 
+:::
+
+::: {}
+&emsp;&nbsp;[**Sacramento River @ Hood**](https://cdec.water.ca.gov/dynamicapp/QueryF?s=SRH)
+
+&emsp;&nbsp;[**San Joaquin River @ Mossdale Bridge**](https://cdec.water.ca.gov/dynamicapp/QueryF?s=MSD)
+
+&emsp;&nbsp;[**Grizzly Bay**](https://cdec.water.ca.gov/dynamicapp/QueryF?s=GZL)
+
+&emsp;&nbsp;[**Honker Bay**](https://cdec.water.ca.gov/dynamicapp/QueryF?s=HON)
+
+&emsp;&nbsp;[**Sacramento River near Sherman Island**](https://cdec.water.ca.gov/dynamicapp/QueryF?s=SSI)
+
+&emsp;&nbsp;[**San Joaquin River @ Twitchell Island**](https://cdec.water.ca.gov/dynamicapp/QueryF?s=TWI)
+
+&emsp;&nbsp;[**SJR – Prisoner's Point**](https://cdec.water.ca.gov/dynamicapp/QueryF?s=PPT)
+:::
+
+::::
+<br>
+Contact: Andrew Tran (andrew.tran@water.ca.gov)
+
+## Related Datasets 
+[**Integrated San Francisco Estuary Discrete Water Quality**] <!-- (`r get_edi_url(731)`) -->
+
+Contact: Sam Bashevkin (sam.bashevkin@waterboards.ca.gov)

@@ -1,0 +1,141 @@
+---
+title: "Current Report"
+---
+
+```{r echo = FALSE}
+# reset caption numbers; do not edit
+capTabNo = 1; capFigNo = 1
+```
+
+## Introduction
+
+The Department of Water Resources (DWR) and the US Bureau of Reclamation (USBR) are required by Water Right Decision 1641 (D-1641) to collect continuous water chemistry data to monitor the water quality at select sites in the upper San Francisco Estuary (Estuary). This report describes the results of these monitoring efforts for water year (report year text) (October 1 2021 through September 30 2022), which was classified as a (wy) in the Sacramento Valley [(source)](https://cdec.water.ca.gov/reportapp/javareports?name=WSIHIST).
+
+## Methods
+
+Water quality data was continuously monitored at 15 sites throughout the Upper Estuary and were grouped into regions based on their geographic location (Figure 1; Table 1). These sites represent a variety of aquatic habitats, from narrow, freshwater channels to broad, estuarine bays. **Note**: CEMP's Sherman Island station (SSI), which was called D11A in previous reports, has been renamed D22A to better reflect it's location in relation to historical station D22.
+
+```{r echo=FALSE, fig.show = 'hold', out.width = '70%', fig.align='center'}
+# knitr::include_graphics(file.path('admin/figures/maps/cwq_station_map.png'))
+```
+
+```{r echo=FALSE, warning=FALSE, message=FALSE, results='asis'}
+# kable_tables(cwq_stations)
+```
+
+Data were collected for six water quality parameters. All water samples were collected 1-meter below the water surface using a float-mounted YSI EXO2 multi-parameter water quality sonde. These parameters are:
+
+-   Water Temperature (°C)
+-   Specific Conductance (μS/cm)
+-   Dissolved Oxygen (mg/L)
+-   pH
+-   Turbidity (FNU)
+-   Fluorescence (μg/L)
+
+Regional facet graphs for (report year text) were created for each parameter. The average, minimum, and maximum values were determined for parameter, both overall and per region. Average summary statistics are reported as the mean (μ) ± the standard deviation.
+
+For more in-depth methodology, see [here](https://portal.edirepository.org/nis/metadataviewer?packageid=edi.1320.6).
+
+## Results
+
+### Water Temperature
+
+The average water temperature value was 2.08 ± x μg/L which was lower than the (wy) year average (μ = 2.37 ± x μg/L). Values ranged from 3.5 μg/L (Confluence) to 65.2 μg/L (Confluence). Per region average, minimum, and maximum values are shown in Table x; time series plots are shown in Figure y.
+
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+# names(nid) <- c('Statistic','Northern Interior Delta','Southern Interior Delta', 'Central Interior Delta','Confluence', 'Grizzly & Suisun Bays','rm')
+# 
+# nid <- subset(nid, select = -c(rm))
+# 
+# nid <- nid[-c(1),]
+# 
+# kable_tables(nid)
+```
+
+```{r echo=FALSE, fig.show = 'hold', out.width = '70%', fig.align='center'}
+# knitr::include_graphics(file.path('admin/figures/cwq/graph_WaterTemperature.jpg'))
+```
+
+### Specific Conductance
+
+The average specific conductance value was 2.08 ± x μg/L which was lower than the (wy) year average (μ = 2.37 ± x μg/L). Values ranged from 3.5 μg/L (Confluence) to 65.2 μg/L (Confluence). Per region average, minimum, and maximum values are shown in Table x; time series plots are shown in Figure y.
+
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+# kable_tables(nid)
+```
+
+```{r echo=FALSE, fig.show = 'hold', out.width = '70%', fig.align='center'}
+# knitr::include_graphics(file.path('admin/figures/cwq/graph_SpC.jpg'))
+```
+
+### Dissolved Oxygen
+
+The average dissolved oxygen value was 2.08 ± x μg/L which was lower than the (wy) year average (μ = 2.37 ± x μg/L). Values ranged from 3.5 μg/L (Confluence) to 65.2 μg/L (Confluence). Per region average, minimum, and maximum values are shown in Table x; time series plots are shown in Figure y. Recorded daily averages did not fall below the standard set by the CVRWQCB in the Basin Plan (CVRWQCB, 1998).
+
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+# kable_tables(nid)
+```
+
+```{r echo=FALSE, fig.show = 'hold', out.width = '70%', fig.align='center'}
+# knitr::include_graphics(file.path('admin/figures/cwq/graph_DissolvedOxygen.jpg'))
+```
+
+#### Stockton Station DO Values
+
+C-EMP monitors DO values at the Stockton Ship channel \<etc etc\>. The range of monthly DO values at the Stockton station is shown below. The monthly average DO levels at the Stockton station did not fall below the 5.0 mg/L standard set by the CVRWQCB (1998) for the December - August period. The monthly average DO levels dropped below the 6.0 mg/L standard (SWRCB, 1995) during the passage of fall-run Chinook salmon through the ship channel in September and October for the September - November control period.
+
+```{r echo=FALSE, fig.show = 'hold', out.width = '70%', fig.align='center'}
+# knitr::include_graphics(file.path('admin/figures/cwq/graph_rri_do.jpg'))
+```
+
+### pH
+
+The average pH value was 2.08 ± x μg/L which was lower than the (wy) year average (μ = 2.37 ± x μg/L). Values ranged from 3.5 μg/L (Confluence) to 65.2 μg/L (Confluence). Per region average, minimum, and maximum values are shown in Table x; time series plots are shown in Figure y.
+
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+# kable_tables(nid)
+```
+
+```{r echo=FALSE, fig.show = 'hold', out.width = '70%', fig.align='center'}
+# knitr::include_graphics(file.path('admin/figures/cwq/graph_pH.jpg'))
+```
+
+### Turbidity
+
+The average turbidity value was 2.08 ± x μg/L which was lower than the (wy) year average (μ = 2.37 ± x μg/L). Values ranged from 3.5 μg/L (Confluence) to 65.2 μg/L (Confluence). Per region average, minimum, and maximum values are shown in Table x; time series plots are shown in Figure y.
+
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+# kable_tables(nid)
+```
+
+```{r echo=FALSE, fig.show = 'hold', out.width = '70%', fig.align='center'}
+# knitr::include_graphics(file.path('admin/figures/cwq/graph_Turbidity.jpg'))
+```
+
+### Chlorophyll *a* Fluorescence
+
+The average chlorophyll *a* value was 2.08 ± x μg/L which was lower than the (wy) year average (μ = 2.37 ± x μg/L). Values ranged from 3.5 μg/L (Confluence) to 65.2 μg/L (Confluence). Per region average, minimum, and maximum values are shown in Table x; time series plots are shown in Figure y.
+
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+# kable_tables(nid)
+```
+
+```{r echo=FALSE, fig.show = 'hold', out.width = '70%', fig.align='center'}
+# knitr::include_graphics(file.path('admin/figures/cwq/graph_Fluorescence.jpg'))
+```
+
+## Interpretations
+
+insert text here
+
+## References
+
+[CVRWQCB] Central Valley Regional Water Quality Control Board. (1998). Water Quality Control Plan for the California Regional Water Quality Control Board Central Valley Region, the Sacramento River Basin, and San Joaquin River Basin [Basin Plan] (4th ed.).
+
+[SWRCB] State Water Resources Control Board. (1995). Water Quality Control Plan for the San Francisco Bay/Sacramento-San Joaquin Estuary [Bay-Delta Plan] (Adopted May 22, 1995, pursuant to Water Right Order 95-1). Sacramento, CA.
+
+[SWRCB] State Water Resources Control Board. (1999). Water Rights Decision 1641 for the Sacramento-San Joaquin Delta and Suisun Marsh (Adopted December 29, 1999, Revised in Accordance with order WR2000-02 March 15, 2000). Sacramento, CA.
+
+## Archived Reports
+
+Old EMP continuous water quality reports can be found [here](https://github.com/emp-dwr/emp-website/tree/gh-pages/admin/archive/c-wq).

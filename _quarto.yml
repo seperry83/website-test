@@ -1,6 +1,8 @@
 project:
   type: website
-
+  output-dir: _site
+  execute-dir: file
+  
 website:
   page-navigation: false
   title: 'Environmental Monitoring Program'
@@ -20,15 +22,15 @@ website:
     collapse-below: lg
     left:
       - text: "Home"
-        href: sections/general/Rmd-files/index.qmd
+        href: sections/general/qmd-files/index.qmd
       - text: "Data Links"
-        href: "https://github.com/quarto-dev/quarto-cli/discussions"
+        href: sections/general/qmd-files/data-links.qmd
       - text: "Annual Reports"
         menu:
           - text: "Continuous Water Quality"
-            href: sections/c-wq/Rmd-files/00-cwq-info.qmd
+            href: sections/c-wq/qmd-files/00-cwq-report.qmd
           - text: "Discrete Water Quality"
-            href: sections/d-wq/Rmd-files/00-dwq-report.qmd
+            href: sections/d-wq/qmd-files/00-dwq-report.qmd
           - text: "Benthic Invertebrates"
             href: "https://github.com/quarto-dev/quarto-cli/discussions"
           - text: "Phytoplankton"
@@ -38,47 +40,17 @@ website:
       - text: Special Studies
         menu:
           - text: "Veliger Monitoring Program"
-            href: "https://github.com/quarto-dev/quarto-cli/discussions"
+            href: sections/special-studies/qmd-files/00-veliger.qmd
       - text: "Contact Us"
         href: "mailto:theodore.flynn@water.ca.gov"
-    # right:
-    #   - text: '![](admin/figures/usbr-logo.jpg)'
-    
-
-  # sidebar:
-  #   - id: cwq
-  #     collapse-level: 2
-  #     contents:
-  #       - section: "Continuous Water Quality"
-  #         contents:
-  #           - sections/c-wq/Rmd-files/00-cwq-info.qmd
-  #           - text: "Current Report"
-  #             href: sections/c-wq/Rmd-files/00-cwq-report.qmd
-  #           - text: "Archived Reports"
-  #             href: sections/c-wq/Rmd-files/00-cwq-archive.qmd
-  # 
-  #   - id: dwq
-  #     collapse-level: 2
-  #     contents:
-  #       - section: "Discrete Water Quality"
-  #         contents:
-  #           - sections/d-wq/Rmd-files/00-dwq-info.qmd
-  #           - text: "Current Report"
-  #             href: sections/d-wq/Rmd-files/00-dwq-report.qmd
-  #           - text: "Archived Reports"
-  #             href: sections/d-wq/Rmd-files/00-dwq-archive.qmd
 
 format:
   html:
     theme: cosmo
-    css: [admin/html-css/styles.css, admin/html-css/slideshow.css] # 'https://use.fontawesome.com/releases/v5.14.0/css/all.css']
+    css: [admin/styling_scripts/styles.css, admin/styling_scripts/slideshow.css]
     # grid:
     #   sidebar-width: 300px
     toc: true
     toc-title: Contents
     page-layout: full
     
-
-# filters:
-#   - include-files.lua
-#   - quarto

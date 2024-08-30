@@ -1,0 +1,22 @@
+::: {.link-cards}
+
+<% 
+const columns = [[], [], []];
+items.forEach(item => {
+  item.links.forEach((link, index) => {
+    columns[index % 3].push(link);
+  });
+});
+%>
+
+<% columns.forEach((column, colIndex) => { %>
+::: {.card}
+::: {.card-body}
+<% column.forEach(link => { %>
+[<%= link.text %>](<%= link.href %>)
+<% }); %>
+:::
+:::
+<% }); %>
+
+:::

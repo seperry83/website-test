@@ -1,0 +1,26 @@
+---
+title: "Veliger Monitoring Program"
+---
+
+```{r echo = FALSE}
+# reset caption numbers; do not edit
+capTabNo = 1; capFigNo = 1
+```
+
+## Background
+
+The Zebra/Quagga Mussel Veliger Monitoring Program monitors zebra (*Dreissena polymorpha*) and quagga (*Dreissena bugensis*) mussel abundance within the Delta. These species were first discovered in Lakes St. Clair and Erie in 1988 and have since expanded their geographic distribution into many other freshwater systems in North America. These mussels were introduced into the Great Lakes by means of discharged ballast water from transoceanic ships that may have contained mussel larvae or possibly juveniles. While zebra and quagga mussels have not been detected in or near the California Delta, the Department of Water Resources' Zebra and Quagga Mussel Early Detection Monitoring Program aims to monitor the potential spread of zebra and quagga mussels in California waterways. The first stage of the mussel lifecycle is called a veliger, which is a free-swimming planktonic larva that develops miniature bivalve shells and feeds by utilizing its hair-like cilia. Veligers drift with the currents and eventually settle onto hard substrates using sticky secretions. Once settled, they are considered juveniles that eventually develop to sexual maturity, becoming adult mussels after about a year of growth.
+
+Zebra and quagga mussels have negative impacts on aquatic food webs by filtering increased amounts of phytoplankton, which then creates a food source deficiency for organisms in higher trophic levels. They also excrete unwanted particulate matter (pseudofeces) that undergoes decomposition, which causes oxygen levels to decrease and toxic byproducts (ammonia and hydrogen sulfide) to be released into the water. Zebra and quagga mussels also influence industrial processes by colonizing hard surfaces, placing potential limitations on pumping plants for water distribution. This program sets out to monitor any traces of zebra and quagga mussel veliger DNA throughout the California water system to prevent the negative effects associated with the spread of these introduced mussels.
+
+<!-- ```{r echo=FALSE, out.width='90%', fig.align='center', caption='Map of veliger monitoring stations for the Sacramento-San Joaquin Delta region.'} -->
+<!-- knitr::include_graphics(file.path('sections/special-studies/figures/veligermap.png')) -->
+<!-- ``` -->
+
+## Sampling Protocols
+
+While this program includes many other regions and sampling methods, the map and sampling protocols listed here are specific to the Sacramento-San Joaquin Delta region. Sampling for this region takes place once a month at each of the three monitoring stations displayed on the map. At each station, a 45-meter horizontal surface tow is conducted using a 64-micron mesh plankton net. The material collected at the cod end of the net is that of which cannot pass through the 64-micron mesh. These particulates are rinsed into a sample container and submitted to a laboratory for PCR analysis, which determines presence/absence of zebra/quagga mussel veliger DNA. In order to sample all three stations in one day, some nets require decontamination in the field prior to reuse. This decontamination process consists of soaking each net in vinegar for a minimum of one hour and then spraying all surfaces of the net with a 10% bleach solution.
+
+## Contact Info
+
+For more information about this study, please contact Craig Stuart at [Craig.Stuart\@water.ca.gov](mailto:Craig.Stuart@water.ca.gov){.email}.

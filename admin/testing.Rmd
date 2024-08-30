@@ -1,0 +1,135 @@
+```{r}
+library(R6)
+library(tidyverse)
+library(glue)
+```
+
+```{r}
+MainClass <- R6Class(
+  'MainClass',
+      
+  private = list(
+    df_units = NULL,
+    df_regions = NULL
+  ),
+  
+  public = list(
+    df_raw = NULL,
+    
+    initialize = function(df_raw, df_units, df_regions) {
+      self$df_raw <- df_raw
+      private$df_units <- df_units
+      private$df_regions <- df_regions
+    },
+    
+    assign_units = function() {
+      self$df_raw <- left_join(self$df_raw, private$df_units, by = 'Analyte')
+      return(invisible(self))
+    },
+    
+    assign_regions = function() {
+      self$df_raw <- left_join(self$df_raw, private$df_regions[c('Station','Region')], by = 'Station')
+      return(invisible(self))
+    },
+    
+    filter_years = function(given_year) {
+      start_date <- as.Date(paste0(given_year - 1, '-10-01'))
+      end_date <- as.Date(paste0(given_year, '-09-30'))
+      
+      self$df_raw <- self$df_raw %>%
+        filter(Date >= start_date & Date <= end_date)
+      
+      return(invisible(self))
+    }
+  )
+)
+```
+
+```{r}
+WQClass <- R6Class(
+  'WQClass',
+  
+  calculate_median_analyte = function(df, analyte_name) {
+  median_value <- median(df %>% 
+                           filter(Analyte == analyte_name) %>% 
+                           pull(Value), na.rm = TRUE)
+  return(median_value)
+}
+)
+```
+
+
+```{r}
+df_raw <- read_csv(here::here('admin/test-data/EMP_DWQ_1975_2023-long.csv'))
+df_units <- read_csv(here::here('admin/figures-tables/unit_table.csv'), locale = readr::locale(encoding = 'UTF-8'))
+df_regions <- read_csv(here::here('admin/figures-tables/region_table.csv'))
+
+report_year <- 2023 
+
+# Create an instance of wqdata
+obj_dwq <- MainClass$new(df_raw, df_units, df_regions)
+obj_dwq$assign_units()
+obj_dwq$assign_regions()
+obj_dwq$filter_years(report_year)
+
+df_wq <- obj_dwq$df_raw
+```
+
+```{r}
+med_val <- class_dwq$median_val('SpCndSurface')
+
+med_val
+```
+
+
+```{r}
+setClass(
+  'UnitAssigner',
+  slots = list(
+    df = 'data.frame',
+    df_units = 'data.frame',
+    df_with_units = 'data.frame'
+  ),
+  prototype = list(
+    df_with_units = data.frame()  # Initialize with an empty dataframe
+  )
+)
+
+setMethod(
+  'initialize',
+  'UnitAssigner',
+  function(.Object, df, df_units) {
+    .Object@df <- df
+    .Object@df_units <- df_units
+    .Object@df_with_units <- merge(df, df_units, by = 'Analyte')
+    return(.Object)
+  }
+)
+
+# Create an instance of the UnitAssigner class
+unit_assigner <- new('UnitAssigner', df = df_import, df_units = df_units)
+
+# Use the output of UnitAssigner to create an instance of the wqdata class
+wq <- new('wqdata', df_with_units = unit_assigner@df_with_units, report_year = 2023)
+```
+
+```{r}
+setClass(
+  'wqdata',
+  contains = 'UnitAssigner',  # Inherits from UnitAssigner
+  slots = list(
+    report_year = 'numeric'
+  )
+)
+
+setMethod(
+  'initialize',
+  'wqdata',
+  function(.Object, df_with_units, report_year) {
+    .Object@df_with_units <- df_with_units
+    .Object@report_year <- report_year
+    return(.Object)
+  }
+)
+```
+
