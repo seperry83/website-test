@@ -9,7 +9,7 @@ source(here::here('admin/import_scripts.R'))
 
 ## Introduction
 
-The Department of Water Resources (DWR) and the US Bureau of Reclamation (USBR) are required by Water Right Decision 1641 (D-1641) to collect discrete water chemistry data to monitor the water quality at select sites in the upper San Francisco Estuary (Estuary). This report describes the results of these monitoring efforts for water year `r report_year` (October 1st `r prev_year` through September 30th `r report_year`), which was classified as a `r water_year()` year in the Sacramento Valley [(source)](https://cdec.water.ca.gov/reportapp/javareports?name=WSIHIST). Results are compared to the previous water year (October 1st `r prev_year-1` through September 30th `r prev_year`), which was classified as a `r water_year(prev_year)` year.
+The Department of Water Resources (DWR) and the US Bureau of Reclamation (USBR) are required by Water Right Decision 1641 (D-1641) to collect discrete water chemistry data to monitor the water quality at select sites in the upper San Francisco Estuary (Estuary). This report describes the results of these monitoring efforts for water year `r report_year` (October 1st `r prev_year` through September 30th `r report_year`), which was classified as a `r get_water_year()` year in the Sacramento Valley [(source)](https://cdec.water.ca.gov/reportapp/javareports?name=WSIHIST). Results are compared to the previous water year (October 1st `r prev_year` through September 30th `r report_year`), which was classified as a `r get_water_year(prev_year)` year.
 
 ## Methods
 
@@ -21,7 +21,8 @@ knitr::include_graphics(file.path('../../../admin/figures/dwq/d-wq_station_map.j
 
 ```{r echo=FALSE, warning=FALSE, message=FALSE, results = 'asis'}
 dwq_stations <- readr::read_csv(here::here('admin/figures-tables/dwq/dwq-stations.csv'))
-kable_tables(dwq_stations)
+
+styler$style_kable(dwq_stations)
 ```
 
 EMP collects data for six different field parameters and 18 different laboratory constituents. The analytes highlighted in this report are:
@@ -41,34 +42,42 @@ For more in-depth methodology, see [here](https://portal.edirepository.org/nis/m
 
 ### Specific Conductance
 
-The average specific conductance value was 2.08 ± x μg/L which was lower than the previous year average (M = 2.37 ± x μg/L). Values ranged from \< 0.5 μg/L (the reporting limit) to 65.2 μg/L (D41A in San Pablo Bay, August). Per region average, minimum, and maximum values are shown in Table x; time series plots are shown in Figure y.”
+The average specific conductance value was `r strings_dwq_cur$disp_val_range('SpCndSurface','median')`; for comparison, the previous year average was `r strings_dwq_prev$disp_val_range('SpCndSurface','median')`. Values ranged from `r strings_dwq_cur$disp_extreme_range('SpCndSurface')`. `r strings_dwq_cur$disp_nondetect_perc('SpCndSurface')` Per region average, minimum, and maximum values are shown in Table x; time series plots are shown in Figure y.
 
-```{r start-index, echo=FALSE, fig.align='center'}
-# knitr::include_graphics(file.path(here::here('admin/figures/dwq/ARGraph_SpCndSurface.jpg')))
+```{r echo=FALSE, fig.align='center'}
+summary_spc <- table_dwq$clone(deep=TRUE)
+summary_spc$create_summary_df('SpCndSurface', 'median')
+summary_spc$create_kable()
 ```
 
 ### Turbidity
 
-The average turbidity value was 2.08 ± x μg/L which was lower than the previous year average (M = 2.37 ± x μg/L). Values ranged from \< 0.5 μg/L (the reporting limit) to 65.2 μg/L (D41A in San Pablo Bay, August). Per region average, minimum, and maximum values are shown in Table x; time series plots are shown in Figure y.”
+The average turbidity value was `r strings_dwq_cur$disp_val_range('TurbiditySurface','median')`; for comparison, the previous year average was `r strings_dwq_prev$disp_val_range('TurbiditySurface','median')`. Values ranged from `r strings_dwq_cur$disp_extreme_range('TurbiditySurface')`. `r strings_dwq_cur$disp_nondetect_perc('TurbiditySurface')` Per region average, minimum, and maximum values are shown in Table x; time series plots are shown in Figure y.
 
 ```{r echo=FALSE, fig.align='center'}
-# knitr::include_graphics(file.path(here::here('admin/figures/dwq/ARGraph_TurbiditySurface.jpg')))
+summary_spc <- table_dwq$clone(deep=TRUE)
+summary_spc$create_summary_df('TurbiditySurface', 'median')
+summary_spc$create_kable()
 ```
 
 ### Dissolved Ammonia
 
-The average dissolved ammonia value was 2.08 ± x μg/L which was lower than the previous year average (M = 2.37 ± x μg/L). Values ranged from \< 0.5 μg/L (the reporting limit) to 65.2 μg/L (D41A in San Pablo Bay, August). y% of samples were below the reporting limit. Per region average, minimum, and maximum values are shown in Table x; time series plots are shown in Figure y.”
+The average dissolved ammonia value was `r strings_dwq_cur$disp_val_range('DissAmmonia','median')`; for comparison, the previous year average was `r strings_dwq_prev$disp_val_range('DissAmmonia','median')`. Values ranged from `r strings_dwq_cur$disp_extreme_range('DissAmmonia')`. `r strings_dwq_cur$disp_nondetect_perc('DissAmmonia')` Per region average, minimum, and maximum values are shown in Table x; time series plots are shown in Figure y.
 
 ```{r echo=FALSE, fig.align='center'}
-# knitr::include_graphics(file.path(here::here('admin/figures/dwq/ARGraph_DissAmmonia.jpg')))
+summary_spc <- table_dwq$clone(deep=TRUE)
+summary_spc$create_summary_df('DissAmmonia', 'median')
+summary_spc$create_kable()
 ```
 
 ### Chlorophyll *a*
 
-The average specific chlorophyll *a* value was 2.08 ± x μg/L which was lower than the previous year average (M = 2.37 ± x μg/L). Values ranged from \< 0.5 μg/L (the reporting limit) to 65.2 μg/L (D41A in San Pablo Bay, August). y% of samples were below the reporting limit. Per region average, minimum, and maximum values are shown in Table x; time series plots are shown in Figure y.”
+The average chlorophyll *a* value was `r strings_dwq_cur$disp_val_range('Chla','median')`; for comparison, the previous year average was `r strings_dwq_prev$disp_val_range('Chla','median')`. Values ranged from `r strings_dwq_cur$disp_extreme_range('Chla')`. `r strings_dwq_cur$disp_nondetect_perc('Chla')` Per region average, minimum, and maximum values are shown in Table x; time series plots are shown in Figure y.
 
 ```{r echo=FALSE, fig.align='center'}
-# knitr::include_graphics(file.path(here::here('admin/figures/dwq/ARGraph_Chla.jpg')))
+summary_spc <- table_dwq$clone(deep=TRUE)
+summary_spc$create_summary_df('Chla', 'median')
+summary_spc$create_kable()
 ```
 
 ### Dissolved Nitrate + Nitrite
