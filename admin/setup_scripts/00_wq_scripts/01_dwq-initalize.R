@@ -16,7 +16,7 @@ obj_dwq$remove_EZ()
 
 obj_dwq$assign_units()
 
-obj_dwq$assign_regions()
+obj_dwq$assign_regions('DEMP')
 
 obj_dwq$replace_nondetect()
 
@@ -43,8 +43,3 @@ strings_dwq_prev <- WQStringClass$new(obj_dwq_prev$df_raw)
 # Create Current Year Summary Table ---------------------------------------
 
 table_dwq <- WQTableClass$new(obj_dwq_cur$df_raw)
-
-summary_dwq <- table_dwq$create_summary_df('SpCndSurface', 'median')
-
-test <- table_dwq$df_raw
-

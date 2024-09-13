@@ -8,3 +8,7 @@ quarto::quarto_render(
   input = ".",
   execute = TRUE
 )
+
+# TODO:
+# fix the footnote extending the column length
+# fix the average not having "<" if its the same as the min

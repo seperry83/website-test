@@ -1,10 +1,4 @@
 ```{r}
-# obj_dwq <- BaseClass$new(df_raw, df_units, df_regions)
-# 
-# obj_dwq$df_raw
-# 
-# obj_dwq$assign_units()
-# obj_dwq$df_raw
-# 
-# obj_dwq$assign_regions()77y 
+# test
+```
 

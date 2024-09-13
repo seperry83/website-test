@@ -42,7 +42,7 @@ website:
           - text: "Veliger Monitoring Program"
             href: sections/special-studies/qmd-files/00-veliger.qmd
       - text: "Contact Us"
-        href: "mailto:theodore.flynn@water.ca.gov"
+        href: "mailto:ted.flynn@water.ca.gov"
 
 format:
   html:

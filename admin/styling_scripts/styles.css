@@ -150,3 +150,24 @@ p.subtitle {
 .anchored .anchorjs-link {
     display: none;
 }
+
+/* remove line below kable table footer */
+
+table.table-striped.table-sm.small tfoot td {
+    border: none;
+}
+
+table.kable-table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+table.kable-table th, table.kable-table td {
+  width: calc(100% / var(--num-cols));
+}
+
+a[href^="#fig"], a[href^="#tbl"] {
+  pointer-events: none;
+  color: inherit;
+  text-decoration: none;
+}

@@ -71,16 +71,25 @@ WQStringClass <- R6Class(
     disp_val_range = function(analyte, statistic) {
       avg_val <- self$calc_avg(analyte, statistic)
       variance_val <- self$calc_variance(analyte, statistic)
+      # min_val <- self$calc_min(analyte)
+      
+      # is_nondetect <- any(self$df_raw %>%
+      #                       filter(Analyte == analyte & Value == min_val & DetectStatus == 'Nondetect'))
       
       unit_val <- unique(self$df_raw %>% 
-                             filter(Analyte == analyte) %>% 
-                             pull(Unit))
+                           filter(Analyte == analyte) %>% 
+                           pull(Unit))
       
       if (length(unit_val) != 1) {
         stop('Error: Multiple units found for analyte. There should be only one.')
       }
       
+      # If avg_val is equal to min_val and it's a nondetect, add "<" to the result string
+      # if (avg_val == min_val && is_nondetect) {
+      #   result_string <- paste0('< ', round(avg_val, 2), ' \u00B1 ', round(variance_val, 2), ' ', unit_val)
+      # } else {
       result_string <- paste0(round(avg_val, 2), ' \u00B1 ', round(variance_val, 2), ' ', unit_val)
+      # }
       
       return(result_string)
     },
@@ -107,14 +116,7 @@ WQStringClass <- R6Class(
         stop('Error: Multiple units found for analyte. There should be only one.')
       }
       
-      stations_months <- filtered_rows %>%
-        mutate(Month = month(Date, label = TRUE, abbr = TRUE)) %>%
-        mutate(StationMonth = paste0(Station, ', ', Month)) %>%
-        pull(StationMonth)
-
-      station_month_str <- paste(stations_months, collapse = '; ')
-      
-      result_string <- paste0(extreme_val, ' ', unit_val, ' (', station_month_str, ')')
+      result_string <- paste0(extreme_val, ' ', unit_val)
       
       return(result_string)
     },
@@ -158,19 +160,28 @@ WQTableClass <- R6Class(
   
   private = list(
     summary_df = NULL,
-    non_detect_flag = FALSE
+    nondetect_flag = FALSE
   ),
   
   public = list(
     df_raw = NULL,
     
     initialize = function(df_raw) {
-      self$df_raw <- df_raw 
+      self$df_raw <- df_raw
     },
     
     # create dataframe containing summary stat information per region
     create_summary_df = function(analyte, statistic) {
       summary_list <- list()
+      
+      na_regions <- self$df_raw %>%
+        filter(Analyte == analyte, is.na(Region)) %>%
+        pull(Station) %>%
+        unique()
+      
+      if (length(na_regions) > 0) {
+        stop(paste('Station(s)', paste(na_regions, collapse = ', '), 'aren\'t assigned to regions'))
+      }
       
       regions <- unique(self$df_raw %>% filter(Analyte == analyte) %>% pull(Region))
       
@@ -190,11 +201,14 @@ WQTableClass <- R6Class(
           pull(DetectStatus)
         
         if ('Nondetect' %in% detect_status) {
-          min_val <- paste0(min_val, '*')
           if (min_val == max_val) {
             max_val <- paste0(max_val, '*')
           }
-          private$non_detect_flag <- TRUE 
+          if (min_val == avg_val) {
+            avg_val <- paste0(avg_val, '*')
+          }
+          min_val <- paste0(min_val, '*')
+          private$nondetect_flag <- TRUE 
         }
         
         summary_list[[region]] <- c(
@@ -206,9 +220,14 @@ WQTableClass <- R6Class(
       
       summary_df <- do.call(cbind, summary_list)
       
-      rownames(summary_df) <- c('Average', 'Min', 'Max')
+      summary_df <- as.data.frame(summary_df)[, sort(colnames(summary_df))]
       
-      private$summary_df <- as.data.frame(summary_df)[, sort(colnames(summary_df))]
+      rownames(summary_df) <- NULL
+      
+      private$summary_df <- cbind(
+        Statistic = c('Average', 'Min', 'Max'),
+        as.data.frame(summary_df)
+      )
       
       return(invisible(private$summary_df))
     },
@@ -221,9 +240,9 @@ WQTableClass <- R6Class(
       
       table <- self$style_kable(private$summary_df, caption)
       
-      if (private$non_detect_flag) {
+      if (private$nondetect_flag) {
         table <- table %>%
-          footnote(general = '* value is reporting limit', footnote_as_chunk = TRUE)
+          kableExtra::footnote('* value is RL', general_title = '')
       }
       
       return(table)

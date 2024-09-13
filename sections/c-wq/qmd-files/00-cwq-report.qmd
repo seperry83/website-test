@@ -1,26 +1,36 @@
 ---
-title: "Current Report"
+title: "Continuous Water Quality Report"
 ---
 
 ```{r echo = FALSE}
-# reset caption numbers; do not edit
-capTabNo = 1; capFigNo = 1
+# read in functions; do not edit
+source(here::here('admin/import_scripts.R'))
 ```
 
 ## Introduction
 
-The Department of Water Resources (DWR) and the US Bureau of Reclamation (USBR) are required by Water Right Decision 1641 (D-1641) to collect continuous water chemistry data to monitor the water quality at select sites in the upper San Francisco Estuary (Estuary). This report describes the results of these monitoring efforts for water year (report year text) (October 1 2021 through September 30 2022), which was classified as a (wy) in the Sacramento Valley [(source)](https://cdec.water.ca.gov/reportapp/javareports?name=WSIHIST).
+The Department of Water Resources (DWR) and the US Bureau of Reclamation (USBR) are required by Water Right Decision 1641 (D-1641) to collect continuous water chemistry data to monitor the water quality at select sites in the upper San Francisco Estuary (Estuary). This report describes the results of these monitoring efforts for water year `r report_year` (October 1st `r prev_year` through September 30th `r report_year`), which was classified as a `r get_water_year()` year in the Sacramento Valley [(source)](https://cdec.water.ca.gov/reportapp/javareports?name=WSIHIST). Results are compared to the previous water year, which was classified as a `r get_water_year(prev_year)` year.
 
 ## Methods
 
-Water quality data was continuously monitored at 15 sites throughout the Upper Estuary and were grouped into regions based on their geographic location (Figure 1; Table 1). These sites represent a variety of aquatic habitats, from narrow, freshwater channels to broad, estuarine bays. **Note**: CEMP's Sherman Island station (SSI), which was called D11A in previous reports, has been renamed D22A to better reflect it's location in relation to historical station D22.
+Discrete water quality samples were collected monthly at 24 monitoring sites throughout the Upper Estuary and were grouped into regions based on their geographic location . These sites represent a variety of aquatic habitats, from narrow, freshwater channels to broad, estuarine bays.
 
-```{r echo=FALSE, fig.show = 'hold', out.width = '70%', fig.align='center'}
-# knitr::include_graphics(file.path('admin/figures/maps/cwq_station_map.png'))
+Water quality data was continuously monitored at 15 sites throughout the Upper Estuary and were grouped into regions based on their geographic location (@fig-stations; @tbl-stations). These sites represent a variety of aquatic habitats, from narrow, freshwater channels to broad, estuarine bays. **Note**: CEMP's Sherman Island station (SSI), which was called D11A in previous reports, has been renamed D22A to better reflect it's location in relation to historical station D22.
+
+```{r echo=FALSE, fig.align='center',  out.width = '70%'}
+#| label: fig-stations
+#| fig-cap: 'test'
+#| 
+knitr::include_graphics(file.path('../../../admin/figures/dwq/d-wq_station_map.jpg'))
 ```
 
-```{r echo=FALSE, warning=FALSE, message=FALSE, results='asis'}
-# kable_tables(cwq_stations)
+```{r echo=FALSE, warning=FALSE, message=FALSE, results = 'asis'}
+#| label: tbl-stations
+#| tbl-cap: 'test'
+
+cwq_stations <- readr::read_csv(here::here('admin/figures-tables/dwq/dwq-stations.csv'))
+
+styler$style_kable(cwq_stations)
 ```
 
 Data were collected for six water quality parameters. All water samples were collected 1-meter below the water surface using a float-mounted YSI EXO2 multi-parameter water quality sonde. These parameters are:
@@ -32,7 +42,7 @@ Data were collected for six water quality parameters. All water samples were col
 -   Turbidity (FNU)
 -   Fluorescence (μg/L)
 
-Regional facet graphs for (report year text) were created for each parameter. The average, minimum, and maximum values were determined for parameter, both overall and per region. Average summary statistics are reported as the mean (μ) ± the standard deviation.
+Regional facet graphs were created for each parameter.  The average, minimum, and maximum values were determined for parameter, both overall and per region. Average summary statistics are reported as the mean (μ) ± the standard deviation.
 
 For more in-depth methodology, see [here](https://portal.edirepository.org/nis/metadataviewer?packageid=edi.1320.6).
 
@@ -40,44 +50,41 @@ For more in-depth methodology, see [here](https://portal.edirepository.org/nis/m
 
 ### Water Temperature
 
-The average water temperature value was 2.08 ± x μg/L which was lower than the (wy) year average (μ = 2.37 ± x μg/L). Values ranged from 3.5 μg/L (Confluence) to 65.2 μg/L (Confluence). Per region average, minimum, and maximum values are shown in Table x; time series plots are shown in Figure y.
+The average water temperature value was `r strings_cwq_cur$disp_val_range('WaterTemperature','mean')`; for comparison, the previous year average was `r strings_cwq_prev$disp_val_range('WaterTemperature','mean')`. Values ranged from `r strings_cwq_cur$disp_extreme_range('WaterTemperature')`. `r strings_cwq_cur$disp_nondetect_perc('WaterTemperature')` Per region average, minimum, and maximum values are shown in @tbl-wt; time series plots are shown in Figure y.
 
-```{r echo=FALSE, warning=FALSE, message=FALSE}
-# names(nid) <- c('Statistic','Northern Interior Delta','Southern Interior Delta', 'Central Interior Delta','Confluence', 'Grizzly & Suisun Bays','rm')
-# 
-# nid <- subset(nid, select = -c(rm))
-# 
-# nid <- nid[-c(1),]
-# 
-# kable_tables(nid)
-```
-
-```{r echo=FALSE, fig.show = 'hold', out.width = '70%', fig.align='center'}
-# knitr::include_graphics(file.path('admin/figures/cwq/graph_WaterTemperature.jpg'))
+```{r echo=FALSE, fig.align='center', results='asis'}
+#| label: tbl-wt
+#| tbl-cap: 'test'
+ 
+summary_wt <- table_cwq$clone(deep=TRUE)
+summary_wt$create_summary_df('WaterTemperature', 'mean')
+summary_wt$create_kable()
 ```
 
 ### Specific Conductance
 
-The average specific conductance value was 2.08 ± x μg/L which was lower than the (wy) year average (μ = 2.37 ± x μg/L). Values ranged from 3.5 μg/L (Confluence) to 65.2 μg/L (Confluence). Per region average, minimum, and maximum values are shown in Table x; time series plots are shown in Figure y.
+The average water temperature value was `r strings_cwq_cur$disp_val_range('SpC','mean')`; for comparison, the previous year average was `r strings_cwq_prev$disp_val_range('SpC','mean')`. Values ranged from `r strings_cwq_cur$disp_extreme_range('SpC')`. `r strings_cwq_cur$disp_nondetect_perc('SpC')` Per region average, minimum, and maximum values are shown in @tbl-spc; time series plots are shown in Figure y.
 
-```{r echo=FALSE, warning=FALSE, message=FALSE}
-# kable_tables(nid)
-```
+```{r echo=FALSE, fig.align='center'}
+#| label: tbl-spc
+#| tbl-cap: 'test'
 
-```{r echo=FALSE, fig.show = 'hold', out.width = '70%', fig.align='center'}
-# knitr::include_graphics(file.path('admin/figures/cwq/graph_SpC.jpg'))
+summary_spc <- table_cwq$clone(deep=TRUE)
+summary_spc$create_summary_df('SpC', 'mean')
+summary_spc$create_kable()
 ```
 
 ### Dissolved Oxygen
 
-The average dissolved oxygen value was 2.08 ± x μg/L which was lower than the (wy) year average (μ = 2.37 ± x μg/L). Values ranged from 3.5 μg/L (Confluence) to 65.2 μg/L (Confluence). Per region average, minimum, and maximum values are shown in Table x; time series plots are shown in Figure y. Recorded daily averages did not fall below the standard set by the CVRWQCB in the Basin Plan (CVRWQCB, 1998).
+The average water temperature value was `r strings_cwq_cur$disp_val_range('DissolvedOxygen','mean')`; for comparison, the previous year average was `r strings_cwq_prev$disp_val_range('DissolvedOxygen','mean')`. Values ranged from `r strings_cwq_cur$disp_extreme_range('DissolvedOxygen')`. `r strings_cwq_cur$disp_nondetect_perc('DissolvedOxygen')` Per region average, minimum, and maximum values are shown in @tbl-do; time series plots are shown in Figure y.
 
-```{r echo=FALSE, warning=FALSE, message=FALSE}
-# kable_tables(nid)
-```
+```{r echo=FALSE, fig.align='center'}
+#| label: tbl-do
+#| tbl-cap: 'test'
 
-```{r echo=FALSE, fig.show = 'hold', out.width = '70%', fig.align='center'}
-# knitr::include_graphics(file.path('admin/figures/cwq/graph_DissolvedOxygen.jpg'))
+summary_do <- table_cwq$clone(deep=TRUE)
+summary_do$create_summary_df('DissolvedOxygen', 'mean')
+summary_do$create_kable()
 ```
 
 #### Stockton Station DO Values
@@ -90,38 +97,41 @@ C-EMP monitors DO values at the Stockton Ship channel \<etc etc\>. The range of 
 
 ### pH
 
-The average pH value was 2.08 ± x μg/L which was lower than the (wy) year average (μ = 2.37 ± x μg/L). Values ranged from 3.5 μg/L (Confluence) to 65.2 μg/L (Confluence). Per region average, minimum, and maximum values are shown in Table x; time series plots are shown in Figure y.
+The average water temperature value was `r strings_cwq_cur$disp_val_range('pH','mean')`; for comparison, the previous year average was `r strings_cwq_prev$disp_val_range('pH','mean')`. Values ranged from `r strings_cwq_cur$disp_extreme_range('pH')`. `r strings_cwq_cur$disp_nondetect_perc('pH')` Per region average, minimum, and maximum values are shown in @tbl-ph; time series plots are shown in Figure y.
 
-```{r echo=FALSE, warning=FALSE, message=FALSE}
-# kable_tables(nid)
-```
+```{r echo=FALSE, fig.align='center'}
+#| label: tbl-ph
+#| tbl-cap: 'test'
 
-```{r echo=FALSE, fig.show = 'hold', out.width = '70%', fig.align='center'}
-# knitr::include_graphics(file.path('admin/figures/cwq/graph_pH.jpg'))
+summary_ph <- table_cwq$clone(deep=TRUE)
+summary_ph$create_summary_df('pH', 'mean')
+summary_ph$create_kable()
 ```
 
 ### Turbidity
 
-The average turbidity value was 2.08 ± x μg/L which was lower than the (wy) year average (μ = 2.37 ± x μg/L). Values ranged from 3.5 μg/L (Confluence) to 65.2 μg/L (Confluence). Per region average, minimum, and maximum values are shown in Table x; time series plots are shown in Figure y.
+The average water temperature value was `r strings_cwq_cur$disp_val_range('Turbidity','mean')`; for comparison, the previous year average was `r strings_cwq_prev$disp_val_range('Turbidity','mean')`. Values ranged from `r strings_cwq_cur$disp_extreme_range('Turbidity')`. `r strings_cwq_cur$disp_nondetect_perc('Turbidity')` Per region average, minimum, and maximum values are shown in @tbl-turb; time series plots are shown in Figure y.
 
-```{r echo=FALSE, warning=FALSE, message=FALSE}
-# kable_tables(nid)
-```
+```{r echo=FALSE, fig.align='center'}
+#| label: tbl-turb
+#| tbl-cap: 'test'
 
-```{r echo=FALSE, fig.show = 'hold', out.width = '70%', fig.align='center'}
-# knitr::include_graphics(file.path('admin/figures/cwq/graph_Turbidity.jpg'))
+summary_turb <- table_cwq$clone(deep=TRUE)
+summary_turb$create_summary_df('Turbidity', 'mean')
+summary_turb$create_kable()
 ```
 
 ### Chlorophyll *a* Fluorescence
 
-The average chlorophyll *a* value was 2.08 ± x μg/L which was lower than the (wy) year average (μ = 2.37 ± x μg/L). Values ranged from 3.5 μg/L (Confluence) to 65.2 μg/L (Confluence). Per region average, minimum, and maximum values are shown in Table x; time series plots are shown in Figure y.
+The average water temperature value was `r strings_cwq_cur$disp_val_range('Fluorescence','mean')`; for comparison, the previous year average was `r strings_cwq_prev$disp_val_range('Fluorescence','mean')`. Values ranged from `r strings_cwq_cur$disp_extreme_range('Fluorescence')`. `r strings_cwq_cur$disp_nondetect_perc('Fluorescence')` Per region average, minimum, and maximum values are shown in @tbl-fluor; time series plots are shown in Figure y.
 
-```{r echo=FALSE, warning=FALSE, message=FALSE}
-# kable_tables(nid)
-```
+```{r echo=FALSE, fig.align='center'}
+#| label: tbl-fluor
+#| tbl-cap: 'test'
 
-```{r echo=FALSE, fig.show = 'hold', out.width = '70%', fig.align='center'}
-# knitr::include_graphics(file.path('admin/figures/cwq/graph_Fluorescence.jpg'))
+summary_fluor <- table_cwq$clone(deep=TRUE)
+summary_fluor$create_summary_df('Fluorescence', 'mean')
+summary_fluor$create_kable()
 ```
 
 ## Interpretations

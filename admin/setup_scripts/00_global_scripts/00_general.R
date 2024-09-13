@@ -17,12 +17,24 @@ left_join <- dplyr::left_join
 filter <- dplyr::filter
 pull <- dplyr::pull
 mutate <- dplyr::mutate
+group_by <- dplyr::group_by
+ungroup <- dplyr::ungroup
+rename <- dplyr::rename
+summarize <- dplyr::summarize
+
+createWorkbook <- openxlsx::createWorkbook
+addWorksheet <- openxlsx::addWorksheet
+writeData <- openxlsx::writeData
+saveWorkbook <- openxlsx::saveWorkbook
+
+parse_date_time <- lubridate::parse_date_time
 
 month <- lubridate::month
 
 kable <- knitr::kable
 
 kable_styling <- kableExtra::kable_styling
+add_header_above <- kableExtra::add_header_above
 footnote <- kableExtra::footnote
 
 # Create Base Data Frame -------------------------------------------------------
@@ -39,7 +51,13 @@ BaseClass <- R6Class(
     df_raw = NULL,
 
     initialize = function(df_raw, df_units, df_regions) {
+      
+      # add in a detect column if none exists (for coding purposes)
+      if (!'DetectStatus' %in% colnames(df_raw)) {
+        df_raw$DetectStatus <- 'Detect'
+      }
       self$df_raw <- df_raw
+      
       private$df_units <- df_units
       private$df_regions <- df_regions
     },
@@ -57,8 +75,11 @@ BaseClass <- R6Class(
     },
     
     # add regions to dataframe
-    assign_regions = function() {
-      self$df_raw <- left_join(self$df_raw, private$df_regions[c('Station','Region')], by = 'Station')
+    assign_regions = function(program) {
+      filt_regions <- private$df_regions %>% 
+        filter(Program == program)
+      
+      self$df_raw <- left_join(self$df_raw, filt_regions[c('Station','Region')], by = 'Station')
       return(invisible(self))
     },
     
@@ -88,8 +109,10 @@ StylingClass <- R6Class(
   
   public = list(
     style_kable = function(df, caption = NULL) {
-      table <- kable(df, caption = caption, align = 'c') %>%
-        kable_styling(c('striped', 'scale_down'), font_size = 14, html_font = 'Arimo', full_width = FALSE)
+      table <- kable(df, caption = caption, align = 'c', digits = 2, escape = FALSE) %>%
+        kable_styling(c('striped', 'scale_down'), font_size = 14, html_font = 'Arimo', full_width = TRUE) %>%
+        kableExtra::column_spec(1:ncol(df), width = paste0(100 / ncol(df), "%"))
+      
       return(table)
     }
   )
@@ -100,6 +123,10 @@ StylingClass <- R6Class(
 # read in csv without output
 read_quiet_csv <- function(fp, ...){
   df <- read_csv(fp, show_col_types = FALSE, ...)
+  
+  if ('Date' %in% colnames(df)) {
+    df$Date <- as.Date(parse_date_time(df$Date, orders = c('ymd', 'mdy', 'dmy')))
+  }
   
   return(df)
 }
