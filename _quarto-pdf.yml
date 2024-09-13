@@ -1,0 +1,75 @@
+project:
+  type: pdf
+  output-dir: _pdf
+  execute-dir: file
+
+format:
+  pdf:
+    toc: true
+    toc-title: Contents
+    documentclass: article
+    # Adjust margins if needed
+    margin-left: 1in
+    margin-right: 1in
+    margin-top: 1in
+    margin-bottom: 1in
+    header-includes:
+      - \usepackage{fancyhdr}
+      - \pagestyle{fancy}
+      - \fancyhf{}
+      - \fancyfoot[C]{\thepage}
+    latex-engine: pdflatex
+    includes:
+      in-header: admin/styling_scripts/pdf-header.tex # Optional for custom headers
+
+website:
+  title: 'Environmental Monitoring Program'
+  favicon: admin/figures/sentinel.ico
+
+  page-footer:
+    background: '#e8f1f5'
+    center: |
+        ![](/admin/figures/website-logo-EMP.png){fig-alt="DWR, USBR, CDFW, and IEP logos" height=50px}
+
+navbar:
+  logo: 'admin/figures/EMP-logo-website-small-3.png'
+  logo-alt: 'EMP logo'
+  title: 'Environmental Monitoring Program'
+
+project:
+  type: pdf
+  output-dir: _pdf
+  execute-dir: file
+
+format:
+  pdf:
+    toc: true
+    toc-title: Contents
+    documentclass: article
+    margin-left: 1in
+    margin-right: 1in
+    margin-top: 1in
+    margin-bottom: 1in
+    header-includes:
+      - \usepackage{fancyhdr}
+      - \pagestyle{fancy}
+      - \fancyhf{}
+      - \fancyfoot[C]{\thepage}
+    latex-engine: pdflatex
+    includes:
+      in-header: admin/styling_scripts/pdf-header.tex # Optional for custom headers
+
+website:
+  title: 'Environmental Monitoring Program'
+  favicon: admin/figures/sentinel.ico
+
+navbar:
+  logo: 'admin/figures/EMP-logo-website-small-3.png'
+  logo-alt: 'EMP logo'
+  title: 'Environmental Monitoring Program'
+
+reports:
+  - text: "Continuous Water Quality"
+    href: sections/c-wq/qmd-files/00-cwq-report.qmd
+  - text: "Discrete Water Quality"
+    href: sections/d-wq/qmd-files/00-dwq-report.qmd
