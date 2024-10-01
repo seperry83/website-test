@@ -20,7 +20,7 @@ WQStatsClass <- R6Class(
                           'median' = median(self$df_raw %>% 
                                               filter(Analyte == analyte) %>% 
                                               pull(Value), na.rm = TRUE),
-                          stop("Invalid statistic. Use 'mean' or 'median'."))
+                          stop('Invalid statistic. Use \'mean\' or \'median\'.'))
       return(avg_val)
     },
     
@@ -36,7 +36,7 @@ WQStatsClass <- R6Class(
                                      filter(Analyte == analyte) %>%
                                      pull(Value) - median_val), na.rm = TRUE)
       } else {
-        stop("Invalid statistic. Use 'mean' or 'median'.")
+        stop('Invalid statistic. Use \'mean\' or \'median\'.')
       }
       return(variance_val)
     },
@@ -71,11 +71,7 @@ WQStringClass <- R6Class(
     disp_val_range = function(analyte, statistic) {
       avg_val <- self$calc_avg(analyte, statistic)
       variance_val <- self$calc_variance(analyte, statistic)
-      # min_val <- self$calc_min(analyte)
-      
-      # is_nondetect <- any(self$df_raw %>%
-      #                       filter(Analyte == analyte & Value == min_val & DetectStatus == 'Nondetect'))
-      
+
       unit_val <- unique(self$df_raw %>% 
                            filter(Analyte == analyte) %>% 
                            pull(Unit))
@@ -84,13 +80,8 @@ WQStringClass <- R6Class(
         stop('Error: Multiple units found for analyte. There should be only one.')
       }
       
-      # If avg_val is equal to min_val and it's a nondetect, add "<" to the result string
-      # if (avg_val == min_val && is_nondetect) {
-      #   result_string <- paste0('< ', round(avg_val, 2), ' \u00B1 ', round(variance_val, 2), ' ', unit_val)
-      # } else {
-      result_string <- paste0(round(avg_val, 2), ' \u00B1 ', round(variance_val, 2), ' ', unit_val)
-      # }
-      
+      result_string <- paste0(format_vals(avg_val, analyte), ' \u00B1 ', format_vals(variance_val, analyte), ' ', unit_val)
+
       return(result_string)
     },
     
@@ -100,7 +91,7 @@ WQStringClass <- R6Class(
       extreme_function <- switch(statistic,
                                  'min' = self$calc_min,
                                  'max' = self$calc_max,
-                                 stop("Invalid statistic. Use 'min' or 'max'."))
+                                 stop('Invalid statistic. Use \'min\' or \'max\'.'))
       
       extreme_val <- extreme_function(analyte)
       
@@ -108,7 +99,9 @@ WQStringClass <- R6Class(
         filter(Analyte == analyte & Value == extreme_val)
       
       if (statistic == 'min' && any(filtered_rows$DetectStatus == 'Nondetect')) {
-        extreme_val <- paste0('< ', extreme_val)
+        extreme_val <- paste0('< ', format_vals(extreme_val, analyte))
+      } else {
+        extreme_val <- format_vals(extreme_val, analyte)
       }
 
       unit_val <- unique(filtered_rows$Unit)
@@ -191,7 +184,7 @@ WQTableClass <- R6Class(
         avg_val <- switch(statistic,
                             'mean' = mean(region_data$Value, na.rm = TRUE),
                             'median' = median(region_data$Value, na.rm = TRUE),
-                            stop("Invalid statistic. Use 'mean' or 'median'."))
+                            stop('Invalid statistic. Use \'mean\' or \'median\'.'))
         
         min_val <- min(region_data$Value, na.rm = TRUE)
         max_val <- max(region_data$Value, na.rm = TRUE)
@@ -202,13 +195,21 @@ WQTableClass <- R6Class(
         
         if ('Nondetect' %in% detect_status) {
           if (min_val == max_val) {
+            max_val <- format_vals(max_val, analyte)
             max_val <- paste0(max_val, '*')
           }
           if (min_val == avg_val) {
+            avg_val <- format_vals(avg_val, analyte)
             avg_val <- paste0(avg_val, '*')
           }
+          min_val <- format_vals(min_val, analyte)
           min_val <- paste0(min_val, '*')
           private$nondetect_flag <- TRUE 
+        
+        } else {
+          max_val <- format_vals(max_val, analyte)
+          min_val <- format_vals(min_val, analyte)
+          avg_val <- format_vals(avg_val, analyte)
         }
         
         summary_list[[region]] <- c(
@@ -233,12 +234,12 @@ WQTableClass <- R6Class(
     },
     
     # create table with the summary stat information
-    create_kable = function(caption = NULL) {
+    create_kable = function() {
       if (is.null(private$summary_df)) {
         stop('Summary dataframe has not been created. Please call create_summary_df first.')
       }
       
-      table <- self$style_kable(private$summary_df, caption)
+      table <- self$style_kable(private$summary_df)
       
       if (private$nondetect_flag) {
         table <- table %>%
@@ -249,3 +250,37 @@ WQTableClass <- R6Class(
     }
   )
 )
+
+
+# Create WQ Graphs --------------------------------------------------------
+
+WQGraphClass <- R6Class(
+  'WQGraphClass',
+  
+  inherit = StylingClass,
+  
+  public = list(
+    df_raw = NULL,
+    
+    initialize = function(df_raw) {
+      self$df_raw <- df_raw
+    },
+    
+    # create test plot
+    create_test_plt = function(vari) {
+      df_do <- self$df_raw %>% filter(Analyte == vari)
+      
+      df_do <- df_do %>%
+        dplyr::mutate(Month = factor(month.abb[lubridate::month(Date)], levels = month.abb))
+      
+      plt_do <- ggplot() +
+        geom_boxplot(df_do, mapping = aes(Month, Value))
+      
+      # plt_do <- self$style_RRI_plt(plt_do)
+      
+      ggsave(here::here(paste0('admin/figures-tables/cwq/test_',vari,'.jpg')), plt_do, width = 3.5, height = 2, unit = 'in')
+    }
+  )
+)
+
+    

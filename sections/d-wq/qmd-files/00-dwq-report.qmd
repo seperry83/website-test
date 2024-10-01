@@ -46,129 +46,179 @@ For more in-depth methodology, see [here](https://portal.edirepository.org/nis/m
 
 ## Results
 
+### testing
+
 ### Specific Conductance
 
 The average specific conductance value was `r strings_dwq_cur$disp_val_range('SpCndSurface','median')`; for comparison, the previous year average was `r strings_dwq_prev$disp_val_range('SpCndSurface','median')`. Values ranged from `r strings_dwq_cur$disp_extreme_range('SpCndSurface')`. `r strings_dwq_cur$disp_nondetect_perc('SpCndSurface')` Per region average, minimum, and maximum values are shown in @tbl-spc; time series plots are shown in @fig-spc.
 
-```{r echo=FALSE, fig.align='center', results='asis'}
+```{r}
+#| label: fig-spc
+#| echo: false
+#| fig-align: 'center'
+#| fig-cap: 'Specific conductance by region in the San Francisco Bay-Delta estuary.'
+
+knitr::include_graphics(here::here(file.path('admin/plots/dwq/ARGraph_SpCndSurface.jpg')))
+```
+
+:::: {.content-visible when-format="html"}
+
+```{r}
 #| label: tbl-spc
-#| tbl-cap: 'test'
- 
+#| echo: false
+#| fig-align: 'center'
+#| tbl-cap: 'Summary statistics for specific conductance by region in the San Francisco Bay-Delta estuary.'
+
 summary_spc <- table_dwq$clone(deep=TRUE)
 summary_spc$create_summary_df('SpCndSurface', 'median')
 summary_spc$create_kable()
 ```
 
-```{r echo=FALSE, fig.align='center', results='asis'}
-#| label: fig-spc
-#| tbl-cap: 'test'
- 
-knitr::include_graphics(here::here(file.path('admin/plots/dwq/ARGraph_SpCndSurface.jpg')))
-```
+::::
 
 ### Turbidity
 
 The average turbidity value was `r strings_dwq_cur$disp_val_range('TurbiditySurface','median')`; for comparison, the previous year average was `r strings_dwq_prev$disp_val_range('TurbiditySurface','median')`. Values ranged from `r strings_dwq_cur$disp_extreme_range('TurbiditySurface')`. `r strings_dwq_cur$disp_nondetect_perc('TurbiditySurface')` Per region average, minimum, and maximum values are shown in @tbl-turb; time series plots are shown in @fig-turb
 
-```{r echo=FALSE, fig.align='center'}
+```{r}
+#| label: fig-turb
+#| echo: false
+#| fig-align: 'center'
+#| fig-cap: 'Turbidity by region in the San Francisco Bay-Delta estuary.'
+ 
+include_graphics(here::here(file.path('admin/plots/dwq/ARGraph_TurbiditySurface.jpg')))
+```
+
+:::: {.content-visible when-format="html"}
+
+```{r}
 #| label: tbl-turb
-#| tbl-cap: 'test'
+#| echo: false
+#| fig-align: 'center'
+#| tbl-cap: 'Summary statistics for turbidity by region in the San Francisco Bay-Delta estuary.'
 
 summary_turb <- table_dwq$clone(deep=TRUE)
 summary_turb$create_summary_df('TurbiditySurface', 'median')
 summary_turb$create_kable()
 ```
 
-```{r echo=FALSE, fig.align='center', results='asis'}
-#| label: fig-turb
-#| tbl-cap: 'test'
- 
-knitr::include_graphics(here::here(file.path('admin/plots/dwq/ARGraph_TurbiditySurface.jpg')))
-```
+::::
 
 ### Dissolved Ammonia
 
 The average dissolved ammonia value was `r strings_dwq_cur$disp_val_range('DissAmmonia','median')`; for comparison, the previous year average was `r strings_dwq_prev$disp_val_range('DissAmmonia','median')`. Values ranged from `r strings_dwq_cur$disp_extreme_range('DissAmmonia')`. `r strings_dwq_cur$disp_nondetect_perc('DissAmmonia')` Per region average, minimum, and maximum values are shown in @tbl-amm; time series plots are shown in @fig-amm.
 
-```{r echo=FALSE, fig.align='center'}
+```{r}
+#| label: fig-amm
+#| echo: false
+#| fig-align: 'center'
+#| fig-cap: 'Dissolved ammonia by region in the San Francisco Bay-Delta estuary.'
+ 
+knitr::include_graphics(here::here(file.path('admin/plots/dwq/ARGraph_DissAmmonia.jpg')))
+```
+
+:::: {.content-visible when-format="html"}
+
+```{r}
 #| label: tbl-amm
-#| tbl-cap: 'test'
+#| echo: false
+#| fig-align: 'center'
+#| tbl-cap: 'Summary statistics for dissolved ammonia by region in the San Francisco Bay-Delta estuary.'
 
 summary_amm <- table_dwq$clone(deep=TRUE)
 summary_amm$create_summary_df('DissAmmonia', 'median')
 summary_amm$create_kable()
 ```
 
-```{r echo=FALSE, fig.align='center', results='asis'}
-#| label: fig-amm
-#| tbl-cap: 'test'
- 
-knitr::include_graphics(here::here(file.path('admin/plots/dwq/ARGraph_DissAmmonia.jpg')))
-```
+::::
 
 ### Chlorophyll *a*
 
 The average chlorophyll *a* value was `r strings_dwq_cur$disp_val_range('Chla','median')`; for comparison, the previous year average was `r strings_dwq_prev$disp_val_range('Chla','median')`. Values ranged from `r strings_dwq_cur$disp_extreme_range('Chla')`. `r strings_dwq_cur$disp_nondetect_perc('Chla')` Per region average, minimum, and maximum values are shown in @tbl-chla; time series plots are shown in @fig-chla.
 
-```{r echo=FALSE, fig.align='center'}
+```{r}
+#| label: fig-chla
+#| echo: false
+#| fig-align: 'center'
+#| fig-cap: 'Chlorophyll a by region in the San Francisco Bay-Delta estuary.'
+
+knitr::include_graphics(here::here(file.path('admin/plots/dwq/ARGraph_Chla.jpg')))
+```
+
+:::: {.content-visible when-format="html"}
+
+```{r}
 #| label: tbl-chla
-#| tbl-cap: 'test'
+#| echo: false
+#| fig-align: 'center'
+#| tbl-cap: 'Summary statistics for chlorophyll a by region in the San Francisco Bay-Delta estuary.'
 
 summary_chla <- table_dwq$clone(deep=TRUE)
 summary_chla$create_summary_df('Chla', 'median')
 summary_chla$create_kable()
 ```
 
-```{r echo=FALSE, fig.align='center', results='asis'}
-#| label: fig-chla
-#| tbl-cap: 'test'
- 
-knitr::include_graphics(here::here(file.path('admin/plots/dwq/ARGraph_Chla.jpg')))
-```
+::::
 
 ### Dissolved Nitrate + Nitrite
 
 The average dissolved nitrate + nitrite value was `r strings_dwq_cur$disp_val_range('DissNitrateNitrite','median')`; for comparison, the previous year average was `r strings_dwq_prev$disp_val_range('DissNitrateNitrite','median')`. Values ranged from `r strings_dwq_cur$disp_extreme_range('DissNitrateNitrite')`. `r strings_dwq_cur$disp_nondetect_perc('DissNitrateNitrite')` Per region average, minimum, and maximum values are shown in @tbl-dnn; time series plots are shown in @fig-dnn.
 
-```{r echo=FALSE, fig.align='center'}
+```{r}
+#| label: fig-dnn
+#| echo: false
+#| fig-align: 'center'
+#| fig-cap: 'Dissovled nitrate nitrite by region in the San Francisco Bay-Delta estuary.'
+
+knitr::include_graphics(here::here(file.path('admin/plots/dwq/ARGraph_DissNitrateNitrite.jpg')))
+```
+
+:::: {.content-visible when-format="html"}
+
+```{r}
 #| label: tbl-dnn
-#| tbl-cap: 'test'
+#| echo: false
+#| fig-align: 'center'
+#| tbl-cap: 'Summary statistics for dissolved nitrate nitrite by region in the San Francisco Bay-Delta estuary.'
 
 summary_nn <- table_dwq$clone(deep=TRUE)
 summary_nn$create_summary_df('DissNitrateNitrite', 'median')
 summary_nn$create_kable()
 ```
 
-```{r echo=FALSE, fig.align='center', results='asis'}
-#| label: fig-dnn
-#| tbl-cap: 'test'
- 
-knitr::include_graphics(here::here(file.path('admin/plots/dwq/ARGraph_DissNitrateNitrite.jpg')))
-```
+::::
 
 ### Total Phosphorus
 
 The average total phosphorus value was `r strings_dwq_cur$disp_val_range('TotPhos','median')`; for comparison, the previous year average was `r strings_dwq_prev$disp_val_range('TotPhos','median')`. Values ranged from `r strings_dwq_cur$disp_extreme_range('TotPhos')`. `r strings_dwq_cur$disp_nondetect_perc('TotPhos')` Per region average, minimum, and maximum values are shown in @tbl-phos; time series plots are shown in @fig-phos.
 
-```{r echo=FALSE, fig.align='center'}
+```{r}
+#| label: fig-phos
+#| echo: false
+#| fig-align: 'center'
+#| fig-cap: 'Total phosphorus by region in the San Francisco Bay-Delta estuary.'
+ 
+knitr::include_graphics(here::here(file.path('admin/plots/dwq/ARGraph_TotPhos.jpg')))
+```
+
+:::: {.content-visible when-format="html"}
+
+```{r}
 #| label: tbl-phos
-#| tbl-cap: 'test'
+#| echo: false
+#| fig-align: 'center'
+#| tbl-cap: 'Summary statistics for total phosphorus by region in the San Francisco Bay-Delta estuary.'
 
 summary_phos <- table_dwq$clone(deep=TRUE)
 summary_phos$create_summary_df('TotPhos', 'median')
 summary_phos$create_kable()
 ```
 
-```{r echo=FALSE, fig.align='center', results='asis'}
-#| label: fig-phos
-#| tbl-cap: 'test'
- 
-knitr::include_graphics(here::here(file.path('admin/plots/dwq/ARGraph_TotPhos.jpg')))
-```
+::::
 
 ## Interpretations
 
-insert text here
+[[**To be written by section lead**]{.underline}]{.smallcaps}
 
 ## Archived Reports
 

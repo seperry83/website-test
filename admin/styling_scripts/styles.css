@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Oswald|Arimo');
 
-/* format headers/footers */
+/* General Formatting */
+
+/* format headers+footers */
 
 h1, h2, h3, h4, h5 {
   color: #006699;
@@ -143,19 +145,15 @@ p.subtitle {
   margin-bottom: 0.5rem;
 }
 
-/* misc */
-
-/* remove anchor icon */
-
-.anchored .anchorjs-link {
-    display: none;
-}
+/* Figures */
 
 /* remove line below kable table footer */
 
 table.table-striped.table-sm.small tfoot td {
     border: none;
 }
+
+/* fix table width */
 
 table.kable-table {
   table-layout: fixed;
@@ -166,8 +164,24 @@ table.kable-table th, table.kable-table td {
   width: calc(100% / var(--num-cols));
 }
 
+/* remove figure ref in text */
+
 a[href^="#fig"], a[href^="#tbl"] {
   pointer-events: none;
   color: inherit;
   text-decoration: none;
+}
+
+/* center captions */
+
+figure .figure-caption {
+  text-align: center;
+}
+
+/* Misc */
+
+/* remove anchor icon */
+
+.anchored .anchorjs-link {
+    display: none;
 }

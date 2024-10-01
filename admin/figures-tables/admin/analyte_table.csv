@@ -1,0 +1,13 @@
+﻿Program,Analyte,Unit,SigFigs,FracDigits
+DEMP,SpCndSurface,µS/cm,3,0
+DEMP,TurbiditySurface,FNU,3,2
+DEMP,DissAmmonia,mg/L,3,2
+DEMP,DissNitrateNitrite,mg/L,3,2
+DEMP,TotPhos,mg/L,3,2
+DEMP,Chla,µg/L,3,2
+CEMP,Fluorescence,μg/L,3,2
+CEMP,DissolvedOxygen,mg/L,3,2
+CEMP,pH,,3,2
+CEMP,SpC,μS/cm,3,0
+CEMP,Turbidity,FNU,3,2
+CEMP,WaterTemperature,°C,3,2

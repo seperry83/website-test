@@ -21,6 +21,21 @@ group_by <- dplyr::group_by
 ungroup <- dplyr::ungroup
 rename <- dplyr::rename
 summarize <- dplyr::summarize
+select <- dplyr::select
+arrange <- dplyr::arrange
+
+ggplot <- ggplot2::ggplot
+aes <- ggplot2::aes
+geom_boxplot <- ggplot2::geom_boxplot
+geom_segment <- ggplot2::geom_segment
+annotate <- ggplot2::annotate
+theme_bw <- ggplot2::theme_bw
+labs <- ggplot2::labs
+theme <- ggplot2::theme
+scale_y_continuous <- ggplot2::scale_y_continuous
+ggsave <- ggplot2::ggsave
+element_blank <- ggplot2::element_blank
+element_text <- ggplot2::element_text
 
 createWorkbook <- openxlsx::createWorkbook
 addWorksheet <- openxlsx::addWorksheet
@@ -32,6 +47,7 @@ parse_date_time <- lubridate::parse_date_time
 month <- lubridate::month
 
 kable <- knitr::kable
+include_graphics <- knitr::include_graphics
 
 kable_styling <- kableExtra::kable_styling
 add_header_above <- kableExtra::add_header_above
@@ -69,15 +85,27 @@ BaseClass <- R6Class(
     },
     
     # add units to dataframe
-    assign_units = function() {
+    assign_analyte_meta = function() {
       self$df_raw <- left_join(self$df_raw, private$df_units, by = 'Analyte')
+      return(invisible(self))
+    },
+    
+    # simply station names (benthic)
+    simplify_stations = function() {
+      self$df_raw$Station <- stringr::str_remove(self$df_raw$Station, '-.*')
+      return(invisible(self))
+    },
+    
+    # remove "_bottom" stations (cwq)
+    remove_bottom = function() {
+      self$df_raw <- filter(self$df_raw, !grepl('_bottom', Station))
       return(invisible(self))
     },
     
     # add regions to dataframe
     assign_regions = function(program) {
       filt_regions <- private$df_regions %>% 
-        filter(Program == program)
+        filter(grepl(program, Program))
       
       self$df_raw <- left_join(self$df_raw, filt_regions[c('Station','Region')], by = 'Station')
       return(invisible(self))
@@ -108,13 +136,17 @@ StylingClass <- R6Class(
   'StylingClass',
   
   public = list(
-    style_kable = function(df, caption = NULL) {
-      table <- kable(df, caption = caption, align = 'c', digits = 2, escape = FALSE) %>%
+    
+    # style all tables
+    style_kable = function(df) {
+      table <- kable(df, align = 'c', digits = 2, escape = FALSE) %>%
         kable_styling(c('striped', 'scale_down'), font_size = 14, html_font = 'Arimo', full_width = TRUE) %>%
-        kableExtra::column_spec(1:ncol(df), width = paste0(100 / ncol(df), "%"))
+        kableExtra::column_spec(1:ncol(df), width = paste0(100 / ncol(df), '%'))
       
       return(table)
     }
+    
+    # style all plots
   )
 )
 
@@ -129,6 +161,19 @@ read_quiet_csv <- function(fp, ...){
   }
   
   return(df)
+}
+
+# base filepath to EMP SharePoint
+abs_path_data <- function(fp_rel = NULL) {
+  fp_emp <- 'California Department of Water Resources/Environmental Monitoring Program - Documents/'
+  
+  if (is.null(fp_rel)) {
+    fp_abs <- normalizePath(file.path(Sys.getenv('USERPROFILE'), fp_emp))
+  } else {
+    fp_abs <- normalizePath(file.path(Sys.getenv('USERPROFILE'), fp_emp, fp_rel))
+  }
+  
+  return(fp_abs)
 }
 
 # determine water year
@@ -153,6 +198,24 @@ get_water_year <- function(given_year = report_year) {
   }
   
   return(water_year)
+}
+
+# format numbers for display based on analyte
+format_vals <- function(value, vari) {
+  df_analytes <- readr::read_csv(here::here('admin/figures-tables/admin/analyte_table.csv'),
+                                 locale = readr::locale(encoding = 'UTF-8'),
+                                 show_col_types = FALSE)
+  
+  fracdigits <- df_analytes$FracDigits[df_analytes$Analyte == vari]
+  sigfigs <- df_analytes$SigFigs[df_analytes$Analyte == vari]
+  
+  rounded_val <- signif(value, sigfigs)
+  
+  format_str <- sprintf('%%.%df', fracdigits)
+  
+  final_val <- sprintf(format_str, rounded_val)
+  
+  return(final_val)
 }
 
 # Global Variables --------------------------------------------------------

@@ -3,18 +3,20 @@
 
 df_raw <- read_quiet_csv(here::here('admin/test-data/EMP_CWQ_data-long.csv'))
 
-df_units <- read_quiet_csv(here::here('admin/figures-tables/unit_table.csv'), locale = readr::locale(encoding = 'UTF-8'))
+df_units <- read_quiet_csv(here::here('admin/figures-tables/admin/analyte_table.csv'), locale = readr::locale(encoding = 'UTF-8'))
 
-df_regions <- read_quiet_csv(here::here('admin/figures-tables/region_table.csv'))
+df_regions <- read_quiet_csv(here::here('admin/figures-tables/admin/region_table.csv'))
 
 
-# Create Base cwq Object --------------------------------------------------
+# Create Base CWQ Object --------------------------------------------------
 
 obj_cwq <- BaseClass$new(df_raw, df_units, df_regions)
 
 obj_cwq$remove_EZ()
 
-obj_cwq$assign_units()
+obj_cwq$remove_bottom()
+
+obj_cwq$assign_analyte_meta()
 
 obj_cwq$assign_regions('CEMP')
 
@@ -41,3 +43,12 @@ strings_cwq_prev <- WQStringClass$new(obj_cwq_prev$df_raw)
 # Create Current Year Summary Table ---------------------------------------
 
 table_cwq <- WQTableClass$new(obj_cwq_cur$df_raw)
+
+# Create Current Year Plots -----------------------------------------------
+
+plt_cwq <- WQGraphClass$new(obj_cwq_cur$df_raw)
+
+
+# Create RRI DO Object ----------------------------------------------------
+
+obj_rri <- WQRRIClass$new(obj_cwq_cur$df_raw)

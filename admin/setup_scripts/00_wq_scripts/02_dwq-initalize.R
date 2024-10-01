@@ -3,18 +3,17 @@
 
 df_raw <- read_quiet_csv(here::here('admin/test-data/EMP_DWQ_1975_2023-long.csv'))
 
-df_units <- read_quiet_csv(here::here('admin/figures-tables/unit_table.csv'), locale = readr::locale(encoding = 'UTF-8'))
+df_analytes <- read_quiet_csv(here::here('admin/figures-tables/admin/analyte_table.csv'), locale = readr::locale(encoding = 'UTF-8'))
 
-df_regions <- read_quiet_csv(here::here('admin/figures-tables/region_table.csv'))
-
+df_regions <- read_quiet_csv(here::here('admin/figures-tables/admin/region_table.csv'))
 
 # Create Base DWQ Object --------------------------------------------------
 
-obj_dwq <- BaseClass$new(df_raw, df_units, df_regions)
+obj_dwq <- BaseClass$new(df_raw, df_analytes, df_regions)
 
 obj_dwq$remove_EZ()
 
-obj_dwq$assign_units()
+obj_dwq$assign_analyte_meta()
 
 obj_dwq$assign_regions('DEMP')
 

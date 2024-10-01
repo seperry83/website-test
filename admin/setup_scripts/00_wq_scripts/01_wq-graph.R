@@ -1,24 +1,77 @@
 # this is temporary
+blank_theme <- ggplot2::theme_bw() +
+  ggplot2::theme(
+    panel.grid.major.x = ggplot2::element_blank() ,
+    panel.grid.minor = ggplot2::element_blank(),
+    axis.line = ggplot2::element_blank(),
+    axis.text = ggplot2::element_text(color='black', size=5, family='sans'),
+    axis.text.x = ggplot2::element_text(angle = 45, vjust = 0.5, margin = ggplot2::margin(t = 1)),
+    axis.title.x = ggplot2::element_blank(),
+    axis.title.y = ggplot2::element_blank(),
+    plot.title = ggplot2::element_text(size=7, hjust=0.5),
+    legend.position = 'top',
+    legend.title = ggplot2::element_blank(),
+    legend.box.margin = ggplot2::margin(-10,-10,-10,-10),
+    legend.text = ggplot2::element_text(size=5),
+    legend.key.size = ggplot2::unit(.3, 'lines')
+  )
 
-func_dwq_graphs <- function(df_wq){
-  # Clean data for graph creation
-  df_dwq <- func_clean_graph_dat(df_wq)
+# base graph
+base_graph <- function(colors, m, rl_exists, df_vert, df_horz, cur_region){
+  y_ftsize <- 2
+  x_ftsize <- 1
+  
+  p <- ggplot2::ggplot() +
+    blank_theme +
+    ggplot2::scale_x_date(labels = scales::date_format('%b'), breaks = m$Date) +
+    ggplot2::scale_color_manual(values=colors, guide = ggplot2::guide_legend(nrow = 1)) +
+    ggplot2::scale_fill_manual(values=colors) +
+    ggplot2::ggtitle(cur_region)
+  
+  # if > RL data exists
+  if(!all(is.na(m$Val))){
+    p <- p +
+      ggplot2::geom_line(data = m, mapping = ggplot2::aes(Date, Val, group = Station, color = Station), na.rm = TRUE, size = .6) +
+      ggplot2::geom_point(data = m, mapping = ggplot2::aes(Date, Val, group = Station, color = Station, shape = Station), na.rm = TRUE, size = 2)
+  }
+  
+  # if < RL data exists
+  if(rl_exists){
+    p <- p +
+      ggplot2::geom_segment(data = df_vert, mapping = ggplot2::aes(x = x, xend = xend, y = y, yend = yend, color = Station), size = .6, lty = 5) +
+      ggplot2::geom_segment(data = df_horz, mapping = ggplot2::aes(x = x, xend = xend, y = y, yend = yend, color = Station), size = .6, lineend = 'square')
+  }
+  
+  # only have x-axis show for bottom ones
+  if(cur_region != 'Southern Interior Delta' & cur_region != 'Suisun & Grizzly Bays'){
+    p <- p + ggplot2::theme(
+      axis.text.x = ggplot2::element_text(size = x_ftsize, color = 'white'),
+      axis.ticks.x = ggplot2::element_blank()
+    )
+  }
+  
+  return(p)
+}
+
+func_dwq_graphs <- function(df_wq, analytes){
   
   # Create order for regions
   reg_order_two <- c('Central Delta','Northern Interior Delta','Southern Interior Delta','Confluence','San Pablo Bay','Suisun & Grizzly Bays')
-  df_dwq <- df_dwq %>%
-    dplyr::mutate(Region = factor(Region, levels = reg_order_two)) %>%
+  df_wq <- df_wq %>%
+    dplyr::mutate(Region = factor(Region, levels = reg_order_two),
+                  Month = lubridate::month(Date)) %>%
+    dplyr::filter(Analyte %in% analytes) %>%
     dplyr::arrange(Region)
   
-  analytes <- unique(df_dwq$Analyte)
+  analytes <- unique(df_wq$Analyte)
   
   # Create subset for segments where values are '<' (non-detects)
-  seg_subset <- subset(df_dwq, df_dwq$DetectStatus == 'Nondetect')
+  seg_subset <- subset(df_wq, df_wq$DetectStatus == 'Nondetect')
   
   # Create vertical segment dataframe for non-detects
   df_seg_vert <- data.frame(
-    x = seg_subset$Monyear,
-    xend = seg_subset$Monyear,
+    x = seg_subset$Date,
+    xend = seg_subset$Date,
     y = 0,
     yend = seg_subset$Value,
     Analyte = seg_subset$Analyte,
@@ -29,8 +82,8 @@ func_dwq_graphs <- function(df_wq){
   
   # Create horizontal segment dataframe for non-detects
   df_seg_horz <- data.frame(
-    x = seg_subset$Monyear - 10,
-    xend = seg_subset$Monyear + 10,
+    x = seg_subset$Date - 10,
+    xend = seg_subset$Date + 10,
     y = seg_subset$Value,
     yend = seg_subset$Value,
     Analyte = seg_subset$Analyte,
@@ -54,7 +107,7 @@ func_dwq_graphs <- function(df_wq){
   )
   
   for (i in seq_along(analytes)) {
-    df_dwq_filt <- df_dwq %>% dplyr::filter(Analyte == analytes[i])
+    df_dwq_filt <- df_wq %>% dplyr::filter(Analyte == analytes[i])
     
     # Set y-axis limits based on region for SpCndSurface
     if (analytes[i] != 'SpCndSurface') {
@@ -123,6 +176,10 @@ func_dwq_graphs <- function(df_wq){
     # Combine the plots and save them as images
     graph <- gridExtra::marrangeGrob(grobs = out, ncol = 2, nrow = 3,
                                      top = grid::textGrob(analyte_plot_name, gp = grid::gpar(fontsize = 9, fontface = 'bold')))
-    ggplot2::ggsave(paste0('admin/plots/dwq/ARGraph_', analytes[i], '.jpg'), graph, width = 4.5, height = 5.3, unit = 'in')
+    ggplot2::ggsave(paste0('admin/plots/dwq/ARGraph1_', analytes[i], '.jpg'), graph, width = 4.5, height = 5.3, unit = 'in')
   }
 }
+# 
+test_analytes <- c('Chla', 'Turbidity','SpCndSurface','DissAmmonia','DissNitrateNitrite','TotalPhosphorus')
+
+func_dwq_graphs(obj_dwq_cur$df_raw, test_analytes)

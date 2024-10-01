@@ -52,14 +52,29 @@ For more in-depth methodology, see [here](https://portal.edirepository.org/nis/m
 
 The average water temperature value was `r strings_cwq_cur$disp_val_range('WaterTemperature','mean')`; for comparison, the previous year average was `r strings_cwq_prev$disp_val_range('WaterTemperature','mean')`. Values ranged from `r strings_cwq_cur$disp_extreme_range('WaterTemperature')`. `r strings_cwq_cur$disp_nondetect_perc('WaterTemperature')` Per region average, minimum, and maximum values are shown in @tbl-wt; time series plots are shown in Figure y.
 
-```{r echo=FALSE, fig.align='center', results='asis'}
+```{r}
 #| label: tbl-wt
-#| tbl-cap: 'test'
+#| echo: false
+#| warning: false
+#| fig-align: 'center'
+#| tbl-cap: 'Summary statistics for water temperature by region in the San Francisco Bay-Delta estuary.'
  
 summary_wt <- table_cwq$clone(deep=TRUE)
 summary_wt$create_summary_df('WaterTemperature', 'mean')
 summary_wt$create_kable()
 ```
+
+```{r}
+#| label: fig-wt
+#| echo: false
+#| warning: false
+#| fig-align: 'center'
+#| fig-cap: 'Average daily water temperature by region in the San Francisco Bay-Delta estuary.'
+
+plt_cwq$create_test_plt('Turbidity')
+include_graphics(here::here(file.path('admin/figures-tables/cwq/test_Turbidity.jpg')))
+```
+
 
 ### Specific Conductance
 
@@ -67,7 +82,8 @@ The average water temperature value was `r strings_cwq_cur$disp_val_range('SpC',
 
 ```{r echo=FALSE, fig.align='center'}
 #| label: tbl-spc
-#| tbl-cap: 'test'
+#| warning: false
+#| tbl-cap: 'Summary statistics for specific conductance by region in the San Francisco Bay-Delta estuary.'
 
 summary_spc <- table_cwq$clone(deep=TRUE)
 summary_spc$create_summary_df('SpC', 'mean')
@@ -80,7 +96,8 @@ The average water temperature value was `r strings_cwq_cur$disp_val_range('Disso
 
 ```{r echo=FALSE, fig.align='center'}
 #| label: tbl-do
-#| tbl-cap: 'test'
+#| warning: false
+#| tbl-cap: 'Summary statistics for dissolved oxygen by region in the San Francisco Bay-Delta estuary.'
 
 summary_do <- table_cwq$clone(deep=TRUE)
 summary_do$create_summary_df('DissolvedOxygen', 'mean')
@@ -89,10 +106,17 @@ summary_do$create_kable()
 
 #### Stockton Station DO Values
 
-C-EMP monitors DO values at the Stockton Ship channel \<etc etc\>. The range of monthly DO values at the Stockton station is shown below. The monthly average DO levels at the Stockton station did not fall below the 5.0 mg/L standard set by the CVRWQCB (1998) for the December - August period. The monthly average DO levels dropped below the 6.0 mg/L standard (SWRCB, 1995) during the passage of fall-run Chinook salmon through the ship channel in September and October for the September - November control period.
+C-EMP monitors DO at the Stockton Ship channel to determine if/when it fall below limits established by the CVRWQCB (1998). For the December - August period, values `r obj_rri$disp_RRI_months('off months')`. For the September - November period that coincides with the passage of fall-run Chinook salmon, values `r obj_rri$disp_RRI_months('on months')`. A boxplot of the DO values is shown in @fig-rri. 
 
-```{r echo=FALSE, fig.show = 'hold', out.width = '70%', fig.align='center'}
-# knitr::include_graphics(file.path('admin/figures/cwq/graph_rri_do.jpg'))
+```{r}
+#| label: fig-rri
+#| echo: false
+#| warning: false
+#| fig-align: 'center'
+#| fig-cap: 'Range of daily dissolved oxygen values at the Stockton Ship Channel (P8).'
+
+obj_rri$create_rri_plt()
+include_graphics(here::here(file.path('admin/figures-tables/cwq/fig_rri_do.jpg')))
 ```
 
 ### pH
@@ -101,7 +125,7 @@ The average water temperature value was `r strings_cwq_cur$disp_val_range('pH','
 
 ```{r echo=FALSE, fig.align='center'}
 #| label: tbl-ph
-#| tbl-cap: 'test'
+#| tbl-cap: 'Summary statistics for pH by region in the San Francisco Bay-Delta estuary.'
 
 summary_ph <- table_cwq$clone(deep=TRUE)
 summary_ph$create_summary_df('pH', 'mean')
@@ -114,7 +138,7 @@ The average water temperature value was `r strings_cwq_cur$disp_val_range('Turbi
 
 ```{r echo=FALSE, fig.align='center'}
 #| label: tbl-turb
-#| tbl-cap: 'test'
+#| tbl-cap: 'Summary statistics for turbidity by region in the San Francisco Bay-Delta estuary.'
 
 summary_turb <- table_cwq$clone(deep=TRUE)
 summary_turb$create_summary_df('Turbidity', 'mean')
@@ -127,7 +151,7 @@ The average water temperature value was `r strings_cwq_cur$disp_val_range('Fluor
 
 ```{r echo=FALSE, fig.align='center'}
 #| label: tbl-fluor
-#| tbl-cap: 'test'
+#| tbl-cap: 'Summary statistics for chlorophyll a fluorescence by region in the San Francisco Bay-Delta estuary.'
 
 summary_fluor <- table_cwq$clone(deep=TRUE)
 summary_fluor$create_summary_df('Fluorescence', 'mean')
@@ -136,7 +160,7 @@ summary_fluor$create_kable()
 
 ## Interpretations
 
-insert text here
+[[**To be written by section lead**]{.underline}]{.smallcaps}
 
 ## References
 
