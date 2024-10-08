@@ -17,14 +17,14 @@ Discrete water quality samples were collected monthly at 24 monitoring sites thr
 
 ```{r echo=FALSE, fig.align='center',  out.width = '70%'}
 #| label: fig-stations
-#| fig-cap: 'test'
+#| fig-cap: 'Map of EMP’s discrete WQ field sites.'
 #| 
 knitr::include_graphics(file.path('../../../admin/figures/dwq/d-wq_station_map.jpg'))
 ```
 
 ```{r echo=FALSE, warning=FALSE, message=FALSE, results = 'asis'}
 #| label: tbl-stations
-#| tbl-cap: 'test'
+#| tbl-cap: 'Stations included within each region of the Delta'
 
 dwq_stations <- readr::read_csv(here::here('admin/figures-tables/dwq/dwq-stations.csv'))
 
@@ -45,8 +45,6 @@ Regional facet graphs were created for each parameter. The average, minimum and 
 For more in-depth methodology, see [here](https://portal.edirepository.org/nis/metadataviewer?packageid=edi.1320.6).
 
 ## Results
-
-### testing
 
 ### Specific Conductance
 

@@ -144,9 +144,29 @@ StylingClass <- R6Class(
         kableExtra::column_spec(1:ncol(df), width = paste0(100 / ncol(df), '%'))
       
       return(table)
-    }
+    },
     
     # style all plots
+    
+    # create list item for bullet lists
+    list_item = function(ele){
+      item <- glue::glue('&#x2022; {ele}<br />')
+      return(item)
+    },
+    
+    # style bullet lists
+    bullet_list = function(vec){
+      final_list <- c()
+      
+      for (i in 1:length(vec)){
+        new_ele <- self$list_item(vec[i])
+        final_list <- c(final_list, new_ele)
+      }
+      
+      final_list <- paste0(final_list, collapse = '')
+      
+      return(final_list)
+    }
   )
 )
 
