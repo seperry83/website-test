@@ -189,9 +189,9 @@ StylingClass <- R6Class(
       color_pal_name <- switch(region,
        "Central Delta" = "Blues",
        "Confluence" = "Oranges",
-       "Northern Interior Delta" = "Greys",
+       "North Delta" = "Greys",
        "San Pablo Bay" = "BrBG",
-       "Southern Interior Delta" = "Greens",
+       "South Delta" = "Greens",
        "Suisun & Grizzly Bays" = "Purples"
       )
       
@@ -199,9 +199,9 @@ StylingClass <- R6Class(
       color_pal_num <- switch(region,
         "Central Delta" = c(6, 3),
         "Confluence" = c(6, 3),
-        "Northern Interior Delta" = c(4, 3),
+        "North Delta" = c(4, 3),
         "San Pablo Bay" = 8, # only dwq has stations within this region
-        "Southern Interior Delta" = c(6, 3),
+        "South Delta" = c(6, 3),
         "Suisun & Grizzly Bays" = c(6, 4)
       )
       
