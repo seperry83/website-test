@@ -34,7 +34,7 @@ website:
           - text: "Benthic Invertebrates"
             href: "https://github.com/quarto-dev/quarto-cli/discussions"
           - text: "Phytoplankton"
-            href: "https://github.com/quarto-dev/quarto-cli/discussions"
+            href: sections/phyto/qmd-files/00-phyto-report.qmd
           - text: "Zooplankton"
             href: "https://github.com/quarto-dev/quarto-cli/discussions"
       - text: Special Studies

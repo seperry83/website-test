@@ -1,0 +1,94 @@
+---
+title: "Phytoplankton Report"
+---
+
+```{r echo = FALSE}
+# read in functions; do not edit
+source(here::here('admin/import_scripts.R'))
+```
+
+## Introduction
+
+The Department of Water Resources (DWR) and the US Bureau of Reclamation (USBR) are required by Water Right Decision 1641 (D-1641) to collect phytoplankton and chlorophyll *a* samples to monitor algal community composition and biomass at select sites in the upper San Francisco Estuary (Estuary). This report describes the results of these monitoring efforts for water year `r report_year` (October 1st `r prev_year` through September 30th `r report_year`), which was classified as a `r get_water_year()` year in the Sacramento Valley [(source)](https://cdec.water.ca.gov/reportapp/javareports?name=WSIHIST).
+
+## Methods
+
+Phytoplankton samples were collected monthly at 24 monitoring sites throughout the Upper Estuary and were grouped into regions based on their geographic location (@fig-stations; @tbl-stations). These sites represent a variety of aquatic habitats, from narrow, freshwater channels to broad, estuarine bays.
+
+```{r echo=FALSE, fig.align='center',  out.width = '70%'}
+#| label: fig-stations
+#| fig-cap: 'Map of EMP’s phytoplankton field sites.'
+#| 
+knitr::include_graphics(file.path('../../../admin/figures/dwq/d-wq_station_map.jpg'))
+```
+
+```{r echo=FALSE, warning=FALSE, message=FALSE, results = 'asis'}
+#| label: tbl-stations
+#| tbl-cap: 'Stations included within each region of the Delta'
+
+dwq_stations <- readr::read_csv(here::here('admin/figures-tables/dwq/dwq-stations.csv'))
+
+styler$style_kable(dwq_stations)
+```
+
+### Phytoplankton
+
+The 10 most common genera were determined by summing the normalized organism counts across all stations and months for each genus. For the bar graphs, average organism counts were calculated per month, per region, and normalized to the number of stations. Average summary statistics are reported as the mean (μ) ± the standard deviation.
+
+For more in-depth methodology, see [here](https://portal.edirepository.org/nis/metadataviewer?packageid=edi.1320.6).
+
+### Chlorophyll a and Pheophytin a
+
+Samples of chlorophyll a and pheophytin a were collected monthly at 24 monitoring sites throughout the upper Estuary using a submersible pump positioned 1 meter below the water's surface. Average analyte concentrations were then calculated per month, per region, and were normalized to the number of stations. Average summary statistics are reported as the median (M) ± the median absolute deviation.
+
+For more in-depth methodology, see [here](https://portal.edirepository.org/nis/metadataviewer?packageid=edi.1320.6).
+
+## Overall Results
+
+### Phytoplankton Identification
+
+```{r echo = FALSE, results = 'asis'}
+strings_phyto_cur$alg_list_txt()
+```
+
+### Pigment Concentrations
+
+## Regional Results
+
+### Northern Interior Delta
+
+#### Water Quality
+
+The average chlorophyll a concentration was 2.08 ± x μg/L. Values ranged from \< 0.5 μg/L (the reporting limit) to 49.8 μg/L (NZ325 in August). 8 samples were below the reporting limit.
+
+The average pheophytin concentration was 2.08 ± x μg/L. Values ranged from \< 0.5 μg/L (the reporting limit) to 49.8 μg/L (NZ325 in August). 8 samples were below the reporting limit.
+
+#### Phytoplankton
+
+`r strings_phyto_cur$composition_summary_region('Central Delta')` (Other, Figure x).
+
+## Interpretations
+
+[[**To be written by section lead**]{.underline}]{.smallcaps}
+
+## References
+
+[APHA] American Public Health Association, American Waterworks, and Water Environmental Federation. 2012. Standard Methods for the Examination of Water and Wastewater. 22nd ed. Washington, D.C.: American Public Health Association.
+
+Alpine, A. E., and Cloern, J. E. 1992. Trophic interactions and direct physical effects control phytoplankton biomass and production in an estuary. Limnol. Oceanogr. 37: 946-955
+
+Carmichael, W., ed. 1981. The Water Environment, Algal Toxins and Health. Plenum Press, New York, N. Y.
+
+Gannon, J. E. and R. S. Stemberger. 1978. Zooplankton (especially crustaceans and rotifers) as indicators of water quality. Trans. Amer. Microsc. 97:16.
+
+Horne, A. and Goldman, C. 1994. Limnology. 2nd ed. New York, New York, McGraw-Hill, Inc.
+
+Müller-Solger AB, Jassby AD, Müller-Navarra DC. 2002. Nutritional quality of food resources for zooplankton (Daphnia) in a tidal freshwater system (Sacramento-San Joaquin River Delta). Limnology and Oceanography 47(5): 1468-1476.
+
+Utermöhl, H. 1958. Zur Vervollkommnung der quantitativen Phytoplankton Methodik. Mitt. Int. Verh. Limnol. 9: 38.
+
+van den Hoek, C., D.G. Mann, and H.M. Jahns. 1995. Algae: an introduction to Phycology. Cambridge University Press, United Kingdom.
+
+## Archived Reports
+
+Previous EMP phytoplankton reports can be found [here](https://github.com/emp-dwr/emp-website/tree/gh-pages/admin/archive/phyto).

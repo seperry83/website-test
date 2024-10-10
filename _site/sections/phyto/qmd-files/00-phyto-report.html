@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Environmental Monitoring Program - Veliger Monitoring Program</title>
+<title>Environmental Monitoring Program - Phytoplankton Report</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -60,6 +60,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+
+<script src="../../../site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="../../../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 
 
 <link rel="stylesheet" href="../../../admin/styling_scripts/styles.css">
@@ -149,9 +152,24 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Contents</h2>
    
   <ul>
-  <li><a href="#background" id="toc-background" class="nav-link active" data-scroll-target="#background">Background</a></li>
-  <li><a href="#sampling-protocols" id="toc-sampling-protocols" class="nav-link" data-scroll-target="#sampling-protocols">Sampling Protocols</a></li>
-  <li><a href="#contact-info" id="toc-contact-info" class="nav-link" data-scroll-target="#contact-info">Contact Info</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#methods" id="toc-methods" class="nav-link" data-scroll-target="#methods">Methods</a>
+  <ul class="collapse">
+  <li><a href="#phytoplankton" id="toc-phytoplankton" class="nav-link" data-scroll-target="#phytoplankton">Phytoplankton</a></li>
+  <li><a href="#chlorophyll-a-and-pheophytin-a" id="toc-chlorophyll-a-and-pheophytin-a" class="nav-link" data-scroll-target="#chlorophyll-a-and-pheophytin-a">Chlorophyll a and Pheophytin a</a></li>
+  </ul></li>
+  <li><a href="#overall-results" id="toc-overall-results" class="nav-link" data-scroll-target="#overall-results">Overall Results</a>
+  <ul class="collapse">
+  <li><a href="#phytoplankton-identification" id="toc-phytoplankton-identification" class="nav-link" data-scroll-target="#phytoplankton-identification">Phytoplankton Identification</a></li>
+  <li><a href="#pigment-concentrations" id="toc-pigment-concentrations" class="nav-link" data-scroll-target="#pigment-concentrations">Pigment Concentrations</a></li>
+  </ul></li>
+  <li><a href="#regional-results" id="toc-regional-results" class="nav-link" data-scroll-target="#regional-results">Regional Results</a>
+  <ul class="collapse">
+  <li><a href="#northern-interior-delta" id="toc-northern-interior-delta" class="nav-link" data-scroll-target="#northern-interior-delta">Northern Interior Delta</a></li>
+  </ul></li>
+  <li><a href="#interpretations" id="toc-interpretations" class="nav-link" data-scroll-target="#interpretations">Interpretations</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  <li><a href="#archived-reports" id="toc-archived-reports" class="nav-link" data-scroll-target="#archived-reports">Archived Reports</a></li>
   </ul>
 </nav>
     </div>
@@ -160,7 +178,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Veliger Monitoring Program</h1>
+<h1 class="title">Phytoplankton Report</h1>
 </div>
 
 
@@ -175,21 +193,120 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="background" class="level2">
-<h2 class="anchored" data-anchor-id="background">Background</h2>
-<p>The Zebra/Quagga Mussel Veliger Monitoring Program monitors zebra (<em>Dreissena polymorpha</em>) and quagga (<em>Dreissena bugensis</em>) mussel abundance within the Delta. These species were first discovered in Lakes St.&nbsp;Clair and Erie in 1988 and have since expanded their geographic distribution into many other freshwater systems in North America. These mussels were introduced into the Great Lakes by means of discharged ballast water from transoceanic ships that may have contained mussel larvae or possibly juveniles. While zebra and quagga mussels have not been detected in or near the California Delta, the Department of Water Resources’ Zebra and Quagga Mussel Early Detection Monitoring Program aims to monitor the potential spread of zebra and quagga mussels in California waterways. The first stage of the mussel lifecycle is called a veliger, which is a free-swimming planktonic larva that develops miniature bivalve shells and feeds by utilizing its hair-like cilia. Veligers drift with the currents and eventually settle onto hard substrates using sticky secretions. Once settled, they are considered juveniles that eventually develop to sexual maturity, becoming adult mussels after about a year of growth.</p>
-<p>Zebra and quagga mussels have negative impacts on aquatic food webs by filtering increased amounts of phytoplankton, which then creates a food source deficiency for organisms in higher trophic levels. They also excrete unwanted particulate matter (pseudofeces) that undergoes decomposition, which causes oxygen levels to decrease and toxic byproducts (ammonia and hydrogen sulfide) to be released into the water. Zebra and quagga mussels also influence industrial processes by colonizing hard surfaces, placing potential limitations on pumping plants for water distribution. This program sets out to monitor any traces of zebra and quagga mussel veliger DNA throughout the California water system to prevent the negative effects associated with the spread of these introduced mussels.</p>
-<!-- ```{r echo=FALSE, out.width='90%', fig.align='center', caption='Map of veliger monitoring stations for the Sacramento-San Joaquin Delta region.'} -->
-<!-- knitr::include_graphics(file.path('sections/special-studies/figures/veligermap.png')) -->
-<!-- ``` -->
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>The Department of Water Resources (DWR) and the US Bureau of Reclamation (USBR) are required by Water Right Decision 1641 (D-1641) to collect phytoplankton and chlorophyll <em>a</em> samples to monitor algal community composition and biomass at select sites in the upper San Francisco Estuary (Estuary). This report describes the results of these monitoring efforts for water year 2023 (October 1st 2022 through September 30th 2023), which was classified as a wet year in the Sacramento Valley <a href="https://cdec.water.ca.gov/reportapp/javareports?name=WSIHIST">(source)</a>.</p>
 </section>
-<section id="sampling-protocols" class="level2">
-<h2 class="anchored" data-anchor-id="sampling-protocols">Sampling Protocols</h2>
-<p>While this program includes many other regions and sampling methods, the map and sampling protocols listed here are specific to the Sacramento-San Joaquin Delta region. Sampling for this region takes place once a month at each of the three monitoring stations displayed on the map. At each station, a 45-meter horizontal surface tow is conducted using a 64-micron mesh plankton net. The material collected at the cod end of the net is that of which cannot pass through the 64-micron mesh. These particulates are rinsed into a sample container and submitted to a laboratory for PCR analysis, which determines presence/absence of zebra/quagga mussel veliger DNA. In order to sample all three stations in one day, some nets require decontamination in the field prior to reuse. This decontamination process consists of soaking each net in vinegar for a minimum of one hour and then spraying all surfaces of the net with a 10% bleach solution.</p>
+<section id="methods" class="level2">
+<h2 class="anchored" data-anchor-id="methods">Methods</h2>
+<p>Phytoplankton samples were collected monthly at 24 monitoring sites throughout the Upper Estuary and were grouped into regions based on their geographic location (<a href="#fig-stations">Figure&nbsp;1</a>; <a href="#tbl-stations">Table&nbsp;1</a>). These sites represent a variety of aquatic habitats, from narrow, freshwater channels to broad, estuarine bays.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-stations" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="../../../admin/figures/dwq/d-wq_station_map.jpg" class="img-fluid figure-img" style="width:70.0%"></p>
+<figcaption class="figure-caption">Figure&nbsp;1: Map of EMP’s phytoplankton field sites.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div id="tbl-stations" class="anchored">
+<table class="table table-striped table-sm small" data-quarto-postprocess="true">
+<caption>Table&nbsp;1: Stations included within each region of the Delta</caption>
+<thead>
+<tr class="header">
+<th style="text-align: center;" data-quarto-table-cell-role="th">Region</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Stations</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center; width: 50%;">Northern Interior Delta</td>
+<td style="text-align: center; width: 50%;">C3A and NZ068</td>
+</tr>
+<tr class="even">
+<td style="text-align: center; width: 50%;">Southern Interior Delta</td>
+<td style="text-align: center; width: 50%;">C9, C10A, MD10A and P8</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center; width: 50%;">Central Delta</td>
+<td style="text-align: center; width: 50%;">D16, D19, D26 and D28A</td>
+</tr>
+<tr class="even">
+<td style="text-align: center; width: 50%;">The Confluence</td>
+<td style="text-align: center; width: 50%;">D4, D10, D12 and D22</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center; width: 50%;">Grizzly and Suisun Bay</td>
+<td style="text-align: center; width: 50%;">D7, D8, NZ032 and NZS42</td>
+</tr>
+<tr class="even">
+<td style="text-align: center; width: 50%;">San Pablo Bay</td>
+<td style="text-align: center; width: 50%;">D6, D41, D41A, NZ002, NZ004 and NZ325</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+</div>
+</div>
+<section id="phytoplankton" class="level3">
+<h3 class="anchored" data-anchor-id="phytoplankton">Phytoplankton</h3>
+<p>The 10 most common genera were determined by summing the normalized organism counts across all stations and months for each genus. For the bar graphs, average organism counts were calculated per month, per region, and normalized to the number of stations. Average summary statistics are reported as the mean (μ) ± the standard deviation.</p>
+<p>For more in-depth methodology, see <a href="https://portal.edirepository.org/nis/metadataviewer?packageid=edi.1320.6">here</a>.</p>
 </section>
-<section id="contact-info" class="level2">
-<h2 class="anchored" data-anchor-id="contact-info">Contact Info</h2>
-<p>For more information about this study, please contact Craig Stuart at <a href="mailto:Craig.Stuart@water.ca.gov" class="email">Craig.Stuart@water.ca.gov</a>.</p>
+<section id="chlorophyll-a-and-pheophytin-a" class="level3">
+<h3 class="anchored" data-anchor-id="chlorophyll-a-and-pheophytin-a">Chlorophyll a and Pheophytin a</h3>
+<p>Samples of chlorophyll a and pheophytin a were collected monthly at 24 monitoring sites throughout the upper Estuary using a submersible pump positioned 1 meter below the water’s surface. Average analyte concentrations were then calculated per month, per region, and were normalized to the number of stations. Average summary statistics are reported as the median (M) ± the median absolute deviation.</p>
+<p>For more in-depth methodology, see <a href="https://portal.edirepository.org/nis/metadataviewer?packageid=edi.1320.6">here</a>.</p>
+</section>
+</section>
+<section id="overall-results" class="level2">
+<h2 class="anchored" data-anchor-id="overall-results">Overall Results</h2>
+<section id="phytoplankton-identification" class="level3">
+<h3 class="anchored" data-anchor-id="phytoplankton-identification">Phytoplankton Identification</h3>
+<p>All organisms collected in water year 2023 fell into these 12 algal groups:<br> • Chrysophytes<br>• Ciliates<br>• Cryptophytes<br>• Cyanobacteria<br>• Diatoms (Pennate and Centric)<br>• Dinoflagellates<br>• Euglenoids<br>• Green Algae<br>• Haptophytes<br>• Raphidophytes<br>• Synurophytes<br><br></p>
+</section>
+<section id="pigment-concentrations" class="level3">
+<h3 class="anchored" data-anchor-id="pigment-concentrations">Pigment Concentrations</h3>
+</section>
+</section>
+<section id="regional-results" class="level2">
+<h2 class="anchored" data-anchor-id="regional-results">Regional Results</h2>
+<section id="northern-interior-delta" class="level3">
+<h3 class="anchored" data-anchor-id="northern-interior-delta">Northern Interior Delta</h3>
+<section id="water-quality" class="level4">
+<h4 class="anchored" data-anchor-id="water-quality">Water Quality</h4>
+<p>The average chlorophyll a concentration was 2.08 ± x μg/L. Values ranged from &lt; 0.5 μg/L (the reporting limit) to 49.8 μg/L (NZ325 in August). 8 samples were below the reporting limit.</p>
+<p>The average pheophytin concentration was 2.08 ± x μg/L. Values ranged from &lt; 0.5 μg/L (the reporting limit) to 49.8 μg/L (NZ325 in August). 8 samples were below the reporting limit.</p>
+</section>
+<section id="phytoplankton-1" class="level4">
+<h4 class="anchored" data-anchor-id="phytoplankton-1">Phytoplankton</h4>
+<p>The most abundant algal groups were cyanobacteria (94.89% of organisms, μ = 21804 ± 48437 organisms/mL) and green algae (2.6% of organisms, μ = 666 ± 1203 organisms/mL). The remaining 2.5% of organisms were comprised of centric diatoms, chrysophytes, cryptophytes, dinoflagellates, euglenoids, haptophytes, and pennate diatoms (Other, Figure x).</p>
+</section>
+</section>
+</section>
+<section id="interpretations" class="level2">
+<h2 class="anchored" data-anchor-id="interpretations">Interpretations</h2>
+<p><span class="smallcaps"><u><strong>To be written by section lead</strong></u></span></p>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<p>[APHA] American Public Health Association, American Waterworks, and Water Environmental Federation. 2012. Standard Methods for the Examination of Water and Wastewater. 22nd ed.&nbsp;Washington, D.C.: American Public Health Association.</p>
+<p>Alpine, A. E., and Cloern, J. E. 1992. Trophic interactions and direct physical effects control phytoplankton biomass and production in an estuary. Limnol. Oceanogr. 37: 946-955</p>
+<p>Carmichael, W., ed.&nbsp;1981. The Water Environment, Algal Toxins and Health. Plenum Press, New York, N. Y.</p>
+<p>Gannon, J. E. and R. S. Stemberger. 1978. Zooplankton (especially crustaceans and rotifers) as indicators of water quality. Trans. Amer. Microsc. 97:16.</p>
+<p>Horne, A. and Goldman, C. 1994. Limnology. 2nd ed.&nbsp;New York, New York, McGraw-Hill, Inc.</p>
+<p>Müller-Solger AB, Jassby AD, Müller-Navarra DC. 2002. Nutritional quality of food resources for zooplankton (Daphnia) in a tidal freshwater system (Sacramento-San Joaquin River Delta). Limnology and Oceanography 47(5): 1468-1476.</p>
+<p>Utermöhl, H. 1958. Zur Vervollkommnung der quantitativen Phytoplankton Methodik. Mitt. Int. Verh. Limnol. 9: 38.</p>
+<p>van den Hoek, C., D.G. Mann, and H.M. Jahns. 1995. Algae: an introduction to Phycology. Cambridge University Press, United Kingdom.</p>
+</section>
+<section id="archived-reports" class="level2">
+<h2 class="anchored" data-anchor-id="archived-reports">Archived Reports</h2>
+<p>Previous EMP phytoplankton reports can be found <a href="https://github.com/emp-dwr/emp-website/tree/gh-pages/admin/archive/phyto">here</a>.</p>
 
 
 </section>

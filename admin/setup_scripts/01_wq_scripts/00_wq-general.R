@@ -12,30 +12,44 @@ WQStatsClass <- R6Class(
     },
     
     # calculate the average (either mean or median)
-    calc_avg = function(analyte, statistic = c('mean','median')) {
+    calc_avg = function(analyte, region = NULL, statistic = c('mean','median')) {
       statistic = match.arg(statistic)
       
+      df_summ <- self$df_raw
+      
+      if (!is.null(region)) {
+        df_summ <- df_summ %>%
+          filter(Region == region)
+      }
+      
       avg_val <- switch(statistic,
-                          'mean' = mean(self$df_raw %>% 
+                          'mean' = mean(df_summ %>% 
                                           filter(Analyte == analyte) %>% 
                                           pull(Value), na.rm = TRUE),
-                          'median' = median(self$df_raw %>% 
+                          'median' = median(df_summ %>% 
                                               filter(Analyte == analyte) %>% 
                                               pull(Value), na.rm = TRUE))
       return(avg_val)
     },
     
     # calculate the variance (standard deviation for mean, MAD for median)
-    calc_variance = function(analyte, statistic = c('mean','median')) {
+    calc_variance = function(analyte, region = NULL, statistic = c('mean','median')) {
       statistic <- match.arg(statistic)
       
+      df_summ <- self$df_raw
+      
+      if (!is.null(region)) {
+        df_summ <- df_summ %>%
+          filter(Region == region)
+      }
+      
       if (statistic == 'mean') {
-        variance_val <- sd(self$df_raw %>%
+        variance_val <- sd(df_summ %>%
                              filter(Analyte == analyte) %>%
                              pull(Value), na.rm = TRUE)
       } else if (statistic == 'median') {
         median_val <- self$calc_avg(analyte, 'median')
-        variance_val <- median(abs(self$df_raw %>%
+        variance_val <- median(abs(df_summ %>%
                                      filter(Analyte == analyte) %>%
                                      pull(Value) - median_val), na.rm = TRUE)
       }
