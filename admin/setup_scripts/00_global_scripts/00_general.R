@@ -147,7 +147,75 @@ StylingClass <- R6Class(
       return(table)
     },
     
-    # style all plots
+    # Define custom theme for WQ plots
+    wq_plt_theme = list(
+      ggplot2::theme_bw(),
+      ggplot2::theme(
+        panel.grid.major.x = ggplot2::element_blank(),
+        panel.grid.minor = ggplot2::element_blank(),
+        axis.line = ggplot2::element_blank(),
+        axis.text = ggplot2::element_text(color = "black", size = 5, family = "sans"),
+        axis.title.x = ggplot2::element_blank(),
+        axis.title.y = ggplot2::element_blank(),
+        plot.title = ggplot2::element_text(size = 7, hjust = 0.5),
+        legend.position = "top",
+        legend.title = ggplot2::element_blank(),
+        legend.box.margin = ggplot2::margin(-10, -10, -10, -10),
+        legend.text = ggplot2::element_text(size = 5),
+        legend.key.size = ggplot2::unit(0.3, "lines")
+      )
+    ),
+    
+    # Format x-axis text labels and tick marks for WQ plots
+    wq_plt_xaxis = function(x_lab) {
+      if(x_lab == TRUE) {
+        list(
+          ggplot2::theme(
+            axis.text.x = ggplot2::element_text(angle = 90, vjust = 0.5, margin = ggplot2::margin(t = 1))
+          )
+        )
+      } else {
+        list(
+          ggplot2::theme(axis.text.x = ggplot2::element_blank(), axis.ticks.x = ggplot2::element_blank())
+        )
+      }
+    },
+    
+    # Define custom color palette by Region for WQ plots
+    wq_plt_colors = function(region, plt_type = c("dwq", "cwq")) {
+      # Argument checking
+      plt_type <- rlang::arg_match(plt_type, values = c("dwq", "cwq"))
+      
+      # Define RColorBrewer palette name for each Region
+      color_pal_name <- switch(region,
+       "Central Delta" = "Blues",
+       "Confluence" = "Oranges",
+       "North Delta" = "Greys",
+       "San Pablo Bay" = "BrBG",
+       "South Delta" = "Greens",
+       "Suisun & Grizzly Bays" = "Purples"
+      )
+      
+      # Define number of stations for each region based on plt_type (dwq, cwq)
+      color_pal_num <- switch(region,
+        "Central Delta" = c(6, 3),
+        "Confluence" = c(6, 3),
+        "North Delta" = c(4, 3),
+        "San Pablo Bay" = 8, # only dwq has stations within this region
+        "South Delta" = c(6, 3),
+        "Suisun & Grizzly Bays" = c(6, 4)
+      )
+      
+      # Build RColorBrewer palette
+      if(plt_type == "dwq") {
+        color_pal <- rev(RColorBrewer::brewer.pal(color_pal_num[1], color_pal_name))
+      } else {
+        color_pal <- rev(RColorBrewer::brewer.pal(color_pal_num[2], color_pal_name))
+      }
+      
+      # Create ggplot2 layer
+      list(ggplot2::scale_color_manual(values = color_pal))
+    },
     
     # create list item for bullet lists
     list_item = function(ele){
