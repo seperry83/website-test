@@ -138,7 +138,8 @@ StylingClass <- R6Class(
   
   public = list(
     
-    # style all tables
+    # TABLES
+    # # style all tables
     style_kable = function(df) {
       table <- kable(df, align = 'c', digits = 2, escape = FALSE) %>%
         kable_styling(c('striped', 'scale_down'), font_size = 14, html_font = 'Arimo', full_width = TRUE) %>%
@@ -147,7 +148,8 @@ StylingClass <- R6Class(
       return(table)
     },
     
-    # Define custom theme for WQ plots
+    # PLOTS
+    # # Define custom theme for WQ plots
     wq_plt_theme = list(
       ggplot2::theme_bw(),
       ggplot2::theme(
@@ -166,7 +168,7 @@ StylingClass <- R6Class(
       )
     ),
     
-    # Format x-axis text labels and tick marks for WQ plots
+    # # Format x-axis text labels and tick marks for WQ plots
     wq_plt_xaxis = function(x_lab) {
       if(x_lab == TRUE) {
         list(
@@ -181,12 +183,12 @@ StylingClass <- R6Class(
       }
     },
     
-    # Define custom color palette by Region for WQ plots
+    # # Define custom color palette by Region for WQ plots
     wq_plt_colors = function(region, plt_type = c("dwq", "cwq")) {
       # Argument checking
       plt_type <- rlang::arg_match(plt_type, values = c("dwq", "cwq"))
       
-      # Define RColorBrewer palette name for each Region
+      # # Define RColorBrewer palette name for each Region
       color_pal_name <- switch(region,
        "Central Delta" = "Blues",
        "Confluence" = "Oranges",
@@ -196,7 +198,7 @@ StylingClass <- R6Class(
        "Suisun & Grizzly Bays" = "Purples"
       )
       
-      # Define number of stations for each region based on plt_type (dwq, cwq)
+      # # Define number of stations for each region based on plt_type (dwq, cwq)
       color_pal_num <- switch(region,
         "Central Delta" = c(6, 3),
         "Confluence" = c(6, 3),
@@ -206,24 +208,25 @@ StylingClass <- R6Class(
         "Suisun & Grizzly Bays" = c(6, 4)
       )
       
-      # Build RColorBrewer palette
+      # # Build RColorBrewer palette
       if(plt_type == "dwq") {
         color_pal <- rev(RColorBrewer::brewer.pal(color_pal_num[1], color_pal_name))
       } else {
         color_pal <- rev(RColorBrewer::brewer.pal(color_pal_num[2], color_pal_name))
       }
       
-      # Create ggplot2 layer
+      # # Create ggplot2 layer
       list(ggplot2::scale_color_manual(values = color_pal))
     },
     
-    # create list item for bullet lists
+    # # create list item for bullet lists
     list_item = function(ele){
       item <- glue::glue('&#x2022; {ele}<br />')
       return(item)
     },
     
-    # style bullet lists
+    # LISTS
+    # # style bullet lists
     bullet_list = function(vec){
       final_list <- c()
       
