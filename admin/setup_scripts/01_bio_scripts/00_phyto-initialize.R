@@ -1,7 +1,7 @@
 
 # Read in Data ------------------------------------------------------------
 
-df_raw <- read_quiet_csv(here::here('admin/test-data/EMP_Phyto.csv'))
+df_raw <- read_quiet_csv(here::here('admin/test-data/EMP_Phyto_Data_2008-2023.csv'))
 
 df_units <- read_quiet_csv(here::here('admin/figures-tables/admin/analyte_table.csv'), locale = readr::locale(encoding = 'UTF-8'))
 

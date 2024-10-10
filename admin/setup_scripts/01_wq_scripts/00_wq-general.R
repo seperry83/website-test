@@ -65,7 +65,7 @@ WQStatsClass <- R6Class(
 WQStringClass <- R6Class(
   'WQStringClass',
   
-  inherit = WQStatsClass, # inherit stats functions from WQStatsClass
+  inherit = WQStatsClass,
   
   public = list(
     # text string for the average +/- variance

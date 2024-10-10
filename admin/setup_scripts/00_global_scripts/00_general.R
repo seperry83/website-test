@@ -23,6 +23,7 @@ rename <- dplyr::rename
 summarize <- dplyr::summarize
 select <- dplyr::select
 arrange <- dplyr::arrange
+n <- dplyr::n
 
 ggplot <- ggplot2::ggplot
 aes <- ggplot2::aes
