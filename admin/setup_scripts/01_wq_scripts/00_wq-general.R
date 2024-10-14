@@ -12,7 +12,7 @@ WQStatsClass <- R6Class(
     },
     
     # calculate the average (either mean or median)
-    calc_avg = function(analyte, region = NULL, statistic = c('mean','median')) {
+    calc_avg = function(analyte, statistic = c('mean','median'), region = NULL) {
       statistic = match.arg(statistic)
       
       df_summ <- self$df_raw
@@ -33,7 +33,7 @@ WQStatsClass <- R6Class(
     },
     
     # calculate the variance (standard deviation for mean, MAD for median)
-    calc_variance = function(analyte, region = NULL, statistic = c('mean','median')) {
+    calc_variance = function(analyte, statistic = c('mean','median'),  region = NULL) {
       statistic <- match.arg(statistic)
       
       df_summ <- self$df_raw
@@ -155,6 +155,32 @@ WQStringClass <- R6Class(
       
       # if no nondetects, return NULL
       return(NULL)
+    },
+    
+    # paragraph statement for WQ
+    disp_paragraph = function(analyte, statistic, strings_dwq_prev) {
+      
+      current_val_range <- self$disp_val_range(analyte, statistic)
+      prev_val_range <- strings_dwq_prev$disp_val_range(analyte, statistic)
+      extreme_range <- self$disp_extreme_range(analyte)
+      nondetect_perc <- self$disp_nondetect_perc(analyte)
+      label_val <- unique(self$df_raw %>% 
+                           filter(Analyte == analyte) %>% 
+                           pull(Label))
+      
+      fig_ref <- glue::glue('@fig-{tolower(analyte)}')
+      tbl_ref <- glue::glue('@tbl-{tolower(analyte)}')
+      
+      paragraph <- glue::glue(
+        'The average {tolower(label_val)} value was {current_val_range}; ',
+        'for comparison, the previous year average was {prev_val_range}. ',
+        'Values ranged from {extreme_range}. ',
+        '{ifelse(!is.null(nondetect_perc), paste0(nondetect_perc, \' \'), \'\')}', 
+        'Per region average, minimum, and maximum values are shown in {tbl_ref}; ',
+        'time series plots are shown in {fig_ref}.'
+      )
+      
+      return(paragraph)
     }
   )
 )
@@ -270,8 +296,8 @@ WQTableClass <- R6Class(
 
 # Create WQ Graphs --------------------------------------------------------
 
-WQGraphClass <- R6Class(
-  'WQGraphClass',
+WQFigureClass <- R6Class(
+  'WQFigureClass',
   
   inherit = StylingClass,
   
@@ -298,9 +324,73 @@ WQGraphClass <- R6Class(
       ggsave(here::here(paste0('admin/figures-tables/cwq/test_',vari,'.jpg')), plt_do, width = 3.5, height = 2, unit = 'in')
     },
     
+    # Combine regional plots into one plot for each analyte
+    wq_return_plt = function(param, plt_type = c('dwq', 'cwq'), ret_region = NULL) {
+      # Filter to single Analyte (param)
+      df_filt <- self$df_raw %>% dplyr::filter(Analyte == param)
+      
+      # Define main label for combined plots
+      if (param == 'pH') {
+        # pH doesn't have units
+        comb_plt_title <- unique(df_filt$Label)
+      } else if (param == 'Chla') {
+        # Chlorophyll needs special formatting (italicized a) 
+        comb_plt_title <- expression(bold(Chlorophyll)~bolditalic(a)~bold('(\u03bc'*g*'/'*L*')'))
+      } else {
+        comb_plt_title <- paste0(unique(df_filt$Label), ' (', unique(df_filt$Unit), ')')
+      }
+      
+      # Convert to nested df and create single plots
+      ndf_filt <- df_filt %>% 
+        tidyr::nest(.by = c(Analyte, Region), .key = 'df_data') %>% 
+        dplyr::arrange(Analyte, Region) %>% 
+        dplyr::mutate(
+          num_station = dplyr::row_number(),
+          x_label = dplyr::if_else(
+            Region %in% tail(unique(Region), 2) | !is.null(ret_region),
+            TRUE, 
+            FALSE
+          ),
+          .by = Analyte
+        ) %>% 
+        dplyr::mutate(
+          plt_single = purrr::pmap(
+            list(df_data, Region, x_label), 
+            \(x, y, z) private$wq_region_plt(x, y, z, plt_type = plt_type)
+          )
+        )
+      
+      # Un-nest single plots into a list
+      ls_plts <- dplyr::pull(ndf_filt, plt_single)
+      
+      if (!is.null(ret_region)) {
+        sing_plt <- ndf_filt %>% dplyr::filter(Region == ret_region) %>% dplyr::pull(plt_single)
+        return(sing_plt[[1]])
+      }
+      
+      # Combine plots into one
+      comb_plts <- patchwork::wrap_plots(ls_plts, ncol = 2) +
+        patchwork::plot_annotation(
+          title = comb_plt_title,
+          theme = ggplot2::theme(
+            plot.title = ggplot2::element_text(
+              family = 'sans',
+              face = 'bold',
+              size = 9,
+              hjust = 0.5
+            )
+          )
+        )
+      
+      return(comb_plts)
+    }
+  ),
+  
+  private = list(
+    
     # Create segment geoms for below RL values
     blw_rl_geom = function(df) {
-      df_segment <- df %>% dplyr::filter(DetectStatus == "Nondetect")
+      df_segment <- df %>% dplyr::filter(DetectStatus == 'Nondetect')
       
       list(
         # Vertical segment geom
@@ -327,102 +417,50 @@ WQGraphClass <- R6Class(
             color = Station
           ),
           linewidth = 0.6,
-          lineend = "square"
+          lineend = 'square'
         )
       )
     },
     
     # Create single water quality plot for each region
-    wq_single_plt = function(df, region, x_lab, plt_type = c("dwq", "cwq")) {
+    wq_region_plt = function(df, region, x_lab, plt_type = c('dwq', 'cwq')) {
       # Argument checking
-      plt_type <- rlang::arg_match(plt_type, values = c("dwq", "cwq"))
+      plt_type <- rlang::arg_match(plt_type, values = c('dwq', 'cwq'))
       
-      if (plt_type == "dwq") {
+      if (plt_type == 'dwq') {
         # Create discrete WQ plot
         plt <- df %>% 
           dplyr::mutate(
-            Value = dplyr::if_else(DetectStatus == "Nondetect", NA_real_, Value)
+            Value = dplyr::if_else(DetectStatus == 'Nondetect', NA_real_, Value)
           ) %>% 
-          ggplot2::ggplot(ggplot2::aes(Month, Value, color = Station)) +
-          ggplot2::geom_line(linewidth = 0.6, na.rm = TRUE) +
-          ggplot2::geom_point(size = 2, na.rm = TRUE) +
-          ggplot2::scale_x_continuous(breaks = seq_along(month.name), labels = month.abb)
+          ggplot(ggplot2::aes(Month, Value, color = Station)) +
+          geom_line(linewidth = 0.6, na.rm = TRUE) +
+          geom_point(size = 2, na.rm = TRUE) +
+          scale_x_continuous(breaks = seq_along(month.name), labels = month.abb)
         
         # Add geoms for < RL values if necessary
-        if (any(df$DetectStatus == "Nondetect")) plt <- plt + self$blw_rl_geom(df)
+        if (any(df$DetectStatus == 'Nondetect')) plt <- plt + private$blw_rl_geom(df)
         
       } else {
         # Create continuous WQ plot
         plt <- df %>% 
-          ggplot2::ggplot(ggplot2::aes(Date, Value, color = Station)) +
+          ggplot(ggplot2::aes(Date, Value, color = Station)) +
           ggborderline::geom_borderline(
             linewidth = 0.8,
-            bordercolor = "black",
+            bordercolor = 'black',
             borderwidth = 0.2
           ) +
-          ggplot2::scale_x_date(date_labels = "%b", date_breaks = "month") 
+          scale_x_date(date_labels = '%b', date_breaks = 'month') 
       }
       
       # Add common plot elements
-      plt +
+      plt <- plt +
         self$wq_plt_theme +
         self$wq_plt_xaxis(x_lab) +
         self$wq_plt_colors(region, plt_type) +
-        ggplot2::ggtitle(region)
-    },
-    
-    # Combine regional plots into one plot for each analyte
-    wq_combined_plt = function(param, plt_type = c("dwq", "cwq")) {
-      # Filter to single Analyte (param)
-      df_filt <- self$df_raw %>% dplyr::filter(Analyte == param)
+        ggtitle(region)
       
-      # Define main label for combined plots
-      if (param == "pH") {
-        # pH doesn't have units
-        comb_plt_title <- unique(df_filt$Label)
-      } else if (param == "Chla") {
-        # Chlorophyll needs special formatting (italicized a) 
-        comb_plt_title <- expression(bold(Chlorophyll)~bolditalic(a)~bold("(\u03bc"*g*"/"*L*")"))
-      } else {
-        comb_plt_title <- paste0(unique(df_filt$Label), " (", unique(df_filt$Unit), ")")
-      }
-      
-      # Convert to nested df and create single plots
-      ndf_filt <- df_filt %>% 
-        tidyr::nest(.by = c(Analyte, Region), .key = "df_data") %>% 
-        dplyr::arrange(Analyte, Region) %>% 
-        dplyr::mutate(
-          num_station = dplyr::row_number(),
-          x_label = dplyr::if_else(
-            num_station == max(num_station) | num_station == max(num_station) - 1, 
-            TRUE, 
-            FALSE
-          ),
-          .by = Analyte
-        ) %>% 
-        dplyr::mutate(
-          plt_single = purrr::pmap(
-            list(df_data, Region, x_label), 
-            \(x, y, z) self$wq_single_plt(x, y, z, plt_type = plt_type)
-          )
-        )
-      
-      # Unnest single plots into a list
-      ls_plts <- dplyr::pull(ndf_filt, plt_single)
-      
-      # Combine plots into one
-      patchwork::wrap_plots(ls_plts, ncol = 2) +
-        patchwork::plot_annotation(
-          title = comb_plt_title,
-          theme = ggplot2::theme(
-            plot.title = ggplot2::element_text(
-              family = "sans",
-              face = "bold",
-              size = 9,
-              hjust = 0.5
-            )
-          )
-        )
+      return(plt)
     }
   )
 )

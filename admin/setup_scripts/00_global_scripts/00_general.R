@@ -27,12 +27,16 @@ n <- dplyr::n
 
 ggplot <- ggplot2::ggplot
 aes <- ggplot2::aes
+geom_line <- ggplot2::geom_line
+geom_point <- ggplot2::geom_point
 geom_boxplot <- ggplot2::geom_boxplot
 geom_segment <- ggplot2::geom_segment
 annotate <- ggplot2::annotate
 theme_bw <- ggplot2::theme_bw
+ggtitle <- ggplot2::ggtitle
 labs <- ggplot2::labs
 theme <- ggplot2::theme
+scale_x_continuous <- ggplot2::scale_x_continuous
 scale_y_continuous <- ggplot2::scale_y_continuous
 ggsave <- ggplot2::ggsave
 element_blank <- ggplot2::element_blank
