@@ -5,7 +5,7 @@ df_data <- read_quiet_csv(here::here('admin/test-data/EMP_DWQ_1975_2023-long.csv
 
 df_analytes <- read_quiet_csv(here::here('admin/figures-tables/admin/analyte_table.csv'), locale = readr::locale(encoding = 'UTF-8'))
 
-df_regions <- read_quiet_csv(here::here('admin/figures-tables/admin/region_table.csv'))
+df_regions <- read_quiet_csv(here::here('admin/figures-tables/admin/station_table.csv'))
 
 # Create Base DWQ Object --------------------------------------------------
 
@@ -41,3 +41,23 @@ strings_dwq_prev <- WQStringClass$new(obj_dwq_prev$df_raw)
 
 table_dwq <- WQTableClass$new(obj_dwq_cur$df_raw)
 
+
+# Generate Figures --------------------------------------------------------
+
+report_analytes <- df_analytes %>%
+  filter(Program == 'DEMP') %>%
+  pull(Analyte)
+
+for (param in report_analytes){
+  plt <- fig_dwq$wq_return_plt(param, 'dwq')
+  
+  height_factor <- fig_dwq$df_raw %>%
+    pull(Region) %>%
+    unique() %>%
+    length()
+  
+  exp_height <- ceiling((2*height_factor)/2)
+  
+  ggsave(here::here(paste0('admin/figures-tables/dwq/fig_', tolower(param), '.jpg')), 
+         plt, width = 6, height = exp_height, unit = 'in')
+}

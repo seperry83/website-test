@@ -5,7 +5,7 @@ df_raw <- read_quiet_csv(here::here('admin/test-data/EMP_Phyto_Data_2008-2023.cs
 
 df_units <- read_quiet_csv(here::here('admin/figures-tables/admin/analyte_table.csv'), locale = readr::locale(encoding = 'UTF-8'))
 
-df_regions <- read_quiet_csv(here::here('admin/figures-tables/admin/region_table.csv'))
+df_regions <- read_quiet_csv(here::here('admin/figures-tables/admin/station_table.csv'))
 
 
 # Create Base Phyto Object ------------------------------------------------

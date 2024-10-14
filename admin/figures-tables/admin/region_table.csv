@@ -1,39 +1,9 @@
-﻿Program,Station,Latitude,Longitude,Region
-"DEMP, CEMP, Phyto",C10A,,,South Delta
-"DEMP, CEMP, Phyto",C3A,,,North Delta
-CEMP,C7A,,,South Delta
-"DEMP, Phyto, Benthic",C9,,,South Delta
-"DEMP, Phyto, Zoop",D10,,,Confluence
-CEMP,D10A,,,Confluence
-"DEMP, Phyto, Zoop",D12,,,Confluence
-CEMP,D12A,,,Confluence
-"DEMP, Phyto, Benthic, Zoop",D16,,,Central Delta
-CEMP,D16A,,,Central Delta
-"DEMP, Phyto",D19,,,Central Delta
-CEMP,D19A,,,Central Delta
-"DEMP, Phyto, Zoop",D22,,,Confluence
-CEMP,D22A,,,Confluence
-Benthic,D24,,,North Delta
-CEMP,D24A,,,North Delta
-"DEMP, Phyto, Zoop",D26,,,Central Delta
-"DEMP, Phyto, Benthic, Zoop",D28A,,,Central Delta
-CEMP,D29,,,Central Delta
-"DEMP, Phyto, Benthic, Zoop",D4,,,Confluence
-"DEMP, Phyto, Benthic, Zoop",D41,,,San Pablo Bay
-"DEMP, Phyto, Benthic, Zoop",D41A,,,San Pablo Bay
-"DEMP, Phyto, Benthic, Zoop",D6,,,San Pablo Bay
-CEMP,D6A,,,Suisun & Grizzly Bays
-"DEMP, Phyto, Benthic, Zoop",D7,,,Suisun & Grizzly Bays
-CEMP,D7A,,,Suisun & Grizzly Bays
-"DEMP, Phyto, Zoop",D8,,,Suisun & Grizzly Bays
-CEMP,D8A,,,Suisun & Grizzly Bays
-CEMP,D9A,,,Suisun & Grizzly Bays
-"DEMP, Phyto, Zoop",MD10A,,,South Delta
-"DEMP, Phyto",NZ002,,,San Pablo Bay
-"DEMP, Phyto",NZ004,,,San Pablo Bay
-"DEMP, Phyto",NZ032,,,Suisun & Grizzly Bays
-"DEMP, Phyto, Benthic",NZ068,,,North Delta
-"DEMP, Phyto, Zoop",NZ325,,,San Pablo Bay
-"DEMP, Phyto, Benthic, Zoop",NZS42,,,Suisun & Grizzly Bays
-"DEMP, Phyto, Benthic, Zoop",P8,,,South Delta
-CEMP,P8A,,,South Delta
+﻿Region,HexColor
+South Delta,#0071fe
+North Delta,#ffaa01
+Confluence,#66d2ee
+Central Delta,#c500ff
+San Pablo Bay,#f76aec
+Suisun & Grizzly Bays,#e51a1d
+Suisun Marsh,#528153
+Carquinez,#ffff00

@@ -36,6 +36,7 @@ theme_bw <- ggplot2::theme_bw
 ggtitle <- ggplot2::ggtitle
 labs <- ggplot2::labs
 theme <- ggplot2::theme
+scale_color_manual <- ggplot2::scale_color_manual
 scale_x_continuous <- ggplot2::scale_x_continuous
 scale_y_continuous <- ggplot2::scale_y_continuous
 ggsave <- ggplot2::ggsave
@@ -57,6 +58,9 @@ include_graphics <- knitr::include_graphics
 kable_styling <- kableExtra::kable_styling
 add_header_above <- kableExtra::add_header_above
 footnote <- kableExtra::footnote
+
+darken <- colorspace::darken
+lighten <- colorspace::lighten
 
 # Create Base Data Frame -------------------------------------------------------
 
@@ -139,8 +143,13 @@ BaseClass <- R6Class(
 
 StylingClass <- R6Class(
   'StylingClass',
-  
   public = list(
+    
+    df_regionhex = NULL,
+    
+    initialize = function(df_regionhex) {
+      self$df_regionhex <- read_csv(here::here('admin/figures-tables/admin/region_table.csv'), show_col_types = FALSE)
+    },
     
     # TABLES
     # # style all tables
@@ -187,40 +196,45 @@ StylingClass <- R6Class(
       }
     },
     
-    # # Define custom color palette by Region for WQ plots
-    wq_plt_colors = function(region, plt_type = c("dwq", "cwq")) {
-      # Argument checking
-      plt_type <- rlang::arg_match(plt_type, values = c("dwq", "cwq"))
+    # # Generate skip color palette based off base color
+    gen_gradient = function(center_hex, num_colors,
+                                      skip_amt = 3,
+                                      lighten_amt = 0.4, darken_amt = 0.4) {
+      dark_color <- darken(center_hex, amount = darken_amt)
+      light_color <- lighten(center_hex, amount = lighten_amt)
       
-      # # Define RColorBrewer palette name for each Region
-      color_pal_name <- switch(region,
-       "Central Delta" = "Blues",
-       "Confluence" = "Oranges",
-       "North Delta" = "Greys",
-       "San Pablo Bay" = "BrBG",
-       "South Delta" = "Greens",
-       "Suisun & Grizzly Bays" = "Purples"
-      )
+      palette_base <- colorRampPalette(c(light_color, dark_color))(num_colors * skip_amt)
       
-      # # Define number of stations for each region based on plt_type (dwq, cwq)
-      color_pal_num <- switch(region,
-        "Central Delta" = c(6, 3),
-        "Confluence" = c(6, 3),
-        "North Delta" = c(4, 3),
-        "San Pablo Bay" = 8, # only dwq has stations within this region
-        "South Delta" = c(6, 3),
-        "Suisun & Grizzly Bays" = c(6, 4)
-      )
+      palette_skip <- palette_base[seq(1, length(palette_skip), by = skip_amt)]
       
-      # # Build RColorBrewer palette
-      if(plt_type == "dwq") {
-        color_pal <- rev(RColorBrewer::brewer.pal(color_pal_num[1], color_pal_name))
-      } else {
-        color_pal <- rev(RColorBrewer::brewer.pal(color_pal_num[2], color_pal_name))
+      return(skip_palette)
+    },
+    
+    # # Create scale_color_manual layer based off region and palette
+    wq_plt_colors = function(region, plt_type = c('dwq', 'cwq')) {
+      plt_type <- rlang::arg_match(plt_type, values = c('dwq', 'cwq'))
+
+      center_hex <- self$df_regionhex %>%
+        filter(Region == region) %>%
+        pull(HexColor)
+      
+      if (length(center_hex) == 0) {
+        stop('Region not found in region_table')
       }
       
-      # # Create ggplot2 layer
-      list(ggplot2::scale_color_manual(values = color_pal))
+      num_colors <- self$df_raw %>%
+        filter(Region == region) %>%
+        pull(Station) %>%
+        unique() %>%
+        length()
+      
+      if (num_colors == 0) {
+        stop('No stations found for the region in self$df_raw')
+      }
+      
+      color_pal <- gen_gradient(center_hex, num_colors)
+      
+      return(list(scale_color_manual(values = color_pal)))
     },
     
     # # create list item for bullet lists

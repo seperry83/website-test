@@ -293,8 +293,7 @@ WQTableClass <- R6Class(
   )
 )
 
-
-# Create WQ Graphs --------------------------------------------------------
+# Create WQ Figures --------------------------------------------------------
 
 WQFigureClass <- R6Class(
   'WQFigureClass',
@@ -305,6 +304,8 @@ WQFigureClass <- R6Class(
     df_raw = NULL,
     
     initialize = function(df_raw) {
+      super$initialize()
+      
       self$df_raw <- df_raw %>% 
         dplyr::mutate(Month = lubridate::month(Date), .after = Date)
     },
