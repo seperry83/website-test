@@ -13,6 +13,8 @@ R6Class <- R6::R6Class
 
 str_match <- stringr::str_match
 
+glue <- glue::glue
+
 left_join <- dplyr::left_join
 filter <- dplyr::filter
 pull <- dplyr::pull
@@ -38,7 +40,9 @@ labs <- ggplot2::labs
 theme <- ggplot2::theme
 scale_color_manual <- ggplot2::scale_color_manual
 scale_x_continuous <- ggplot2::scale_x_continuous
+scale_x_discrete <- ggplot2::scale_x_discrete
 scale_y_continuous <- ggplot2::scale_y_continuous
+scale_x_date <- ggplot2::scale_x_date
 ggsave <- ggplot2::ggsave
 element_blank <- ggplot2::element_blank
 element_text <- ggplot2::element_text
@@ -105,7 +109,7 @@ BaseClass <- R6Class(
       return(invisible(self))
     },
     
-    # remove "_bottom" stations (cwq)
+    # remove '_bottom' stations (cwq)
     remove_bottom = function() {
       self$df_raw <- filter(self$df_raw, !grepl('_bottom', Station))
       return(invisible(self))
@@ -169,15 +173,15 @@ StylingClass <- R6Class(
         panel.grid.major.x = ggplot2::element_blank(),
         panel.grid.minor = ggplot2::element_blank(),
         axis.line = ggplot2::element_blank(),
-        axis.text = ggplot2::element_text(color = "black", size = 5, family = "sans"),
+        axis.text = ggplot2::element_text(color = 'black', size = 5, family = 'sans'),
         axis.title.x = ggplot2::element_blank(),
         axis.title.y = ggplot2::element_blank(),
         plot.title = ggplot2::element_text(size = 7, hjust = 0.5),
-        legend.position = "top",
+        legend.position = 'top',
         legend.title = ggplot2::element_blank(),
         legend.box.margin = ggplot2::margin(-10, -10, -10, -10),
         legend.text = ggplot2::element_text(size = 5),
-        legend.key.size = ggplot2::unit(0.3, "lines")
+        legend.key.size = ggplot2::unit(0.3, 'lines')
       )
     ),
     
@@ -186,7 +190,7 @@ StylingClass <- R6Class(
       if(x_lab == TRUE) {
         list(
           ggplot2::theme(
-            axis.text.x = ggplot2::element_text(angle = 90, vjust = 0.5, margin = ggplot2::margin(t = 1))
+            axis.text.x = ggplot2::element_text(angle = 45, vjust = 0.5, margin = ggplot2::margin(t = 1))
           )
         )
       } else {
@@ -203,11 +207,11 @@ StylingClass <- R6Class(
       dark_color <- darken(center_hex, amount = darken_amt)
       light_color <- lighten(center_hex, amount = lighten_amt)
       
-      palette_base <- colorRampPalette(c(light_color, dark_color))(num_colors * skip_amt)
+      palette_base <- colorRampPalette(c(dark_color,light_color))(num_colors * skip_amt)
       
-      palette_skip <- palette_base[seq(1, length(palette_skip), by = skip_amt)]
+      palette_skip <- palette_base[seq(1, length(palette_base), by = skip_amt)]
       
-      return(skip_palette)
+      return(palette_skip)
     },
     
     # # Create scale_color_manual layer based off region and palette
@@ -232,7 +236,7 @@ StylingClass <- R6Class(
         stop('No stations found for the region in self$df_raw')
       }
       
-      color_pal <- gen_gradient(center_hex, num_colors)
+      color_pal <- self$gen_gradient(center_hex, num_colors)
       
       return(list(scale_color_manual(values = color_pal)))
     },
@@ -293,21 +297,55 @@ get_water_year <- function(given_year = report_year) {
     html_element('pre') %>% html_text2()
   
   wy_int <- str_match(wy_text, paste0('(?<=',given_year,')(.*?[a-zA-Z]+)(?=\\r)'))[[1]][1]
-  wy_abb <- str_match(wy_int, '[a-zA-Z]+')
+  wy_parts <- stringr::str_extract_all(wy_int, '[a-zA-Z]+')[[1]]
   
-  if(wy_abb == 'C'){
-    water_year <- 'critically dry'
-  } else if(wy_abb == 'W'){
-    water_year <- 'wet'
-  } else if(wy_abb == 'D'){
-    water_year <- 'dry'
-  } else if(wy_abb == 'AN'){
-    water_year <- 'above normal'
-  } else if (wy_abb == 'BN'){
-    water_year <- 'below normal'
+  sac_abb <- wy_parts[1]
+  sj_abb <- wy_parts[2]
+
+  sac_abb <- switch(sac_abb,
+                       'C' = 'critically dry',
+                       'W' = 'wet',
+                       'D' = 'dry',
+                       'AN' = 'above normal',
+                       'BN' = 'below normal',
+                       'Unknown')
+  
+  sj_abb <- switch(sj_abb,
+                       'C' = 'critically dry',
+                       'W' = 'wet',
+                       'D' = 'dry',
+                       'AN' = 'above normal',
+                       'BN' = 'below normal',
+                       'Unknown')
+  
+  
+  wy_abb <- list(sac = sac_abb, sj = sj_abb)
+  return(wy_abb)
+}
+
+# text string for water year
+str_water_year <- function(given_year = report_year, period = c('cur','prev')){
+  period <- match.arg(period)
+  
+  wy_abb <- get_water_year(given_year)
+  
+  if(period == 'cur'){
+    if (wy_abb$sac == wy_abb$sj){
+      result_string <- glue('which was classified as a {wy_abb$sac} year in the Sacramento and San Joaquin Valleys')
+    } else{
+      result_string <- glue('which was classified as a {wy_abb$sac} year in the Sacramento Valley and {wy_abb$sj} in the San Joaquin Valley')
+    }
   }
   
-  return(water_year)
+  if(period == 'prev'){
+    if (wy_abb$sac == wy_abb$sj){
+      result_string <- glue('which was classified as {wy_abb$sac} in both valleys')
+    } else{
+      result_string <- glue('which was classified as {wy_abb$sac} in the Sacramento Valley and {wy_abb$sj} in the San Joaquin Valley')
+    }
+  }
+  
+  return(result_string)
 }
 
 # format numbers for display based on analyte
@@ -334,5 +372,8 @@ format_vals <- function(value, vari) {
 report_year <- as.integer(format(Sys.Date(), '%Y')) - 1 
 
 prev_year <- report_year - 1
+
+month_order <- c('October','November','December','January','February','March','April','May','June','July','August','September')
+label_order <- c(glue('Oct-{prev_year%%100}'),glue('Nov-{prev_year%%100}'),glue('Dec-{prev_year%%100}'),glue('Jan-{report_year%%100}'),glue('Feb-{report_year%%100}'),glue('Mar-{report_year%%100}'),glue('Apr-{report_year%%100}'),glue('May-{report_year%%100}'),glue('Jun-{report_year%%100}'),glue('Jul-{report_year%%100}'),glue('Aug-{report_year%%100}'),glue('Sep-{report_year%%100}'))
 
 styler <- StylingClass$new()

@@ -9,7 +9,7 @@ source(here::here('admin/import_scripts.R'))
 
 ## Introduction
 
-The Department of Water Resources (DWR) and the US Bureau of Reclamation (USBR) are required by Water Right Decision 1641 (D-1641) to collect continuous water chemistry data to monitor the water quality at select sites in the upper San Francisco Estuary (Estuary). This report describes the results of these monitoring efforts for water year `r report_year` (October 1st `r prev_year` through September 30th `r report_year`), which was classified as a `r get_water_year()` year in the Sacramento Valley [(source)](https://cdec.water.ca.gov/reportapp/javareports?name=WSIHIST). Results are compared to the previous water year, which was classified as a `r get_water_year(prev_year)` year.
+The Department of Water Resources (DWR) and the US Bureau of Reclamation (USBR) are required by Water Right Decision 1641 (D-1641) to collect continuous water chemistry data to monitor the water quality at select sites in the upper San Francisco Estuary (Estuary). This report describes the results of these monitoring efforts for water year `r report_year` (October 1st `r prev_year` through September 30th `r report_year`), `r str_water_year(report_year, 'cur')` [(source)](https://cdec.water.ca.gov/reportapp/javareports?name=WSIHIST). Results are compared to the previous water year, `r str_water_year(prev_year, 'prev')`.
 
 ## Methods
 
@@ -19,14 +19,14 @@ Water quality data was continuously monitored at 15 sites throughout the Upper E
 
 ```{r echo=FALSE, fig.align='center',  out.width = '70%'}
 #| label: fig-stations
-#| fig-cap: 'test'
+#| fig-cap: 'Map of EMP’s continuous WQ field sites'
 #| 
 knitr::include_graphics(file.path('../../../admin/figures/dwq/d-wq_station_map.jpg'))
 ```
 
 ```{r echo=FALSE, warning=FALSE, message=FALSE, results = 'asis'}
 #| label: tbl-stations
-#| tbl-cap: 'test'
+#| tbl-cap: 'Continuous WQ stations included within each region of the Delta'
 
 cwq_stations <- readr::read_csv(here::here('admin/figures-tables/dwq/dwq-stations.csv'))
 
@@ -50,39 +50,42 @@ For more in-depth methodology, see [here](https://portal.edirepository.org/nis/m
 
 ### Water Temperature
 
-The average water temperature value was `r strings_cwq_cur$disp_val_range('WaterTemperature','mean')`; for comparison, the previous year average was `r strings_cwq_prev$disp_val_range('WaterTemperature','mean')`. Values ranged from `r strings_cwq_cur$disp_extreme_range('WaterTemperature')`. `r strings_cwq_cur$disp_nondetect_perc('WaterTemperature')` Per region average, minimum, and maximum values are shown in @tbl-wt; time series plots are shown in Figure y.
+`r strings_cwq_cur$disp_paragraph('WaterTemperature','mean', strings_cwq_prev)`
+
+:::: {.content-visible when-format="html"}
 
 ```{r}
-#| label: tbl-wt
+#| label: tbl-watertemperature
 #| echo: false
-#| warning: false
 #| fig-align: 'center'
 #| tbl-cap: 'Summary statistics for water temperature by region in the San Francisco Bay-Delta estuary.'
- 
-summary_wt <- table_cwq$clone(deep=TRUE)
-summary_wt$create_summary_df('WaterTemperature', 'mean')
-summary_wt$create_kable()
+
+summary_spc <- table_cwq$clone(deep=TRUE)
+summary_spc$create_summary_df('WaterTemperature', 'mean')
+summary_spc$create_kable()
 ```
+
+::::
 
 ```{r}
-#| label: fig-wt
+#| label: fig-watertemperature
 #| echo: false
-#| warning: false
 #| fig-align: 'center'
-#| fig-cap: 'Average daily water temperature by region in the San Francisco Bay-Delta estuary.'
+#| fig-cap: 'Water temperature by region in the San Francisco Bay-Delta estuary.'
 
-plt_cwq$create_test_plt('Turbidity')
-include_graphics(here::here(file.path('admin/figures-tables/cwq/test_Turbidity.jpg')))
+knitr::include_graphics(here::here(file.path('admin/figures-tables/cwq/fig_watertemperature.jpg')))
 ```
-
 
 ### Specific Conductance
 
-The average water temperature value was `r strings_cwq_cur$disp_val_range('SpC','mean')`; for comparison, the previous year average was `r strings_cwq_prev$disp_val_range('SpC','mean')`. Values ranged from `r strings_cwq_cur$disp_extreme_range('SpC')`. `r strings_cwq_cur$disp_nondetect_perc('SpC')` Per region average, minimum, and maximum values are shown in @tbl-spc; time series plots are shown in Figure y.
+`r strings_cwq_cur$disp_paragraph('SpC','mean', strings_cwq_prev)`
 
-```{r echo=FALSE, fig.align='center'}
+:::: {.content-visible when-format="html"}
+
+```{r}
 #| label: tbl-spc
-#| warning: false
+#| echo: false
+#| fig-align: 'center'
 #| tbl-cap: 'Summary statistics for specific conductance by region in the San Francisco Bay-Delta estuary.'
 
 summary_spc <- table_cwq$clone(deep=TRUE)
@@ -90,23 +93,48 @@ summary_spc$create_summary_df('SpC', 'mean')
 summary_spc$create_kable()
 ```
 
+::::
+
+```{r}
+#| label: fig-spc
+#| echo: false
+#| fig-align: 'center'
+#| fig-cap: 'Specific conductance by region in the San Francisco Bay-Delta estuary.'
+
+knitr::include_graphics(here::here(file.path('admin/figures-tables/cwq/fig_spc.jpg')))
+```
+
 ### Dissolved Oxygen
 
-The average water temperature value was `r strings_cwq_cur$disp_val_range('DissolvedOxygen','mean')`; for comparison, the previous year average was `r strings_cwq_prev$disp_val_range('DissolvedOxygen','mean')`. Values ranged from `r strings_cwq_cur$disp_extreme_range('DissolvedOxygen')`. `r strings_cwq_cur$disp_nondetect_perc('DissolvedOxygen')` Per region average, minimum, and maximum values are shown in @tbl-do; time series plots are shown in Figure y.
+`r strings_cwq_cur$disp_paragraph('DissolvedOxygen','mean', strings_cwq_prev)`
 
-```{r echo=FALSE, fig.align='center'}
-#| label: tbl-do
-#| warning: false
+:::: {.content-visible when-format="html"}
+
+```{r}
+#| label: tbl-dissolvedoxygen
+#| echo: false
+#| fig-align: 'center'
 #| tbl-cap: 'Summary statistics for dissolved oxygen by region in the San Francisco Bay-Delta estuary.'
 
-summary_do <- table_cwq$clone(deep=TRUE)
-summary_do$create_summary_df('DissolvedOxygen', 'mean')
-summary_do$create_kable()
+summary_spc <- table_cwq$clone(deep=TRUE)
+summary_spc$create_summary_df('DissolvedOxygen', 'mean')
+summary_spc$create_kable()
+```
+
+::::
+
+```{r}
+#| label: fig-dissolvedoxygen
+#| echo: false
+#| fig-align: 'center'
+#| fig-cap: 'Dissolved oxygen by region in the San Francisco Bay-Delta estuary.'
+
+knitr::include_graphics(here::here(file.path('admin/figures-tables/cwq/fig_dissolvedoxygen.jpg')))
 ```
 
 #### Stockton Station DO Values
 
-C-EMP monitors DO at the Stockton Ship channel to determine if/when it fall below limits established by the CVRWQCB (1998). For the December - August period, values `r obj_rri$disp_RRI_months('off months')`. For the September - November period that coincides with the passage of fall-run Chinook salmon, values `r obj_rri$disp_RRI_months('on months')`. A boxplot of the DO values is shown in @fig-rri. 
+C-EMP monitors DO at the Stockton Ship channel to determine if/when it fall below limits established by the CVRWQCB (1998). For the months that coincide with the passage of fall-run Chinook salmon (October, November, and September), values `r obj_rri$disp_RRI_months('on months')`. For all other months, values `r obj_rri$disp_RRI_months('off months')`. A boxplot of the DO values is shown in @fig-rri. 
 
 ```{r}
 #| label: fig-rri
@@ -121,41 +149,86 @@ include_graphics(here::here(file.path('admin/figures-tables/cwq/fig_rri_do.jpg')
 
 ### pH
 
-The average water temperature value was `r strings_cwq_cur$disp_val_range('pH','mean')`; for comparison, the previous year average was `r strings_cwq_prev$disp_val_range('pH','mean')`. Values ranged from `r strings_cwq_cur$disp_extreme_range('pH')`. `r strings_cwq_cur$disp_nondetect_perc('pH')` Per region average, minimum, and maximum values are shown in @tbl-ph; time series plots are shown in Figure y.
+`r strings_cwq_cur$disp_paragraph('pH','mean', strings_cwq_prev)`
 
-```{r echo=FALSE, fig.align='center'}
+:::: {.content-visible when-format="html"}
+
+```{r}
 #| label: tbl-ph
+#| echo: false
+#| fig-align: 'center'
 #| tbl-cap: 'Summary statistics for pH by region in the San Francisco Bay-Delta estuary.'
 
-summary_ph <- table_cwq$clone(deep=TRUE)
-summary_ph$create_summary_df('pH', 'mean')
-summary_ph$create_kable()
+summary_spc <- table_cwq$clone(deep=TRUE)
+summary_spc$create_summary_df('pH', 'mean')
+summary_spc$create_kable()
+```
+
+::::
+
+```{r}
+#| label: fig-ph
+#| echo: false
+#| fig-align: 'center'
+#| fig-cap: 'pH by region in the San Francisco Bay-Delta estuary.'
+
+knitr::include_graphics(here::here(file.path('admin/figures-tables/cwq/fig_ph.jpg')))
 ```
 
 ### Turbidity
 
-The average water temperature value was `r strings_cwq_cur$disp_val_range('Turbidity','mean')`; for comparison, the previous year average was `r strings_cwq_prev$disp_val_range('Turbidity','mean')`. Values ranged from `r strings_cwq_cur$disp_extreme_range('Turbidity')`. `r strings_cwq_cur$disp_nondetect_perc('Turbidity')` Per region average, minimum, and maximum values are shown in @tbl-turb; time series plots are shown in Figure y.
+`r strings_cwq_cur$disp_paragraph('Turbidity','mean', strings_cwq_prev)`
 
-```{r echo=FALSE, fig.align='center'}
-#| label: tbl-turb
+:::: {.content-visible when-format="html"}
+
+```{r}
+#| label: tbl-turbidity
+#| echo: false
+#| fig-align: 'center'
 #| tbl-cap: 'Summary statistics for turbidity by region in the San Francisco Bay-Delta estuary.'
 
-summary_turb <- table_cwq$clone(deep=TRUE)
-summary_turb$create_summary_df('Turbidity', 'mean')
-summary_turb$create_kable()
+summary_spc <- table_cwq$clone(deep=TRUE)
+summary_spc$create_summary_df('Turbidity', 'mean')
+summary_spc$create_kable()
+```
+
+::::
+
+```{r}
+#| label: fig-turbidity
+#| echo: false
+#| fig-align: 'center'
+#| fig-cap: 'Turbidity by region in the San Francisco Bay-Delta estuary.'
+
+knitr::include_graphics(here::here(file.path('admin/figures-tables/cwq/fig_turbidity.jpg')))
 ```
 
 ### Chlorophyll *a* Fluorescence
 
-The average water temperature value was `r strings_cwq_cur$disp_val_range('Fluorescence','mean')`; for comparison, the previous year average was `r strings_cwq_prev$disp_val_range('Fluorescence','mean')`. Values ranged from `r strings_cwq_cur$disp_extreme_range('Fluorescence')`. `r strings_cwq_cur$disp_nondetect_perc('Fluorescence')` Per region average, minimum, and maximum values are shown in @tbl-fluor; time series plots are shown in Figure y.
+`r strings_cwq_cur$disp_paragraph('Fluorescence','mean', strings_cwq_prev)`
 
-```{r echo=FALSE, fig.align='center'}
-#| label: tbl-fluor
+:::: {.content-visible when-format="html"}
+
+```{r}
+#| label: tbl-fluorescence
+#| echo: false
+#| fig-align: 'center'
 #| tbl-cap: 'Summary statistics for chlorophyll a fluorescence by region in the San Francisco Bay-Delta estuary.'
 
-summary_fluor <- table_cwq$clone(deep=TRUE)
-summary_fluor$create_summary_df('Fluorescence', 'mean')
-summary_fluor$create_kable()
+summary_spc <- table_cwq$clone(deep=TRUE)
+summary_spc$create_summary_df('Fluorescence', 'mean')
+summary_spc$create_kable()
+```
+
+::::
+
+```{r}
+#| label: fig-fluorescence
+#| echo: false
+#| fig-align: 'center'
+#| fig-cap: 'Chlorophyll a fluorescence by region in the San Francisco Bay-Delta estuary.'
+
+knitr::include_graphics(here::here(file.path('admin/figures-tables/cwq/fig_fluorescence.jpg')))
 ```
 
 ## Interpretations

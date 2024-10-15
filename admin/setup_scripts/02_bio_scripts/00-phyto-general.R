@@ -1,3 +1,6 @@
+
+# Calculate General Phyto Stats -------------------------------------------
+
 PhytoStatsClass <- R6Class(
   'PhytoStatsClass',
   
@@ -45,6 +48,8 @@ PhytoStatsClass <- R6Class(
     }
   )
 )
+
+# Create Phyto Text Strings -----------------------------------------------
 
 PhytoStringClass <- R6Class(
   'PhytoStringClass',

@@ -1,7 +1,9 @@
 ﻿Region,Stations
-Northern Interior Delta,C3A and NZ068
-Southern Interior Delta,"C9, C10A, MD10A and P8"
-Central Delta,"D16, D19, D26 and D28A"
-The Confluence,"D4, D10, D12 and D22"
-Grizzly and Suisun Bay,"D7, D8, NZ032 and NZS42"
-San Pablo Bay,"D6, D41, D41A, NZ002, NZ004 and NZ325"
+Carquinez,"NZ002, NZ004"
+Central Delta,"D16, D19, D26, D28A"
+Confluence,"D10, D12, D22, D4"
+North Delta,"C3A, NZ068"
+San Pablo Bay,"D41, D41A, NZ325"
+South Delta,"C10A, C9, MD10A, P8"
+Suisun & Grizzly Bays,"D6, D7, D8"
+Suisun Marsh,"NZ032, NZS42"
