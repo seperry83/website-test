@@ -9,20 +9,16 @@ PhytoStatsClass <- R6Class(
     },
     
     # Calc summary stats by AlgalGroup (both overall and by region)
-    summarize_region = function(region = NULL) {
-      df_summ <- self$df_raw
+    summarize_algalgrp = function(df, region = NULL) {
       
-      if (!is.null(region)) {
-        df_summ <- df_summ %>%
-          filter(Region == region)
-      }
+      if (!is.null(region)) df <- df %>% filter(Region == region)
       
-      summ_units <- sum(df_summ$Units_per_mL, na.rm = TRUE)
+      sum_units <- sum(df$Units_per_mL, na.rm = TRUE)
       
-      df_summ <- df_summ %>%
+      df_summ <- df %>%
         group_by(AlgalGroup) %>%
         summarize(
-          per = 100 * sum(Units_per_mL, na.rm = TRUE) / summ_units,
+          per = 100 * sum(Units_per_mL, na.rm = TRUE) / sum_units,
           mean = round(mean(Units_per_mL, na.rm = TRUE),0),
           sd = round(sd(Units_per_mL, na.rm = TRUE),0)
         ) %>%
@@ -35,7 +31,7 @@ PhytoStatsClass <- R6Class(
   private = list(
     # Define AlgalGroups in either 'Main' or 'Other' category using frequency threshold
     def_alg_cat = function(region = NULL, threshold = 1) {
-      df_per <- self$summarize_region(region)
+      df_per <- self$summarize_algalgrp(self$df_raw, region)
       ls_alg <- list(
         main = dplyr::filter(df_per, per >= threshold) %>% dplyr::pull(AlgalGroup),
         other = dplyr::filter(df_per, per < threshold) %>% dplyr::pull(AlgalGroup)
@@ -85,7 +81,7 @@ PhytoStringClass <- R6Class(
     
     composition_summary_region = function(region, threshold = 1) {
       
-      df_summ <- self$summarize_region(region) %>% mutate(per = round(per, 1))
+      df_summ <- self$summarize_algalgrp(self$df_raw, region) %>% mutate(per = round(per, 1))
       alg_cat <- private$def_alg_cat(region, threshold)
       
       main_groups <-
