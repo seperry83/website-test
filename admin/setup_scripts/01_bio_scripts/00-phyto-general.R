@@ -22,7 +22,7 @@ PhytoStatsClass <- R6Class(
       df_summ <- df_summ %>%
         group_by(AlgalGroup) %>%
         summarize(
-          per = round(100 * sum(Units_per_mL, na.rm = TRUE) / summ_units, 2),
+          per = 100 * sum(Units_per_mL, na.rm = TRUE) / summ_units,
           mean = round(mean(Units_per_mL, na.rm = TRUE),0),
           sd = round(sd(Units_per_mL, na.rm = TRUE),0)
         ) %>%
@@ -85,9 +85,8 @@ PhytoStringClass <- R6Class(
     
     composition_summary_region = function(region, threshold = 1) {
       
-      df_summ <- self$summarize_region(region)
+      df_summ <- self$summarize_region(region) %>% mutate(per = round(per, 1))
       alg_cat <- private$def_alg_cat(region, threshold)
-      
       
       main_groups <-
         dplyr::filter(df_summ, AlgalGroup %in% alg_cat$main)
@@ -107,7 +106,7 @@ PhytoStringClass <- R6Class(
         other_list <- sort(tolower(other_groups$AlgalGroup))
         other_list_combined <- knitr::combine_words(other_list)
         glue::glue(
-          'The remaining {round(sum(other_groups$per), 2)}% of organisms were comprised of {other_list_combined}'
+          'The remaining {sum(other_groups$per)}% of organisms were comprised of {other_list_combined}'
         )
       } else {
         ''
