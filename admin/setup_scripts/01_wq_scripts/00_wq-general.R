@@ -57,8 +57,7 @@ WQStatsClass <- R6Class(
     },
     
     # calculate the minimum value
-    calc_min = function(analyte, region = NULL ) {
-
+    calc_min = function(analyte, region = NULL) {
       min_val <- min(self$df_raw %>% 
                        filter(Analyte == analyte) %>% 
                        { if (!is.null(region)) filter(., Region == region) else . } %>%
@@ -73,6 +72,17 @@ WQStatsClass <- R6Class(
                        { if (!is.null(region)) filter(., Region == region) else . } %>%
                        pull(Value), na.rm = TRUE)
       return(max_val)
+    },
+    
+    # determine chla above 10 ug/L
+    calc_chla_above = function() {
+      df_above <- self$df_raw %>%
+        filter(Analyte == 'Chla',
+               Value >= 10)
+      
+      per_above <- round(nrow(df_above)/nrow(self$df_raw)*100,2)
+      
+      return(per_above)
     }
   )
 )
@@ -200,7 +210,7 @@ WQStringClass <- R6Class(
     },
     
     # paragraph statement for phyto
-    disp_phyto_paragraph = function(analyte, statistic, region) {
+    disp_phyto_paragraph = function(analyte, statistic, region = NULL, end = FALSE) {
       
       val_range <- self$disp_val_range(analyte, statistic, region)
       extreme_range <- self$disp_extreme_range(analyte, region)
@@ -209,14 +219,21 @@ WQStringClass <- R6Class(
                             filter(Analyte == analyte) %>% 
                             pull(Label))
       
-      fig_ref <- glue::glue('@fig-{tolower(analyte)}')
-      tbl_ref <- glue::glue('@tbl-{tolower(analyte)}')
+     fp_name <- gsub(' ', '', tolower(region))
+     fp_name <- gsub('&','', fp_name)
+     fig_ref <- glue::glue('@fig-wq-{fp_name}')
       
       paragraph <- glue::glue(
-        'The average {tolower(label_val)} value was {val_range}. ',
-        'Values ranged from {extreme_range}. ',
-        '{ifelse(!is.null(nondetect_perc), paste0(nondetect_perc, \' \'), \'\')}'
-      )
+        'The average {tolower(label_val)} value was {val_range}; ',
+        'values ranged from {extreme_range}. ',
+        '{ifelse(!is.null(nondetect_perc), paste0(nondetect_perc, \' \'), \'\')}')
+      
+      if(end){
+        paragraph <- glue::glue(
+          paragraph,
+          'Time series plots averaged over region are shown in {fig_ref}.'
+        )
+      }
       
       return(paragraph)
     }
@@ -418,6 +435,10 @@ WQFigureClass <- R6Class(
           .groups = 'drop'
         ) %>%
         rename(Value = avg_val)
+      
+      if (region == 'San Pablo Bay'){
+        df_chlatest <<- region_monthly_data
+      }
       
       return(region_monthly_data)
     },

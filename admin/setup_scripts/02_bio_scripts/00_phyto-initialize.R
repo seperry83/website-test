@@ -24,7 +24,6 @@ obj_phyto$
 obj_phyto_cur <- obj_phyto$clone(deep=TRUE)
 obj_phyto_cur$filter_years(report_year)
 
-
 # Create Current Year Stats -----------------------------------------------
 
 stats_phyto_cur <- PhytoStatsClass$new(obj_phyto_cur$df_raw)
@@ -46,25 +45,31 @@ obj_pwq$
 obj_pwq_cur <- obj_pwq$clone(deep=TRUE)
 obj_pwq_cur$filter_years(report_year)
 
+stats_pwq_cur <- WQStatsClass$new(obj_pwq_cur$df_raw)
 strings_pwq_cur <- WQStringClass$new(obj_pwq_cur$df_raw)
 
 # Create Figure Classes ---------------------------------------------------
 
 fig_pwq <- WQFigureClass$new(obj_pwq_cur$df_raw)
-# 
-# # Generate Figures --------------------------------------------------------
-# 
-# # wq figs
-# # phyto_regions <- fig_pwq$df_raw %>%
-# #       pull(Region) %>%
-# #       unique()
-# # 
-# # for (region in phyto_regions){
-# #  plt <- fig_pwq$phyto_return_plt(region)[1][[1]]
-# #  
-# #  fp_name <- gsub(' ', '', tolower(region))
-# #  fp_name <- gsub('&','', fp_name)
-# # 
-# #   ggsave(here::here(paste0('admin/figures-tables/phyto/fig_wq_', fp_name, '.jpg')),
-# #          plt, width = 6*.8, height = 3.5*.8, unit = 'in')
-# # }
+
+fig_phyto <- PhytoFigureClass$new(obj_phyto_cur$df_raw)
+
+# Generate Figures --------------------------------------------------------
+phyto_regions <- fig_pwq$df_raw %>%
+      pull(Region) %>%
+      unique()
+
+for (region in phyto_regions){
+ plt_wq <- fig_pwq$phyto_return_plt(region)[1][[1]]
+
+ plt_phyto <- fig_phyto$plt_org_density_TEST(region, 'AlgalGroup')
+
+ fp_name <- gsub(' ', '', tolower(region))
+ fp_name <- gsub('&','', fp_name)
+
+ ggsave(here::here(paste0('admin/figures-tables/phyto/fig_wq_', fp_name, '.jpg')),
+        plt_wq, width = 6*.8, height = 3.5*.8, unit = 'in')
+
+ ggsave(here::here(paste0('admin/figures-tables/phyto/fig_phyto_', fp_name, '.jpg')),
+        plt_phyto, width = 10, height = 8, unit = 'in')
+}

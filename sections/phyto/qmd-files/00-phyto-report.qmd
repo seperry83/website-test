@@ -51,22 +51,120 @@ For more in-depth methodology, see [here](https://portal.edirepository.org/nis/m
 strings_phyto_cur$alg_list_txt()
 
 strings_phyto_cur$gen_list_txt()
+
+strings_phyto_cur$alg_tree_txt()
+```
+
+```{r}
+#| label: fig-alg
+#| echo: false
+#| fig-align: 'center'
+#| fig-cap: 'Phytoplankton composition by algal group.'
+#| out-width: '100%'
+#| out-height: '100%'
+
+knitr::include_graphics(here::here(file.path('admin/figures-tables/phyto/fig_alg.png')))
 ```
 
 ### Pigment Concentrations
 
+`r stats_pwq_cur$calc_chla_above()`% of samples had chlorophyll a levels below 10 μg/L; chlorophyll a levels below 10 μg/L are considered limiting for zooplankton growth (Müller-Solger et al., 2002). `r strings_pwq_cur$disp_phyto_paragraph('Chla','median')` `r strings_pwq_cur$disp_phyto_paragraph('Pheoa','median')`
+
 ## Regional Results
+
+### Carquinez
+
+#### Water Quality
+
+`r strings_pwq_cur$disp_phyto_paragraph('Chla','median','Carquinez')` `r strings_pwq_cur$disp_phyto_paragraph('Pheoa','median','Carquinez', end=TRUE)`
+
+```{r}
+#| label: fig-wq-carquinez
+#| echo: false
+#| fig-align: 'center'
+#| fig-cap: 'Chlorophyll a and pheophytin a average concentrations in the North Delta.'
+
+knitr::include_graphics(here::here(file.path('admin/figures-tables/phyto/fig_wq_carquinez.jpg')))
+```
+
+#### Phytoplankton
+
+`r strings_phyto_cur$composition_summary_region('Carquinez')` (Other, @fig-phy-carquinez).
+
+```{r}
+#| label: fig-phy-carquinez
+#| echo: false
+#| fig-align: 'center'
+#| fig-cap: 'Density of phytoplankton organisms in the North Delta.'
+
+knitr::include_graphics(here::here(file.path('admin/figures-tables/phyto/fig_phyto_carquinez.jpg')))
+```
+
+### Central Delta
+
+#### Water Quality
+
+`r strings_pwq_cur$disp_phyto_paragraph('Chla','median','Central Delta')` `r strings_pwq_cur$disp_phyto_paragraph('Pheoa','median','Central Delta', end=TRUE)`
+
+```{r}
+#| label: fig-wq-centraldelta
+#| echo: false
+#| fig-align: 'center'
+#| fig-cap: 'Chlorophyll a and pheophytin a average concentrations in the North Delta.'
+
+knitr::include_graphics(here::here(file.path('admin/figures-tables/phyto/fig_wq_centraldelta.jpg')))
+```
+
+#### Phytoplankton
+
+`r strings_phyto_cur$composition_summary_region('Central Delta')` (Other, @fig-phy-centraldelta).
+
+```{r}
+#| label: fig-phy-centraldelta
+#| echo: false
+#| fig-align: 'center'
+#| fig-cap: 'Density of phytoplankton organisms in the North Delta.'
+
+knitr::include_graphics(here::here(file.path('admin/figures-tables/phyto/fig_phyto_centraldelta.jpg')))
+```
+
+
+### Confluence
+
+#### Water Quality
+
+`r strings_pwq_cur$disp_phyto_paragraph('Chla','median','Confluence')` `r strings_pwq_cur$disp_phyto_paragraph('Pheoa','median','Confluence', end=TRUE)`
+
+```{r}
+#| label: fig-wq-confluence
+#| echo: false
+#| fig-align: 'center'
+#| fig-cap: 'Chlorophyll a and pheophytin a average concentrations in the Confluence.'
+
+knitr::include_graphics(here::here(file.path('admin/figures-tables/phyto/fig_wq_confluence.jpg')))
+```
+
+#### Phytoplankton
+
+`r strings_phyto_cur$composition_summary_region('Confluence')` (Other, @fig-phy-confluence).
+
+```{r}
+#| label: fig-phy-confluence
+#| echo: false
+#| fig-align: 'center'
+#| fig-cap: 'Density of phytoplankton organisms in the Confluence.'
+
+knitr::include_graphics(here::here(file.path('admin/figures-tables/phyto/fig_phyto_confluence.jpg')))
+```
 
 ### North Delta
 
 #### Water Quality
 
-`r strings_pwq_cur$disp_phyto_paragraph('Chla','median','North Delta')`
-
-`r strings_pwq_cur$disp_phyto_paragraph('Pheoa','median','North Delta')`
+`r strings_pwq_cur$disp_phyto_paragraph('Chla','median','North Delta')` `r strings_pwq_cur$disp_phyto_paragraph('Pheoa','median','North Delta', end=TRUE)`
 
 ```{r}
-#| label: fig-northdelta
+#| label: fig-wq-northdelta
 #| echo: false
 #| fig-align: 'center'
 #| fig-cap: 'Chlorophyll a and pheophytin a average concentrations in the North Delta.'
@@ -76,7 +174,132 @@ knitr::include_graphics(here::here(file.path('admin/figures-tables/phyto/fig_wq_
 
 #### Phytoplankton
 
-`r strings_phyto_cur$composition_summary_region('Central Delta')` (Other, Figure x).
+`r strings_phyto_cur$composition_summary_region('North Delta')` (Other, @fig-phy-northdelta).
+
+```{r}
+#| label: fig-phy-northdelta
+#| echo: false
+#| fig-align: 'center'
+#| fig-cap: 'Density of phytoplankton organisms in the North Delta.'
+
+knitr::include_graphics(here::here(file.path('admin/figures-tables/phyto/fig_phyto_northdelta.jpg')))
+```
+
+
+### San Pablo Bay
+
+#### Water Quality
+
+`r strings_pwq_cur$disp_phyto_paragraph('Chla','median','San Pablo Bay')` `r strings_pwq_cur$disp_phyto_paragraph('Pheoa','median','San Pablo Bay', end=TRUE)`
+
+```{r}
+#| label: fig-wq-sanpablobay
+#| echo: false
+#| fig-align: 'center'
+#| fig-cap: 'Chlorophyll a and pheophytin a average concentrations in the San Pablo Bay.'
+
+knitr::include_graphics(here::here(file.path('admin/figures-tables/phyto/fig_wq_sanpablobay.jpg')))
+```
+
+#### Phytoplankton
+
+`r strings_phyto_cur$composition_summary_region('San Pablo Bay')` (Other, @fig-phy-sanpablobay).
+
+```{r}
+#| label: fig-phy-sanpablobay
+#| echo: false
+#| fig-align: 'center'
+#| fig-cap: 'Density of phytoplankton organisms in the San Pablo Bay.'
+
+knitr::include_graphics(here::here(file.path('admin/figures-tables/phyto/fig_phyto_sanpablobay.jpg')))
+```
+
+
+### South Delta
+
+#### Water Quality
+
+`r strings_pwq_cur$disp_phyto_paragraph('Chla','median','South Delta')` `r strings_pwq_cur$disp_phyto_paragraph('Pheoa','median','South Delta', end=TRUE)`
+
+```{r}
+#| label: fig-wq-southdelta
+#| echo: false
+#| fig-align: 'center'
+#| fig-cap: 'Chlorophyll a and pheophytin a average concentrations in the South Delta.'
+
+knitr::include_graphics(here::here(file.path('admin/figures-tables/phyto/fig_wq_southdelta.jpg')))
+```
+
+#### Phytoplankton
+
+`r strings_phyto_cur$composition_summary_region('South Delta')` (Other, @fig-phy-southdelta).
+
+```{r}
+#| label: fig-phy-southdelta
+#| echo: false
+#| fig-align: 'center'
+#| fig-cap: 'Density of phytoplankton organisms in the South Delta.'
+
+knitr::include_graphics(here::here(file.path('admin/figures-tables/phyto/fig_phyto_southdelta.jpg')))
+```
+
+
+### Suisun & Grizzly Bays
+
+#### Water Quality
+
+`r strings_pwq_cur$disp_phyto_paragraph('Chla','median','Suisun & Grizzly Bays')` `r strings_pwq_cur$disp_phyto_paragraph('Pheoa','median','Suisun & Grizzly Bays', end=TRUE)`
+
+```{r}
+#| label: fig-wq-suisungrizzlybays
+#| echo: false
+#| fig-align: 'center'
+#| fig-cap: 'Chlorophyll a and pheophytin a average concentrations in the North Delta.'
+
+knitr::include_graphics(here::here(file.path('admin/figures-tables/phyto/fig_wq_suisungrizzlybays.jpg')))
+```
+
+#### Phytoplankton
+
+`r strings_phyto_cur$composition_summary_region('Suisun & Grizzly Bays')` (Other, @fig-phy-suisungrizzlybays).
+
+```{r}
+#| label: fig-phy-suisungrizzlybays
+#| echo: false
+#| fig-align: 'center'
+#| fig-cap: 'Density of phytoplankton organisms in the North Delta.'
+
+knitr::include_graphics(here::here(file.path('admin/figures-tables/phyto/fig_phyto_suisungrizzlybays.jpg')))
+```
+
+
+### Suisun Marsh
+
+#### Water Quality
+
+`r strings_pwq_cur$disp_phyto_paragraph('Chla','median','Suisun Marsh')`. `r strings_pwq_cur$disp_phyto_paragraph('Pheoa','median','Suisun Marsh', end=TRUE)`
+
+```{r}
+#| label: fig-wq-suisunmarsh
+#| echo: false
+#| fig-align: 'center'
+#| fig-cap: 'Chlorophyll a and pheophytin a average concentrations in the North Delta.'
+
+knitr::include_graphics(here::here(file.path('admin/figures-tables/phyto/fig_wq_suisunmarsh.jpg')))
+```
+
+#### Phytoplankton
+
+`r strings_phyto_cur$composition_summary_region('Suisun Marsh')` (Other, @fig-phy-suisunmarsh).
+
+```{r}
+#| label: fig-phy-suisunmarsh
+#| echo: false
+#| fig-align: 'center'
+#| fig-cap: 'Density of phytoplankton organisms in the North Delta.'
+
+knitr::include_graphics(here::here(file.path('admin/figures-tables/phyto/fig_phyto_suisunmarsh.jpg')))
+```
 
 ## Interpretations
 
@@ -103,4 +326,3 @@ van den Hoek, C., D.G. Mann, and H.M. Jahns. 1995. Algae: an introduction to Phy
 ## Archived Reports
 
 Previous EMP phytoplankton reports can be found [here](https://github.com/emp-dwr/emp-website/tree/gh-pages/admin/archive/phyto).
-----

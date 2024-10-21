@@ -11,6 +11,11 @@ html_text2 <- rvest::html_text2
 
 R6Class <- R6::R6Class
 
+`%/%` <- patchwork:::`/.ggplot`
+`%|%` <- patchwork:::`|.ggplot`
+
+sym <- rlang::sym
+
 str_match <- stringr::str_match
 
 glue <- glue::glue
