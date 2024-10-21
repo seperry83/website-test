@@ -1,9 +1,9 @@
-﻿Region,Stations
-Carquinez,"NZ002, NZ004"
-Central Delta,"D16, D19, D26, D28A"
-Confluence,"D10, D12, D22, D4"
-North Delta,"C3A, NZ068"
-San Pablo Bay,"D41, D41A, NZ325"
-South Delta,"C10A, C9, MD10A, P8"
-Suisun & Grizzly Bays,"D6, D7, D8"
-Suisun Marsh,"NZ032, NZS42"
+﻿Region,WY Index,Stations
+Carquinez,Sacramento,"NZ002, NZ004"
+Central Delta,San Joaquin,"D16, D19, D26, D28A"
+Confluence,Sacramento,"D10, D12, D22, D4"
+North Delta,Sacramento,"C3A, NZ068"
+San Pablo Bay,Sacramento,"D41, D41A, NZ325"
+South Delta,San Joaquin,"C10A, C9, MD10A, P8"
+Suisun & Grizzly Bays,Sacramento,"D6, D7, D8"
+Suisun Marsh,Sacramento,"NZ032, NZS42"

@@ -51,20 +51,20 @@ strings_pwq_cur <- WQStringClass$new(obj_pwq_cur$df_raw)
 # Create Figure Classes ---------------------------------------------------
 
 fig_pwq <- WQFigureClass$new(obj_pwq_cur$df_raw)
-
-# Generate Figures --------------------------------------------------------
-
-# wq figs
-# phyto_regions <- fig_pwq$df_raw %>%
-#       pull(Region) %>%
-#       unique()
 # 
-# for (region in phyto_regions){
-#  plt <- fig_pwq$phyto_return_plt(region)[1][[1]]
-#  
-#  fp_name <- gsub(' ', '', tolower(region))
-#  fp_name <- gsub('&','', fp_name)
+# # Generate Figures --------------------------------------------------------
 # 
-#   ggsave(here::here(paste0('admin/figures-tables/phyto/fig_wq_', fp_name, '.jpg')),
-#          plt, width = 6*.8, height = 3.5*.8, unit = 'in')
-# }
+# # wq figs
+# # phyto_regions <- fig_pwq$df_raw %>%
+# #       pull(Region) %>%
+# #       unique()
+# # 
+# # for (region in phyto_regions){
+# #  plt <- fig_pwq$phyto_return_plt(region)[1][[1]]
+# #  
+# #  fp_name <- gsub(' ', '', tolower(region))
+# #  fp_name <- gsub('&','', fp_name)
+# # 
+# #   ggsave(here::here(paste0('admin/figures-tables/phyto/fig_wq_', fp_name, '.jpg')),
+# #          plt, width = 6*.8, height = 3.5*.8, unit = 'in')
+# # }

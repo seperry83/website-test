@@ -48,20 +48,20 @@ fig_dwq <- WQFigureClass$new(obj_dwq_cur$df_raw)
 # Generate Figures --------------------------------------------------------
 
 # main figs
-# dwq_analytes <- df_analytes %>%
-#   filter(Program == 'DEMP') %>%
-#   pull(Analyte)
-# 
-# for (param in dwq_analytes){
-#   plt <- fig_dwq$wq_return_plt(param, 'dwq')
-# 
-#   height_factor <- fig_dwq$df_raw %>%
-#     pull(Region) %>%
-#     unique() %>%
-#     length()
-# 
-#   exp_height <- ceiling(height_factor/2)*2
-# 
-#   ggsave(here::here(paste0('admin/figures-tables/dwq/fig_', tolower(param), '.jpg')),
-#          plt, width = 6*.8, height = exp_height*.8, unit = 'in')
-# }
+dwq_analytes <- df_analytes %>%
+  filter(Program == 'DEMP') %>%
+  pull(Analyte)
+
+for (param in dwq_analytes){
+  plt <- fig_dwq$wq_return_plt(param, 'dwq')
+
+  height_factor <- fig_dwq$df_raw %>%
+    pull(Region) %>%
+    unique() %>%
+    length()
+
+  exp_height <- ceiling(height_factor/2)*2
+
+  ggsave(here::here(paste0('admin/figures-tables/dwq/fig_', tolower(param), '.jpg')),
+         plt, width = 6*.8, height = exp_height*.8, unit = 'in')
+}

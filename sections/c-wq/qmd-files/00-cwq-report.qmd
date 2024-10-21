@@ -9,7 +9,7 @@ source(here::here('admin/import_scripts.R'))
 
 ## Introduction
 
-The Department of Water Resources (DWR) and the US Bureau of Reclamation (USBR) are required by Water Right Decision 1641 (D-1641) to collect continuous water chemistry data to monitor the water quality at select sites in the upper San Francisco Estuary (Estuary). This report describes the results of these monitoring efforts for water year `r report_year` (October 1st `r prev_year` through September 30th `r report_year`), `r str_water_year(report_year, 'cur')` [(source)](https://cdec.water.ca.gov/reportapp/javareports?name=WSIHIST). Results are compared to the previous water year, `r str_water_year(prev_year, 'prev')`.
+The Department of Water Resources (DWR) and the US Bureau of Reclamation (USBR) are required by Water Right Decision 1641 (D-1641) to collect continuous water chemistry data to monitor the water quality at select sites in the upper San Francisco Estuary (Estuary). This report describes the results of these monitoring efforts for water year `r report_year` (October 1st `r prev_year` through September 30th `r report_year`) `r str_water_year(report_year, 'cur')` [(source)](https://cdec.water.ca.gov/reportapp/javareports?name=WSIHIST). Results are compared to the previous water year, `r str_water_year(prev_year, 'prev')`.
 
 ## Methods
 
