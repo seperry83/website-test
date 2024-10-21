@@ -11,14 +11,21 @@ PhytoStatsClass <- R6Class(
     },
     
     # Calc summary stats by AlgalGroup (both overall and by region)
+    # summarize_algalgrp = function(df, region = NULL) {
+    #   if (!is.null(region)) df <- df %>% filter(Region == region)
+    #   
+    #   sum_units <- sum(df$Units_per_mL, na.rm = TRUE)
+    # 
+    #   return(sum_units)
+    # }
+    
     summarize_region = function(region = NULL, grouping) {
       df_summ <- self$df_raw
-      
-      if (!is.null(region)) {
-        df_summ <- df_summ %>%
-          filter(Region == region)
+
+      if (!is.null(region)){
+        df_summ <- df_summ %>% filter(Region == region)
       }
-      
+
       summ_units <- sum(df_summ$Units_per_mL, na.rm = TRUE)
       
       df_summ <- df_summ %>%
@@ -26,8 +33,7 @@ PhytoStatsClass <- R6Class(
         summarize(
           per = round(100 * sum(Units_per_mL, na.rm = TRUE) / summ_units, 2),
           mean = round(mean(Units_per_mL, na.rm = TRUE), 0),
-          sd = round(sd(Units_per_mL, na.rm = TRUE), 0)
-        ) %>%
+          sd = round(sd(Units_per_mL, na.rm = TRUE), 0)) %>%
         arrange(desc(per))
       
       return(df_summ)
@@ -36,11 +42,12 @@ PhytoStatsClass <- R6Class(
   
   private = list(
     # Define AlgalGroups in either 'Main' or 'Other' category using frequency threshold
-    def_alg_cat = function(grouping, region = NULL, threshold = 1) {
-      df_per <- self$summarize_region(region, grouping)
+    def_alg_cat = function(region = NULL, threshold = 1) {
+      df_per <- self$summarize_region(grouping = 'AlgalGroup')
+
       ls_alg <- list(
-        main = dplyr::filter(df_per, per >= threshold) %>% dplyr::pull(!!rlang::sym(grouping)),
-        other = dplyr::filter(df_per, per < threshold) %>% dplyr::pull(!!rlang::sym(grouping))
+        main = dplyr::filter(df_per, per >= threshold) %>% dplyr::pull('AlgalGroup'),
+        other = dplyr::filter(df_per, per < threshold) %>% dplyr::pull('AlgalGroup')
       )
       
       return(ls_alg)
@@ -105,15 +112,13 @@ PhytoStringClass <- R6Class(
     },
     
     composition_summary_region = function(region, threshold = 1) {
+      df_summ <- self$summarize_region(region, 'AlgalGroup') %>%
+        mutate(per = round(per, 1))
       
-      df_summ <- self$summarize_region(region, 'AlgalGroup')
-      alg_cat <- private$def_alg_cat('AlgalGroup', region, threshold)
-      
-      
-      main_groups <-
-        dplyr::filter(df_summ, AlgalGroup %in% alg_cat$main)
-      other_groups <-
-        dplyr::filter(df_summ, AlgalGroup %in% alg_cat$other)
+      alg_cat <- private$def_alg_cat(region, threshold)
+
+      main_groups <- filter(df_summ, AlgalGroup %in% alg_cat$main)
+      other_groups <- filter(df_summ, AlgalGroup %in% alg_cat$other)
       
       main_txt <-
         purrr::map2_chr(main_groups$AlgalGroup, 1:nrow(main_groups), function(group, idx) {
@@ -128,7 +133,7 @@ PhytoStringClass <- R6Class(
         other_list <- sort(tolower(other_groups$AlgalGroup))
         other_list_combined <- knitr::combine_words(other_list)
         glue::glue(
-          'The remaining {round(sum(other_groups$per), 2)}% of organisms were comprised of {other_list_combined}'
+          'The remaining {sum(other_groups$per)}% of organisms were comprised of {other_list_combined}'
         )
       } else {
         ''
