@@ -4,7 +4,7 @@ subtitle: "CA Deptartment of Water Resources"
 listing:
   id: landing
   template: ../../../admin/styling_scripts/landing-links.ejs
-  contents: ../../../admin/yml-guides/landing.yml
+  contents: ../../../admin/styling_scripts/landing.yml
 ---
 
 ```{r echo = FALSE}

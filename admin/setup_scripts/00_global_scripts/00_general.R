@@ -9,16 +9,24 @@ read_html <- rvest::read_html
 html_element <- rvest::html_element
 html_text2 <- rvest::html_text2
 
+include_graphics <- knitr::include_graphics
+
 R6Class <- R6::R6Class
 
 `%/%` <- patchwork:::`/.ggplot`
 `%|%` <- patchwork:::`|.ggplot`
+
+`%m+%` <- lubridate::`%m+%`
+`%m-%` <- lubridate::`%m-%`
 
 sym <- rlang::sym
 
 str_match <- stringr::str_match
 
 glue <- glue::glue
+
+year <- lubridate::year
+month <- lubridate::month
 
 left_join <- dplyr::left_join
 filter <- dplyr::filter
@@ -31,6 +39,8 @@ summarize <- dplyr::summarize
 select <- dplyr::select
 arrange <- dplyr::arrange
 n <- dplyr::n
+relocate <- dplyr::relocate
+desc <- dplyr::desc
 
 ggplot <- ggplot2::ggplot
 aes <- ggplot2::aes
@@ -157,7 +167,7 @@ StylingClass <- R6Class(
     df_regionhex = NULL,
     
     initialize = function(df_regionhex) {
-      self$df_regionhex <- read_csv(here::here('admin/figures-tables/admin/region_table.csv'), show_col_types = FALSE)
+      self$df_regionhex <- read_csv(here::here('admin/figures-tables/region_table.csv'), show_col_types = FALSE)
     },
     
     # TABLES
@@ -355,7 +365,7 @@ str_water_year <- function(given_year = report_year, period = c('cur','prev')){
 
 # format numbers for display based on analyte
 format_vals <- function(value, vari) {
-  df_analytes <- readr::read_csv(here::here('admin/figures-tables/admin/analyte_table.csv'),
+  df_analytes <- readr::read_csv(here::here('admin/figures-tables/analyte_table.csv'),
                                  locale = readr::locale(encoding = 'UTF-8'),
                                  show_col_types = FALSE)
   

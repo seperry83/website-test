@@ -3,9 +3,9 @@
 
 df_raw <- read_quiet_csv(here::here('admin/test-data/EMP_CWQ_data-long.csv'))
 
-df_analytes <- read_quiet_csv(here::here('admin/figures-tables/admin/analyte_table.csv'), locale = readr::locale(encoding = 'UTF-8'))
+df_analytes <- read_quiet_csv(here::here('admin/figures-tables/analyte_table.csv'), locale = readr::locale(encoding = 'UTF-8'))
 
-df_regions <- read_quiet_csv(here::here('admin/figures-tables/admin/station_table.csv'))
+df_regions <- read_quiet_csv(here::here('admin/figures-tables/station_table.csv'))
 
 
 # Create Base CWQ Object --------------------------------------------------
@@ -58,7 +58,7 @@ fig_cwq <- WQFigureClass$new(obj_cwq_cur$df_raw)
 
 # Generate Figures --------------------------------------------------------
 
-# main figs
+# # main figs
 # cwq_analytes <- df_analytes %>%
 #   filter(Program == 'CEMP') %>%
 #   pull(Analyte)
@@ -74,9 +74,9 @@ fig_cwq <- WQFigureClass$new(obj_cwq_cur$df_raw)
 # 
 #   exp_height <- ceiling(height_factor/2)*2
 # 
-#   ggsave(here::here(paste0('admin/figures-tables/cwq/fig_', tolower(param), '.jpg')),
+#   ggsave(here::here(paste0('admin/figures-tables/cwq/cwq_ts_', tolower(param), '.jpg')),
 #          plt, width = 6*.8, height = exp_height*.8, unit = 'in')
 # }
 
 # # RRI fig
-obj_rri$create_rri_plt()
+# obj_rri$create_rri_plt()

@@ -1,0 +1,13 @@
+
+- links:
+    - text: "Continuous Water Quality"
+      href: /sections/cwq/qmd-files/cwq-info.qmd
+    - text: "Discrete Water Quality"
+      href: /sections/cwq/qmd-files/cwq-info.qmd
+    - text: "Benthic Invertebrates"
+      href: /sections/cwq/qmd-files/cwq-info.qmd
+    - text: "Phytoplankton"
+      href: /sections/cwq/qmd-files/cwq-info.qmd
+    - text: ""
+    - text: "Zooplankton"
+      href: /sections/cwq/qmd-files/cwq-info.qmd

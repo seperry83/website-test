@@ -13,7 +13,7 @@ WQRRIClass <- R6Class(
     
     # text string for CWQ RRI DO
     disp_RRI_months = function(time_period) {
-      df_rl <- read_quiet_csv(here::here('admin/figures-tables/admin/stockton_DO_limits.csv'))
+      df_rl <- read_quiet_csv(here::here('sections/cwq/tables/stockton_DO_limits.csv'))
       
       rel_months <- switch(time_period,
                            'off months' = df_rl %>% filter(Type == 'Off') %>% pull(Month),
@@ -64,7 +64,7 @@ WQRRIClass <- R6Class(
     create_rri_plt = function() {
       df_do <- self$df_raw %>% filter((Site == 'RRI') & (Analyte == 'DissolvedOxygen'))
       
-      df_rls <- read_quiet_csv(here::here('admin/figures-tables/admin/stockton_DO_limits.csv'))
+      df_rls <- read_quiet_csv(here::here('sections/cwq/tables/stockton_DO_limits.csv'))
 
       df_do <- df_do %>%
         dplyr::mutate(Month = lubridate::month(Date, label = TRUE, abbr = FALSE),

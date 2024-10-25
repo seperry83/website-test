@@ -20,8 +20,11 @@ BenBaseClass <- R6Class(
       
       self$df_raw <- self$df_raw %>% select(Year, Month, Station, Region, MeanCPUE, TotalGrabs,
                                             !!!rlang::syms(self$ben_classif)) %>%
-        mutate(MeanOrgs = round(MeanCPUE * TotalGrabs * 0.052, 0)) %>%
-        mutate(Month = factor(Month, month_order))
+        mutate(MeanOrgs = round(MeanCPUE * TotalGrabs * 0.052, 0),
+               Month = factor(Month, levels = month_order)) %>%
+        mutate(WaterYear = ifelse(Month %in% c('October', 'November', 'December'), Year + 1, Year)) %>%
+        filter(WaterYear >= min(Year) & WaterYear <= max(Year)) %>%
+        relocate(WaterYear, .before = everything())
       return(invisible(self))
     },
     
@@ -29,10 +32,260 @@ BenBaseClass <- R6Class(
     merge_grab_cols = function() {
       private$calc_grab_cols()
       
-      self$df_raw <- left_join(self$df_raw, private$df_grabs, by = c('Station','Month')) %>%
-        select(-TotalGrabs)
+      self$df_raw <- left_join(self$df_raw, private$df_grabs, by = c('Station','Month','WaterYear')) %>%
+        select(-c(TotalGrabs))
       
       return(invisible(self))
+    },
+    
+    plt_phy_timeseries_all_TEST = function(station){
+      df_filtered <- self$df_raw %>%
+        dplyr::filter(WaterYear >= (report_year - 5))
+      
+      df_filtered <- df_filtered %>%
+        mutate(Date = as.Date(paste(Year, Month, "01", sep = "-"), "%Y-%B-%d"),
+               FullTaxa = paste(Phylum, Genus, Species))
+
+      top_groups <- df_filtered %>%
+        group_by(FullTaxa) %>%
+        summarize(MeanOrgsTotal = sum(MeanOrgs, na.rm = TRUE)) %>%
+        arrange(desc(MeanOrgsTotal)) %>%
+        dplyr::slice(1:16) %>%
+        pull(FullTaxa)
+      
+      uni_groups <- unique(top_groups)
+      
+      col_colors <- setNames(
+        c(RColorBrewer::brewer.pal(8, 'Set2'), RColorBrewer::brewer.pal(8, 'Dark2'))[1:length(uni_groups)], 
+        uni_groups
+      )
+      
+      df_raw_c <- df_filtered %>%
+        dplyr::filter(FullTaxa %in% top_groups) %>%
+        mutate(ColColor = col_colors[as.factor(FullTaxa)])
+
+      df_filt_c <- df_raw_c %>%
+        dplyr::filter(Station == station)
+    
+      df_summ_c <- df_filt_c %>%
+        summarize(
+          MeanOrgs = sum(MeanOrgs),
+          .by = c(FullTaxa, Station, Date, ColColor)
+        )
+      
+      group_avgs <- df_summ_c %>%
+        group_by(FullTaxa) %>%
+        summarize(avg_val = mean(MeanOrgs, na.rm = TRUE)) %>%
+        arrange(desc(avg_val)) %>%
+        dplyr::slice(1:10)
+      
+       df_summ_c <- df_summ_c %>%
+        dplyr::filter(FullTaxa %in% group_avgs$FullTaxa) %>%
+        mutate(FullTaxa = factor(FullTaxa, levels = group_avgs %>% arrange(avg_val) %>% pull(FullTaxa)))
+
+       ls_plt_format <- list(
+        ggplot2::theme_bw(),
+        ggplot2::scale_y_continuous(name = NULL, labels = scales::label_comma()),
+        ggplot2::xlab(NULL)
+      )
+
+      df_summ_c <- df_summ_c %>%
+        arrange(Date) %>%
+        group_by(FullTaxa) %>%
+        dplyr::mutate(
+          group_id = cumsum(c(1, diff(lubridate::year(Date) * 12 + lubridate::month(Date)) > 1))
+        ) %>%
+        dplyr::ungroup()
+      
+
+      plt_timeseries <- suppressMessages({
+        df_summ_c %>%
+          ggplot(ggplot2::aes(Date, MeanOrgs, color = FullTaxa, group = interaction(FullTaxa, group_id))) +
+          geom_line(na.rm = TRUE) +  
+          geom_point(size = 2) +
+          ggplot2::scale_color_manual(values = col_colors) +
+          ggplot2::scale_x_date(date_labels = "%m-%y", limits = c(min(df_summ_c$Date), max(df_summ_c$Date)), date_breaks = '4 months') +
+          ls_plt_format +
+          ggplot2::guides(color = ggplot2::guide_legend(reverse = TRUE, nrow = 1))
+      })
+      
+      plt_facet_timeseries <- suppressMessages({
+        df_summ_c %>%
+          ggplot(ggplot2::aes(Date, MeanOrgs, color = FullTaxa, group = interaction(FullTaxa, group_id))) +
+          geom_line(na.rm = TRUE) + 
+          geom_point(size = 2) +
+          ggplot2::scale_color_manual(values = col_colors) +
+          ggplot2::facet_wrap(
+            ggplot2::vars(forcats::fct_rev(FullTaxa)),
+            scales = 'free_y',
+            ncol = 3,
+            # labeller = ggplot2::as_labeller(setNames(df_summ_c$FullTaxa, as.character(df_summ_c$FullTaxa)))
+          ) +
+          ggplot2::scale_x_date(date_labels = "%m-%y", limits = c(min(df_summ_c$Date), max(df_summ_c$Date)), date_breaks = '4 months') +
+          ls_plt_format +
+          ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 45, hjust = 1)) +
+          ggplot2::guides(color = ggplot2::guide_legend(reverse = TRUE, nrow = 1))
+      })
+      
+      plt_ylab <- ggplot(data.frame(l = 'MeanOrgs', x = 1, y = 1)) +
+        ggplot2::geom_text(ggplot2::aes(x, y, label = l), angle = 90) +
+        ggplot2::theme_void() +
+        ggplot2::coord_cartesian(clip = 'off')
+      
+      # Determine rel height factor
+      height_factor <- df_summ_c %>%
+        pull(FullTaxa) %>%
+        unique() %>%
+        length()
+      
+      exp_height <- ((.5 * ceiling(height_factor / 3)) * 1.2)
+      
+      combined_plot <- patchwork::wrap_plots(
+        plt_timeseries,
+        plt_facet_timeseries,
+        heights = c(1, exp_height),
+        widths = c(1, 30),
+        ncol = 1
+      ) +
+        patchwork::plot_layout(guides = 'collect', heights = c(1, exp_height)) &
+        ggplot2::theme(legend.position = 'none', legend.title = element_blank())
+      
+      final_plot <- patchwork::wrap_plots(
+        plt_ylab,
+        combined_plot,
+        widths = c(1, 30)
+      ) +
+        patchwork::plot_annotation(
+          title = glue::glue('{station} Benthic Organism Densities'),
+          theme = ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
+        )
+      
+      return(final_plot)
+    },
+    
+    plt_phy_timeseries_TEST = function(station){
+      
+      df_filtered <- self$df_raw %>%
+        mutate(FullTaxa = paste(Phylum, Genus, Species))
+      
+      top_groups <- df_filtered %>%
+        group_by(FullTaxa) %>%
+        summarize(MeanOrgsTotal = sum(MeanOrgs, na.rm = TRUE)) %>%
+        arrange(desc(MeanOrgsTotal)) %>%
+        dplyr::slice(1:16) %>%
+        pull(FullTaxa)
+
+      # assign coloring
+      uni_groups <- unique(top_groups)
+      
+      col_colors <- setNames(
+        c(RColorBrewer::brewer.pal(8, 'Set2'), RColorBrewer::brewer.pal(8, 'Dark2'))[1:length(top_groups)], 
+        top_groups
+      )
+      
+      df_raw_c <- df_filtered %>%
+        dplyr::filter(FullTaxa %in% top_groups) %>%
+        mutate(ColColor = col_colors[as.factor(FullTaxa)],
+               Month = factor(Month, levels = month_order),
+               Month_num = as.numeric(Month))
+      
+      df_filt_c <- df_raw_c %>%
+        dplyr::filter(Station == station)
+      
+      df_summ_c <- df_filt_c %>%
+        summarize(
+          MeanOrgs = sum(MeanOrgs),
+          .by = c(FullTaxa, Station, Month, Month_num, ColColor)
+        )
+      
+      group_avgs <- df_summ_c %>%
+        group_by(FullTaxa) %>%
+        summarize(avg_val = mean(MeanOrgs, na.rm = TRUE)) %>%
+        arrange(desc(avg_val)) %>%
+        dplyr::slice(1:10)
+ 
+      df_summ_c <- df_summ_c %>%
+        dplyr::filter(FullTaxa %in% group_avgs$FullTaxa) %>%
+        mutate(FullTaxa = factor(FullTaxa, levels = group_avgs %>% arrange(avg_val) %>% pull(FullTaxa)))
+      
+      ls_plt_format <- list(
+        ggplot2::theme_bw(),
+        ggplot2::scale_y_continuous(name = NULL, labels = scales::label_comma()),
+        ggplot2::xlab(NULL)
+      )
+      
+      df_summ_c <- df_summ_c %>%
+        mutate(Date = as.Date(paste(ifelse(Month %in% month_order[1:3], report_year-1, report_year), Month, "01", sep = "-"), "%Y-%B-%d")) %>%
+        group_by(FullTaxa) %>%
+        dplyr::mutate(
+          group_id = cumsum(c(1, diff(lubridate::year(Date) * 12 + lubridate::month(Date)) > 1))
+        ) %>%
+        dplyr::ungroup()
+
+      plt_timeseries <- suppressMessages({
+        df_summ_c %>%
+        ggplot(ggplot2::aes(Date, MeanOrgs, color = FullTaxa, group = interaction(FullTaxa, group_id))) +
+        geom_line(na.rm = TRUE) +
+        geom_point(size = 2) +
+        ggplot2::scale_color_manual(values = col_colors) +
+        ggplot2::scale_x_date(date_labels = "%m-%y", limits = c(min(df_summ_c$Date), max(df_summ_c$Date)), date_breaks = '1 month') +
+        ls_plt_format +
+        ggplot2::guides(color = ggplot2::guide_legend(reverse = TRUE, nrow = 1))
+      })
+      
+
+      plt_facet_timeseries <- suppressMessages({
+        df_summ_c %>%
+        ggplot(ggplot2::aes(Date, MeanOrgs, color = FullTaxa, group = interaction(FullTaxa, group_id))) +
+        geom_line(na.rm = TRUE) +
+        geom_point(size = 2) +
+        ggplot2::scale_color_manual(values = col_colors) +
+        ggplot2::facet_wrap(
+          ggplot2::vars(forcats::fct_rev(FullTaxa)),
+          scales = 'free_y',
+          ncol = 3,
+        ) +
+        ggplot2::scale_x_date(date_labels = "%m-%y", limits = c(min(df_summ_c$Date), max(df_summ_c$Date)), date_breaks = '1 month') +
+        ls_plt_format +
+        ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 45, hjust = 1)) +
+        ggplot2::guides(color = ggplot2::guide_legend(reverse = TRUE, nrow = 1))
+      })
+      
+      
+      
+      plt_ylab <- ggplot(data.frame(l = 'MeanOrgs', x = 1, y = 1)) +
+        ggplot2::geom_text(ggplot2::aes(x, y, label = l), angle = 90) +
+        ggplot2::theme_void() +
+        ggplot2::coord_cartesian(clip = 'off')
+
+      height_factor <- df_summ_c %>%
+        pull(FullTaxa) %>%
+        unique() %>%
+        length()
+      
+      exp_height <- ((.5*ceiling(height_factor/3))*1.2)
+      
+      combined_plot <- patchwork::wrap_plots(
+        plt_timeseries,
+        plt_facet_timeseries,
+        heights = c(1, exp_height),
+        widths = c(1, 30),
+        ncol = 1
+      ) +
+        patchwork::plot_layout(guides = 'collect', heights = c(1, exp_height)) &
+        ggplot2::theme(legend.position = 'none', legend.title = element_blank())
+      
+      final_plot <- patchwork::wrap_plots(
+        plt_ylab,
+        combined_plot,
+        widths = c(1, 30)
+      ) +
+        patchwork::plot_annotation(
+          title = glue::glue('{station} Benthic Organism Densities'),
+          theme = ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
+        )
+      
+      return(final_plot)
     },
   
     plt_phy_density_TEST = function(station, filt_col){
@@ -54,16 +307,16 @@ BenBaseClass <- R6Class(
       
       # Calculate monthly total densities for each group
       df_summ_c <- df_filt_c %>%
-        dplyr::summarise(
+        summarize(
           MeanOrgs = sum(MeanOrgs),
           .by = c(!!sym(filt_col), Station, Month, Month_num, ColColor)
         )
       
       # Calc overall average for reordering
       group_avgs <- df_summ_c %>%
-        dplyr::group_by(!!sym(filt_col)) %>%
-        dplyr::summarise(avg_val = mean(MeanOrgs, na.rm = TRUE)) %>%
-        dplyr::arrange(avg_val)
+        group_by(!!sym(filt_col)) %>%
+        summarize(avg_val = mean(MeanOrgs, na.rm = TRUE)) %>%
+        arrange(avg_val)
       
       # Reorder the levels based on the averages
       df_summ_c <- df_summ_c %>%
@@ -78,7 +331,7 @@ BenBaseClass <- R6Class(
   
       # Create stacked barplot of monthly densities by the filtered column
       plt_stacked <- df_summ_c %>%
-        ggplot2::ggplot(ggplot2::aes(Month_num, MeanOrgs, fill = !!sym(filt_col))) +
+        ggplot(ggplot2::aes(Month_num, MeanOrgs, fill = !!sym(filt_col))) +
         ggplot2::geom_col(color = 'black') +
         ggplot2::scale_fill_manual(values = col_colors) +
         scale_x_continuous(breaks = seq_along(month_order), labels = label_order) +
@@ -87,7 +340,7 @@ BenBaseClass <- R6Class(
   
       # Create facetted barplots by the filtered column
       plt_facet <- df_summ_c %>%
-        ggplot2::ggplot(ggplot2::aes(Month_num, MeanOrgs, fill = !!sym(filt_col))) +
+        ggplot(ggplot2::aes(Month_num, MeanOrgs, fill = !!sym(filt_col))) +
         ggplot2::geom_col(color = 'black') +
         ggplot2::scale_fill_manual(values = col_colors) +
         ggplot2::facet_wrap(ggplot2::vars(forcats::fct_rev(!!sym(filt_col))), scales = 'free_y', ncol = 3) +
@@ -97,7 +350,7 @@ BenBaseClass <- R6Class(
         ggplot2::guides(fill = ggplot2::guide_legend(reverse = TRUE, nrow = 1))
   
       # Create text-only ggplot for the collective y-axis label
-      plt_ylab <- ggplot2::ggplot(data.frame(l = 'MeanOrgs', x = 1, y = 1)) +
+      plt_ylab <- ggplot(data.frame(l = 'MeanOrgs', x = 1, y = 1)) +
         ggplot2::geom_text(ggplot2::aes(x, y, label = l), angle = 90) +
         ggplot2::theme_void() +
         ggplot2::coord_cartesian(clip = 'off')
@@ -142,35 +395,34 @@ BenBaseClass <- R6Class(
       
       # (month) (station)
       private$df_grabs <- self$df_raw %>%
-        group_by(Station, Month) %>%
+        group_by(Station, Month, WaterYear) %>%
         summarize(TotalGrabs = max(TotalGrabs, na.rm = TRUE),
                   .groups = 'drop') %>%
         rename(TotalGrabs_MonthStation = TotalGrabs)
       
       # (year) (station)
       private$df_grabs <- private$df_grabs %>%  
-        group_by(Station) %>%
+        group_by(Station, WaterYear) %>%
         mutate(TotalGrabs_YearStation = sum(TotalGrabs_MonthStation, na.rm = TRUE)) %>%
         ungroup()
       
       # (month) (all)
       df_temp <- private$df_grabs %>%
-        select(Station, Month, TotalGrabs_MonthStation) %>%
+        select(Station, Month, WaterYear, TotalGrabs_MonthStation) %>%
         unique() %>%
-        group_by(Month) %>%
+        group_by(Month, WaterYear) %>%
         summarize(TotalGrabs_MonthAll = sum(TotalGrabs_MonthStation), .groups = 'drop')
       
-      private$df_grabs <- left_join(private$df_grabs, df_temp, by = 'Month')
+      private$df_grabs <- left_join(private$df_grabs, df_temp, by = c('Month','WaterYear'))
       
       # (year) (all)
       df_temp <- private$df_grabs %>%
-        select(Station, TotalGrabs_YearStation) %>%
-        unique()
+        select(Station, WaterYear, TotalGrabs_YearStation) %>%
+        unique() %>%
+        group_by(WaterYear) %>%
+        summarize(TotalGrabs_YearAll = sum(TotalGrabs_YearStation), .groups = 'drop')
       
-      grab_total = sum(df_temp$TotalGrabs_YearStation)
-      
-      private$df_grabs <- private$df_grabs %>%
-        mutate(TotalGrabs_YearAll = grab_total)
+      private$df_grabs <- left_join(private$df_grabs, df_temp, by = c('WaterYear'))
     }
   )
 )
@@ -196,7 +448,7 @@ BenWkbkClass <- R6Class(
       }
       
       result <- self$df_raw %>%
-        group_by(!!!rlang::syms(cols)) %>%
+        group_by(WaterYear, !!!rlang::syms(cols)) %>%
         summarize(
           TotalGrabs = unique(TotalGrabs_YearAll),
           MeanOrgs = sum(MeanOrgs),
@@ -204,7 +456,7 @@ BenWkbkClass <- R6Class(
           .groups = 'drop'
         ) %>%
         mutate(Percentage = round(MeanCPUE / sum(MeanCPUE) * 100, 2)) %>%
-        dplyr::arrange(desc(Percentage))
+        arrange(desc(WaterYear), desc(Percentage))
       
       if (out_type == 'wkbk'){
         private$add_sheet(result, sheet_name)
@@ -224,16 +476,16 @@ BenWkbkClass <- R6Class(
       }
       
       result <- self$df_raw %>%
-        group_by(Month, !!!rlang::syms(cols)) %>%
+        group_by(WaterYear, Month, !!!rlang::syms(cols)) %>%
         summarize(
           TotalGrabs = unique(TotalGrabs_MonthAll),
           MeanOrgs = sum(MeanOrgs),
           MeanCPUE = round(MeanOrgs / TotalGrabs / 0.052, 4),
           .groups = 'drop'
         ) %>%
-        group_by(Month) %>%
+        group_by(Month, WaterYear) %>%
         mutate(Percentage = round(MeanCPUE / sum(MeanCPUE) * 100, 2)) %>%
-        dplyr::arrange(Month, desc(Percentage))
+        arrange(desc(WaterYear), Month, desc(Percentage))
       
       if (out_type == 'wkbk'){
         private$add_sheet(result, sheet_name)
@@ -253,17 +505,17 @@ BenWkbkClass <- R6Class(
       }
       
       result <- self$df_raw %>%
-        group_by(Station, Region, !!!rlang::syms(cols)) %>%
+        group_by(WaterYear, Station, Region, !!!rlang::syms(cols)) %>%
         summarize(
           TotalGrabs = unique(TotalGrabs_YearStation),
           MeanOrgs = sum(MeanOrgs),
           MeanCPUE = MeanOrgs / TotalGrabs / 0.052,
           .groups = 'drop'
         ) %>%
-        group_by(Station, Region) %>%
+        group_by(Station, Region, WaterYear) %>%
         mutate(Percentage = round(MeanCPUE / sum(MeanCPUE) * 100, 2),
                MeanCPUE = round(MeanCPUE, 4)) %>%
-        dplyr::arrange(Region, Station, desc(Percentage))
+        arrange(desc(WaterYear), Region, Station, desc(Percentage))
       
       if (out_type == 'wkbk'){
         private$add_sheet(result, sheet_name)
@@ -284,30 +536,29 @@ BenWkbkClass <- R6Class(
       }
       
       result <- self$df_raw %>%
-        group_by(Station, Region, Month, !!!rlang::syms(cols)) %>%
+        group_by(WaterYear, Station, Region, Month, !!!rlang::syms(cols)) %>%
         summarize(
           TotalGrabs = unique(TotalGrabs_MonthStation),
           MeanOrgs = sum(MeanOrgs),
           MeanCPUE = MeanOrgs / TotalGrabs / 0.052,
           .groups = 'drop'
         ) %>%
-        group_by(Station, Region, Month) %>%
+        group_by(WaterYear, Station, Region, Month) %>%
         mutate(Percentage = round(MeanCPUE / sum(MeanCPUE) * 100, 2),
                MeanCPUE = round(MeanCPUE, 4)) %>%
-        dplyr::arrange(Region, Station, Month, desc(Percentage))
+        arrange(desc(WaterYear), Region, Station, Month, desc(Percentage))
       
       if (out_type == 'wkbk'){
         private$add_sheet(result, sheet_name)
       }
       
       if (out_type == 'fig'){
-        self$plt_org_density()
       }
     },
     
     # export workbook
     export_wkbk = function(path_export){
-      suppressWarnings(
+      suppressMessages(
         openxlsx::saveWorkbook(self$wkbk, file = path_export, overwrite = TRUE)
       )
     }

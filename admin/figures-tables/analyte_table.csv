@@ -1,0 +1,14 @@
+﻿Program,Analyte,Unit,Label,SigFigs,FracDigits
+DEMP,SpCndSurface,µS/cm,Specific Conductance,3,0
+DEMP,TurbiditySurface,FNU,Turbidity,3,2
+DEMP,DissAmmonia,mg/L,Dissolved Ammonia,3,2
+DEMP,DissNitrateNitrite,mg/L,Dissolved Nitrate+Nitrite,3,2
+DEMP,TotPhos,mg/L,Total Phosphorus,3,2
+"DEMP,Phyto",Chla,µg/L,Chlorophyll a,3,2
+CEMP,Fluorescence,µg/L,Fluorescence,3,2
+CEMP,DissolvedOxygen,mg/L,Dissolved Oxygen,3,2
+CEMP,pH,,pH,3,2
+CEMP,SpC,µS/cm,Specific Conductance,3,0
+CEMP,Turbidity,FNU,Turbidity,3,2
+CEMP,WaterTemperature,°C,Water Temperature,3,2
+Phyto,Pheoa,µg/L,Pheophytin a,3,2

@@ -6,17 +6,17 @@ project:
 website:
   page-navigation: false
   title: 'Environmental Monitoring Program'
-  favicon: admin/figures/sentinel.ico
+  favicon: admin/figures-tables/sentinel.ico
   
   page-footer:
     background: '#e8f1f5'
     center: |
-        ![](/admin/figures/website-logo-EMP.png){fig-alt="DWR, USBR, CDFW, and IEP logos" height=50px}
+        ![](/admin/figures-tables/EMP_footer.png){fig-alt="DWR, USBR, CDFW, and IEP logos" height=50px}
 
   navbar:
     background: '#e8f1f5'
     foreground: '#006699'
-    logo: 'admin/figures/EMP-logo-website-small-3.png'
+    logo: 'admin/figures-tables/EMP-logo.png'
     logo-alt: 'EMP logo'
     title: false
     collapse-below: lg
@@ -28,19 +28,19 @@ website:
       - text: "Annual Reports"
         menu:
           - text: "Continuous Water Quality"
-            href: sections/c-wq/qmd-files/00-cwq-report.qmd
+            href: sections/cwq/qmd-files/cwq-report.qmd
           - text: "Discrete Water Quality"
-            href: sections/d-wq/qmd-files/00-dwq-report.qmd
+            href: sections/dwq/qmd-files/dwq-report.qmd
           - text: "Benthic Invertebrates"
-            href: "https://github.com/quarto-dev/quarto-cli/discussions"
+            href: sections/benthic/qmd-files/benthic-report.qmd
           - text: "Phytoplankton"
-            href: sections/phyto/qmd-files/00-phyto-report.qmd
+            href: sections/phyto/qmd-files/phyto-report.qmd
           - text: "Zooplankton"
             href: "https://github.com/quarto-dev/quarto-cli/discussions"
       - text: Special Studies
         menu:
           - text: "Veliger Monitoring Program"
-            href: sections/special-studies/qmd-files/00-veliger.qmd
+            href: sections/special-studies/qmd-files/veliger-info.qmd
       - text: "Contact Us"
         href: "mailto:ted.flynn@water.ca.gov"
 
