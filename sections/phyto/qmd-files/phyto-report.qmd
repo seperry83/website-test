@@ -68,7 +68,7 @@ include_graphics(here::here(file.path('sections/phyto/figures/phyto_tree.png')))
 
 ### Pigment Concentrations
 
-`r stats_pwq_cur$calc_chla_above()`% of samples had chlorophyll *a* levels below 10 μg/L, which is considered limiting for zooplankton growth (Müller-Solger et al., 2002). `r strings_pwq_cur$disp_phyto_paragraph('Chla','median')` `r strings_pwq_cur$disp_phyto_paragraph('Pheoa','median')`
+`r stats_pwq_cur$calc_chla_below()`% of samples had chlorophyll *a* levels below 10 μg/L, which is considered limiting for zooplankton growth (Müller-Solger et al., 2002). `r strings_pwq_cur$disp_phyto_paragraph('Chla','median')` `r strings_pwq_cur$disp_phyto_paragraph('Pheoa','median')`
 
 ## Regional Results
 
@@ -82,20 +82,20 @@ include_graphics(here::here(file.path('sections/phyto/figures/phyto_tree.png')))
 #| label: fig-wq-carquinez
 #| echo: false
 #| fig-align: 'center'
-#| fig-cap: 'Chlorophyll a and pheophytin a average concentrations in the North Delta.'
+#| fig-cap: 'Chlorophyll a and pheophytin a average concentrations in Carquinez.'
 
 include_graphics(here::here(file.path('sections/phyto/figures/phyto_wq_carquinez.jpg')))
 ```
 
 #### Phytoplankton
 
-`r strings_phyto_cur$composition_summary_region('Carquinez')` (Other, @fig-phy-carquinez).
+`r strings_phyto_cur$summary_region_txt('Carquinez')` (Other, @fig-phy-carquinez).
 
 ```{r}
 #| label: fig-phy-carquinez
 #| echo: false
 #| fig-align: 'center'
-#| fig-cap: 'Density of phytoplankton organisms in the North Delta.'
+#| fig-cap: 'Density of phytoplankton organisms in Carquinez.'
 
 include_graphics(here::here(file.path('sections/phyto/figures/phyto_bar_carquinez.jpg')))
 ```
@@ -110,20 +110,20 @@ include_graphics(here::here(file.path('sections/phyto/figures/phyto_bar_carquine
 #| label: fig-wq-centraldelta
 #| echo: false
 #| fig-align: 'center'
-#| fig-cap: 'Chlorophyll a and pheophytin a average concentrations in the North Delta.'
+#| fig-cap: 'Chlorophyll a and pheophytin a average concentrations in the Central Delta.'
 
 include_graphics(here::here(file.path('sections/phyto/figures/phyto_wq_centraldelta.jpg')))
 ```
 
 #### Phytoplankton
 
-`r strings_phyto_cur$composition_summary_region('Central Delta')` (Other, @fig-phy-centraldelta).
+`r strings_phyto_cur$summary_region_txt('Central Delta')` (Other, @fig-phy-centraldelta).
 
 ```{r}
 #| label: fig-phy-centraldelta
 #| echo: false
 #| fig-align: 'center'
-#| fig-cap: 'Density of phytoplankton organisms in the North Delta.'
+#| fig-cap: 'Density of phytoplankton organisms in the Central Delta.'
 
 include_graphics(here::here(file.path('sections/phyto/figures/phyto_bar_centraldelta.jpg')))
 ```
@@ -145,7 +145,7 @@ include_graphics(here::here(file.path('sections/phyto/figures/phyto_wq_confluenc
 
 #### Phytoplankton
 
-`r strings_phyto_cur$composition_summary_region('Confluence')` (Other, @fig-phy-confluence).
+`r strings_phyto_cur$summary_region_txt('Confluence')` (Other, @fig-phy-confluence).
 
 ```{r}
 #| label: fig-phy-confluence
@@ -173,7 +173,7 @@ include_graphics(here::here(file.path('sections/phyto/figures/phyto_wq_northdelt
 
 #### Phytoplankton
 
-`r strings_phyto_cur$composition_summary_region('North Delta')` (Other, @fig-phy-northdelta).
+`r strings_phyto_cur$summary_region_txt('North Delta')` (Other, @fig-phy-northdelta).
 
 ```{r}
 #| label: fig-phy-northdelta
@@ -201,7 +201,7 @@ include_graphics(here::here(file.path('sections/phyto/figures/phyto_wq_sanpablob
 
 #### Phytoplankton
 
-`r strings_phyto_cur$composition_summary_region('San Pablo Bay')` (Other, @fig-phy-sanpablobay).
+`r strings_phyto_cur$summary_region_txt('San Pablo Bay')` (Other, @fig-phy-sanpablobay).
 
 ```{r}
 #| label: fig-phy-sanpablobay
@@ -229,7 +229,7 @@ include_graphics(here::here(file.path('sections/phyto/figures/phyto_wq_southdelt
 
 #### Phytoplankton
 
-`r strings_phyto_cur$composition_summary_region('South Delta')` (Other, @fig-phy-southdelta).
+`r strings_phyto_cur$summary_region_txt('South Delta')` (Other, @fig-phy-southdelta).
 
 ```{r}
 #| label: fig-phy-southdelta
@@ -250,20 +250,20 @@ include_graphics(here::here(file.path('sections/phyto/figures/phyto_bar_southdel
 #| label: fig-wq-suisungrizzlybays
 #| echo: false
 #| fig-align: 'center'
-#| fig-cap: 'Chlorophyll a and pheophytin a average concentrations in the North Delta.'
+#| fig-cap: 'Chlorophyll a and pheophytin a average concentrations in Suisun and Grizzly Bays.'
 
 include_graphics(here::here(file.path('sections/phyto/figures/phyto_wq_suisungrizzlybays.jpg')))
 ```
 
 #### Phytoplankton
 
-`r strings_phyto_cur$composition_summary_region('Suisun & Grizzly Bays')` (Other, @fig-phy-suisungrizzlybays).
+`r strings_phyto_cur$summary_region_txt('Suisun & Grizzly Bays')` (Other, @fig-phy-suisungrizzlybays).
 
 ```{r}
 #| label: fig-phy-suisungrizzlybays
 #| echo: false
 #| fig-align: 'center'
-#| fig-cap: 'Density of phytoplankton organisms in the North Delta.'
+#| fig-cap: 'Density of phytoplankton organisms in Suisun and Grizzly Bays.'
 
 include_graphics(here::here(file.path('sections/phyto/figures/phyto_bar_suisungrizzlybays.jpg')))
 ```
@@ -278,27 +278,27 @@ include_graphics(here::here(file.path('sections/phyto/figures/phyto_bar_suisungr
 #| label: fig-wq-suisunmarsh
 #| echo: false
 #| fig-align: 'center'
-#| fig-cap: 'Chlorophyll a and pheophytin a average concentrations in the North Delta.'
+#| fig-cap: 'Chlorophyll a and pheophytin a average concentrations in Suisun Marsh.'
 
 include_graphics(here::here(file.path('sections/phyto/figures/phyto_wq_suisunmarsh.jpg')))
 ```
 
 #### Phytoplankton
 
-`r strings_phyto_cur$composition_summary_region('Suisun Marsh')` (Other, @fig-phy-suisunmarsh).
+`r strings_phyto_cur$summary_region_txt('Suisun Marsh')` (Other, @fig-phy-suisunmarsh).
 
 ```{r}
 #| label: fig-phy-suisunmarsh
 #| echo: false
 #| fig-align: 'center'
-#| fig-cap: 'Density of phytoplankton organisms in the North Delta.'
+#| fig-cap: 'Density of phytoplankton organisms in Suisun Marsh.'
 
 include_graphics(here::here(file.path('sections/phyto/figures/phyto_bar_suisunmarsh.jpg')))
 ```
 
 ## Interpretations
 
-[[**To be written by section lead**]{.underline}]{.smallcaps}
+Overall, chlorophyll-*a*, pheophytin-*a*, and phytoplankton abundance followed a seasonal pattern with the highest values of pigments and abundances in the spring and summer months and lower values and abundances in winter months. One exception was a large cyanobacterial bloom in January 2023 which occurred across all regions. However, this bloom was not associated with larger chlorophyll-*a* values, suggesting that, while the cyanobacteria were abundant, they were not producing large amounts of biomass as chlorophyll-*a*. Though cyanobacteria were dominant in the abundance counts, all phytoplankton fell into 12 distinct taxonomic groups distributed across all the regions of the San Francisco Estuary. Chlorophyll-*a* values were low throughout the year across all regions, with the majority of values below 10 µg/L, which is considered food limiting for zooplankton.
 
 ## References
 

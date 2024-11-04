@@ -16,6 +16,7 @@ BenBaseClass <- R6Class(
     
     # subset columns
     subset_cols = function() {
+      # TODO: remove
       month_order <- c('October','November','December','January','February','March','April','May','June','July','August','September')
       
       self$df_raw <- self$df_raw %>% select(Year, Month, Station, Region, MeanCPUE, TotalGrabs,
@@ -43,7 +44,7 @@ BenBaseClass <- R6Class(
         dplyr::filter(WaterYear >= (report_year - 5))
       
       df_filtered <- df_filtered %>%
-        mutate(Date = as.Date(paste(Year, Month, "01", sep = "-"), "%Y-%B-%d"),
+        mutate(Date = as.Date(paste(Year, Month, '01', sep = '-'), '%Y-%B-%d'),
                FullTaxa = paste(Phylum, Genus, Species))
 
       top_groups <- df_filtered %>%
@@ -104,7 +105,7 @@ BenBaseClass <- R6Class(
           geom_line(na.rm = TRUE) +  
           geom_point(size = 2) +
           ggplot2::scale_color_manual(values = col_colors) +
-          ggplot2::scale_x_date(date_labels = "%m-%y", limits = c(min(df_summ_c$Date), max(df_summ_c$Date)), date_breaks = '4 months') +
+          ggplot2::scale_x_date(date_labels = '%m-%y', limits = c(min(df_summ_c$Date), max(df_summ_c$Date)), date_breaks = '4 months') +
           ls_plt_format +
           ggplot2::guides(color = ggplot2::guide_legend(reverse = TRUE, nrow = 1))
       })
@@ -121,7 +122,7 @@ BenBaseClass <- R6Class(
             ncol = 3,
             # labeller = ggplot2::as_labeller(setNames(df_summ_c$FullTaxa, as.character(df_summ_c$FullTaxa)))
           ) +
-          ggplot2::scale_x_date(date_labels = "%m-%y", limits = c(min(df_summ_c$Date), max(df_summ_c$Date)), date_breaks = '4 months') +
+          ggplot2::scale_x_date(date_labels = '%m-%y', limits = c(min(df_summ_c$Date), max(df_summ_c$Date)), date_breaks = '4 months') +
           ls_plt_format +
           ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 45, hjust = 1)) +
           ggplot2::guides(color = ggplot2::guide_legend(reverse = TRUE, nrow = 1))
@@ -140,7 +141,7 @@ BenBaseClass <- R6Class(
       
       exp_height <- ((.5 * ceiling(height_factor / 3)) * 1.2)
       
-      combined_plot <- patchwork::wrap_plots(
+      plt_combined <- patchwork::wrap_plots(
         plt_timeseries,
         plt_facet_timeseries,
         heights = c(1, exp_height),
@@ -150,9 +151,9 @@ BenBaseClass <- R6Class(
         patchwork::plot_layout(guides = 'collect', heights = c(1, exp_height)) &
         ggplot2::theme(legend.position = 'none', legend.title = element_blank())
       
-      final_plot <- patchwork::wrap_plots(
+      plt_final <- patchwork::wrap_plots(
         plt_ylab,
-        combined_plot,
+        plt_combined,
         widths = c(1, 30)
       ) +
         patchwork::plot_annotation(
@@ -160,7 +161,7 @@ BenBaseClass <- R6Class(
           theme = ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
         )
       
-      return(final_plot)
+      return(plt_final)
     },
     
     plt_phy_timeseries_TEST = function(station){
@@ -215,7 +216,7 @@ BenBaseClass <- R6Class(
       )
       
       df_summ_c <- df_summ_c %>%
-        mutate(Date = as.Date(paste(ifelse(Month %in% month_order[1:3], report_year-1, report_year), Month, "01", sep = "-"), "%Y-%B-%d")) %>%
+        mutate(Date = as.Date(paste(ifelse(Month %in% month_order[1:3], report_year-1, report_year), Month, '01', sep = '-'), '%Y-%B-%d')) %>%
         group_by(FullTaxa) %>%
         dplyr::mutate(
           group_id = cumsum(c(1, diff(lubridate::year(Date) * 12 + lubridate::month(Date)) > 1))
@@ -228,7 +229,7 @@ BenBaseClass <- R6Class(
         geom_line(na.rm = TRUE) +
         geom_point(size = 2) +
         ggplot2::scale_color_manual(values = col_colors) +
-        ggplot2::scale_x_date(date_labels = "%m-%y", limits = c(min(df_summ_c$Date), max(df_summ_c$Date)), date_breaks = '1 month') +
+        ggplot2::scale_x_date(date_labels = '%m-%y', limits = c(min(df_summ_c$Date), max(df_summ_c$Date)), date_breaks = '1 month') +
         ls_plt_format +
         ggplot2::guides(color = ggplot2::guide_legend(reverse = TRUE, nrow = 1))
       })
@@ -245,13 +246,11 @@ BenBaseClass <- R6Class(
           scales = 'free_y',
           ncol = 3,
         ) +
-        ggplot2::scale_x_date(date_labels = "%m-%y", limits = c(min(df_summ_c$Date), max(df_summ_c$Date)), date_breaks = '1 month') +
+        ggplot2::scale_x_date(date_labels = '%m-%y', limits = c(min(df_summ_c$Date), max(df_summ_c$Date)), date_breaks = '1 month') +
         ls_plt_format +
         ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 45, hjust = 1)) +
         ggplot2::guides(color = ggplot2::guide_legend(reverse = TRUE, nrow = 1))
       })
-      
-      
       
       plt_ylab <- ggplot(data.frame(l = 'MeanOrgs', x = 1, y = 1)) +
         ggplot2::geom_text(ggplot2::aes(x, y, label = l), angle = 90) +
@@ -265,7 +264,7 @@ BenBaseClass <- R6Class(
       
       exp_height <- ((.5*ceiling(height_factor/3))*1.2)
       
-      combined_plot <- patchwork::wrap_plots(
+      plt_combined <- patchwork::wrap_plots(
         plt_timeseries,
         plt_facet_timeseries,
         heights = c(1, exp_height),
@@ -275,9 +274,9 @@ BenBaseClass <- R6Class(
         patchwork::plot_layout(guides = 'collect', heights = c(1, exp_height)) &
         ggplot2::theme(legend.position = 'none', legend.title = element_blank())
       
-      final_plot <- patchwork::wrap_plots(
+      plt_final <- patchwork::wrap_plots(
         plt_ylab,
-        combined_plot,
+        plt_combined,
         widths = c(1, 30)
       ) +
         patchwork::plot_annotation(
@@ -285,7 +284,7 @@ BenBaseClass <- R6Class(
           theme = ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
         )
       
-      return(final_plot)
+      return(plt_final)
     },
   
     plt_phy_density_TEST = function(station, filt_col){
@@ -363,7 +362,7 @@ BenBaseClass <- R6Class(
       
       exp_height <- ((.5*ceiling(height_factor/3))*1.2)
       
-      combined_plot <- patchwork::wrap_plots(
+      plt_combined <- patchwork::wrap_plots(
         plt_stacked,
         plt_facet,
         heights = c(1, exp_height),
@@ -373,9 +372,9 @@ BenBaseClass <- R6Class(
         patchwork::plot_layout(guides = 'collect', heights = c(1, exp_height)) &
         ggplot2::theme(legend.position = 'none', legend.title = element_blank())
       
-      final_plot <- patchwork::wrap_plots(
+      plt_final <- patchwork::wrap_plots(
         plt_ylab,
-        combined_plot,
+        plt_combined,
         widths = c(1, 30)
       ) +
         patchwork::plot_annotation(
@@ -383,7 +382,7 @@ BenBaseClass <- R6Class(
           theme = ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
         )
       
-      return(final_plot)
+      return(plt_final)
     }
   ),
   

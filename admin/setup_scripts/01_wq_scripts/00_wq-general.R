@@ -75,14 +75,18 @@ WQStatsClass <- R6Class(
     },
     
     # determine chla above 10 ug/L
-    calc_chla_above = function() {
-      df_above <- self$df_raw %>%
-        filter(Analyte == 'Chla',
-               Value >= 10)
+    calc_chla_below = function() {
+      df_chla <- self$df_raw %>%
+        filter(Analyte == 'Chla')
       
-      per_above <- round(nrow(df_above)/nrow(self$df_raw)*100,2)
+      df_below <- df_chla %>%
+        filter(Value <= 10)
       
-      return(per_above)
+      test <<- df_below
+      
+      per_below <- round(nrow(df_below)/nrow(df_chla)*100,2)
+      
+      return(per_below)
     }
   )
 )
@@ -414,7 +418,7 @@ WQFigureClass <- R6Class(
       comb_plts <- patchwork::wrap_plots(ls_plts, ncol = 2)
       
       blanklabelplot <- ggplot()+labs(y=comb_plt_title)+ggplot2::theme_void()+ 
-        ggplot2::guides(x = "none", y = "none") +
+        ggplot2::guides(x = 'none', y = 'none') +
         ggplot2::theme(axis.title.y = ggplot2::element_text(size = 7, hjust = 0.5, angle = 90))
       
       final_plt <- blanklabelplot+comb_plts+ patchwork::plot_layout(widths=c(1,1000))
@@ -469,12 +473,12 @@ WQFigureClass <- R6Class(
       
       comb_plts <- patchwork::wrap_plots(ls_plts, ncol = 2)
       
-      blanklabelplot <- ggplot() + labs(y = comb_plt_title) + 
+      label_plt <- ggplot() + labs(y = comb_plt_title) + 
         ggplot2::theme_void() + 
-        ggplot2::guides(x = "none", y = "none") +
+        ggplot2::guides(x = 'none', y = 'none') +
         ggplot2::theme(axis.title.y = ggplot2::element_text(size = 7, hjust = 0.5, angle = 90))
       
-      final_plt <- blanklabelplot + comb_plts + patchwork::plot_layout(widths = c(1, 1000))
+      final_plt <- label_plt + comb_plts + patchwork::plot_layout(widths = c(1, 1000))
       
       return(final_plt)
     }
@@ -555,7 +559,7 @@ WQFigureClass <- R6Class(
         ggtitle(region)
       
       if (color_by == 'Analyte') {
-        plt <- plt + scale_color_manual(values = c('#d8b365', '#5ab4ac'))
+        plt <- plt + scale_color_manual(values = c('#5ab4ac','#d8b365'))
       } else {
         plt <- plt + self$wq_plt_colors(region, plt_type)
       }

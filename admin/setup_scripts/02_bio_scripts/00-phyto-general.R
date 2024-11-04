@@ -1,4 +1,4 @@
-# Calculate General Phyto Stats -------------------------------------------
+                      # Calculate General Phyto Stats -------------------------------------------
 
 PhytoStatsClass <- R6Class(
   'PhytoStatsClass',
@@ -71,7 +71,7 @@ PhytoStringClass <- R6Class(
     styling = NULL,
     
     initialize = function(df_raw) {
-      super$initialize(df_raw)  # Initialize parent class
+      super$initialize(df_raw)
       self$styling <- StylingClass$new()
     },
     
@@ -129,7 +129,7 @@ PhytoStringClass <- R6Class(
     },
     
     # Create summary of organisms by region
-    composition_summary_region = function(region, threshold = 1) {
+    summary_region_txt = function(region, threshold = 1) {
       df_summ <- self$summarize_region(region, 'AlgalGroup') %>%
         mutate(per = round(per, 1))
       
@@ -183,7 +183,7 @@ PhytoFigureClass <- R6Class(
     # Default is 'Other' category for AlgalGroups in less than 1% of samples
     plt_org_density_TEST = function(region, filt_col, threshold = 1){
       # assign coloring
-      uni_groups <- c(private$def_alg_cat(region, 'name', threshold)$main,'Other')
+      uni_groups <- c(private$def_alg_cat(region, 'name', threshold)$main, 'Other')
       
       col_colors <- setNames(
         c(RColorBrewer::brewer.pal(8, 'Set2'), RColorBrewer::brewer.pal(8, 'Dark2'))[1:length(uni_groups)], 
@@ -255,7 +255,7 @@ PhytoFigureClass <- R6Class(
         ggplot2::coord_cartesian(clip = 'off')
       
       # Combine barplots together using patchwork
-      combined_plot <- patchwork::wrap_plots(
+      plt_combined <- patchwork::wrap_plots(
         plt_stacked,
         plt_facet,
         widths = c(1, 30),
@@ -264,9 +264,9 @@ PhytoFigureClass <- R6Class(
         patchwork::plot_layout(guides = 'collect') &
         ggplot2::theme(legend.position = 'none', legend.title = element_blank())
       
-      final_plot <- patchwork::wrap_plots(
+      plt_final <- patchwork::wrap_plots(
         plt_ylab,
-        combined_plot,
+        plt_combined,
         widths = c(1, 30)
       ) +
         patchwork::plot_annotation(

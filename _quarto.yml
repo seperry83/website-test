@@ -16,7 +16,7 @@ website:
   navbar:
     background: '#e8f1f5'
     foreground: '#006699'
-    logo: 'admin/figures-tables/EMP-logo.png'
+    logo: 'admin/figures-tables/EMP_logo.png'
     logo-alt: 'EMP logo'
     title: false
     collapse-below: lg
