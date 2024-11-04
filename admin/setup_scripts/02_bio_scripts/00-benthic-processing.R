@@ -11,7 +11,7 @@ BenBaseClass <- R6Class(
     
     initialize = function(df_raw) {
       self$df_raw <- df_raw
-      self$wkbk <- openxlsx::createWorkbook()
+      self$wkbk <- createWorkbook()
     },
     
     # subset columns
@@ -41,7 +41,7 @@ BenBaseClass <- R6Class(
     
     plt_phy_timeseries_all_TEST = function(station){
       df_filtered <- self$df_raw %>%
-        dplyr::filter(WaterYear >= (report_year - 5))
+        filter(WaterYear >= (report_year - 5))
       
       df_filtered <- df_filtered %>%
         mutate(Date = as.Date(paste(Year, Month, '01', sep = '-'), '%Y-%B-%d'),
@@ -51,7 +51,7 @@ BenBaseClass <- R6Class(
         group_by(FullTaxa) %>%
         summarize(MeanOrgsTotal = sum(MeanOrgs, na.rm = TRUE)) %>%
         arrange(desc(MeanOrgsTotal)) %>%
-        dplyr::slice(1:16) %>%
+        slice(1:16) %>%
         pull(FullTaxa)
       
       uni_groups <- unique(top_groups)
@@ -62,11 +62,11 @@ BenBaseClass <- R6Class(
       )
       
       df_raw_c <- df_filtered %>%
-        dplyr::filter(FullTaxa %in% top_groups) %>%
+        filter(FullTaxa %in% top_groups) %>%
         mutate(ColColor = col_colors[as.factor(FullTaxa)])
 
       df_filt_c <- df_raw_c %>%
-        dplyr::filter(Station == station)
+        filter(Station == station)
     
       df_summ_c <- df_filt_c %>%
         summarize(
@@ -78,60 +78,60 @@ BenBaseClass <- R6Class(
         group_by(FullTaxa) %>%
         summarize(avg_val = mean(MeanOrgs, na.rm = TRUE)) %>%
         arrange(desc(avg_val)) %>%
-        dplyr::slice(1:10)
+        slice(1:10)
       
        df_summ_c <- df_summ_c %>%
-        dplyr::filter(FullTaxa %in% group_avgs$FullTaxa) %>%
+        filter(FullTaxa %in% group_avgs$FullTaxa) %>%
         mutate(FullTaxa = factor(FullTaxa, levels = group_avgs %>% arrange(avg_val) %>% pull(FullTaxa)))
 
        ls_plt_format <- list(
-        ggplot2::theme_bw(),
-        ggplot2::scale_y_continuous(name = NULL, labels = scales::label_comma()),
-        ggplot2::xlab(NULL)
+        theme_bw(),
+        scale_y_continuous(name = NULL, labels = scales::label_comma()),
+        xlab(NULL)
       )
 
       df_summ_c <- df_summ_c %>%
         arrange(Date) %>%
         group_by(FullTaxa) %>%
-        dplyr::mutate(
+        mutate(
           group_id = cumsum(c(1, diff(lubridate::year(Date) * 12 + lubridate::month(Date)) > 1))
         ) %>%
-        dplyr::ungroup()
+        ungroup()
       
 
       plt_timeseries <- suppressMessages({
         df_summ_c %>%
-          ggplot(ggplot2::aes(Date, MeanOrgs, color = FullTaxa, group = interaction(FullTaxa, group_id))) +
+          ggplot(aes(Date, MeanOrgs, color = FullTaxa, group = interaction(FullTaxa, group_id))) +
           geom_line(na.rm = TRUE) +  
           geom_point(size = 2) +
-          ggplot2::scale_color_manual(values = col_colors) +
-          ggplot2::scale_x_date(date_labels = '%m-%y', limits = c(min(df_summ_c$Date), max(df_summ_c$Date)), date_breaks = '4 months') +
+          scale_color_manual(values = col_colors) +
+          scale_x_date(date_labels = '%m-%y', limits = c(min(df_summ_c$Date), max(df_summ_c$Date)), date_breaks = '4 months') +
           ls_plt_format +
-          ggplot2::guides(color = ggplot2::guide_legend(reverse = TRUE, nrow = 1))
+          guides(color = guide_legend(reverse = TRUE, nrow = 1))
       })
       
       plt_facet_timeseries <- suppressMessages({
         df_summ_c %>%
-          ggplot(ggplot2::aes(Date, MeanOrgs, color = FullTaxa, group = interaction(FullTaxa, group_id))) +
+          ggplot(aes(Date, MeanOrgs, color = FullTaxa, group = interaction(FullTaxa, group_id))) +
           geom_line(na.rm = TRUE) + 
           geom_point(size = 2) +
-          ggplot2::scale_color_manual(values = col_colors) +
-          ggplot2::facet_wrap(
-            ggplot2::vars(forcats::fct_rev(FullTaxa)),
+          scale_color_manual(values = col_colors) +
+          facet_wrap(
+            vars(fct_rev(FullTaxa)),
             scales = 'free_y',
             ncol = 3,
             # labeller = ggplot2::as_labeller(setNames(df_summ_c$FullTaxa, as.character(df_summ_c$FullTaxa)))
           ) +
-          ggplot2::scale_x_date(date_labels = '%m-%y', limits = c(min(df_summ_c$Date), max(df_summ_c$Date)), date_breaks = '4 months') +
+          scale_x_date(date_labels = '%m-%y', limits = c(min(df_summ_c$Date), max(df_summ_c$Date)), date_breaks = '4 months') +
           ls_plt_format +
-          ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 45, hjust = 1)) +
-          ggplot2::guides(color = ggplot2::guide_legend(reverse = TRUE, nrow = 1))
+          theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+          guides(color = guide_legend(reverse = TRUE, nrow = 1))
       })
       
       plt_ylab <- ggplot(data.frame(l = 'MeanOrgs', x = 1, y = 1)) +
-        ggplot2::geom_text(ggplot2::aes(x, y, label = l), angle = 90) +
-        ggplot2::theme_void() +
-        ggplot2::coord_cartesian(clip = 'off')
+        geom_text(aes(x, y, label = l), angle = 90) +
+        theme_void() +
+        coord_cartesian(clip = 'off')
       
       # Determine rel height factor
       height_factor <- df_summ_c %>%
@@ -141,24 +141,24 @@ BenBaseClass <- R6Class(
       
       exp_height <- ((.5 * ceiling(height_factor / 3)) * 1.2)
       
-      plt_combined <- patchwork::wrap_plots(
+      plt_combined <- wrap_plots(
         plt_timeseries,
         plt_facet_timeseries,
         heights = c(1, exp_height),
         widths = c(1, 30),
         ncol = 1
       ) +
-        patchwork::plot_layout(guides = 'collect', heights = c(1, exp_height)) &
-        ggplot2::theme(legend.position = 'none', legend.title = element_blank())
+        plot_layout(guides = 'collect', heights = c(1, exp_height)) &
+        theme(legend.position = 'none', legend.title = element_blank())
       
-      plt_final <- patchwork::wrap_plots(
+      plt_final <- wrap_plots(
         plt_ylab,
         plt_combined,
         widths = c(1, 30)
       ) +
-        patchwork::plot_annotation(
-          title = glue::glue('{station} Benthic Organism Densities'),
-          theme = ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
+        plot_annotation(
+          title = glue('{station} Benthic Organism Densities'),
+          theme = theme(plot.title = element_text(hjust = 0.5))
         )
       
       return(plt_final)
@@ -173,7 +173,7 @@ BenBaseClass <- R6Class(
         group_by(FullTaxa) %>%
         summarize(MeanOrgsTotal = sum(MeanOrgs, na.rm = TRUE)) %>%
         arrange(desc(MeanOrgsTotal)) %>%
-        dplyr::slice(1:16) %>%
+        slice(1:16) %>%
         pull(FullTaxa)
 
       # assign coloring
@@ -185,13 +185,13 @@ BenBaseClass <- R6Class(
       )
       
       df_raw_c <- df_filtered %>%
-        dplyr::filter(FullTaxa %in% top_groups) %>%
+        filter(FullTaxa %in% top_groups) %>%
         mutate(ColColor = col_colors[as.factor(FullTaxa)],
                Month = factor(Month, levels = month_order),
                Month_num = as.numeric(Month))
       
       df_filt_c <- df_raw_c %>%
-        dplyr::filter(Station == station)
+        filter(Station == station)
       
       df_summ_c <- df_filt_c %>%
         summarize(
@@ -203,59 +203,59 @@ BenBaseClass <- R6Class(
         group_by(FullTaxa) %>%
         summarize(avg_val = mean(MeanOrgs, na.rm = TRUE)) %>%
         arrange(desc(avg_val)) %>%
-        dplyr::slice(1:10)
+        slice(1:10)
  
       df_summ_c <- df_summ_c %>%
-        dplyr::filter(FullTaxa %in% group_avgs$FullTaxa) %>%
+        filter(FullTaxa %in% group_avgs$FullTaxa) %>%
         mutate(FullTaxa = factor(FullTaxa, levels = group_avgs %>% arrange(avg_val) %>% pull(FullTaxa)))
       
       ls_plt_format <- list(
-        ggplot2::theme_bw(),
-        ggplot2::scale_y_continuous(name = NULL, labels = scales::label_comma()),
-        ggplot2::xlab(NULL)
+        theme_bw(),
+        scale_y_continuous(name = NULL, labels = scales::label_comma()),
+        xlab(NULL)
       )
       
       df_summ_c <- df_summ_c %>%
         mutate(Date = as.Date(paste(ifelse(Month %in% month_order[1:3], report_year-1, report_year), Month, '01', sep = '-'), '%Y-%B-%d')) %>%
         group_by(FullTaxa) %>%
-        dplyr::mutate(
+        mutate(
           group_id = cumsum(c(1, diff(lubridate::year(Date) * 12 + lubridate::month(Date)) > 1))
         ) %>%
-        dplyr::ungroup()
+        ungroup()
 
       plt_timeseries <- suppressMessages({
         df_summ_c %>%
-        ggplot(ggplot2::aes(Date, MeanOrgs, color = FullTaxa, group = interaction(FullTaxa, group_id))) +
+        ggplot(aes(Date, MeanOrgs, color = FullTaxa, group = interaction(FullTaxa, group_id))) +
         geom_line(na.rm = TRUE) +
         geom_point(size = 2) +
-        ggplot2::scale_color_manual(values = col_colors) +
-        ggplot2::scale_x_date(date_labels = '%m-%y', limits = c(min(df_summ_c$Date), max(df_summ_c$Date)), date_breaks = '1 month') +
+        scale_color_manual(values = col_colors) +
+        scale_x_date(date_labels = '%m-%y', limits = c(min(df_summ_c$Date), max(df_summ_c$Date)), date_breaks = '1 month') +
         ls_plt_format +
-        ggplot2::guides(color = ggplot2::guide_legend(reverse = TRUE, nrow = 1))
+        guides(color = guide_legend(reverse = TRUE, nrow = 1))
       })
       
 
       plt_facet_timeseries <- suppressMessages({
         df_summ_c %>%
-        ggplot(ggplot2::aes(Date, MeanOrgs, color = FullTaxa, group = interaction(FullTaxa, group_id))) +
+        ggplot(aes(Date, MeanOrgs, color = FullTaxa, group = interaction(FullTaxa, group_id))) +
         geom_line(na.rm = TRUE) +
         geom_point(size = 2) +
-        ggplot2::scale_color_manual(values = col_colors) +
-        ggplot2::facet_wrap(
-          ggplot2::vars(forcats::fct_rev(FullTaxa)),
+        scale_color_manual(values = col_colors) +
+        facet_wrap(
+          vars(fct_rev(FullTaxa)),
           scales = 'free_y',
           ncol = 3,
         ) +
-        ggplot2::scale_x_date(date_labels = '%m-%y', limits = c(min(df_summ_c$Date), max(df_summ_c$Date)), date_breaks = '1 month') +
+        scale_x_date(date_labels = '%m-%y', limits = c(min(df_summ_c$Date), max(df_summ_c$Date)), date_breaks = '1 month') +
         ls_plt_format +
-        ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 45, hjust = 1)) +
-        ggplot2::guides(color = ggplot2::guide_legend(reverse = TRUE, nrow = 1))
+        theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+        guides(color = guide_legend(reverse = TRUE, nrow = 1))
       })
       
       plt_ylab <- ggplot(data.frame(l = 'MeanOrgs', x = 1, y = 1)) +
-        ggplot2::geom_text(ggplot2::aes(x, y, label = l), angle = 90) +
-        ggplot2::theme_void() +
-        ggplot2::coord_cartesian(clip = 'off')
+        geom_text(aes(x, y, label = l), angle = 90) +
+        theme_void() +
+        coord_cartesian(clip = 'off')
 
       height_factor <- df_summ_c %>%
         pull(FullTaxa) %>%
@@ -264,24 +264,24 @@ BenBaseClass <- R6Class(
       
       exp_height <- ((.5*ceiling(height_factor/3))*1.2)
       
-      plt_combined <- patchwork::wrap_plots(
+      plt_combined <- wrap_plots(
         plt_timeseries,
         plt_facet_timeseries,
         heights = c(1, exp_height),
         widths = c(1, 30),
         ncol = 1
       ) +
-        patchwork::plot_layout(guides = 'collect', heights = c(1, exp_height)) &
-        ggplot2::theme(legend.position = 'none', legend.title = element_blank())
+        plot_layout(guides = 'collect', heights = c(1, exp_height)) &
+        theme(legend.position = 'none', legend.title = element_blank())
       
-      plt_final <- patchwork::wrap_plots(
+      plt_final <- wrap_plots(
         plt_ylab,
         plt_combined,
         widths = c(1, 30)
       ) +
-        patchwork::plot_annotation(
-          title = glue::glue('{station} Benthic Organism Densities'),
-          theme = ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
+        plot_annotation(
+          title = glue('{station} Benthic Organism Densities'),
+          theme = theme(plot.title = element_text(hjust = 0.5))
         )
       
       return(plt_final)
@@ -302,7 +302,7 @@ BenBaseClass <- R6Class(
                Month_num = as.numeric(Month))
 
       # filter to station
-      df_filt_c <- df_raw_c %>% dplyr::filter(Station == station)
+      df_filt_c <- df_raw_c %>% filter(Station == station)
       
       # Calculate monthly total densities for each group
       df_summ_c <- df_filt_c %>%
@@ -323,36 +323,36 @@ BenBaseClass <- R6Class(
   
       # Define custom plot formatting to be used globally
       ls_plt_format <- list(
-        ggplot2::theme_bw(),
-        ggplot2::scale_y_continuous(name = NULL, labels = scales::label_comma()),
-        ggplot2::xlab(NULL)
+        theme_bw(),
+        scale_y_continuous(name = NULL, labels = scales::label_comma()),
+        xlab(NULL)
       )
   
       # Create stacked barplot of monthly densities by the filtered column
       plt_stacked <- df_summ_c %>%
-        ggplot(ggplot2::aes(Month_num, MeanOrgs, fill = !!sym(filt_col))) +
-        ggplot2::geom_col(color = 'black') +
-        ggplot2::scale_fill_manual(values = col_colors) +
+        ggplot(aes(Month_num, MeanOrgs, fill = !!sym(filt_col))) +
+        geom_col(color = 'black') +
+        scale_fill_manual(values = col_colors) +
         scale_x_continuous(breaks = seq_along(month_order), labels = label_order) +
         ls_plt_format +
-        ggplot2::guides(fill = ggplot2::guide_legend(reverse = TRUE, nrow = 1))
+        guides(fill = guide_legend(reverse = TRUE, nrow = 1))
   
       # Create facetted barplots by the filtered column
       plt_facet <- df_summ_c %>%
-        ggplot(ggplot2::aes(Month_num, MeanOrgs, fill = !!sym(filt_col))) +
-        ggplot2::geom_col(color = 'black') +
-        ggplot2::scale_fill_manual(values = col_colors) +
-        ggplot2::facet_wrap(ggplot2::vars(forcats::fct_rev(!!sym(filt_col))), scales = 'free_y', ncol = 3) +
+        ggplot(aes(Month_num, MeanOrgs, fill = !!sym(filt_col))) +
+        geom_col(color = 'black') +
+        scale_fill_manual(values = col_colors) +
+        facet_wrap(vars(fct_rev(!!sym(filt_col))), scales = 'free_y', ncol = 3) +
         scale_x_continuous(breaks = seq_along(month_order), labels = label_order) +
         ls_plt_format +
-        ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 45, hjust = 1)) +
-        ggplot2::guides(fill = ggplot2::guide_legend(reverse = TRUE, nrow = 1))
+        theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+        guides(fill = guide_legend(reverse = TRUE, nrow = 1))
   
       # Create text-only ggplot for the collective y-axis label
       plt_ylab <- ggplot(data.frame(l = 'MeanOrgs', x = 1, y = 1)) +
-        ggplot2::geom_text(ggplot2::aes(x, y, label = l), angle = 90) +
-        ggplot2::theme_void() +
-        ggplot2::coord_cartesian(clip = 'off')
+        geom_text(aes(x, y, label = l), angle = 90) +
+        theme_void() +
+        coord_cartesian(clip = 'off')
       
       # Determine rel height factor
       height_factor <- df_summ_c %>%
@@ -362,24 +362,24 @@ BenBaseClass <- R6Class(
       
       exp_height <- ((.5*ceiling(height_factor/3))*1.2)
       
-      plt_combined <- patchwork::wrap_plots(
+      plt_combined <- wrap_plots(
         plt_stacked,
         plt_facet,
         heights = c(1, exp_height),
         widths = c(1, 30),
         ncol = 1
       ) +
-        patchwork::plot_layout(guides = 'collect', heights = c(1, exp_height)) &
-        ggplot2::theme(legend.position = 'none', legend.title = element_blank())
+        plot_layout(guides = 'collect', heights = c(1, exp_height)) &
+        theme(legend.position = 'none', legend.title = element_blank())
       
-      plt_final <- patchwork::wrap_plots(
+      plt_final <- wrap_plots(
         plt_ylab,
         plt_combined,
         widths = c(1, 30)
       ) +
-        patchwork::plot_annotation(
-          title = glue::glue('{station} Benthic Organism Densities'),
-          theme = ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
+        plot_annotation(
+          title = glue('{station} Benthic Organism Densities'),
+          theme = theme(plot.title = element_text(hjust = 0.5))
         )
       
       return(plt_final)

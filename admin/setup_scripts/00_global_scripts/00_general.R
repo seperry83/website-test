@@ -23,7 +23,13 @@ sym <- rlang::sym
 
 str_match <- stringr::str_match
 
-glue <- glue::glue
+glue <- glue
+
+fct_rev <- forcats::fct_rev
+
+plot_annotation <- patchwork::plot_annotation
+wrap_plots <- patchwork::wrap_plots
+plot_layout <- patchwork::plot_layout
 
 year <- lubridate::year
 month <- lubridate::month
@@ -41,6 +47,7 @@ arrange <- dplyr::arrange
 n <- dplyr::n
 relocate <- dplyr::relocate
 desc <- dplyr::desc
+slice <- dplyr::slice
 
 ggplot <- ggplot2::ggplot
 aes <- ggplot2::aes
@@ -58,9 +65,19 @@ scale_x_continuous <- ggplot2::scale_x_continuous
 scale_x_discrete <- ggplot2::scale_x_discrete
 scale_y_continuous <- ggplot2::scale_y_continuous
 scale_x_date <- ggplot2::scale_x_date
+scale_fill_manual <- ggplot2::scale_fill_manual
 ggsave <- ggplot2::ggsave
 element_blank <- ggplot2::element_blank
 element_text <- ggplot2::element_text
+guide_legend <- ggplot2::guide_legend
+vars <- ggplot2::vars
+geom_text <- ggplot2::geom_text
+geom_col <- ggplot2::geom_col
+theme_void <- ggplot2::theme_void
+guides <- ggplot2::guides
+facet_wrap <- ggplot2::facet_wrap
+coord_cartesian <- ggplot2::coord_cartesian
+xlab <- ggplot2::xlab
 
 createWorkbook <- openxlsx::createWorkbook
 addWorksheet <- openxlsx::addWorksheet
@@ -258,7 +275,7 @@ StylingClass <- R6Class(
     
     # # create list item for bullet lists
     list_item = function(ele){
-      item <- glue::glue('&#x2022; {ele}<br />')
+      item <- glue('&#x2022; {ele}<br />')
       return(item)
     },
     
