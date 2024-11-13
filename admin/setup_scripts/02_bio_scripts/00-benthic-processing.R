@@ -49,8 +49,8 @@ BenBaseClass <- R6Class(
 
       top_groups <- df_filtered %>%
         group_by(FullTaxa) %>%
-        summarize(MeanOrgsTotal = sum(MeanOrgs, na.rm = TRUE)) %>%
-        arrange(desc(MeanOrgsTotal)) %>%
+        summarize(MeanCPUETotal = sum(MeanCPUE, na.rm = TRUE)) %>%
+        arrange(desc(MeanCPUETotal)) %>%
         slice(1:16) %>%
         pull(FullTaxa)
       
@@ -70,13 +70,13 @@ BenBaseClass <- R6Class(
     
       df_summ_c <- df_filt_c %>%
         summarize(
-          MeanOrgs = sum(MeanOrgs),
+          MeanCPUE = sum(MeanCPUE),
           .by = c(FullTaxa, Station, Date, ColColor)
         )
       
       group_avgs <- df_summ_c %>%
         group_by(FullTaxa) %>%
-        summarize(avg_val = mean(MeanOrgs, na.rm = TRUE)) %>%
+        summarize(avg_val = mean(MeanCPUE, na.rm = TRUE)) %>%
         arrange(desc(avg_val)) %>%
         slice(1:10)
       
@@ -101,7 +101,7 @@ BenBaseClass <- R6Class(
 
       plt_timeseries <- suppressMessages({
         df_summ_c %>%
-          ggplot(aes(Date, MeanOrgs, color = FullTaxa, group = interaction(FullTaxa, group_id))) +
+          ggplot(aes(Date, MeanCPUE, color = FullTaxa, group = interaction(FullTaxa, group_id))) +
           geom_line(na.rm = TRUE) +  
           geom_point(size = 2) +
           scale_color_manual(values = col_colors) +
@@ -112,7 +112,7 @@ BenBaseClass <- R6Class(
       
       plt_facet_timeseries <- suppressMessages({
         df_summ_c %>%
-          ggplot(aes(Date, MeanOrgs, color = FullTaxa, group = interaction(FullTaxa, group_id))) +
+          ggplot(aes(Date, MeanCPUE, color = FullTaxa, group = interaction(FullTaxa, group_id))) +
           geom_line(na.rm = TRUE) + 
           geom_point(size = 2) +
           scale_color_manual(values = col_colors) +
@@ -128,7 +128,7 @@ BenBaseClass <- R6Class(
           guides(color = guide_legend(reverse = TRUE, nrow = 1))
       })
       
-      plt_ylab <- ggplot(data.frame(l = 'MeanOrgs', x = 1, y = 1)) +
+      plt_ylab <- ggplot(data.frame(l = 'MeanCPUE', x = 1, y = 1)) +
         geom_text(aes(x, y, label = l), angle = 90) +
         theme_void() +
         coord_cartesian(clip = 'off')
@@ -171,8 +171,8 @@ BenBaseClass <- R6Class(
       
       top_groups <- df_filtered %>%
         group_by(FullTaxa) %>%
-        summarize(MeanOrgsTotal = sum(MeanOrgs, na.rm = TRUE)) %>%
-        arrange(desc(MeanOrgsTotal)) %>%
+        summarize(MeanCPUETotal = sum(MeanCPUE, na.rm = TRUE)) %>%
+        arrange(desc(MeanCPUETotal)) %>%
         slice(1:16) %>%
         pull(FullTaxa)
 
@@ -195,13 +195,13 @@ BenBaseClass <- R6Class(
       
       df_summ_c <- df_filt_c %>%
         summarize(
-          MeanOrgs = sum(MeanOrgs),
+          MeanCPUE = sum(MeanCPUE),
           .by = c(FullTaxa, Station, Month, Month_num, ColColor)
         )
       
       group_avgs <- df_summ_c %>%
         group_by(FullTaxa) %>%
-        summarize(avg_val = mean(MeanOrgs, na.rm = TRUE)) %>%
+        summarize(avg_val = mean(MeanCPUE, na.rm = TRUE)) %>%
         arrange(desc(avg_val)) %>%
         slice(1:10)
  
@@ -225,7 +225,7 @@ BenBaseClass <- R6Class(
 
       plt_timeseries <- suppressMessages({
         df_summ_c %>%
-        ggplot(aes(Date, MeanOrgs, color = FullTaxa, group = interaction(FullTaxa, group_id))) +
+        ggplot(aes(Date, MeanCPUE, color = FullTaxa, group = interaction(FullTaxa, group_id))) +
         geom_line(na.rm = TRUE) +
         geom_point(size = 2) +
         scale_color_manual(values = col_colors) +
@@ -237,7 +237,7 @@ BenBaseClass <- R6Class(
 
       plt_facet_timeseries <- suppressMessages({
         df_summ_c %>%
-        ggplot(aes(Date, MeanOrgs, color = FullTaxa, group = interaction(FullTaxa, group_id))) +
+        ggplot(aes(Date, MeanCPUE, color = FullTaxa, group = interaction(FullTaxa, group_id))) +
         geom_line(na.rm = TRUE) +
         geom_point(size = 2) +
         scale_color_manual(values = col_colors) +
@@ -252,7 +252,7 @@ BenBaseClass <- R6Class(
         guides(color = guide_legend(reverse = TRUE, nrow = 1))
       })
       
-      plt_ylab <- ggplot(data.frame(l = 'MeanOrgs', x = 1, y = 1)) +
+      plt_ylab <- ggplot(data.frame(l = 'MeanCPUE', x = 1, y = 1)) +
         geom_text(aes(x, y, label = l), angle = 90) +
         theme_void() +
         coord_cartesian(clip = 'off')
@@ -307,14 +307,14 @@ BenBaseClass <- R6Class(
       # Calculate monthly total densities for each group
       df_summ_c <- df_filt_c %>%
         summarize(
-          MeanOrgs = sum(MeanOrgs),
+          MeanCPUE = sum(MeanCPUE),
           .by = c(!!sym(filt_col), Station, Month, Month_num, ColColor)
         )
       
       # Calc overall average for reordering
       group_avgs <- df_summ_c %>%
         group_by(!!sym(filt_col)) %>%
-        summarize(avg_val = mean(MeanOrgs, na.rm = TRUE)) %>%
+        summarize(avg_val = mean(MeanCPUE, na.rm = TRUE)) %>%
         arrange(avg_val)
       
       # Reorder the levels based on the averages
@@ -330,7 +330,7 @@ BenBaseClass <- R6Class(
   
       # Create stacked barplot of monthly densities by the filtered column
       plt_stacked <- df_summ_c %>%
-        ggplot(aes(Month_num, MeanOrgs, fill = !!sym(filt_col))) +
+        ggplot(aes(Month_num, MeanCPUE, fill = !!sym(filt_col))) +
         geom_col(color = 'black') +
         scale_fill_manual(values = col_colors) +
         scale_x_continuous(breaks = seq_along(month_order), labels = label_order) +
@@ -339,7 +339,7 @@ BenBaseClass <- R6Class(
   
       # Create facetted barplots by the filtered column
       plt_facet <- df_summ_c %>%
-        ggplot(aes(Month_num, MeanOrgs, fill = !!sym(filt_col))) +
+        ggplot(aes(Month_num, MeanCPUE, fill = !!sym(filt_col))) +
         geom_col(color = 'black') +
         scale_fill_manual(values = col_colors) +
         facet_wrap(vars(fct_rev(!!sym(filt_col))), scales = 'free_y', ncol = 3) +
@@ -349,7 +349,7 @@ BenBaseClass <- R6Class(
         guides(fill = guide_legend(reverse = TRUE, nrow = 1))
   
       # Create text-only ggplot for the collective y-axis label
-      plt_ylab <- ggplot(data.frame(l = 'MeanOrgs', x = 1, y = 1)) +
+      plt_ylab <- ggplot(data.frame(l = 'MeanCPUE', x = 1, y = 1)) +
         geom_text(aes(x, y, label = l), angle = 90) +
         theme_void() +
         coord_cartesian(clip = 'off')
@@ -454,8 +454,10 @@ BenWkbkClass <- R6Class(
           MeanCPUE = round(MeanOrgs / TotalGrabs / 0.052, 4),
           .groups = 'drop'
         ) %>%
+        group_by(WaterYear) %>%
         mutate(Percentage = round(MeanCPUE / sum(MeanCPUE) * 100, 2)) %>%
-        arrange(desc(WaterYear), desc(Percentage))
+        arrange(desc(WaterYear), desc(Percentage)) %>%
+        ungroup()
       
       if (out_type == 'wkbk'){
         private$add_sheet(result, sheet_name)
@@ -484,7 +486,8 @@ BenWkbkClass <- R6Class(
         ) %>%
         group_by(Month, WaterYear) %>%
         mutate(Percentage = round(MeanCPUE / sum(MeanCPUE) * 100, 2)) %>%
-        arrange(desc(WaterYear), Month, desc(Percentage))
+        arrange(desc(WaterYear), Month, desc(Percentage)) %>%
+        ungroup()
       
       if (out_type == 'wkbk'){
         private$add_sheet(result, sheet_name)
@@ -514,7 +517,8 @@ BenWkbkClass <- R6Class(
         group_by(Station, Region, WaterYear) %>%
         mutate(Percentage = round(MeanCPUE / sum(MeanCPUE) * 100, 2),
                MeanCPUE = round(MeanCPUE, 4)) %>%
-        arrange(desc(WaterYear), Region, Station, desc(Percentage))
+        arrange(desc(WaterYear), Region, Station, desc(Percentage)) %>%
+        ungroup()
       
       if (out_type == 'wkbk'){
         private$add_sheet(result, sheet_name)
@@ -545,7 +549,8 @@ BenWkbkClass <- R6Class(
         group_by(WaterYear, Station, Region, Month) %>%
         mutate(Percentage = round(MeanCPUE / sum(MeanCPUE) * 100, 2),
                MeanCPUE = round(MeanCPUE, 4)) %>%
-        arrange(desc(WaterYear), Region, Station, Month, desc(Percentage))
+        arrange(desc(WaterYear), Region, Station, Month, desc(Percentage)) %>%
+        ungroup()
       
       if (out_type == 'wkbk'){
         private$add_sheet(result, sheet_name)

@@ -83,21 +83,21 @@ for (station in benthic_stations){
 
   plt_benthic_ts_all <- obj_ben_all$plt_phy_timeseries_all_TEST(station)
 
-  # ggsave(here::here(paste0(emp_path, '/timeseries_all/benthic_tsall_', fp_name, '.jpg')),
-  #        plt_benthic_ts_all, width = 25, height = exp_height, unit = 'cm')
+  ggsave(here::here(paste0(emp_path, '/timeseries_all/benthic_tsall_', fp_name, '.jpg')),
+         plt_benthic_ts_all, width = 25, height = exp_height, unit = 'cm')
 
   if (station %in% unique(obj_ben_cur$df_raw$Station)){
     plt_benthic <- obj_ben_cur$plt_phy_density_TEST(station, 'Phylum')
     plt_benthic_ts <- obj_ben_cur$plt_phy_timeseries_TEST(station)
 
-    # ggsave(here::here(paste0('sections/benthic/figures/benthic_bar_', fp_name, '.jpg')),
-    #        plt_benthic, width = 25, height = exp_height, unit = 'cm')
-    # 
-    # ggsave(here::here(paste0(emp_path, '/bargraphs/benthic_bar_', fp_name, '.jpg')),
-    #        plt_benthic, width = 25, height = exp_height, unit = 'cm')
+    ggsave(here::here(paste0('sections/benthic/figures/benthic_bar_', fp_name, '.jpg')),
+           plt_benthic, width = 25, height = exp_height, unit = 'cm')
 
-# ggsave(here::here(paste0(emp_path, '/timeseries/benthic_ts_', fp_name, '.jpg')),
-#        plt_benthic_ts, width = 25, height = exp_height, unit = 'cm')
+    ggsave(here::here(paste0(emp_path, '/bargraphs/benthic_bar_', fp_name, '.jpg')),
+           plt_benthic, width = 25, height = exp_height, unit = 'cm')
+
+ggsave(here::here(paste0(emp_path, '/timeseries/benthic_ts_', fp_name, '.jpg')),
+       plt_benthic_ts, width = 25, height = exp_height, unit = 'cm')
 
     }
 }

@@ -23,7 +23,7 @@ sym <- rlang::sym
 
 str_match <- stringr::str_match
 
-glue <- glue
+glue <- glue::glue
 
 fct_rev <- forcats::fct_rev
 
