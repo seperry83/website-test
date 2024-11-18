@@ -17,9 +17,10 @@ Phytoplankton samples were collected monthly at 24 monitoring sites throughout t
 
 ```{r echo=FALSE, fig.align='center',  out.width = '70%'}
 #| label: fig-stations
+#| out-width: 90%
 #| fig-cap: 'Map of EMP’s phytoplankton field sites.'
 
-include_graphics(here::here(file.path('sections/phyto/figures/phyto_station_map.jpg')))
+include_graphics(here::here(file.path('sections/phyto/figures/phyto_station_map.png')))
 ```
 
 ```{r echo=FALSE, warning=FALSE, message=FALSE, results = 'asis'}

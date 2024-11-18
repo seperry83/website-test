@@ -1,6 +1,6 @@
 project:
   type: website
-  output-dir: _site
+  output-dir: docs
   execute-dir: file
   
 website:
@@ -11,7 +11,7 @@ website:
   page-footer:
     background: '#e8f1f5'
     center: |
-        ![](/admin/figures-tables/EMP_footer.png){fig-alt="DWR, USBR, CDFW, and IEP logos" height=50px}
+        ![](/admin/figures-tables/EMP_footer.png){fig-alt="DWR, CDFW, and USBR logos" height=50px}
 
   navbar:
     background: '#e8f1f5'
@@ -36,7 +36,7 @@ website:
           - text: "Phytoplankton"
             href: sections/phyto/qmd-files/phyto-report.qmd
           - text: "Zooplankton"
-            href: "https://github.com/quarto-dev/quarto-cli/discussions"
+            href: sections/zoop/qmd-files/zoop-report.qmd
       - text: Special Studies
         menu:
           - text: "Veliger Monitoring Program"

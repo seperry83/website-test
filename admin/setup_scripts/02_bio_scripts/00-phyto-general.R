@@ -278,6 +278,4 @@ PhytoFigureClass <- R6Class(
     }
   )
 )
-    
-
 

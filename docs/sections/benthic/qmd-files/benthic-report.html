@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Environmental Monitoring Program - Benthic Invertebrates Report</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<link href="../../../admin/figures-tables/sentinel.ico" rel="icon">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+<script src="../../../site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="../../../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../../../admin/styling_scripts/styles.css">
+<link rel="stylesheet" href="../../../admin/styling_scripts/slideshow.css">
+</head>
+
+<body class="nav-fixed">
+
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a href="../../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../../admin/figures-tables/EMP_logo.png" alt="EMP logo" class="navbar-logo">
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../sections/general/qmd-files/index.html" rel="" target="">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../sections/general/qmd-files/data-links.html" rel="" target="">
+ <span class="menu-text">Data Links</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-annual-reports" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Annual Reports</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-annual-reports">    
+        <li>
+    <a class="dropdown-item" href="../../../sections/cwq/qmd-files/cwq-report.html" rel="" target="">
+ <span class="dropdown-text">Continuous Water Quality</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../sections/dwq/qmd-files/dwq-report.html" rel="" target="">
+ <span class="dropdown-text">Discrete Water Quality</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../sections/benthic/qmd-files/benthic-report.html" rel="" target="">
+ <span class="dropdown-text">Benthic Invertebrates</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../sections/phyto/qmd-files/phyto-report.html" rel="" target="">
+ <span class="dropdown-text">Phytoplankton</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../sections/zoop/qmd-files/zoop-report.html" rel="" target="">
+ <span class="dropdown-text">Zooplankton</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-special-studies" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Special Studies</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-special-studies">    
+        <li>
+    <a class="dropdown-item" href="../../../sections/special-studies/qmd-files/veliger-info.html" rel="" target="">
+ <span class="dropdown-text">Veliger Monitoring Program</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="mailto:ted.flynn@water.ca.gov" rel="" target="">
+ <span class="menu-text">Contact Us</span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools ms-auto">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#methods" id="toc-methods" class="nav-link" data-scroll-target="#methods">Methods</a></li>
+  <li><a href="#overall-results" id="toc-overall-results" class="nav-link" data-scroll-target="#overall-results">Overall Results</a></li>
+  <li><a href="#regional-results" id="toc-regional-results" class="nav-link" data-scroll-target="#regional-results">Regional Results</a>
+  <ul class="collapse">
+  <li><a href="#central-delta-d16-d28a" id="toc-central-delta-d16-d28a" class="nav-link" data-scroll-target="#central-delta-d16-d28a">Central Delta (D16, D28A)</a></li>
+  <li><a href="#confluence-d4" id="toc-confluence-d4" class="nav-link" data-scroll-target="#confluence-d4">Confluence (D4)</a></li>
+  <li><a href="#san-pablo-bay-d41-d41a" id="toc-san-pablo-bay-d41-d41a" class="nav-link" data-scroll-target="#san-pablo-bay-d41-d41a">San Pablo Bay (D41, D41A)</a></li>
+  <li><a href="#south-delta-p8-c9" id="toc-south-delta-p8-c9" class="nav-link" data-scroll-target="#south-delta-p8-c9">South Delta (P8, C9)</a></li>
+  <li><a href="#suisun-grizzly-bays-d6-d7" id="toc-suisun-grizzly-bays-d6-d7" class="nav-link" data-scroll-target="#suisun-grizzly-bays-d6-d7">Suisun &amp; Grizzly Bays (D6, D7)</a></li>
+  </ul></li>
+  <li><a href="#interpretations" id="toc-interpretations" class="nav-link" data-scroll-target="#interpretations">Interpretations</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  <li><a href="#archived-reports" id="toc-archived-reports" class="nav-link" data-scroll-target="#archived-reports">Archived Reports</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content column-page-left" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Benthic Invertebrates Report</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>Benthic monitoring conducted by the California Department of Water Resources (DWR) since 1975 has documented changes in the composition, density, and distribution of the macrobenthic biota inhabiting the upper San Francisco Estuary. This monitoring is performed by the Environmental Monitoring Program (EMP) as part of the Interagency Ecological Program (IEP) and is one component of the biological monitoring mandated by Water Right Decision D-1641. Since benthic species respond to changes in physical factors such as freshwater inflows, salinity, and substrate composition, benthic community data provides an indication of physical changes occurring within the Estuary. Benthic monitoring is an important component of the EMP because operation of the State Water Project can change the Estuary’s flow characteristics, affecting the density and distribution of benthic biota. Benthic monitoring data is also used to detect and document the presence of new, non-native species in the Upper Estuary, such as the 1986 arrival and subsequent wide spread of the overbite clam, Potamocorbula amurensis. This report describes the results of these monitoring efforts for water year 2023 (October 1st 2022 through September 30th 2023) which was classified as a wet year in the Sacramento and San Joaquin Valleys <a href="https://cdec.water.ca.gov/reportapp/javareports?name=WSIHIST">(source)</a>.</p>
+</section>
+<section id="methods" class="level2">
+<h2 class="anchored" data-anchor-id="methods">Methods</h2>
+<p>Benthic monitoring was conducted monthly at 10 sampling sites distributed throughout the Estuary, from San Pablo Bay upstream through the Sacramento-San Joaquin Delta (<a href="#fig-stations">Figure&nbsp;1</a>; <a href="#tbl-stations">Table&nbsp;1</a>). EMP staff collected four bottom grab samples at each station using a Ponar dredge with a sampling area of 0.052 <span class="math inline">\(m^2\)</span>. The four replicate grab samples were analyzed for benthic macrofauna by Hydrozoology, a private laboratory under contract with DWR. All organisms were identified to the lowest taxon possible and enumerated.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-stations" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="../figures/benthic_station_map.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<figcaption class="figure-caption">Figure&nbsp;1: Map of EMP’s benthic field sites.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div id="tbl-stations" class="anchored">
+<table class="table table-striped table-sm small" data-quarto-postprocess="true">
+<caption>Table&nbsp;1: Stations included within each region of the Delta</caption>
+<thead>
+<tr class="header">
+<th style="text-align: center;" data-quarto-table-cell-role="th">Region</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">WY Index</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Stations</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center; width: 33.3333333333333%;">Carquinez</td>
+<td style="text-align: center; width: 33.3333333333333%;">Sacramento</td>
+<td style="text-align: center; width: 33.3333333333333%;">NZ002, NZ004</td>
+</tr>
+<tr class="even">
+<td style="text-align: center; width: 33.3333333333333%;">Central Delta</td>
+<td style="text-align: center; width: 33.3333333333333%;">San Joaquin</td>
+<td style="text-align: center; width: 33.3333333333333%;">D16, D19, D26, D28A</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center; width: 33.3333333333333%;">Confluence</td>
+<td style="text-align: center; width: 33.3333333333333%;">Sacramento</td>
+<td style="text-align: center; width: 33.3333333333333%;">D4, D10, D12, D22</td>
+</tr>
+<tr class="even">
+<td style="text-align: center; width: 33.3333333333333%;">North Delta</td>
+<td style="text-align: center; width: 33.3333333333333%;">Sacramento</td>
+<td style="text-align: center; width: 33.3333333333333%;">C3A, NZ068</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center; width: 33.3333333333333%;">San Pablo Bay</td>
+<td style="text-align: center; width: 33.3333333333333%;">Sacramento</td>
+<td style="text-align: center; width: 33.3333333333333%;">D41, D41A, NZ325</td>
+</tr>
+<tr class="even">
+<td style="text-align: center; width: 33.3333333333333%;">South Delta</td>
+<td style="text-align: center; width: 33.3333333333333%;">San Joaquin</td>
+<td style="text-align: center; width: 33.3333333333333%;">C9, C10A, MD10A, P8</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center; width: 33.3333333333333%;">Suisun &amp; Grizzly Bays</td>
+<td style="text-align: center; width: 33.3333333333333%;">Sacramento</td>
+<td style="text-align: center; width: 33.3333333333333%;">D6, D7, D8</td>
+</tr>
+<tr class="even">
+<td style="text-align: center; width: 33.3333333333333%;">Suisun Marsh</td>
+<td style="text-align: center; width: 33.3333333333333%;">Sacramento</td>
+<td style="text-align: center; width: 33.3333333333333%;">NZ032, NZS42</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+</div>
+</div>
+<p>The 10 most common genera were determined by summing the normalized organism counts across all stations and months for each genus. For the bar graphs, the data is reported as the average&nbsp; organism catch per unit effort (CPUE).&nbsp; This was calculated as the organism count per replicate grab, converted to organisms per m<sup>2</sup> (each grab is 0.052m<sup>2</sup>), averaged across replicates for each station in each month and aggregated by phylum.</p>
+<p>For more in-depth methodology, see <a href="https://portal.edirepository.org/nis/metadataviewer?packageid=edi.1320.6">here</a>.</p>
+</section>
+<section id="overall-results" class="level2">
+<h2 class="anchored" data-anchor-id="overall-results">Overall Results</h2>
+<p>The benthic fauna collected in FY2023 comprised nine phyla: Annelida (37% of total organisms), Arthropoda (31%) and Mollusca (31%), with Phoronida, Nematoda, Chordata, Platyhelminthes, Cnidaria, and Nemertea each representing 1% or less of total organisms. Of the 185 benthic species collected in WY 2023, the ten most abundant species represented 80% of all individuals collected throughout the year (<a href="#fig-abund">Figure&nbsp;2</a>). These include three species of amphipod, two clams, three oligochate worms, one polychate worm, and one cumacean arthropod (also known as a comma shrimp, although it is not actually a shrimp). Only three species in this group (the amphipods&nbsp;<em>Americorophium spinicorne</em> and <em>Hyalella sp.</em>, and the oligochaete worm <em>Ilyodrilus franzti</em>) are native to this estuary. The rest of the top ten species are non-native or are cosmopolitan species of unknown origin. Refer to Fields and Messer (1999) for descriptions of the habitat requirements, physical attributes, and feeding methods of many of these species.</p>
+<p>In the site descriptions that follow, most species densities are reported as the annual densities of individuals/m<sup>2</sup>, sometimes noting dramatic seasonal peaks. Some species, especially arthropods, display strong seasonal variability with peak monthly densities several times higher than their annual densities. In these cases, we reported the time and magnitude of the peaks as well as the annual densities. Please note that the station P8 was not sampled in December 2022 due to heavy fog, and comparisons to other years’ average annual densities or seasonal patterns should take this omission into account.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-abund" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="../figures/species_list.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<figcaption class="figure-caption">Figure&nbsp;2: List of ten most numerous benthic invertebrate species found at EMP sites.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="regional-results" class="level2">
+<h2 class="anchored" data-anchor-id="regional-results">Regional Results</h2>
+<section id="central-delta-d16-d28a" class="level3">
+<h3 class="anchored" data-anchor-id="central-delta-d16-d28a">Central Delta (D16, D28A)</h3>
+<p>The benthic monitoring program sampled at two stations, in the Central Delta, D16 and D28. Site D16 is on the lower San Joaquin River near Twitchell Island (<a href="#fig-stations">Figure&nbsp;1</a>). There were 15 species in four phyla at D16 in WY 2023, split between Mollusca (62% of all organisms collected in 2023) and Arthropoda (37%) (<a href="#fig-benthic_d16">Figure&nbsp;3</a>). The most abundant species at D16 was the clam&nbsp;<em>Corbicula fluminea</em>&nbsp;which accounted for 58% of all organisms in 2022, with an average annual density of 146 individuals/m<sup>2</sup>&nbsp;and peaks in May and August 2023. The amphipod&nbsp;<em>Gammarus daiberi</em>&nbsp;was the second most abundant organism, accounting for 25% of all individuals, with an average annual density of 62 individuals/m<sup>2</sup>&nbsp;and a peak in October 2022 of 230 individuals/m<sup>2</sup> and another in February of 169 individuals/m<sup>2</sup>.&nbsp; Much of the rest of the community was a combination of various species of amphipods and snails at lower densities. The total number of organisms at D16 in WY 2023 continued the trend of very low numbers compared with other years in the previous decade. In particular, WY 2020-2023 saw very low numbers of the amphipod&nbsp;<em>Americorophium spinicorne</em>, which was seen in very high numbers at D16 from 2015-2018.</p>
+<p>The site on Old River near Rancho Del Rio is known as D28A (<a href="#fig-stations">Figure&nbsp;1</a>). In WY 2023, there were 58 species in seven phyla at D28A. The most abundant phylum was Annelida, followed by Arthropoda and Mollusca (55%, 33%, and 12% of all organisms, respectively) (<a href="#fig-benthic_d28a">Figure&nbsp;4</a>). The most abundant species was the oligochaete worm&nbsp;<em>Variachaetadrilus angustipenis</em> with an average density of 1,494 individuals/m<sup>2</sup> and high densities between December 2022 and May 2023, followed by the ostracod crustacean <em>Cyprideis</em> sp. A with an average density of 767 individuals/m<sup>2</sup> and higher densities between December 2022 and March 2023.&nbsp; The Asian clam <em>Corbicula fluminea</em> had an annual average density of 356 individuals/m<sup>2</sup> that grew from April through July, likely via seasonal recruitment.&nbsp; While D28A had similarly high species richness in WY 2023 to other years, a few notable differences were fewer of the amphipods <em>Gammarus daiberi</em> and <em>Americorophium spinicorne</em>, which were both more numerous in 2013, 2014, and 2022 than now, as well as many fewer of the sabellid worm <em>Manayunkia speciosa</em>, which was the most numerous organism at D28A in several years of the past decade but in WY 2023 comprised just 3.5% of all organisms found here.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-benthic_d16" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="../figures/benthic_bar_d16.jpg" class="img-fluid figure-img" width="1476"></p>
+<figcaption class="figure-caption">Figure&nbsp;3: Density of benthic organisms, by month, collected at station D16.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-benthic_d28a" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="../figures/benthic_bar_d28a.jpg" class="img-fluid figure-img" width="1476"></p>
+<figcaption class="figure-caption">Figure&nbsp;4: Density of benthic organisms, by month, collected at station D28A.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="confluence-d4" class="level3">
+<h3 class="anchored" data-anchor-id="confluence-d4">Confluence (D4)</h3>
+<p>Site D4 is located near the confluence of the Sacramento and San Joaquin Rivers, just north of Point Sacramento (<a href="#fig-stations">Figure&nbsp;1</a>). There were 41 species in six phyla at D4, and in WY 2023 this was the site with the highest number of organisms. Arthropoda was by far the most abundant phylum (88% of all organisms) followed by Annelida (7% of all organisms) and Mollusca (6% of all organisms) (<a href="#fig-benthic_d4">Figure&nbsp;5</a>). The native amphipod&nbsp;<em>Americorophium spinicorne</em>&nbsp;was the most abundant species at this station and made up slightly over 71% of all individual organisms in WY 2023 with a dramatic seasonal peak of 55,279 individuals/m<sup>2</sup>&nbsp;in August 2023 and an annual average of 8,436 individuals/m<sup>2</sup>, the highest annual average in a decade. The non-native amphipod <em>Gammarus daiberi</em> had an annual average of 1,562 individuals/m<sup>2</sup>, which was at low density before increasing&nbsp; in June to a seasonal peak in September of 5,380 individuals/m<sup>2</sup>.&nbsp; The invasive clam <em>Corbicula fluminea</em> also saw a summer seasonal increase, with a high in August of 1,788 and an annual average of 471&nbsp;individuals/m<sup>2</sup>.</p>
+<p>Because of D4’s position at the front of saltwater and freshwater mixing in the estuary, we often see a shift from the freshwater clam&nbsp;<em>Corbicula fluminea</em>&nbsp;to more brackish-water&nbsp;<em>Potamocorbula amurensis</em>&nbsp;following dry years, and the reverse following wet years.&nbsp; The drought of 2018-2022 led to high <em>Potamocorbula</em> numbers, which abruptly crashed down in WY 2023 while <em>Corbicula</em> increased modestly. 2022 was also notable for its rebound&nbsp;of amphipod <em>A. spinicorne</em>&nbsp;in 2022 from the low of WY 2022.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-benthic_d4" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="../figures/benthic_bar_d4.jpg" class="img-fluid figure-img" width="1476"></p>
+<figcaption class="figure-caption">Figure&nbsp;5: Density of benthic organisms, by month, collected at station D4.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="san-pablo-bay-d41-d41a" class="level3">
+<h3 class="anchored" data-anchor-id="san-pablo-bay-d41-d41a">San Pablo Bay (D41, D41A)</h3>
+<p>The benthic monitoring program sampled at two stations in San Pablo Bay, D41 and D41A. Station D41 is near Point Pinole (<a href="#fig-stations">Figure&nbsp;1</a>) and has a benthic community primarily comprised of marine organisms, especially in drier water years. There were 76 species in seven phyla at D41 in WY 2023. Annelida was the most abundant phylum (37% of all organisms) followed by Phoronida (25%), Arthropoda (24%) and Mollusca (10%) (<a href="#fig-benthic_d41">Figure&nbsp;6</a>). The single most abundant species was&nbsp;the <em>Phoronis harmeri</em>, a native tube-dwelling filter-feeder from the small marine lophophorate phylum Phoronida, with an average annual density of 490 individuals/m<sup>2</sup> and representing 25% of all organisms. The second most abundant species was non-native amphipod&nbsp;<em>Ampelisa abdita</em>, comprising 19% of all organisms with 370 organisms/m<sup>2</sup>, most of them in a very strong peak in September 2023. The window shell clam&nbsp;<em>Theora lubrica,</em>&nbsp;along with the tube-dwelling polychate worm&nbsp;<em>Pseudopolydora kempi</em>&nbsp;and the polychaete worm&nbsp;<em>Scoletoma luti</em>, were the other species found in notable densities. D41 overall community composition in 2021 was similar to the preceding decade apart from the high numbers of Potamocorbula amurensis from WY 2017-2019,&nbsp; and the decrease in the amphipod <em>Ampelisca abdita</em> from its very high levels in WY 2018-2021.&nbsp; This pattern reinforces that higher-salinity water years such as 2021 see increases in more marine species such as&nbsp;<em>Apelisca abdita</em>,&nbsp;<em>Phoronis harmeri</em>, and&nbsp;<em>Theora lubrica</em>&nbsp;but lower numbers of the clam&nbsp;<em>Potamocorbula amurensis</em>, which prefers more brackish water and is mostly seen at D41 following wetter water years.</p>
+<p>Station D41A is in San Pablo Bay near the mouth of the Petaluma River (<a href="#fig-stations">Figure&nbsp;1</a>). There were 51 species in seven phyla at D41A in WY 2023. The most abundant phyla was Arthropoda (39% of all organisms), with Annelida second (31%) and Mollusca third (26%) (<a href="#fig-benthic_d41a">Figure&nbsp;7</a>). The two most numerous species were the small cumacean arthropod&nbsp;<em>Nippoleucon hinumensis</em>&nbsp;, which had an annual average of 557 individuals/m<sup>2</sup> and a strong seasonal peak from January-May, and the arthropod <em>Ampelisca abdita</em>, which had an annual average of 338 individuals/m<sup>2</sup>, almost all of which occurred in August and September 2023. The window shell clam&nbsp;<em>Theora lubrica</em>&nbsp;and the invasive overbite clam Potamocorbula amurensis had seasonally opposed patterns; <em>T. lubrica</em> had its peak in December and was not seen again after January 2023, while <em>P. amurensis</em> did not appear until February and was densest in August, likely because of the opposing effects of the wet winter of WY 2023 on the more marine <em>T. lubrica</em> and the more brackish-water <em>P. amurensis</em>. The community in 2022 was lacking in several species which had been numerically dominant for the previous decade: the amphipods&nbsp;<em>Ampelisca abdita</em>&nbsp;and&nbsp;<em>Monocorophim acherusicum</em>, the clam&nbsp;<em>Potamocorbula amurensis</em>, and the small cumacean arthropod&nbsp;<em>Nippoleucon hinumensis</em>&nbsp;were at some of their lowest levels in the last decade.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-benthic_d41" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="../figures/benthic_bar_d41.jpg" class="img-fluid figure-img" width="1476"></p>
+<figcaption class="figure-caption">Figure&nbsp;6: Density of benthic organisms, by month, collected at station D41.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-benthic_d41a" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="../figures/benthic_bar_d41a.jpg" class="img-fluid figure-img" width="1476"></p>
+<figcaption class="figure-caption">Figure&nbsp;7: Density of benthic organisms, by month, collected at station D41A.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="south-delta-p8-c9" class="level3">
+<h3 class="anchored" data-anchor-id="south-delta-p8-c9">South Delta (P8, C9)</h3>
+<p>The benthic monitoring program sampled at two stations in the South Delta. Site P8 is on the San Joaquin River at Buckley Cove (<a href="#fig-stations">Figure&nbsp;1</a>). Sampling did not occur in December 2022 due to very foggy conditions.&nbsp; Station P8 had a total of 54 species in five phyla in WY 2023. Annelida was by far the most abundant phyla at this station in 2023, accounting for 90% of all organisms collected (<strong>?@fig-p8</strong>). The dominant species driving most of the Annelida patterns was the non-native sabellid worm&nbsp;<em>Manayunkia speciosa</em>, which had an annual density of 5,501 individuals/m<sup>2</sup>&nbsp;and accounted by itself for 59% of all organisms.&nbsp;<em>Manayunkia speciosa</em>&nbsp;in 2023 increased slightly from its lower densities from 2017 through 2022, but not close to the high densities seen from 2012 to 2016, which peaked at 11,705 individuals/m<sup>2</sup>&nbsp;in WY 2016. The oligochate worms&nbsp;<em>Limnodrilus hoffmeisteri</em>&nbsp;and&nbsp;<em>Varichaetadrilus angustipenis</em>&nbsp;were the next most common organisms at 1,271 and 537individuals/m<sup>2</sup>&nbsp;annual density, followed by a long tail of many species represented at low densities. This community composition has remained largely unchanged through the last decade, apart from the dramatic changes in of&nbsp;<em>M. speciosa</em>.</p>
+<p>Site C9 is on Old River at the Clifton Court Forebay intake (<a href="#fig-stations">Figure&nbsp;1</a>). There were 85 species in seven phyla at C9 in WY 2023. Annelida was the dominant phylum throughout the year, accounting for 79% of all organisms collected in WY 2023, followed by 15% Arthropoda. (<a href="#fig-benthic_c9">Figure&nbsp;8</a>). An oligochaete worm,&nbsp;<em>Limnodrilus hoffmeisteri,</em> made up 28% of all organisms with an annual density of 1,804 individuals/m<sup>2</sup>, which is roughly a quarter of its decade high value in WY 2012 of 5,454 individuals/m<sup>2</sup>. The oligochaete worms&nbsp;<em>Varichaetadrilus angustipenis</em> and <em>Ilyodrilus frantzi</em>&nbsp;were the next most numeous, with average densities of 1,755 and 1,670 individuals/m<sup>2</sup>. <em>Limnodrilus</em> <em>hoffmeisteri</em> and <em>Ilyodrilus frantzi</em> had their highest densities from May through September 2023.&nbsp; The freshwater amphipod&nbsp;<em>Hyalella</em>&nbsp;sp. A was also notable with an annual average of 737 individuals/m<sup>2</sup> through WY 2023, with two peaks in November 2022 and June 2023. Similar to P8, C9 has a large number of low-density species, including the highest diversity of aquatic insect larvae at any site sampled (23 species in WY 2023, mostly chironomid midges). The community was dominated by oligochaetes and had the same overall composition as it has for many years.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-benthic_c9" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="../figures/benthic_bar_c9.jpg" class="img-fluid figure-img" width="1476"></p>
+<figcaption class="figure-caption">Figure&nbsp;8: Density of benthic organisms, by month, collected at station C9.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-benthic_p8" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="../figures/benthic_bar_p8.jpg" class="img-fluid figure-img" width="1476"></p>
+<figcaption class="figure-caption">Figure&nbsp;9: Density of benthic organisms, by month, collected at station P8.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="suisun-grizzly-bays-d6-d7" class="level3">
+<h3 class="anchored" data-anchor-id="suisun-grizzly-bays-d6-d7">Suisun &amp; Grizzly Bays (D6, D7)</h3>
+<p>The benthic monitoring program sampled at two stations in the Suisun Bay area, D6 and D7. Site D6 is in Suisun Bay near the I-680 bridge (<a href="#fig-stations">Figure&nbsp;1</a>) and had 28 species in five phyla in WY 2023. Mollusca was the dominant phylum, accounting for 97% of all organisms collected (<a href="#fig-benthic_d6">Figure&nbsp;10</a>). Most of the organisms collected were the invasive Asian clam&nbsp;<em>Potamocorbula amurensis</em>, which had an annual density of 9,345 individuals/m<sup>2</sup>, in an increase from its decade-long low in WY 2017 but still below its WY 2020 high of 23,800 individuals/m<sup>2</sup>.&nbsp;<em>Potamocorbula amurensis</em>&nbsp;was most abundant in August 2023 with 55,548 individuals/m<sup>2</sup>, likely as a result of summer seasonal recruitment. The relatively few other organisms found at this site were predominately from phylum Arthropoda, either the brackish-water bay barnacle&nbsp;<em>Amphibalanus improvisus</em>, found mostly growing on&nbsp;<em>P. amurensis</em>&nbsp;shells, or the cumacean crustacean <em>Nippoleucon hinumensis</em>.</p>
+<p>Site D7 is in Grizzly Bay, near the entrance to Suisun Slough (<a href="#fig-stations">Figure&nbsp;1</a>). There were 29 species in three phyla in WY 2023. Mollusca comprised 64% of the total organisms, Arthropoda 28%, and Annelida 8%. The non-native clam&nbsp;<em>Potamocorbula amurensis</em> and the cumacean arthropod&nbsp;<em>Nippoleucon hinumensis</em>&nbsp;were the two most abundant species, comprising 64% and 21% of the total community through the year, respectively (<a href="#fig-benthic_d7">Figure&nbsp;11</a>).&nbsp;<em>Nippoleucon hinumensis</em>&nbsp;had an annual density of 673 organisms/m<sup>2</sup>, but saw a strong seasonal pattern: relatively high densities from October through December and relatively lower densities the rest of the year, including almost none from June through September.&nbsp;<em>Potamocorbula amurensis</em>&nbsp;had an annual average density of 2,085/organisms/m<sup>2</sup> and a very strongly seasonal pattern as well – high numbers in October 20022 decreasing through winter and spring, then an abrupt increase in seasonal recruitment in August to 9,284 organisms/m<sup>2</sup>. While&nbsp;<em>P. amurensis</em>&nbsp;has been numerically dominant through the last decade, a major change in WY 2021 was the rise of&nbsp;<em>N. hinumensis</em>&nbsp;and a simultaneous crash of the amphipod&nbsp;<em>Sinocorophium alienense</em>, which had been the second-densest species at D7 for at least the last decade.&nbsp;<em>Sinocorophium alienense</em>&nbsp;crashed in WY 2021 to around 576 organisms/m<sup>2</sup>, was completely absent from D7 in WY 2022, and barely appeared in WY 2023 at all.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-benthic_d6" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="../figures/benthic_bar_d6.jpg" class="img-fluid figure-img" width="1476"></p>
+<figcaption class="figure-caption">Figure&nbsp;10: Density of benthic organisms, by month, collected at station D6.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-benthic_d7" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="../figures/benthic_bar_d7.jpg" class="img-fluid figure-img" width="1476"></p>
+<figcaption class="figure-caption">Figure&nbsp;11: Density of benthic organisms, by month, collected at station D7.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="interpretations" class="level2">
+<h2 class="anchored" data-anchor-id="interpretations">Interpretations</h2>
+<p>In summary, WY 2023 saw the second lowest average organism density of any year of the past decade, second only to WY 2022. This trend was consistent across most sites, and was caused largely by the decrease in various amphipod species, especially&nbsp;<em>Ampelisca abdita</em>&nbsp;in San Pablo Bay and&nbsp;<em>Sinocorophium alienense</em>&nbsp;in Grizzly Bay, as well as the decrease in the sabellid worm <em>Manayunkia speciosa</em> at Central Delta sites. Since many fish species have switched to amphipod food sources after the collapse of mysid shrimps (Feyrer et al.&nbsp;2003), the near disappearance of various amphipod species may have food web implications unless they have simply shifted their ranges out of our sampling area. Densities of the non-native clams <em>Potamocorbula amurensis</em> and <em>Corbicula fluminea</em> were also near decade lows in WY 2023, possibly because of the wet water year 2023, which caused clams to shift ranges downstream and their numbers to be depressed until they could recruit in the following warm season to their new salinity ranges.&nbsp; Ordinarily, the decrease of both species of invasive clams and their filter-feeding activity would be a favorable sign for the ecosystem, but the relative absence of several other numerically dominant members of the community in WY 2023 has unclear implications. Our ability to recognize these changes over decadal timescales highlights the importance of continued monitoring of benthic invertebrates to a high taxonomic resolution across the entire estuarine salinity gradient, as the community interacts with both various abiotic conditions as well as key parts of the estuarine food web.</p>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<p>Fields W, Messer C. 1999. Life on the bottom: Trends in species composition of the IEP-DWR Benthic Monitoring Program. IEP Newsletter 12(4): 38-41.</p>
+<p>Carlton, J. T. 2007. The Light and Smith manual: Intertidal Invertebrates from central California to Oregon, 4th edition. Berkeley, CA, University of California Press.</p>
+<p>Feyrer, F., B. Herbold, S. A. Matern and P. B. Moyle. 2003. Dietary shifts in a stressed fish assemblage: consequences of a bivalve invasion in the San Francisco Estuary. Environmental Biology of Fishes 67(3): 277-288.</p>
+</section>
+<section id="archived-reports" class="level2">
+<h2 class="anchored" data-anchor-id="archived-reports">Archived Reports</h2>
+<p>Previous EMP benthic reports can be found <a href="https://github.com/emp-dwr/emp-website/tree/gh-pages/admin/archive/benthic">here</a>.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center"><img src="../../..\admin/figures-tables/EMP_footer.png" alt="DWR, CDFW, and USBR logos" height="50"></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+</body></html>

@@ -17,9 +17,10 @@ Discrete water quality samples were collected monthly at 24 monitoring sites thr
 
 ```{r echo=FALSE, fig.align='center',  out.width = '70%'}
 #| label: fig-stations
+#| out-width: 90%
 #| fig-cap: 'Map of EMP’s discrete WQ field sites'
 
-knitr::include_graphics(here::here(file.path('sections/dwq/figures/dwq_station_map.jpg')))
+knitr::include_graphics(here::here(file.path('sections/dwq/figures/dwq_station_map.png')))
 ```
 
 ```{r echo=FALSE, warning=FALSE, message=FALSE, results = 'asis'}

@@ -19,9 +19,10 @@ Water quality data was continuously monitored at 15 sites throughout the Upper E
 
 ```{r echo=FALSE, fig.align='center',  out.width = '70%'}
 #| label: fig-stations
+#| out-width: 90%
 #| fig-cap: 'Map of EMP’s continuous WQ field sites'
 #| 
-include_graphics(here::here(file.path('sections/cwq/figures/cwq_station_map.jpg')))
+include_graphics(here::here(file.path('sections/cwq/figures/cwq_station_map.png')))
 ```
 
 ```{r echo=FALSE, warning=FALSE, message=FALSE, results = 'asis'}

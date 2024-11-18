@@ -2,26 +2,31 @@
 title: "Data Links"
 ---
 
+```{r echo = FALSE}
+# read in functions; do not edit
+source(here::here('admin/import_scripts.R'))
+```
+
 ## Complete Datasets 
-[**Continuous Water Quality**] <!-- (`r get_edi_url(1177)`) -->
+[**Continuous Water Quality**](`r get_edi_url(1177)`)
 
 Contact: Michelle Nelson ([Michelle.Nelson\@water.ca.gov](mailto:Michelle.Nelson@water.ca.gov){.email})
 
-[**Discrete Water Quality**] <!-- (`r get_edi_url(458)`) -->
+[**Discrete Water Quality**](`r get_edi_url(458)`)
 
 Contact: Julianna Manning ([Michelle.Nelson\@water.ca.gov](mailto:Michelle.Nelson@water.ca.gov){.email})
 
-[**Benthic Invertebrates**] <!-- (`r get_edi_url(1036)`) -->
+[**Benthic Invertebrates**](`r get_edi_url(1036)`)
 
 Contact: Betsy Wells ([Elizabeth.Wells\@water.ca.gov](mailto:Elizabeth.Wells@water.ca.gov){.email})
 
-[**Phytoplankton**] <!-- (`r get_edi_url(1320)`) -->
+[**Phytoplankton**](`r get_edi_url(1320)`)
 
 Contact: Tiffany Brown ([Tiffany.Brown\@water.ca.gov](mailto:Tiffany.Brown@water.ca.gov){.email})
 
-[**Zooplankton**] <!-- (`r get_edi_url(522)`) -->
+[**Zooplankton**](`r get_edi_url(522)`)
 
-Contact:  Tracy Shaw (caroline.shaw@wildlife.ca.gov)
+Contact:  Tracy Shaw ([Caroline.Shaw\@wildlife.ca.gov](mailto:Caroline.Shaw@wildlife.ca.gov){.email})
 
 ## Individual Stations (Continuous Water Quality) 
 :::: {style="display: flex;"}
@@ -62,9 +67,9 @@ Contact:  Tracy Shaw (caroline.shaw@wildlife.ca.gov)
 
 ::::
 <br>
-Contact: Andrew Tran (andrew.tran@water.ca.gov)
+Contact: Andrew Tran ([Andrew.Tran\@water.ca.gov](mailto:Andrew.Tran@water.ca.gov){.email})
 
 ## Related Datasets 
-[**Integrated San Francisco Estuary Discrete Water Quality**] <!-- (`r get_edi_url(731)`) -->
+[**Integrated San Francisco Estuary Discrete Water Quality**](`r get_edi_url(731)`)
 
-Contact: Sam Bashevkin (sam.bashevkin@waterboards.ca.gov)
+Contact: Sam Bashevkin ([Sam.Bashevkin\@waterboards.ca.gov](mailto:Sam.Bashevkin@water.ca.gov){.email})
