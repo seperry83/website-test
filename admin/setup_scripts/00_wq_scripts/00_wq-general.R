@@ -233,16 +233,16 @@ WQTableClass <- R6Class(
     },
     
     # create table with the summary stat information
-    create_kable = function(caption = NULL) {
+    create_kable = function() {
       if (is.null(private$summary_df)) {
         stop('Summary dataframe has not been created. Please call create_summary_df first.')
       }
       
-      table <- self$style_kable(private$summary_df, caption)
+      table <- self$style_kable(private$summary_df)
       
       if (private$nondetect_flag) {
         table <- table %>%
-          kableExtra::footnote('* value is RL', general_title = '')
+          kableExtra::add_footnote("Value is RL", notation = "symbol")
       }
       
       return(table)

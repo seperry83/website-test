@@ -108,13 +108,28 @@ StylingClass <- R6Class(
   'StylingClass',
   
   public = list(
-    style_kable = function(df, caption = NULL) {
-      table <- kable(df, caption = caption, align = 'c', digits = 2, escape = FALSE) %>%
-        kable_styling(c('striped', 'scale_down'), font_size = 14, html_font = 'Arimo', full_width = TRUE) %>%
-        kableExtra::column_spec(1:ncol(df), width = paste0(100 / ncol(df), "%"))
+    style_kable = function(df) {
+      # Check the output format
+      output_format <- knitr::opts_knit$get("rmarkdown.pandoc.to")
+
+      if (output_format == "html") {
+        # HTML-specific styling
+        table <- kable(df, align = 'c', digits = 2, escape = FALSE, format = "html") %>%
+          kable_styling(c('striped', 'scale_down'), font_size = 14, html_font = 'Arimo', full_width = TRUE) %>%
+          kableExtra::column_spec(1:ncol(df), width = paste0(100 / ncol(df), '%'))
+      } else if (output_format == "latex") {
+        num_columns <- ncol(df)
+        table_width <- 35
+        column_width <- paste0(table_width / num_columns, "em")
+        
+        table <- kable(df, align = 'c', digits = 2, format = "latex", booktabs = TRUE, escape = FALSE) %>%
+          kable_styling(latex_options = c("hold_position", "scale_down"), position = 'center') %>%
+          kableExtra::column_spec(1:ncol(df), width = column_width)
+      }
       
       return(table)
     }
+    
   )
 )
 

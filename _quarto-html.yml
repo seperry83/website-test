@@ -1,0 +1,56 @@
+project:
+  type: website
+  output-dir: _site
+  execute-dir: file
+  
+website:
+  page-navigation: false
+  title: 'Environmental Monitoring Program'
+  favicon: admin/figures/sentinel.ico
+  
+  page-footer:
+    background: '#e8f1f5'
+    center: |
+        ![](/admin/figures/website-logo-EMP.png){fig-alt="DWR, USBR, CDFW, and IEP logos" height=50px}
+
+  navbar:
+    background: '#e8f1f5'
+    foreground: '#006699'
+    logo: 'admin/figures/EMP-logo-website-small-3.png'
+    logo-alt: 'EMP logo'
+    title: false
+    collapse-below: lg
+    left:
+      - text: "Home"
+        href: sections/general/qmd-files/index.qmd
+      - text: "Data Links"
+        href: sections/general/qmd-files/data-links.qmd
+      - text: "Annual Reports"
+        menu:
+          - text: "Continuous Water Quality"
+            href: sections/c-wq/qmd-files/00-cwq-report.qmd
+          - text: "Discrete Water Quality"
+            href: sections/d-wq/qmd-files/00-dwq-report.qmd
+          - text: "Benthic Invertebrates"
+            href: "https://github.com/quarto-dev/quarto-cli/discussions"
+          - text: "Phytoplankton"
+            href: "https://github.com/quarto-dev/quarto-cli/discussions"
+          - text: "Zooplankton"
+            href: "https://github.com/quarto-dev/quarto-cli/discussions"
+      - text: Special Studies
+        menu:
+          - text: "Veliger Monitoring Program"
+            href: sections/special-studies/qmd-files/00-veliger.qmd
+      - text: "Contact Us"
+        href: "mailto:ted.flynn@water.ca.gov"
+
+format:
+  html:
+    theme: cosmo
+    css: [admin/styling_scripts/styles.css, admin/styling_scripts/slideshow.css]
+    # grid:
+    #   sidebar-width: 300px
+    toc: true
+    toc-title: Contents
+    page-layout: full
+    
