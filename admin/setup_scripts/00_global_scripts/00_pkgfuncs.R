@@ -22,6 +22,7 @@ R6Class <- R6::R6Class
 sym <- rlang::sym
 
 str_match <- stringr::str_match
+str_detect <- stringr::str_detect
 
 glue <- glue::glue
 

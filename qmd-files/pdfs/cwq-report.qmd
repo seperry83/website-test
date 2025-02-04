@@ -1,0 +1,266 @@
+---
+title: "Continuous Water Quality Monitoring Report for Water Year `r lubridate::year(Sys.Date())-1`"
+---
+
+```{r setup, include=FALSE, echo=FALSE}
+# default chunk options
+knitr::opts_chunk$set(echo = FALSE, comment = NA, message = FALSE, warning = FALSE, results = 'asis')
+
+# read in functions; do not edit
+source(here::here('admin/import_scripts.R'))
+```
+
+\begin{center}
+Authors: Michelle Nelson, Andrew Tran, and Scott Waller$^*$ \\
+Division of Integrated Science \& Engineering \\
+California Department of Water Resources \\
+West Sacramento, CA
+
+\vspace*{5mm}
+
+Date: `r format(Sys.Date(), '%m/%d/%Y')`
+
+\vspace*{15mm}
+
+Pursuant to Condition 11c of Water Right Decision 1641, State Water Resources Control Board, State of California, March 15, 2000.
+
+\vspace*{15mm}
+
+Reporting Period: October 1, `r prev_year` – September 30, `r report_year`
+
+\vspace*{5mm}
+
+ $^*$\footnotesize{Address correspondence to scott.waller@water.ca.gov}
+
+\vspace*{5mm}
+
+\includegraphics[width=0.6\textwidth]{`r here::here(file.path('admin/figures-tables/admin/EMP_footer.png'))`}
+\end{center}
+
+\newpage
+
+## Introduction
+
+The Department of Water Resources (DWR) and the US Bureau of Reclamation (USBR) are required by Water Right Decision 1641 (D-1641) to collect continuous water chemistry data to monitor the water quality at select sites in the upper San Francisco Estuary (Estuary). This report describes the results of these monitoring efforts for water year `r report_year` (October 1st `r prev_year` through September 30th `r report_year`) `r str_water_year(report_year, 'cur')` [(source)](https://cdec.water.ca.gov/reportapp/javareports?name=WSIHIST). Results are compared to the previous water year, `r str_water_year(prev_year, 'prev')`.
+
+## Methods
+
+Discrete water quality samples were collected monthly at 24 monitoring sites throughout the Upper Estuary and were grouped into regions based on their geographic location . These sites represent a variety of aquatic habitats, from narrow, freshwater channels to broad, estuarine bays.
+
+Water quality data was continuously monitored at 15 sites throughout the Upper Estuary and were grouped into regions based on their geographic location (@fig-stations; @tbl-stations). These sites represent a variety of aquatic habitats, from narrow, freshwater channels to broad, estuarine bays. **Note**: CEMP's Sherman Island station (SSI), which was called D11A in previous reports, has been renamed D22A to better reflect it's location in relation to historical station D22.
+
+Data were collected for six water quality parameters. All water samples were collected 1-meter below the water surface using a float-mounted YSI EXO2 multi-parameter water quality sonde. These parameters are:
+
+-   Water Temperature (°C)
+-   Specific Conductance (μS/cm)
+-   Dissolved Oxygen (mg/L)
+-   pH
+-   Turbidity (FNU)
+-   Fluorescence (μg/L)
+
+Regional facet graphs were created for each parameter.  The average, minimum, and maximum values were determined for parameter, both overall and per region. Average summary statistics are reported as the mean (μ) ± the standard deviation.
+
+For more in-depth methodology, see [here](https://portal.edirepository.org/nis/metadataviewer?packageid=edi.1320.6).
+
+## Results
+
+### Water Temperature
+
+`r strings_cwq_cur$disp_paragraph('WaterTemperature','mean', strings_cwq_prev)`
+
+### Specific Conductance
+
+`r strings_cwq_cur$disp_paragraph('SpC','mean', strings_cwq_prev)`
+
+### Dissolved Oxygen
+
+`r strings_cwq_cur$disp_paragraph('DissolvedOxygen','mean', strings_cwq_prev)`
+
+#### Stockton Station DO Values
+
+C-EMP monitors DO at the Stockton Ship channel to determine if/when it fall below limits established by the CVRWQCB (1998). For the months that coincide with the passage of fall-run Chinook salmon (October, November, and September), values `r obj_rri$disp_RRI_months('on months')`. For all other months, values `r obj_rri$disp_RRI_months('off months')`. A boxplot of the DO values is shown in @fig-rri. 
+
+### pH
+
+`r strings_cwq_cur$disp_paragraph('pH','mean', strings_cwq_prev)`
+
+### Turbidity
+
+`r strings_cwq_cur$disp_paragraph('Turbidity','mean', strings_cwq_prev)`
+
+### Chlorophyll *a* Fluorescence
+
+`r strings_cwq_cur$disp_paragraph('Fluorescence','mean', strings_cwq_prev)`
+
+## Interpretations
+
+Water Year 2023 began as a continuation of the preceding three years of drought conditions, but a deluge of atmospheric rivers beginning in late December and continuing through March brought high amounts of precipitation and a massive snowpack, which resulted in WY 2023 ultimately being classified as Wet.  
+
+The extreme precipitation events and snowpack runoff led to a considerable drop in specific conductivity in the Delta. The low values persisted through WY 2023 in the Interior Delta regions, with the western regions of Grizzly/Suisun and the Confluence beginning to show a marine influence in July. Cooler than average air temperatures at the start of the water year and runoff from the record snowpack resulted in much cooler water average temperatures. The Water Year 2023 average was 2.1 ºC cooler than the critically dry Water Year 2022. High flows created by the winter storms resulted in high turbidity in January with maximum values in all regions exceeding 100 FNU. A smaller spike in turbidity occurred in March also due to storm runoff. 
+
+## References
+
+[CVRWQCB] Central Valley Regional Water Quality Control Board. (1998). Water Quality Control Plan for the California Regional Water Quality Control Board Central Valley Region, the Sacramento River Basin, and San Joaquin River Basin [Basin Plan] (4th ed.).
+
+[SWRCB] State Water Resources Control Board. (1995). Water Quality Control Plan for the San Francisco Bay/Sacramento-San Joaquin Estuary [Bay-Delta Plan] (Adopted May 22, 1995, pursuant to Water Right Order 95-1). Sacramento, CA.
+
+[SWRCB] State Water Resources Control Board. (1999). Water Rights Decision 1641 for the Sacramento-San Joaquin Delta and Suisun Marsh (Adopted December 29, 1999, Revised in Accordance with order WR2000-02 March 15, 2000). Sacramento, CA.
+
+## Archived Reports
+
+Old EMP continuous water quality reports can be found [here](https://github.com/emp-dwr/emp-website/tree/gh-pages/admin/archive/c-wq).
+
+\newpage
+
+## Figures
+
+```{r echo=FALSE, fig.align='center'}
+#| label: fig-stations
+#| out-width: 100%
+#| fig-cap: 'Map of EMP’s continuous WQ field sites'
+#| 
+include_graphics(here::here(file.path('admin/figures-tables/cwq/cwq_station_map.png')))
+```
+
+```{r}
+#| label: fig-watertemperature
+#| echo: false
+#| fig-align: 'center'
+#| fig-cap: 'Water temperature by region in the San Francisco Bay-Delta estuary.'
+
+include_graphics(here::here(file.path('admin/figures-tables/cwq/cwq_ts_watertemperature.png')))
+```
+
+```{r}
+#| label: fig-spc
+#| echo: false
+#| fig-align: 'center'
+#| fig-cap: 'Specific conductance by region in the San Francisco Bay-Delta estuary.'
+
+include_graphics(here::here(file.path('admin/figures-tables/cwq/cwq_ts_spc.png')))
+```
+
+```{r}
+#| label: fig-dissolvedoxygen
+#| echo: false
+#| fig-align: 'center'
+#| fig-cap: 'Dissolved oxygen by region in the San Francisco Bay-Delta estuary.'
+
+include_graphics(here::here(file.path('admin/figures-tables/cwq/cwq_ts_dissolvedoxygen.png')))
+```
+
+```{r}
+#| label: fig-rri
+#| echo: false
+#| warning: false
+#| fig-align: 'center'
+#| fig-cap: 'Range of daily dissolved oxygen values at the Stockton Ship Channel (P8).'
+
+include_graphics(here::here(file.path('admin/figures-tables/cwq/cwq_rri_do.png')))
+```
+
+```{r}
+#| label: fig-ph
+#| echo: false
+#| fig-align: 'center'
+#| fig-cap: 'pH by region in the San Francisco Bay-Delta estuary.'
+
+include_graphics(here::here(file.path('admin/figures-tables/cwq/cwq_ts_ph.png')))
+```
+
+```{r}
+#| label: fig-turbidity
+#| echo: false
+#| fig-align: 'center'
+#| fig-cap: 'Turbidity by region in the San Francisco Bay-Delta estuary.'
+
+include_graphics(here::here(file.path('admin/figures-tables/cwq/cwq_ts_turbidity.png')))
+```
+
+```{r}
+#| label: fig-fluorescence
+#| echo: false
+#| fig-align: 'center'
+#| fig-cap: 'Chlorophyll a fluorescence by region in the San Francisco Bay-Delta estuary.'
+
+include_graphics(here::here(file.path('admin/figures-tables/cwq/cwq_ts_fluorescence.png')))
+```
+
+\newpage
+
+## Tables
+
+```{r echo=FALSE, warning=FALSE, message=FALSE, results = 'asis'}
+#| label: tbl-stations
+#| tbl-cap: 'Continuous WQ stations included within each region of the Delta'
+
+cwq_stations <- readr::read_csv(here::here('admin/figures-tables/cwq/cwq_stations.csv'))
+
+styler$style_kable(cwq_stations)
+```
+
+```{r}
+#| label: tbl-watertemperature
+#| echo: false
+#| fig-align: 'center'
+#| tbl-cap: 'Summary statistics for water temperature by region in the San Francisco Bay-Delta estuary.'
+
+summary_spc <- table_cwq$clone(deep=TRUE)
+summary_spc$create_summary_df('WaterTemperature', 'mean')
+summary_spc$create_kable()
+```
+
+```{r}
+#| label: tbl-spc
+#| echo: false
+#| fig-align: 'center'
+#| tbl-cap: 'Summary statistics for specific conductance by region in the San Francisco Bay-Delta estuary.'
+
+summary_spc <- table_cwq$clone(deep=TRUE)
+summary_spc$create_summary_df('SpC', 'mean')
+summary_spc$create_kable()
+```
+
+```{r}
+#| label: tbl-dissolvedoxygen
+#| echo: false
+#| fig-align: 'center'
+#| tbl-cap: 'Summary statistics for dissolved oxygen by region in the San Francisco Bay-Delta estuary.'
+
+summary_spc <- table_cwq$clone(deep=TRUE)
+summary_spc$create_summary_df('DissolvedOxygen', 'mean')
+summary_spc$create_kable()
+```
+
+```{r}
+#| label: tbl-ph
+#| echo: false
+#| fig-align: 'center'
+#| tbl-cap: 'Summary statistics for pH by region in the San Francisco Bay-Delta estuary.'
+
+summary_spc <- table_cwq$clone(deep=TRUE)
+summary_spc$create_summary_df('pH', 'mean')
+summary_spc$create_kable()
+```
+
+```{r}
+#| label: tbl-turbidity
+#| echo: false
+#| fig-align: 'center'
+#| tbl-cap: 'Summary statistics for turbidity by region in the San Francisco Bay-Delta estuary.'
+
+summary_spc <- table_cwq$clone(deep=TRUE)
+summary_spc$create_summary_df('Turbidity', 'mean')
+summary_spc$create_kable()
+```
+
+```{r}
+#| label: tbl-fluorescence
+#| echo: false
+#| fig-align: 'center'
+#| tbl-cap: 'Summary statistics for chlorophyll a fluorescence by region in the San Francisco Bay-Delta estuary.'
+
+summary_spc <- table_cwq$clone(deep=TRUE)
+summary_spc$create_summary_df('Fluorescence', 'mean')
+summary_spc$create_kable()
+```

@@ -1,0 +1,17 @@
+project:
+  type: default
+  output-dir: output/pdfs
+  execute-dir: file
+  render: 
+    - 'qmd-files/pdfs'
+  
+format:
+  pdf:
+    toc: false
+    documentclass: article
+    latex-engine: pdflatex
+    number-sections: false
+    header-includes:
+      - \usepackage{float}
+      - \floatplacement{figure}{H}
+      - \usepackage{lmodern}
