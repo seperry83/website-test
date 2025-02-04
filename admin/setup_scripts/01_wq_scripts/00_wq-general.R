@@ -110,7 +110,7 @@ WQStringClass <- R6Class(
         { if (!is.null(region)) filter(., Region == region) else . }
       
       unit_val <- unique(filtered_rows %>% pull(Unit))
-      
+
       if (is.na(unit_val)){
         result_string <- paste0(format_vals(avg_val, analyte), ' \u00B1 ', format_vals(variance_val, analyte))
       } else {

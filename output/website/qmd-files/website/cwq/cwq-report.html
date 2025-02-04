@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Michelle Nelson and Andrew Tran">
+
+<title>Environmental Monitoring Program - Continuous Water Quality Report</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<link href="../../../admin/figures-tables/sentinel.ico" rel="icon">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+<script src="../../../site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="../../../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="../../../admin/styling_scripts/styles.css">
+</head>
+
+<body class="nav-fixed">
+
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a href="../../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../../admin/figures-tables/admin/EMP_logo.png" alt="EMP logo" class="navbar-logo">
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../qmd-files/website/00_index/index.html" rel="" target="">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../qmd-files/website/general/data-links.html" rel="" target="">
+ <span class="menu-text">Data Links</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-annual-reports" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Annual Reports</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-annual-reports">    
+        <li>
+    <a class="dropdown-item" href="../../../qmd-files/website/cwq/cwq-report.html" rel="" target="">
+ <span class="dropdown-text">Continuous Water Quality</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../qmd-files/website/dwq/dwq-report.html" rel="" target="">
+ <span class="dropdown-text">Discrete Water Quality</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../qmd-files/website/benthic/benthic-report.html" rel="" target="">
+ <span class="dropdown-text">Benthic Invertebrates</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../qmd-files/website/phyto/phyto-report.html" rel="" target="">
+ <span class="dropdown-text">Phytoplankton</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../qmd-files/website/zoop/zoop-report.html" rel="" target="">
+ <span class="dropdown-text">Zooplankton</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-special-studies" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Special Studies</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-special-studies">    
+        <li>
+    <a class="dropdown-item" href="../../../qmd-files/website/special-studies/veliger-info.html" rel="" target="">
+ <span class="dropdown-text">Veliger Monitoring Program</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="mailto:ted.flynn@water.ca.gov" rel="" target="">
+ <span class="menu-text">Contact Us</span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools ms-auto">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#methods" id="toc-methods" class="nav-link" data-scroll-target="#methods">Methods</a></li>
+  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a>
+  <ul class="collapse">
+  <li><a href="#water-temperature" id="toc-water-temperature" class="nav-link" data-scroll-target="#water-temperature">Water Temperature</a></li>
+  <li><a href="#specific-conductance" id="toc-specific-conductance" class="nav-link" data-scroll-target="#specific-conductance">Specific Conductance</a></li>
+  <li><a href="#dissolved-oxygen" id="toc-dissolved-oxygen" class="nav-link" data-scroll-target="#dissolved-oxygen">Dissolved Oxygen</a></li>
+  <li><a href="#ph" id="toc-ph" class="nav-link" data-scroll-target="#ph">pH</a></li>
+  <li><a href="#turbidity" id="toc-turbidity" class="nav-link" data-scroll-target="#turbidity">Turbidity</a></li>
+  <li><a href="#chlorophyll-a-fluorescence" id="toc-chlorophyll-a-fluorescence" class="nav-link" data-scroll-target="#chlorophyll-a-fluorescence">Chlorophyll <em>a</em> Fluorescence</a></li>
+  </ul></li>
+  <li><a href="#interpretations" id="toc-interpretations" class="nav-link" data-scroll-target="#interpretations">Interpretations</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  <li><a href="#archived-reports" id="toc-archived-reports" class="nav-link" data-scroll-target="#archived-reports">Archived Reports</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content column-page-left" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Continuous Water Quality Report</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Michelle Nelson and Andrew Tran </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>The Department of Water Resources (DWR) and the US Bureau of Reclamation (USBR) are required by Water Right Decision 1641 (D-1641) to collect continuous water chemistry data to monitor the water quality at select sites in the upper San Francisco Estuary (Estuary). This report describes the results of these monitoring efforts for water year 2023 (October 1st 2022 through September 30th 2023) which was classified as a wet year in the Sacramento and San Joaquin Valleys <a href="https://cdec.water.ca.gov/reportapp/javareports?name=WSIHIST">(source)</a>. Results are compared to the previous water year, which was classified as critically dry in both valleys.</p>
+</section>
+<section id="methods" class="level2">
+<h2 class="anchored" data-anchor-id="methods">Methods</h2>
+<p>Discrete water quality samples were collected monthly at 24 monitoring sites throughout the Upper Estuary and were grouped into regions based on their geographic location . These sites represent a variety of aquatic habitats, from narrow, freshwater channels to broad, estuarine bays.</p>
+<p>Water quality data was continuously monitored at 15 sites throughout the Upper Estuary and were grouped into regions based on their geographic location (<a href="#fig-stations">Figure&nbsp;1</a>; <a href="#tbl-stations">Table&nbsp;1</a>). These sites represent a variety of aquatic habitats, from narrow, freshwater channels to broad, estuarine bays. <strong>Note</strong>: CEMP’s Sherman Island station (SSI), which was called D11A in previous reports, has been renamed D22A to better reflect it’s location in relation to historical station D22.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-stations" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="../../../admin/figures-tables/cwq/cwq_station_map.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<figcaption class="figure-caption">Figure&nbsp;1: Map of EMP’s continuous WQ field sites</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div id="tbl-stations" class="anchored">
+<table class="table table-striped table-sm small" data-quarto-postprocess="true">
+<caption>Table&nbsp;1: Continuous WQ stations included within each region of the Delta</caption>
+<thead>
+<tr class="header">
+<th style="text-align: center;" data-quarto-table-cell-role="th">Region</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">WY Index</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Stations</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center; width: 33.3333333333333%;">Central Delta</td>
+<td style="text-align: center; width: 33.3333333333333%;">San Joaquin</td>
+<td style="text-align: center; width: 33.3333333333333%;">D16A, D19A, D29</td>
+</tr>
+<tr class="even">
+<td style="text-align: center; width: 33.3333333333333%;">Confluence</td>
+<td style="text-align: center; width: 33.3333333333333%;">Sacramento</td>
+<td style="text-align: center; width: 33.3333333333333%;">D9A, D10A, D12A, D22A</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center; width: 33.3333333333333%;">North Delta</td>
+<td style="text-align: center; width: 33.3333333333333%;">Sacramento</td>
+<td style="text-align: center; width: 33.3333333333333%;">C3A, D24A</td>
+</tr>
+<tr class="even">
+<td style="text-align: center; width: 33.3333333333333%;">South Delta</td>
+<td style="text-align: center; width: 33.3333333333333%;">San Joaquin</td>
+<td style="text-align: center; width: 33.3333333333333%;">C7A , C10A, P8A</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center; width: 33.3333333333333%;">Suisun and Grizzly Bays</td>
+<td style="text-align: center; width: 33.3333333333333%;">Sacramento</td>
+<td style="text-align: center; width: 33.3333333333333%;">D6A, D7A, D8A</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+</div>
+</div>
+<p>Data were collected for six water quality parameters. All water samples were collected 1-meter below the water surface using a float-mounted YSI EXO2 multi-parameter water quality sonde. These parameters are:</p>
+<ul>
+<li>Water Temperature (°C)</li>
+<li>Specific Conductance (μS/cm)</li>
+<li>Dissolved Oxygen (mg/L)</li>
+<li>pH</li>
+<li>Turbidity (FNU)</li>
+<li>Fluorescence (μg/L)</li>
+</ul>
+<p>Regional facet graphs were created for each parameter. The average, minimum, and maximum values were determined for parameter, both overall and per region. Average summary statistics are reported as the mean (μ) ± the standard deviation.</p>
+<p>For more in-depth methodology, see <a href="https://portal.edirepository.org/nis/metadataviewer?packageid=edi.1320.6">here</a>.</p>
+</section>
+<section id="results" class="level2">
+<h2 class="anchored" data-anchor-id="results">Results</h2>
+<section id="water-temperature" class="level3">
+<h3 class="anchored" data-anchor-id="water-temperature">Water Temperature</h3>
+<p>The average water temperature value was 15.90 ± 5.19 °C; for comparison, the previous year average was 18.00 ± 5.11 °C. Values ranged from 7.32 °C to 26.90 °C. Per region average, minimum, and maximum values are shown in <a href="#tbl-watertemperature">Table&nbsp;2</a>; time series plots are shown in <a href="#fig-watertemperature">Figure&nbsp;2</a>.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="tbl-watertemperature" class="anchored">
+<table class="table table-striped table-sm small" data-quarto-postprocess="true">
+<caption>Table&nbsp;2: Summary statistics for water temperature by region in the San Francisco Bay-Delta estuary.</caption>
+<thead>
+<tr class="header">
+<th style="text-align: center;" data-quarto-table-cell-role="th">Statistic</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Central Delta</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Confluence</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">North Delta</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">South Delta</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Suisun and Grizzly Bays</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center; width: 16.6666666666667%;">Average</td>
+<td style="text-align: center; width: 16.6666666666667%;">16.50</td>
+<td style="text-align: center; width: 16.6666666666667%;">15.80</td>
+<td style="text-align: center; width: 16.6666666666667%;">15.20</td>
+<td style="text-align: center; width: 16.6666666666667%;">16.30</td>
+<td style="text-align: center; width: 16.6666666666667%;">15.60</td>
+</tr>
+<tr class="even">
+<td style="text-align: center; width: 16.6666666666667%;">Min</td>
+<td style="text-align: center; width: 16.6666666666667%;">8.12</td>
+<td style="text-align: center; width: 16.6666666666667%;">8.06</td>
+<td style="text-align: center; width: 16.6666666666667%;">7.32</td>
+<td style="text-align: center; width: 16.6666666666667%;">7.73</td>
+<td style="text-align: center; width: 16.6666666666667%;">8.07</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center; width: 16.6666666666667%;">Max</td>
+<td style="text-align: center; width: 16.6666666666667%;">26.00</td>
+<td style="text-align: center; width: 16.6666666666667%;">24.20</td>
+<td style="text-align: center; width: 16.6666666666667%;">24.10</td>
+<td style="text-align: center; width: 16.6666666666667%;">26.90</td>
+<td style="text-align: center; width: 16.6666666666667%;">23.60</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-watertemperature" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="../../../admin/figures-tables/cwq/cwq_ts_watertemperature.png" class="img-fluid figure-img" width="720"></p>
+<figcaption class="figure-caption">Figure&nbsp;2: Water temperature by region in the San Francisco Bay-Delta estuary.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="specific-conductance" class="level3">
+<h3 class="anchored" data-anchor-id="specific-conductance">Specific Conductance</h3>
+<p>The average specific conductance value was 3070 ± 6140 µS/cm; for comparison, the previous year average was 5470 ± 7800 µS/cm. Values ranged from 68 µS/cm to 31600 µS/cm. Per region average, minimum, and maximum values are shown in <a href="#tbl-spc">Table&nbsp;3</a>; time series plots are shown in <a href="#fig-spc">Figure&nbsp;3</a>.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="tbl-spc" class="anchored">
+<table class="table table-striped table-sm small" data-quarto-postprocess="true">
+<caption>Table&nbsp;3: Summary statistics for specific conductance by region in the San Francisco Bay-Delta estuary.</caption>
+<thead>
+<tr class="header">
+<th style="text-align: center;" data-quarto-table-cell-role="th">Statistic</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Central Delta</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Confluence</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">North Delta</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">South Delta</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Suisun and Grizzly Bays</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center; width: 16.6666666666667%;">Average</td>
+<td style="text-align: center; width: 16.6666666666667%;">355</td>
+<td style="text-align: center; width: 16.6666666666667%;">3530</td>
+<td style="text-align: center; width: 16.6666666666667%;">181</td>
+<td style="text-align: center; width: 16.6666666666667%;">266</td>
+<td style="text-align: center; width: 16.6666666666667%;">9930</td>
+</tr>
+<tr class="even">
+<td style="text-align: center; width: 16.6666666666667%;">Min</td>
+<td style="text-align: center; width: 16.6666666666667%;">93</td>
+<td style="text-align: center; width: 16.6666666666667%;">90</td>
+<td style="text-align: center; width: 16.6666666666667%;">81</td>
+<td style="text-align: center; width: 16.6666666666667%;">68</td>
+<td style="text-align: center; width: 16.6666666666667%;">118</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center; width: 16.6666666666667%;">Max</td>
+<td style="text-align: center; width: 16.6666666666667%;">2080</td>
+<td style="text-align: center; width: 16.6666666666667%;">20000</td>
+<td style="text-align: center; width: 16.6666666666667%;">1510</td>
+<td style="text-align: center; width: 16.6666666666667%;">820</td>
+<td style="text-align: center; width: 16.6666666666667%;">31600</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-spc" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="../../../admin/figures-tables/cwq/cwq_ts_spc.png" class="img-fluid figure-img" width="720"></p>
+<figcaption class="figure-caption">Figure&nbsp;3: Specific conductance by region in the San Francisco Bay-Delta estuary.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="dissolved-oxygen" class="level3">
+<h3 class="anchored" data-anchor-id="dissolved-oxygen">Dissolved Oxygen</h3>
+<p>The average dissolved oxygen value was 9.16 ± 1.04 mg/L; for comparison, the previous year average was 8.97 ± 1.14 mg/L. Values ranged from 5.86 mg/L to 12.00 mg/L. Per region average, minimum, and maximum values are shown in <a href="#tbl-dissolvedoxygen">Table&nbsp;4</a>; time series plots are shown in <a href="#fig-dissolvedoxygen">Figure&nbsp;4</a>.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="tbl-dissolvedoxygen" class="anchored">
+<table class="table table-striped table-sm small" data-quarto-postprocess="true">
+<caption>Table&nbsp;4: Summary statistics for dissolved oxygen by region in the San Francisco Bay-Delta estuary.</caption>
+<thead>
+<tr class="header">
+<th style="text-align: center;" data-quarto-table-cell-role="th">Statistic</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Central Delta</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Confluence</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">North Delta</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">South Delta</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Suisun and Grizzly Bays</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center; width: 16.6666666666667%;">Average</td>
+<td style="text-align: center; width: 16.6666666666667%;">9.17</td>
+<td style="text-align: center; width: 16.6666666666667%;">9.32</td>
+<td style="text-align: center; width: 16.6666666666667%;">9.62</td>
+<td style="text-align: center; width: 16.6666666666667%;">8.55</td>
+<td style="text-align: center; width: 16.6666666666667%;">9.27</td>
+</tr>
+<tr class="even">
+<td style="text-align: center; width: 16.6666666666667%;">Min</td>
+<td style="text-align: center; width: 16.6666666666667%;">7.14</td>
+<td style="text-align: center; width: 16.6666666666667%;">7.76</td>
+<td style="text-align: center; width: 16.6666666666667%;">7.64</td>
+<td style="text-align: center; width: 16.6666666666667%;">5.86</td>
+<td style="text-align: center; width: 16.6666666666667%;">7.28</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center; width: 16.6666666666667%;">Max</td>
+<td style="text-align: center; width: 16.6666666666667%;">12.00</td>
+<td style="text-align: center; width: 16.6666666666667%;">11.30</td>
+<td style="text-align: center; width: 16.6666666666667%;">11.90</td>
+<td style="text-align: center; width: 16.6666666666667%;">11.60</td>
+<td style="text-align: center; width: 16.6666666666667%;">11.20</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-dissolvedoxygen" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="../../../admin/figures-tables/cwq/cwq_ts_dissolvedoxygen.png" class="img-fluid figure-img" width="720"></p>
+<figcaption class="figure-caption">Figure&nbsp;4: Dissolved oxygen by region in the San Francisco Bay-Delta estuary.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<section id="stockton-station-do-values" class="level4">
+<h4 class="anchored" data-anchor-id="stockton-station-do-values">Stockton Station DO Values</h4>
+<p>C-EMP monitors DO at the Stockton Ship channel to determine if/when it fall below limits established by the CVRWQCB (1998). For the months that coincide with the passage of fall-run Chinook salmon (October, November, and September), values fell below the 6 mg/L limit in October. For all other months, values did not fall below the 5 mg/L limit. A boxplot of the DO values is shown in <a href="#fig-rri">Figure&nbsp;5</a>.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-rri" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="../../../admin/figures-tables/cwq/cwq_rri_do.png" class="img-fluid figure-img" width="525"></p>
+<figcaption class="figure-caption">Figure&nbsp;5: Range of daily dissolved oxygen values at the Stockton Ship Channel (P8).</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="ph" class="level3">
+<h3 class="anchored" data-anchor-id="ph">pH</h3>
+<p>The average pH value was 7.64 ± 0.26; for comparison, the previous year average was 7.87 ± 0.32. Values ranged from 6.90 to 9.38. Per region average, minimum, and maximum values are shown in <a href="#tbl-ph">Table&nbsp;5</a>; time series plots are shown in <a href="#fig-ph">Figure&nbsp;6</a>.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="tbl-ph" class="anchored">
+<table class="table table-striped table-sm small" data-quarto-postprocess="true">
+<caption>Table&nbsp;5: Summary statistics for pH by region in the San Francisco Bay-Delta estuary.</caption>
+<thead>
+<tr class="header">
+<th style="text-align: center;" data-quarto-table-cell-role="th">Statistic</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Central Delta</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Confluence</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">North Delta</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">South Delta</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Suisun and Grizzly Bays</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center; width: 16.6666666666667%;">Average</td>
+<td style="text-align: center; width: 16.6666666666667%;">7.67</td>
+<td style="text-align: center; width: 16.6666666666667%;">7.70</td>
+<td style="text-align: center; width: 16.6666666666667%;">7.64</td>
+<td style="text-align: center; width: 16.6666666666667%;">7.38</td>
+<td style="text-align: center; width: 16.6666666666667%;">7.82</td>
+</tr>
+<tr class="even">
+<td style="text-align: center; width: 16.6666666666667%;">Min</td>
+<td style="text-align: center; width: 16.6666666666667%;">7.17</td>
+<td style="text-align: center; width: 16.6666666666667%;">7.16</td>
+<td style="text-align: center; width: 16.6666666666667%;">7.18</td>
+<td style="text-align: center; width: 16.6666666666667%;">6.90</td>
+<td style="text-align: center; width: 16.6666666666667%;">7.34</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center; width: 16.6666666666667%;">Max</td>
+<td style="text-align: center; width: 16.6666666666667%;">9.38</td>
+<td style="text-align: center; width: 16.6666666666667%;">8.01</td>
+<td style="text-align: center; width: 16.6666666666667%;">8.04</td>
+<td style="text-align: center; width: 16.6666666666667%;">8.11</td>
+<td style="text-align: center; width: 16.6666666666667%;">8.26</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-ph" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="../../../admin/figures-tables/cwq/cwq_ts_ph.png" class="img-fluid figure-img" width="720"></p>
+<figcaption class="figure-caption">Figure&nbsp;6: pH by region in the San Francisco Bay-Delta estuary.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="turbidity" class="level3">
+<h3 class="anchored" data-anchor-id="turbidity">Turbidity</h3>
+<p>The average turbidity value was 19.90 ± 22.30 FNU; for comparison, the previous year average was 14.70 ± 16.50 FNU. Values ranged from 0.20 FNU to 201.00 FNU. Per region average, minimum, and maximum values are shown in <a href="#tbl-turbidity">Table&nbsp;6</a>; time series plots are shown in <a href="#fig-turbidity">Figure&nbsp;7</a>.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="tbl-turbidity" class="anchored">
+<table class="table table-striped table-sm small" data-quarto-postprocess="true">
+<caption>Table&nbsp;6: Summary statistics for turbidity by region in the San Francisco Bay-Delta estuary.</caption>
+<thead>
+<tr class="header">
+<th style="text-align: center;" data-quarto-table-cell-role="th">Statistic</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Central Delta</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Confluence</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">North Delta</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">South Delta</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Suisun and Grizzly Bays</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center; width: 16.6666666666667%;">Average</td>
+<td style="text-align: center; width: 16.6666666666667%;">9.66</td>
+<td style="text-align: center; width: 16.6666666666667%;">21.80</td>
+<td style="text-align: center; width: 16.6666666666667%;">18.60</td>
+<td style="text-align: center; width: 16.6666666666667%;">13.70</td>
+<td style="text-align: center; width: 16.6666666666667%;">34.80</td>
+</tr>
+<tr class="even">
+<td style="text-align: center; width: 16.6666666666667%;">Min</td>
+<td style="text-align: center; width: 16.6666666666667%;">0.20</td>
+<td style="text-align: center; width: 16.6666666666667%;">4.93</td>
+<td style="text-align: center; width: 16.6666666666667%;">0.82</td>
+<td style="text-align: center; width: 16.6666666666667%;">0.93</td>
+<td style="text-align: center; width: 16.6666666666667%;">7.12</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center; width: 16.6666666666667%;">Max</td>
+<td style="text-align: center; width: 16.6666666666667%;">102.00</td>
+<td style="text-align: center; width: 16.6666666666667%;">136.00</td>
+<td style="text-align: center; width: 16.6666666666667%;">201.00</td>
+<td style="text-align: center; width: 16.6666666666667%;">130.00</td>
+<td style="text-align: center; width: 16.6666666666667%;">167.00</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-turbidity" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="../../../admin/figures-tables/cwq/cwq_ts_turbidity.png" class="img-fluid figure-img" width="720"></p>
+<figcaption class="figure-caption">Figure&nbsp;7: Turbidity by region in the San Francisco Bay-Delta estuary.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="chlorophyll-a-fluorescence" class="level3">
+<h3 class="anchored" data-anchor-id="chlorophyll-a-fluorescence">Chlorophyll <em>a</em> Fluorescence</h3>
+<p>The average fluorescence value was 3.48 ± 2.96 µg/L; for comparison, the previous year average was 2.86 ± 1.76 µg/L. Values ranged from 0.34 µg/L to 34.50 µg/L. Per region average, minimum, and maximum values are shown in <a href="#tbl-fluorescence">Table&nbsp;7</a>; time series plots are shown in <a href="#fig-fluorescence">Figure&nbsp;8</a>.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="tbl-fluorescence" class="anchored">
+<table class="table table-striped table-sm small" data-quarto-postprocess="true">
+<caption>Table&nbsp;7: Summary statistics for chlorophyll a fluorescence by region in the San Francisco Bay-Delta estuary.</caption>
+<thead>
+<tr class="header">
+<th style="text-align: center;" data-quarto-table-cell-role="th">Statistic</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Central Delta</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Confluence</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">North Delta</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">South Delta</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Suisun and Grizzly Bays</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center; width: 16.6666666666667%;">Average</td>
+<td style="text-align: center; width: 16.6666666666667%;">2.64</td>
+<td style="text-align: center; width: 16.6666666666667%;">2.68</td>
+<td style="text-align: center; width: 16.6666666666667%;">2.62</td>
+<td style="text-align: center; width: 16.6666666666667%;">6.10</td>
+<td style="text-align: center; width: 16.6666666666667%;">3.34</td>
+</tr>
+<tr class="even">
+<td style="text-align: center; width: 16.6666666666667%;">Min</td>
+<td style="text-align: center; width: 16.6666666666667%;">0.72</td>
+<td style="text-align: center; width: 16.6666666666667%;">0.57</td>
+<td style="text-align: center; width: 16.6666666666667%;">0.43</td>
+<td style="text-align: center; width: 16.6666666666667%;">0.34</td>
+<td style="text-align: center; width: 16.6666666666667%;">0.40</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center; width: 16.6666666666667%;">Max</td>
+<td style="text-align: center; width: 16.6666666666667%;">11.90</td>
+<td style="text-align: center; width: 16.6666666666667%;">9.92</td>
+<td style="text-align: center; width: 16.6666666666667%;">6.77</td>
+<td style="text-align: center; width: 16.6666666666667%;">34.50</td>
+<td style="text-align: center; width: 16.6666666666667%;">11.30</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-fluorescence" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="../../../admin/figures-tables/cwq/cwq_ts_fluorescence.png" class="img-fluid figure-img" width="720"></p>
+<figcaption class="figure-caption">Figure&nbsp;8: Chlorophyll a fluorescence by region in the San Francisco Bay-Delta estuary.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="interpretations" class="level2">
+<h2 class="anchored" data-anchor-id="interpretations">Interpretations</h2>
+<p>Water Year 2023 began as a continuation of the preceding three years of drought conditions, but a deluge of atmospheric rivers beginning in late December and continuing through March brought high amounts of precipitation and a massive snowpack, which resulted in WY 2023 ultimately being classified as Wet.</p>
+<p>The extreme precipitation events and snowpack runoff led to a considerable drop in specific conductivity in the Delta. The low values persisted through WY 2023 in the Interior Delta regions, with the western regions of Grizzly/Suisun and the Confluence beginning to show a marine influence in July. Cooler than average air temperatures at the start of the water year and runoff from the record snowpack resulted in much cooler water average temperatures. The Water Year 2023 average was 2.1 ºC cooler than the critically dry Water Year 2022. High flows created by the winter storms resulted in high turbidity in January with maximum values in all regions exceeding 100 FNU. A smaller spike in turbidity occurred in March also due to storm runoff.</p>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<p>[CVRWQCB] Central Valley Regional Water Quality Control Board. (1998). Water Quality Control Plan for the California Regional Water Quality Control Board Central Valley Region, the Sacramento River Basin, and San Joaquin River Basin [Basin Plan] (4th ed.).</p>
+<p>[SWRCB] State Water Resources Control Board. (1995). Water Quality Control Plan for the San Francisco Bay/Sacramento-San Joaquin Estuary [Bay-Delta Plan] (Adopted May 22, 1995, pursuant to Water Right Order 95-1). Sacramento, CA.</p>
+<p>[SWRCB] State Water Resources Control Board. (1999). Water Rights Decision 1641 for the Sacramento-San Joaquin Delta and Suisun Marsh (Adopted December 29, 1999, Revised in Accordance with order WR2000-02 March 15, 2000). Sacramento, CA.</p>
+</section>
+<section id="archived-reports" class="level2">
+<h2 class="anchored" data-anchor-id="archived-reports">Archived Reports</h2>
+<p>Old EMP continuous water quality reports can be found <a href="https://github.com/emp-dwr/emp-website/tree/gh-pages/admin/archive/c-wq">here</a>.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center"><img src="../../..\admin/figures-tables/admin/EMP_footer.png" alt="DWR, CDFW, and USBR logos" height="50"></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+</body></html>

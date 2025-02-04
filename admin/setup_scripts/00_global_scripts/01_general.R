@@ -85,15 +85,29 @@ StylingClass <- R6Class(
     df_regionhex = NULL,
     
     initialize = function(df_regionhex) {
-      self$df_regionhex <- read_csv(here::here('admin/figures-tables/region_table.csv'), show_col_types = FALSE)
+      self$df_regionhex <- read_csv(here::here('admin/figures-tables/admin/region_table.csv'), show_col_types = FALSE)
     },
     
     # TABLES
     # # style all tables
+    
     style_kable = function(df) {
-      table <- kable(df, align = 'c', digits = 2, escape = FALSE) %>%
-        kable_styling(c('striped', 'scale_down'), font_size = 14, html_font = 'Arimo', full_width = TRUE) %>%
-        kableExtra::column_spec(1:ncol(df), width = paste0(100 / ncol(df), '%'))
+      # website      
+      if (knitr::is_html_output()) {
+        table <- kable(df, align = 'c', digits = 2, escape = FALSE) %>%
+          kable_styling(c('striped', 'scale_down'), font_size = 14, html_font = 'Arimo', full_width = TRUE) %>%
+          kableExtra::column_spec(1:ncol(df), width = paste0(100 / ncol(df), '%'))
+      
+      # pdf
+      } else if (knitr::is_latex_output()) {
+        num_columns <- ncol(df)
+        table_width <- 35
+        column_width <- paste0(table_width / num_columns, 'em')
+        
+        table <- kable(df, align = 'c', digits = 2, format = 'latex', booktabs = TRUE, escape = FALSE) %>%
+          kable_styling(latex_options = c('hold_position', 'scale_down'), position = 'center') %>%
+          kableExtra::column_spec(1:ncol(df), width = column_width)
+      }
       
       return(table)
     },
@@ -176,10 +190,17 @@ StylingClass <- R6Class(
     
     # # create list item for bullet lists
     list_item = function(ele){
-      item <- glue('&#x2022; {ele}<br />')
+      # website
+      if (knitr::is_html_output()) {
+        item <- glue('&#x2022; {ele}<br />')
+      
+      # pdf
+      } else if (knitr::is_latex_output()) {
+        item <- glue('\\item {ele}')
+      }
       return(item)
     },
-    
+
     # LISTS
     # # style bullet lists
     bullet_list = function(vec){
@@ -190,7 +211,15 @@ StylingClass <- R6Class(
         final_list <- c(final_list, new_ele)
       }
       
-      final_list <- paste0(final_list, collapse = '')
+      # website
+      if (knitr::is_html_output()) {
+        final_list <- paste0(final_list, collapse = '')
+        
+      # pdf
+      } else if (knitr::is_latex_output()) {
+        final_list <- c('\\begin{itemize}', final_list, '\\end{itemize}')
+        final_list <- paste0(final_list, collapse = '\n')
+      }
       
       return(final_list)
     }
@@ -283,7 +312,7 @@ str_water_year <- function(given_year = report_year, period = c('cur','prev')){
 
 # format numbers for display based on analyte
 format_vals <- function(value, vari) {
-  df_analytes <- readr::read_csv(here::here('admin/figures-tables/analyte_table.csv'),
+  df_analytes <- readr::read_csv(here::here('admin/figures-tables/admin/analyte_table.csv'),
                                  locale = readr::locale(encoding = 'UTF-8'),
                                  show_col_types = FALSE)
   
@@ -324,6 +353,22 @@ get_edi_url <- function(pkg_id, revision_num = 'current') {
   return(edi_url)
 }
 
+# generate figures
+create_figs <- function(group = c('cwq','dwq','phyto','benthic')){
+  if('cwq' %in% group){
+    create_figs_cwq()  
+  }
+  if('dwq' %in% group){
+    create_figs_dwq()  
+  }
+  if('phyto' %in% group){
+    create_figs_phyto()  
+  }
+  if('benthic' %in% group){
+    create_figs_benthic()  
+  }
+}
+
 # Global Variables --------------------------------------------------------
 
 # define default year (change manually if needed)
@@ -335,3 +380,8 @@ month_order <- c('October','November','December','January','February','March','A
 label_order <- c(glue('Oct-{prev_year%%100}'),glue('Nov-{prev_year%%100}'),glue('Dec-{prev_year%%100}'),glue('Jan-{report_year%%100}'),glue('Feb-{report_year%%100}'),glue('Mar-{report_year%%100}'),glue('Apr-{report_year%%100}'),glue('May-{report_year%%100}'),glue('Jun-{report_year%%100}'),glue('Jul-{report_year%%100}'),glue('Aug-{report_year%%100}'),glue('Sep-{report_year%%100}'))
 
 styler <- StylingClass$new()
+
+# read in relevant dataframes
+df_analytes <- read_quiet_csv(here::here('admin/figures-tables/admin/analyte_table.csv'), locale = readr::locale(encoding = 'UTF-8'))
+
+df_regions <- read_quiet_csv(here::here('admin/figures-tables/admin/station_table.csv'))

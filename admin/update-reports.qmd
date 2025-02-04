@@ -1,0 +1,27 @@
+# Update Annual Reports
+
+## generate figures
+
+```{r}
+source(here::here('admin/import_scripts.R'))
+
+create_figs()
+```
+
+## create pdfs
+
+```{r}
+quarto::quarto_render(
+  profile = 'pdfs'
+)
+```
+
+## update website
+
+**WARNING:** after running, once pushed to the GitHub "gh-pages" branch, website *will* be updated
+
+```{r}
+quarto::quarto_render(
+  profile = 'website'
+)
+```

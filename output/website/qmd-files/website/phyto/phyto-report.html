@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Tiffany Brown">
+
+<title>Environmental Monitoring Program - Phytoplankton Report</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<link href="../../../admin/figures-tables/sentinel.ico" rel="icon">
+<script src="../../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+<script src="../../../site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="../../../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="../../../admin/styling_scripts/styles.css">
+</head>
+
+<body class="nav-fixed">
+
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a href="../../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../../admin/figures-tables/admin/EMP_logo.png" alt="EMP logo" class="navbar-logo">
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../qmd-files/website/00_index/index.html" rel="" target="">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../qmd-files/website/general/data-links.html" rel="" target="">
+ <span class="menu-text">Data Links</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-annual-reports" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Annual Reports</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-annual-reports">    
+        <li>
+    <a class="dropdown-item" href="../../../qmd-files/website/cwq/cwq-report.html" rel="" target="">
+ <span class="dropdown-text">Continuous Water Quality</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../qmd-files/website/dwq/dwq-report.html" rel="" target="">
+ <span class="dropdown-text">Discrete Water Quality</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../qmd-files/website/benthic/benthic-report.html" rel="" target="">
+ <span class="dropdown-text">Benthic Invertebrates</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../qmd-files/website/phyto/phyto-report.html" rel="" target="">
+ <span class="dropdown-text">Phytoplankton</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../qmd-files/website/zoop/zoop-report.html" rel="" target="">
+ <span class="dropdown-text">Zooplankton</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-special-studies" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Special Studies</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-special-studies">    
+        <li>
+    <a class="dropdown-item" href="../../../qmd-files/website/special-studies/veliger-info.html" rel="" target="">
+ <span class="dropdown-text">Veliger Monitoring Program</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="mailto:ted.flynn@water.ca.gov" rel="" target="">
+ <span class="menu-text">Contact Us</span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools ms-auto">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#methods" id="toc-methods" class="nav-link" data-scroll-target="#methods">Methods</a>
+  <ul class="collapse">
+  <li><a href="#phytoplankton" id="toc-phytoplankton" class="nav-link" data-scroll-target="#phytoplankton">Phytoplankton</a></li>
+  <li><a href="#chlorophyll-a-and-pheophytin-a" id="toc-chlorophyll-a-and-pheophytin-a" class="nav-link" data-scroll-target="#chlorophyll-a-and-pheophytin-a">Chlorophyll <em>a</em> and Pheophytin <em>a</em></a></li>
+  </ul></li>
+  <li><a href="#overall-results" id="toc-overall-results" class="nav-link" data-scroll-target="#overall-results">Overall Results</a>
+  <ul class="collapse">
+  <li><a href="#phytoplankton-identification" id="toc-phytoplankton-identification" class="nav-link" data-scroll-target="#phytoplankton-identification">Phytoplankton Identification</a></li>
+  <li><a href="#pigment-concentrations" id="toc-pigment-concentrations" class="nav-link" data-scroll-target="#pigment-concentrations">Pigment Concentrations</a></li>
+  </ul></li>
+  <li><a href="#regional-results" id="toc-regional-results" class="nav-link" data-scroll-target="#regional-results">Regional Results</a>
+  <ul class="collapse">
+  <li><a href="#carquinez" id="toc-carquinez" class="nav-link" data-scroll-target="#carquinez">Carquinez</a></li>
+  <li><a href="#central-delta" id="toc-central-delta" class="nav-link" data-scroll-target="#central-delta">Central Delta</a></li>
+  <li><a href="#confluence" id="toc-confluence" class="nav-link" data-scroll-target="#confluence">Confluence</a></li>
+  <li><a href="#north-delta" id="toc-north-delta" class="nav-link" data-scroll-target="#north-delta">North Delta</a></li>
+  <li><a href="#san-pablo-bay" id="toc-san-pablo-bay" class="nav-link" data-scroll-target="#san-pablo-bay">San Pablo Bay</a></li>
+  <li><a href="#south-delta" id="toc-south-delta" class="nav-link" data-scroll-target="#south-delta">South Delta</a></li>
+  <li><a href="#suisun-and-grizzly-bays" id="toc-suisun-and-grizzly-bays" class="nav-link" data-scroll-target="#suisun-and-grizzly-bays">Suisun and Grizzly Bays</a></li>
+  <li><a href="#suisun-marsh" id="toc-suisun-marsh" class="nav-link" data-scroll-target="#suisun-marsh">Suisun Marsh</a></li>
+  </ul></li>
+  <li><a href="#interpretations" id="toc-interpretations" class="nav-link" data-scroll-target="#interpretations">Interpretations</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  <li><a href="#archived-reports" id="toc-archived-reports" class="nav-link" data-scroll-target="#archived-reports">Archived Reports</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content column-page-left" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Phytoplankton Report</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Tiffany Brown </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>The Department of Water Resources (DWR) and the US Bureau of Reclamation (USBR) are required by Water Right Decision 1641 (D-1641) to collect phytoplankton and chlorophyll <em>a</em> samples to monitor algal community composition and biomass at select sites in the upper San Francisco Estuary (Estuary). This report describes the results of these monitoring efforts for water year 2023 (October 1st 2022 through September 30th 2023) which was classified as a wet year in the Sacramento and San Joaquin Valleys <a href="https://cdec.water.ca.gov/reportapp/javareports?name=WSIHIST">(source)</a>.</p>
+</section>
+<section id="methods" class="level2">
+<h2 class="anchored" data-anchor-id="methods">Methods</h2>
+<p>Phytoplankton samples were collected monthly at 24 monitoring sites throughout the Upper Estuary and were grouped into regions based on their geographic location (<a href="#fig-stations">Figure&nbsp;1</a>; <a href="#tbl-stations">Table&nbsp;1</a>). These sites represent a variety of aquatic habitats, from narrow, freshwater channels to broad, estuarine bays.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-stations" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="../../../admin/figures-tables/phyto/phyto_station_map.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<figcaption class="figure-caption">Figure&nbsp;1: Map of EMP’s phytoplankton field sites.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div id="tbl-stations" class="anchored">
+<table class="table table-striped table-sm small" data-quarto-postprocess="true">
+<caption>Table&nbsp;1: Stations included within each region of the Delta</caption>
+<thead>
+<tr class="header">
+<th style="text-align: center;" data-quarto-table-cell-role="th">Region</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">WY Index</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Stations</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center; width: 33.3333333333333%;">Carquinez</td>
+<td style="text-align: center; width: 33.3333333333333%;">Sacramento</td>
+<td style="text-align: center; width: 33.3333333333333%;">NZ002, NZ004</td>
+</tr>
+<tr class="even">
+<td style="text-align: center; width: 33.3333333333333%;">Central Delta</td>
+<td style="text-align: center; width: 33.3333333333333%;">San Joaquin</td>
+<td style="text-align: center; width: 33.3333333333333%;">D16, D19, D26, D28A</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center; width: 33.3333333333333%;">Confluence</td>
+<td style="text-align: center; width: 33.3333333333333%;">Sacramento</td>
+<td style="text-align: center; width: 33.3333333333333%;">D4, D10, D12, D22</td>
+</tr>
+<tr class="even">
+<td style="text-align: center; width: 33.3333333333333%;">North Delta</td>
+<td style="text-align: center; width: 33.3333333333333%;">Sacramento</td>
+<td style="text-align: center; width: 33.3333333333333%;">C3A, NZ068</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center; width: 33.3333333333333%;">San Pablo Bay</td>
+<td style="text-align: center; width: 33.3333333333333%;">Sacramento</td>
+<td style="text-align: center; width: 33.3333333333333%;">D41, D41A, NZ325</td>
+</tr>
+<tr class="even">
+<td style="text-align: center; width: 33.3333333333333%;">South Delta</td>
+<td style="text-align: center; width: 33.3333333333333%;">San Joaquin</td>
+<td style="text-align: center; width: 33.3333333333333%;">C9, C10A, MD10A, P8</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center; width: 33.3333333333333%;">Suisun and Grizzly Bays</td>
+<td style="text-align: center; width: 33.3333333333333%;">Sacramento</td>
+<td style="text-align: center; width: 33.3333333333333%;">D6, D7, D8</td>
+</tr>
+<tr class="even">
+<td style="text-align: center; width: 33.3333333333333%;">Suisun Marsh</td>
+<td style="text-align: center; width: 33.3333333333333%;">Sacramento</td>
+<td style="text-align: center; width: 33.3333333333333%;">NZ032, NZS42</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+</div>
+</div>
+<section id="phytoplankton" class="level3">
+<h3 class="anchored" data-anchor-id="phytoplankton">Phytoplankton</h3>
+<p>The 10 most common genera were determined by summing the normalized organism counts across all stations and months for each genus. For the bar graphs, average organism counts were calculated per month, per region, and normalized to the number of stations. Average summary statistics are reported as the mean (μ) ± the standard deviation.</p>
+<p>For more in-depth methodology, see <a href="https://portal.edirepository.org/nis/metadataviewer?packageid=edi.1320.6">here</a>.</p>
+</section>
+<section id="chlorophyll-a-and-pheophytin-a" class="level3">
+<h3 class="anchored" data-anchor-id="chlorophyll-a-and-pheophytin-a">Chlorophyll <em>a</em> and Pheophytin <em>a</em></h3>
+<p>Samples of chlorophyll <em>a</em> and pheophytin <em>a</em> were collected monthly at 24 monitoring sites throughout the upper Estuary using a submersible pump positioned 1 meter below the water’s surface. Average analyte concentrations were then calculated per month, per region, and were normalized to the number of stations. Average summary statistics are reported as the median (M) ± the median absolute deviation.</p>
+<p>For more in-depth methodology, see <a href="https://portal.edirepository.org/nis/metadataviewer?packageid=edi.1320.6">here</a>.</p>
+</section>
+</section>
+<section id="overall-results" class="level2">
+<h2 class="anchored" data-anchor-id="overall-results">Overall Results</h2>
+<section id="phytoplankton-identification" class="level3">
+<h3 class="anchored" data-anchor-id="phytoplankton-identification">Phytoplankton Identification</h3>
+<p>All organisms collected in water year 2023 fell into these 12 algal groups:<br> • Centric Diatoms<br>• Chrysophytes<br>• Ciliates<br>• Cryptophytes<br>• Cyanobacteria<br>• Dinoflagellates<br>• Euglenoids<br>• Green Algae<br>• Haptophytes<br>• Pennate Diatoms<br>• Raphidophytes<br>• Synurophytes<br><br> The 10 most common genera collected in water year 2023 were, in order:<br> • Eucapsis (cyanobacteria)<br>• Chlorella (green algae)<br>• Cyclotella (centric diatoms)<br>• Plagioselmis (cryptophytes)<br>• Nitzschia (pennate diatoms)<br>• Skeletonema (centric diatoms)<br>• Monoraphidium (green algae)<br>• Teleaulax (cryptophytes)<br>• Cryptomonas (cryptophytes)<br>• Planktolyngbya (cyanobacteria)<br><br> Of the groups identified, centric diatoms, cyanobacteria, and green algae constituted 98.99% of the organisms collected (<a href="#fig-alg">Figure&nbsp;2</a>).</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-alg" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="../../../admin/figures-tables/phyto/phyto_tree.png" style="width:100.0%;height:100.0%" class="figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;2: Phytoplankton composition by algal group.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="pigment-concentrations" class="level3">
+<h3 class="anchored" data-anchor-id="pigment-concentrations">Pigment Concentrations</h3>
+<p>97.92% of samples had chlorophyll <em>a</em> levels below 10 μg/L, which is considered limiting for zooplankton growth (Müller-Solger et al., 2002). The average chlorophyll a value was 2.20 ± 0.99 µg/L; values ranged from &lt; 0.50 µg/L to 23.70 µg/L. 0.69% of samples were below the reporting limit. The average pheophytin a value was 0.88 ± 0.37 µg/L; values ranged from &lt; 0.50 µg/L to 6.39 µg/L. 18.75% of samples were below the reporting limit.</p>
+</section>
+</section>
+<section id="regional-results" class="level2">
+<h2 class="anchored" data-anchor-id="regional-results">Regional Results</h2>
+<section id="carquinez" class="level3">
+<h3 class="anchored" data-anchor-id="carquinez">Carquinez</h3>
+<section id="water-quality" class="level4">
+<h4 class="anchored" data-anchor-id="water-quality">Water Quality</h4>
+<p>The average chlorophyll a value was 2.54 ± 0.91 µg/L; values ranged from 0.56 µg/L to 4.87 µg/L. The average pheophytin a value was 0.64 ± 0.38 µg/L; values ranged from &lt; 0.50 µg/L to 1.84 µg/L. 37.5% of samples were below the reporting limit. Time series plots averaged over region are shown in <a href="#fig-wq-carquinez">Figure&nbsp;3</a>.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-wq-carquinez" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="../../../admin/figures-tables/phyto/phyto_wq_carquinez.png" class="img-fluid figure-img" width="720"></p>
+<figcaption class="figure-caption">Figure&nbsp;3: Chlorophyll a and pheophytin a average concentrations in Carquinez.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="phytoplankton-1" class="level4">
+<h4 class="anchored" data-anchor-id="phytoplankton-1">Phytoplankton</h4>
+<p>The most abundant algal groups were cyanobacteria (96% of organisms, µ = 58746 ± 72498 organisms/mL), green algae (2.2% of organisms, µ = 1434 ± 1814 organisms/mL), and centric diatoms (1.1% of organisms, µ = 459 ± 574 organisms/mL). The remaining 0.7% of organisms were comprised of chrysophytes, ciliates, cryptophytes, dinoflagellates, euglenoids, and pennate diatoms (Other, <a href="#fig-phy-carquinez">Figure&nbsp;4</a>).</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-phy-carquinez" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="../../../admin/figures-tables/phyto/phyto_bar_carquinez.png" class="img-fluid figure-img" width="1500"></p>
+<figcaption class="figure-caption">Figure&nbsp;4: Density of phytoplankton organisms in Carquinez.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="central-delta" class="level3">
+<h3 class="anchored" data-anchor-id="central-delta">Central Delta</h3>
+<section id="water-quality-1" class="level4">
+<h4 class="anchored" data-anchor-id="water-quality-1">Water Quality</h4>
+<p>The average chlorophyll a value was 1.58 ± 0.68 µg/L; values ranged from &lt; 0.50 µg/L to 7.95 µg/L. 2.08% of samples were below the reporting limit. The average pheophytin a value was 0.70 ± 0.27 µg/L; values ranged from &lt; 0.50 µg/L to 2.62 µg/L. 16.67% of samples were below the reporting limit. Time series plots averaged over region are shown in <a href="#fig-wq-centraldelta">Figure&nbsp;5</a>.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-wq-centraldelta" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="../../../admin/figures-tables/phyto/phyto_wq_centraldelta.png" class="img-fluid figure-img" width="720"></p>
+<figcaption class="figure-caption">Figure&nbsp;5: Chlorophyll a and pheophytin a average concentrations in the Central Delta.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="phytoplankton-2" class="level4">
+<h4 class="anchored" data-anchor-id="phytoplankton-2">Phytoplankton</h4>
+<p>The most abundant algal groups were cyanobacteria (94.9% of organisms, µ = 21804 ± 48437 organisms/mL), green algae (2.6% of organisms, µ = 666 ± 1203 organisms/mL), and centric diatoms (0.9% of organisms, µ = 282 ± 388 organisms/mL). The remaining 1.6% of organisms were comprised of chrysophytes, cryptophytes, dinoflagellates, euglenoids, haptophytes, and pennate diatoms (Other, <a href="#fig-phy-centraldelta">Figure&nbsp;6</a>).</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-phy-centraldelta" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="../../../admin/figures-tables/phyto/phyto_bar_centraldelta.png" class="img-fluid figure-img" width="1500"></p>
+<figcaption class="figure-caption">Figure&nbsp;6: Density of phytoplankton organisms in the Central Delta.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="confluence" class="level3">
+<h3 class="anchored" data-anchor-id="confluence">Confluence</h3>
+<section id="water-quality-2" class="level4">
+<h4 class="anchored" data-anchor-id="water-quality-2">Water Quality</h4>
+<p>The average chlorophyll a value was 2.05 ± 0.90 µg/L; values ranged from 0.61 µg/L to 5.42 µg/L. The average pheophytin a value was 0.80 ± 0.30 µg/L; values ranged from &lt; 0.50 µg/L to 2.20 µg/L. 18.75% of samples were below the reporting limit. Time series plots averaged over region are shown in <a href="#fig-wq-confluence">Figure&nbsp;7</a>.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-wq-confluence" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="../../../admin/figures-tables/phyto/phyto_wq_confluence.png" class="img-fluid figure-img" width="720"></p>
+<figcaption class="figure-caption">Figure&nbsp;7: Chlorophyll a and pheophytin a average concentrations in the Confluence.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="phytoplankton-3" class="level4">
+<h4 class="anchored" data-anchor-id="phytoplankton-3">Phytoplankton</h4>
+<p>The most abundant algal groups were cyanobacteria (95.7% of organisms, µ = 51544 ± 84041 organisms/mL), green algae (2.5% of organisms, µ = 1166 ± 1833 organisms/mL), and centric diatoms (0.9% of organisms, µ = 483 ± 763 organisms/mL). The remaining 0.8% of organisms were comprised of chrysophytes, ciliates, cryptophytes, dinoflagellates, euglenoids, pennate diatoms, and raphidophytes (Other, <a href="#fig-phy-confluence">Figure&nbsp;8</a>).</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-phy-confluence" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="../../../admin/figures-tables/phyto/phyto_bar_confluence.png" class="img-fluid figure-img" width="1500"></p>
+<figcaption class="figure-caption">Figure&nbsp;8: Density of phytoplankton organisms in the Confluence.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="north-delta" class="level3">
+<h3 class="anchored" data-anchor-id="north-delta">North Delta</h3>
+<section id="water-quality-3" class="level4">
+<h4 class="anchored" data-anchor-id="water-quality-3">Water Quality</h4>
+<p>The average chlorophyll a value was 1.98 ± 0.87 µg/L; values ranged from 0.53 µg/L to 5.45 µg/L. The average pheophytin a value was 0.70 ± 0.38 µg/L; values ranged from &lt; 0.50 µg/L to 3.57 µg/L. 37.5% of samples were below the reporting limit. Time series plots averaged over region are shown in <a href="#fig-wq-northdelta">Figure&nbsp;9</a>.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-wq-northdelta" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="../../../admin/figures-tables/phyto/phyto_wq_northdelta.png" class="img-fluid figure-img" width="720"></p>
+<figcaption class="figure-caption">Figure&nbsp;9: Chlorophyll a and pheophytin a average concentrations in the North Delta.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="phytoplankton-4" class="level4">
+<h4 class="anchored" data-anchor-id="phytoplankton-4">Phytoplankton</h4>
+<p>The most abundant algal groups were cyanobacteria (92.1% of organisms, µ = 25302 ± 47095 organisms/mL), green algae (4.5% of organisms, µ = 832 ± 1730 organisms/mL), and centric diatoms (1.1% of organisms, µ = 309 ± 383 organisms/mL). The remaining 2.1% of organisms were comprised of chrysophytes, ciliates, cryptophytes, dinoflagellates, euglenoids, and pennate diatoms (Other, <a href="#fig-phy-northdelta">Figure&nbsp;10</a>).</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-phy-northdelta" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="../../../admin/figures-tables/phyto/phyto_bar_northdelta.png" class="img-fluid figure-img" width="1500"></p>
+<figcaption class="figure-caption">Figure&nbsp;10: Density of phytoplankton organisms in the North Delta.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="san-pablo-bay" class="level3">
+<h3 class="anchored" data-anchor-id="san-pablo-bay">San Pablo Bay</h3>
+<section id="water-quality-4" class="level4">
+<h4 class="anchored" data-anchor-id="water-quality-4">Water Quality</h4>
+<p>The average chlorophyll a value was 3.38 ± 1.48 µg/L; values ranged from &lt; 0.50 µg/L to 16.50 µg/L. 2.78% of samples were below the reporting limit. The average pheophytin a value was 0.79 ± 0.32 µg/L; values ranged from &lt; 0.50 µg/L to 5.90 µg/L. 25% of samples were below the reporting limit. Time series plots averaged over region are shown in <a href="#fig-wq-sanpablobay">Figure&nbsp;11</a>.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-wq-sanpablobay" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="../../../admin/figures-tables/phyto/phyto_wq_sanpablobay.png" class="img-fluid figure-img" width="720"></p>
+<figcaption class="figure-caption">Figure&nbsp;11: Chlorophyll a and pheophytin a average concentrations in the San Pablo Bay.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="phytoplankton-5" class="level4">
+<h4 class="anchored" data-anchor-id="phytoplankton-5">Phytoplankton</h4>
+<p>The most abundant algal groups were cyanobacteria (94.5% of organisms, µ = 48328 ± 43726 organisms/mL), green algae (3% of organisms, µ = 1292 ± 1578 organisms/mL), and centric diatoms (1.8% of organisms, µ = 471 ± 666 organisms/mL). The remaining 0.7% of organisms were comprised of chrysophytes, ciliates, cryptophytes, dinoflagellates, euglenoids, pennate diatoms, and synurophytes (Other, <a href="#fig-phy-sanpablobay">Figure&nbsp;12</a>).</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-phy-sanpablobay" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="../../../admin/figures-tables/phyto/phyto_bar_sanpablobay.png" class="img-fluid figure-img" width="1500"></p>
+<figcaption class="figure-caption">Figure&nbsp;12: Density of phytoplankton organisms in the San Pablo Bay.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="south-delta" class="level3">
+<h3 class="anchored" data-anchor-id="south-delta">South Delta</h3>
+<section id="water-quality-5" class="level4">
+<h4 class="anchored" data-anchor-id="water-quality-5">Water Quality</h4>
+<p>The average chlorophyll a value was 2.52 ± 1.18 µg/L; values ranged from 0.57 µg/L to 23.70 µg/L. The average pheophytin a value was 1.39 ± 0.51 µg/L; values ranged from &lt; 0.50 µg/L to 6.39 µg/L. 4.17% of samples were below the reporting limit. Time series plots averaged over region are shown in <a href="#fig-wq-southdelta">Figure&nbsp;13</a>.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-wq-southdelta" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="../../../admin/figures-tables/phyto/phyto_wq_southdelta.png" class="img-fluid figure-img" width="720"></p>
+<figcaption class="figure-caption">Figure&nbsp;13: Chlorophyll a and pheophytin a average concentrations in the South Delta.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="phytoplankton-6" class="level4">
+<h4 class="anchored" data-anchor-id="phytoplankton-6">Phytoplankton</h4>
+<p>The most abundant algal groups were cyanobacteria (95.4% of organisms, µ = 34945 ± 172287 organisms/mL), green algae (2.2% of organisms, µ = 694 ± 1354 organisms/mL), and centric diatoms (1.2% of organisms, µ = 523 ± 910 organisms/mL). The remaining 1.1% of organisms were comprised of chrysophytes, ciliates, cryptophytes, dinoflagellates, euglenoids, and pennate diatoms (Other, <a href="#fig-phy-southdelta">Figure&nbsp;14</a>).</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-phy-southdelta" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="../../../admin/figures-tables/phyto/phyto_bar_southdelta.png" class="img-fluid figure-img" width="1500"></p>
+<figcaption class="figure-caption">Figure&nbsp;14: Density of phytoplankton organisms in the South Delta.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="suisun-and-grizzly-bays" class="level3">
+<h3 class="anchored" data-anchor-id="suisun-and-grizzly-bays">Suisun and Grizzly Bays</h3>
+<section id="water-quality-6" class="level4">
+<h4 class="anchored" data-anchor-id="water-quality-6">Water Quality</h4>
+<p>The average chlorophyll a value was 2.58 ± 0.87 µg/L; values ranged from 0.83 µg/L to 6.79 µg/L. The average pheophytin a value was 0.93 ± 0.38 µg/L; values ranged from &lt; 0.50 µg/L to 2.40 µg/L. 19.44% of samples were below the reporting limit. Time series plots averaged over region are shown in <a href="#fig-wq-suisunandgrizzlybays">Figure&nbsp;15</a>.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-wq-suisunandgrizzlybays" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="../../../admin/figures-tables/phyto/phyto_wq_suisunandgrizzlybays.png" class="img-fluid figure-img" width="720"></p>
+<figcaption class="figure-caption">Figure&nbsp;15: Chlorophyll a and pheophytin a average concentrations in Suisun and Grizzly Bays.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="phytoplankton-7" class="level4">
+<h4 class="anchored" data-anchor-id="phytoplankton-7">Phytoplankton</h4>
+<p>The most abundant algal groups were cyanobacteria (95.8% of organisms, µ = 56948 ± 83181 organisms/mL), green algae (2.4% of organisms, µ = 1381 ± 2127 organisms/mL), and centric diatoms (1.1% of organisms, µ = 543 ± 959 organisms/mL). The remaining 0.8% of organisms were comprised of chrysophytes, ciliates, cryptophytes, dinoflagellates, euglenoids, haptophytes, and pennate diatoms (Other, <a href="#fig-phy-suisunandgrizzlybays">Figure&nbsp;16</a>).</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-phy-suisunandgrizzlybays" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="../../../admin/figures-tables/phyto/phyto_bar_suisunandgrizzlybays.png" class="img-fluid figure-img" width="1500"></p>
+<figcaption class="figure-caption">Figure&nbsp;16: Density of phytoplankton organisms in Suisun and Grizzly Bays.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="suisun-marsh" class="level3">
+<h3 class="anchored" data-anchor-id="suisun-marsh">Suisun Marsh</h3>
+<section id="water-quality-7" class="level4">
+<h4 class="anchored" data-anchor-id="water-quality-7">Water Quality</h4>
+<p>The average chlorophyll a value was 2.21 ± 1.12 µg/L; values ranged from 0.99 µg/L to 9.46 µg/L. . The average pheophytin a value was 1.44 ± 0.56 µg/L; values ranged from &lt; 0.50 µg/L to 3.56 µg/L. 4.17% of samples were below the reporting limit. Time series plots averaged over region are shown in <a href="#fig-wq-suisunmarsh">Figure&nbsp;17</a>.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-wq-suisunmarsh" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="../../../admin/figures-tables/phyto/phyto_wq_suisunmarsh.png" class="img-fluid figure-img" width="720"></p>
+<figcaption class="figure-caption">Figure&nbsp;17: Chlorophyll a and pheophytin a average concentrations in Suisun Marsh.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="phytoplankton-8" class="level4">
+<h4 class="anchored" data-anchor-id="phytoplankton-8">Phytoplankton</h4>
+<p>The most abundant algal groups were cyanobacteria (96.4% of organisms, µ = 82361 ± 78772 organisms/mL), green algae (2% of organisms, µ = 1693 ± 2008 organisms/mL), and centric diatoms (1.1% of organisms, µ = 790 ± 1435 organisms/mL). The remaining 0.4% of organisms were comprised of chrysophytes, cryptophytes, dinoflagellates, euglenoids, pennate diatoms, and raphidophytes (Other, <a href="#fig-phy-suisunmarsh">Figure&nbsp;18</a>).</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-phy-suisunmarsh" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="../../../admin/figures-tables/phyto/phyto_bar_suisunmarsh.png" class="img-fluid figure-img" width="1500"></p>
+<figcaption class="figure-caption">Figure&nbsp;18: Density of phytoplankton organisms in Suisun Marsh.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="interpretations" class="level2">
+<h2 class="anchored" data-anchor-id="interpretations">Interpretations</h2>
+<p>Overall, chlorophyll-<em>a</em>, pheophytin-<em>a</em>, and phytoplankton abundance followed a seasonal pattern with the highest values of pigments and abundances in the spring and summer months and lower values and abundances in winter months. One exception was a large cyanobacterial bloom in January 2023 which occurred across all regions. However, this bloom was not associated with larger chlorophyll-<em>a</em> values, suggesting that, while the cyanobacteria were abundant, they were not producing large amounts of biomass as chlorophyll-<em>a</em>. Though cyanobacteria were dominant in the abundance counts, all phytoplankton fell into 12 distinct taxonomic groups distributed across all the regions of the San Francisco Estuary. Chlorophyll-<em>a</em> values were low throughout the year across all regions, with the majority of values below 10 µg/L, which is considered food limiting for zooplankton.</p>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<p>[APHA] American Public Health Association, American Waterworks, and Water Environmental Federation. 2012. Standard Methods for the Examination of Water and Wastewater. 22nd ed.&nbsp;Washington, D.C.: American Public Health Association.</p>
+<p>Alpine, A. E., and Cloern, J. E. 1992. Trophic interactions and direct physical effects control phytoplankton biomass and production in an estuary. Limnol. Oceanogr. 37: 946-955</p>
+<p>Carmichael, W., ed.&nbsp;1981. The Water Environment, Algal Toxins and Health. Plenum Press, New York, N. Y.</p>
+<p>Gannon, J. E. and R. S. Stemberger. 1978. Zooplankton (especially crustaceans and rotifers) as indicators of water quality. Trans. Amer. Microsc. 97:16.</p>
+<p>Horne, A. and Goldman, C. 1994. Limnology. 2nd ed.&nbsp;New York, New York, McGraw-Hill, Inc.</p>
+<p>Müller-Solger AB, Jassby AD, Müller-Navarra DC. 2002. Nutritional quality of food resources for zooplankton (Daphnia) in a tidal freshwater system (Sacramento-San Joaquin River Delta). Limnology and Oceanography 47(5): 1468-1476.</p>
+<p>Utermöhl, H. 1958. Zur Vervollkommnung der quantitativen Phytoplankton Methodik. Mitt. Int. Verh. Limnol. 9: 38.</p>
+<p>van den Hoek, C., D.G. Mann, and H.M. Jahns. 1995. Algae: an introduction to Phycology. Cambridge University Press, United Kingdom.</p>
+</section>
+<section id="archived-reports" class="level2">
+<h2 class="anchored" data-anchor-id="archived-reports">Archived Reports</h2>
+<p>Previous EMP phytoplankton reports can be found <a href="https://github.com/emp-dwr/emp-website/tree/gh-pages/admin/archive/phyto">here</a>.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center"><img src="../../..\admin/figures-tables/admin/EMP_footer.png" alt="DWR, CDFW, and USBR logos" height="50"></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+</body></html>

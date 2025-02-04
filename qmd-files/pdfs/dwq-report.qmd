@@ -1,0 +1,246 @@
+---
+title: "Discrete Water Quality Monitoring Report for Water Year `r lubridate::year(Sys.Date())-1`"
+---
+
+```{r setup, include=FALSE, echo=FALSE}
+# default chunk options
+knitr::opts_chunk$set(echo = FALSE, comment = NA, message = FALSE, warning = FALSE, results = 'asis')
+
+# read in functions; do not edit
+source(here::here('admin/import_scripts.R'))
+```
+
+\begin{center}
+Authors: Julianna Manning, S. Perry, Craig Stuart, and Ted Flynn$^*$ \\
+Division of Integrated Science \& Engineering \\
+California Department of Water Resources \\
+West Sacramento, CA
+
+\vspace*{5mm}
+
+Date: `r format(Sys.Date(), '%m/%d/%Y')`
+
+\vspace*{15mm}
+
+Pursuant to Condition 11c of Water Right Decision 1641, State Water Resources Control Board, State of California, March 15, 2000.
+
+\vspace*{15mm}
+
+Reporting Period: October 1, `r prev_year` – September 30, `r report_year`
+
+\vspace*{5mm}
+
+ $^*$\footnotesize{Address correspondence to ted.flynn@water.ca.gov}
+
+\vspace*{5mm}
+
+\includegraphics[width=0.6\textwidth]{`r here::here(file.path('admin/figures-tables/admin/EMP_footer.png'))`}
+\end{center}
+
+\newpage
+
+## Introduction
+
+The Department of Water Resources (DWR) and the US Bureau of Reclamation (USBR) are required by Water Right Decision 1641 (D-1641) to collect discrete water chemistry data to monitor the water quality at select sites in the upper San Francisco Estuary (Estuary). This report describes the results of these monitoring efforts for water year `r report_year` (October 1st `r prev_year` through September 30th `r report_year`) `r str_water_year(report_year, 'cur')` [(source)](https://cdec.water.ca.gov/reportapp/javareports?name=WSIHIST). Results are compared to the previous water year, `r str_water_year(prev_year, 'prev')`.
+
+## Methods
+
+Discrete water quality samples were collected monthly at 24 monitoring sites throughout the Upper Estuary and were grouped into regions based on their geographic location (@fig-stations; @tbl-stations). These sites represent a variety of aquatic habitats, from narrow, freshwater channels to broad, estuarine bays.
+
+EMP collects data for six different field parameters and 18 different laboratory constituents. The analytes highlighted in this report are:
+
+-   Specific Conductance (μS/cm)
+-   Turbidity (FNU)
+-   Dissolved Ammonia (mg/L)
+-   Chlorophyll *a* (μg/cm)
+-   Dissolved Nitrate+Nitrite (mg/L)
+-   Total Phosphorus (mg/L)
+
+Regional facet graphs were created for each parameter. The average, minimum and maximum values were determined for each analyte. Non-detect values were represented graphically via a vertical dashed line capped at the reporting limit. Average summary statistics are reported as the median (M) ± the median average deviation.
+
+For more in-depth methodology, see [here](https://portal.edirepository.org/nis/metadataviewer?packageid=edi.1320.6).
+
+## Results
+
+### Specific Conductance
+
+`r strings_dwq_cur$disp_paragraph('SpCndSurface','median', strings_dwq_prev)`
+
+### Turbidity
+
+`r strings_dwq_cur$disp_paragraph('TurbiditySurface','median', strings_dwq_prev)`
+
+### Dissolved Ammonia
+
+`r strings_dwq_cur$disp_paragraph('DissAmmonia','median', strings_dwq_prev)`
+
+### Chlorophyll *a*
+
+`r strings_dwq_cur$disp_paragraph('Chla','median', strings_dwq_prev)`
+
+### Dissolved Nitrate + Nitrite
+
+`r strings_dwq_cur$disp_paragraph('DissNitrateNitrite','median', strings_dwq_prev)`
+
+### Total Phosphorus
+
+`r strings_dwq_cur$disp_paragraph('TotPhos','median', strings_dwq_prev)`
+
+## Interpretations
+
+Water year 2023 in the Sacramento and San Joaquin Valleys was classified as wet after three years of drought. Many atmospheric river storms brought considerable amounts of rain starting in late December and colder average temperatures contributed to record snowpack.
+
+Specific conductance had a notable drop in all regions in January due to the influx of freshwater. Most regions continued to have low values throughout the rest of the water year due to snowpack runoff. The San Pablo, Suisun, and Grizzly Bay regions typically have higher values due to the strong marine influence from the Pacific Ocean, and they started to increase again in July. The average specific conductance in water year 2023 was much lower than the previous year. Turbidity had a notable spike in all regions in January due to sediment re-suspension caused by the high flows after a long dry period. Every region (except the Central Delta) had maximum values above 100 FNU. The average turbidity in water year 2023 was higher than the previous year.
+
+Dissolved ammonia, dissolved nitrate + nitrite, and total phosphorus had a notable spike in all regions in January due to increased runoff of organic matter and pollutants. The Southern Interior Delta region had the highest values of all three nutrients likely due to nearby agricultural land use. The average of each nutrient in water year 2023 was similar to the previous year.
+
+Chlorophyll a followed seasonal trends in most regions with higher values in the warmer summer months. The San Pablo Bay region had a small harmful algal bloom of *Heterosigma akashiwo* in July. C10A in the Southern Interior Delta had a spike in August, which is typically shallow during dry periods of the year. The average chlorophyll a in water year 2023 was a little higher than the previous year. More information about the phytoplankton genera is described in the phytoplankton section.
+
+## Archived Reports
+
+Previous EMP discrete water quality reports can be found [here](https://github.com/emp-dwr/emp-website/tree/gh-pages/admin/archive/d-wq).
+
+\newpage
+
+## Figures
+
+```{r echo=FALSE, fig.align='center'}
+#| label: fig-stations
+#| out-width: 100%
+#| fig-cap: 'Map of EMP’s discrete WQ field sites'
+
+knitr::include_graphics(here::here(file.path('admin/figures-tables/dwq/dwq_station_map.png')))
+```
+
+```{r}
+#| label: fig-spcndsurface
+#| echo: false
+#| fig-align: 'center'
+#| fig-cap: 'Specific conductance by region in the San Francisco Bay-Delta estuary.'
+
+knitr::include_graphics(here::here(file.path('admin/figures-tables/dwq/dwq_ts_spcndsurface.png')))
+```
+
+```{r}
+#| label: fig-turbiditysurface
+#| echo: false
+#| fig-align: 'center'
+#| fig-cap: 'Turbidity by region in the San Francisco Bay-Delta estuary.'
+ 
+include_graphics(here::here(file.path('admin/figures-tables/dwq/dwq_ts_turbiditysurface.png')))
+```
+
+```{r}
+#| label: fig-dissammonia
+#| echo: false
+#| fig-align: 'center'
+#| fig-cap: 'Dissolved ammonia by region in the San Francisco Bay-Delta estuary.'
+ 
+include_graphics(here::here(file.path('admin/figures-tables/dwq/dwq_ts_dissammonia.png')))
+```
+
+```{r}
+#| label: fig-chla
+#| echo: false
+#| fig-align: 'center'
+#| fig-cap: 'Chlorophyll a by region in the San Francisco Bay-Delta estuary.'
+
+include_graphics(here::here(file.path('admin/figures-tables/dwq/dwq_ts_chla.png')))
+```
+
+```{r}
+#| label: fig-dissnitratenitrite
+#| echo: false
+#| fig-align: 'center'
+#| fig-cap: 'Dissovled nitrate nitrite by region in the San Francisco Bay-Delta estuary.'
+
+include_graphics(here::here(file.path('admin/figures-tables/dwq/dwq_ts_dissnitratenitrite.png')))
+```
+
+```{r}
+#| label: fig-totphos
+#| echo: false
+#| fig-align: 'center'
+#| fig-cap: 'Total phosphorus by region in the San Francisco Bay-Delta estuary.'
+
+include_graphics(here::here(file.path('admin/figures-tables/dwq/dwq_ts_totphos.png')))
+```
+
+\newpage
+
+## Tables
+
+```{r echo=FALSE, warning=FALSE, message=FALSE, results = 'asis'}
+#| label: tbl-stations
+#| tbl-cap: 'Discrete WQ stations included within each region of the Delta'
+
+dwq_stations <- readr::read_csv(here::here('admin/figures-tables/dwq/dwq_stations.csv'))
+
+styler$style_kable(dwq_stations)
+```
+
+```{r}
+#| label: tbl-spcndsurface
+#| echo: false
+#| fig-align: 'center'
+#| tbl-cap: 'Summary statistics for specific conductance by region in the San Francisco Bay-Delta estuary.'
+
+summary_spc <- table_dwq$clone(deep=TRUE)
+summary_spc$create_summary_df('SpCndSurface', 'median')
+summary_spc$create_kable()
+```
+
+```{r}
+#| label: tbl-turbiditysurface
+#| echo: false
+#| fig-align: 'center'
+#| tbl-cap: 'Summary statistics for turbidity by region in the San Francisco Bay-Delta estuary.'
+
+summary_turb <- table_dwq$clone(deep=TRUE)
+summary_turb$create_summary_df('TurbiditySurface', 'median')
+summary_turb$create_kable()
+```
+
+```{r}
+#| label: tbl-dissammonia
+#| echo: false
+#| fig-align: 'center'
+#| tbl-cap: 'Summary statistics for dissolved ammonia by region in the San Francisco Bay-Delta estuary.'
+
+summary_amm <- table_dwq$clone(deep=TRUE)
+summary_amm$create_summary_df('DissAmmonia', 'median')
+summary_amm$create_kable()
+```
+
+```{r}
+#| label: tbl-chla
+#| echo: false
+#| fig-align: 'center'
+#| tbl-cap: 'Summary statistics for chlorophyll a by region in the San Francisco Bay-Delta estuary.'
+
+summary_chla <- table_dwq$clone(deep=TRUE)
+summary_chla$create_summary_df('Chla', 'median')
+summary_chla$create_kable()
+```
+
+```{r}
+#| label: tbl-dissnitratenitrite
+#| echo: false
+#| fig-align: 'center'
+#| tbl-cap: 'Summary statistics for dissolved nitrate nitrite by region in the San Francisco Bay-Delta estuary.'
+
+summary_nn <- table_dwq$clone(deep=TRUE)
+summary_nn$create_summary_df('DissNitrateNitrite', 'median')
+summary_nn$create_kable()
+```
+
+```{r}
+#| label: tbl-totphos
+#| echo: false
+#| fig-align: 'center'
+#| tbl-cap: 'Summary statistics for total phosphorus by region in the San Francisco Bay-Delta estuary.'
+
+summary_phos <- table_dwq$clone(deep=TRUE)
+summary_phos$create_summary_df('TotPhos', 'median')
+summary_phos$create_kable()
+```
