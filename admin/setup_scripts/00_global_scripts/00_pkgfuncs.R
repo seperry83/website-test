@@ -18,6 +18,12 @@ R6Class <- R6::R6Class
 
 `%m+%` <- lubridate::`%m+%`
 `%m-%` <- lubridate::`%m-%`
+parse_date_time <- lubridate::parse_date_time
+year <- lubridate::year
+month <- lubridate::month
+ymd <- lubridate::ymd
+`%within%` <- lubridate::`%within%`
+interval <- lubridate::interval
 
 sym <- rlang::sym
 
@@ -31,9 +37,6 @@ fct_rev <- forcats::fct_rev
 plot_annotation <- patchwork::plot_annotation
 wrap_plots <- patchwork::wrap_plots
 plot_layout <- patchwork::plot_layout
-
-year <- lubridate::year
-month <- lubridate::month
 
 left_join <- dplyr::left_join
 filter <- dplyr::filter
@@ -49,6 +52,9 @@ n <- dplyr::n
 relocate <- dplyr::relocate
 desc <- dplyr::desc
 slice <- dplyr::slice
+if_else <- dplyr::if_else
+distinct <- dplyr::distinct
+count <- dplyr::count
 
 ggplot <- ggplot2::ggplot
 aes <- ggplot2::aes
@@ -85,10 +91,6 @@ addWorksheet <- openxlsx::addWorksheet
 writeData <- openxlsx::writeData
 saveWorkbook <- openxlsx::saveWorkbook
 
-parse_date_time <- lubridate::parse_date_time
-
-month <- lubridate::month
-
 kable <- knitr::kable
 include_graphics <- knitr::include_graphics
 
@@ -98,3 +100,7 @@ footnote <- kableExtra::footnote
 
 darken <- colorspace::darken
 lighten <- colorspace::lighten
+
+brewer.pal <- RColorBrewer::brewer.pal
+
+complete <- tidyr::complete
