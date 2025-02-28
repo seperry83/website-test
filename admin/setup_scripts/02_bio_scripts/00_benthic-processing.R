@@ -18,8 +18,7 @@ BenBaseClass <- R6Class(
     subset_cols = function() {
       self$df_raw <- self$df_raw %>% select(Year, Month, Station, Region, MeanCPUE, TotalGrabs,
                                             !!!rlang::syms(self$ben_classif)) %>%
-        mutate(MeanOrgs = round(MeanCPUE * TotalGrabs * 0.052, 0),
-               Month = factor(Month, levels = month_order)) %>%
+        mutate(MeanOrgs = round(MeanCPUE * TotalGrabs * 0.052, 0)) %>%
         mutate(WaterYear = ifelse(Month %in% c('October', 'November', 'December'), Year + 1, Year)) %>%
         filter(WaterYear >= min(Year) & WaterYear <= max(Year)) %>%
         relocate(WaterYear, .before = everything())

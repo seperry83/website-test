@@ -15,6 +15,8 @@ obj_cwq$assign_analyte_meta()
 
 obj_cwq$assign_regions('CEMP')
 
+obj_cwq$add_month()
+
 # Create Current/Previous Year Objects ------------------------------------
 
 obj_cwq_cur <- obj_cwq$clone(deep=TRUE)

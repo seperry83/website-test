@@ -363,12 +363,7 @@ WQFigureClass <- R6Class(
     df_raw = NULL,
     
     initialize = function(df_raw) {
-      super$initialize()
-      
-      self$df_raw <- df_raw %>% 
-        dplyr::mutate(Month = lubridate::month(Date, label = TRUE, abbr = FALSE),
-                      Month = factor(Month, levels = month_order),
-                      Month_num = as.numeric(Month))
+      self$df_raw <- df_raw
     },
 
     # Combine regional plots into one plot for each analyte
@@ -488,7 +483,9 @@ WQFigureClass <- R6Class(
     
     # Create segment geoms for below RL values
     blw_rl_geom = function(df, color_by = 'Station') {
-      df_segment <- df %>% dplyr::filter(DetectStatus == 'Nondetect')
+      df_segment <- df %>% 
+        filter(DetectStatus == 'Nondetect') %>% 
+        mutate(Month_num = as.numeric(Month))
       
       list(
         # Vertical segment geom
@@ -528,13 +525,14 @@ WQFigureClass <- R6Class(
       if (plt_type == 'dwq') {
         # Create discrete WQ plot
         plt <- df %>% 
-          dplyr::mutate(
-            Value = dplyr::if_else(DetectStatus == 'Nondetect', NA_real_, Value),
+          mutate(
+            Value = if_else(DetectStatus == 'Nondetect', NA_real_, Value),
+            Month_num = as.numeric(Month)
           ) %>% 
           ggplot(ggplot2::aes(x = Month_num, y = Value, color = .data[[color_by]])) +
           geom_line(linewidth = 0.6, na.rm = TRUE) +
           geom_point(size = 2, na.rm = TRUE) +
-          scale_x_continuous(breaks = seq_along(month_order), labels = label_order)
+          scale_x_continuous(breaks = 1:12, labels = label_order)
         
         # Add geoms for < RL values if necessary
         if (any(df$DetectStatus == 'Nondetect')) plt <- plt + private$blw_rl_geom(df, color_by)
@@ -542,7 +540,7 @@ WQFigureClass <- R6Class(
       } else {
         # Create continuous WQ plot
         plt <- df %>% 
-          ggplot(ggplot2::aes(Date, Value, color = Station)) +
+          ggplot(aes(Date, Value, color = Station)) +
           ggborderline::geom_borderline(
             linewidth = 0.8,
             bordercolor = 'black',

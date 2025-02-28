@@ -16,8 +16,8 @@ obj_phyto <- BaseClass$new(df_raw_phyto, df_analytes, df_regions)
 
 obj_phyto$
   remove_EZ()$
-  assign_regions('Phyto')
-
+  assign_regions('Phyto')$
+  add_month()
 
 # Create Current Year Object ----------------------------------------------
 
@@ -40,6 +40,7 @@ obj_pwq$
   remove_EZ()$
   assign_analyte_meta()$
   assign_regions('DEMP')$
+  add_month()$
   replace_nondetect()
 
 obj_pwq_cur <- obj_pwq$clone(deep=TRUE)

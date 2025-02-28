@@ -17,6 +17,8 @@ obj_ben$simplify_stations()
 
 obj_ben$assign_regions('Benthic')
 
+obj_ben$add_month()
+
 # Create Current Year Object ----------------------------------------------
 
 obj_ben_cur <- obj_ben$clone(deep=TRUE)

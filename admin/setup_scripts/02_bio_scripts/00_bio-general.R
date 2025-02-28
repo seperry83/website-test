@@ -49,12 +49,8 @@ BioFigureClass <- R6Class(
         algal_cat <- private$def_alg_cat(filt_val, type = "name", threshold = 1)
         
         df_filt <- df_filt %>% 
-          mutate(
-            # Combine 'Other' AlgalGroup categories into one
-            "{{group_var}}" := if_else(!!group_var %in% algal_cat$other, 'Other', !!group_var),
-            Month = month(Date, label = TRUE, abbr = FALSE),
-            Month = factor(Month, levels = month_order)
-          )
+          # Combine 'Other' AlgalGroup categories into one
+          mutate("{{group_var}}" := if_else(!!group_var %in% algal_cat$other, 'Other', !!group_var))
       }
       
       # Calculate total number of stations sampled for each month
@@ -97,7 +93,7 @@ BioFigureClass <- R6Class(
         geom_col(color = 'black') +
         theme_bw() +
         scale_y_continuous(name = y_axis_lab, labels = scales::label_comma()) +
-        scale_x_discrete(name = NULL, breaks = month_order, labels = label_order) +
+        scale_x_discrete(name = NULL, labels = label_order) +
         scale_fill_manual(values = col_colors) +
         guides(fill = "none")
       

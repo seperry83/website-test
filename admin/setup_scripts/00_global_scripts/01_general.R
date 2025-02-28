@@ -68,6 +68,17 @@ BaseClass <- R6Class(
       return(invisible(self))
     },
     
+    # Add Month variable and refactor for water year definition
+    add_month = function() {
+      self$df_raw <- self$df_raw %>% 
+        mutate(
+          Month = month(Date, label = TRUE, abbr = FALSE),
+          Month = forcats::fct_shift(Month, -3L)
+        )
+      
+      return(invisible(self))
+    },
+    
     # populate `Value` column of Nondetect entries with `ReportLimit` value (for coding purposes)
     replace_nondetect = function() {
       self$df_raw <- mutate(self$df_raw, Value = ifelse(DetectStatus == 'Nondetect', ReportingLimit, Value))
@@ -376,7 +387,6 @@ report_year <- as.integer(format(Sys.Date(), '%Y')) - 1
 
 prev_year <- report_year - 1
 
-month_order <- c('October','November','December','January','February','March','April','May','June','July','August','September')
 label_order <- c(glue('Oct-{prev_year%%100}'),glue('Nov-{prev_year%%100}'),glue('Dec-{prev_year%%100}'),glue('Jan-{report_year%%100}'),glue('Feb-{report_year%%100}'),glue('Mar-{report_year%%100}'),glue('Apr-{report_year%%100}'),glue('May-{report_year%%100}'),glue('Jun-{report_year%%100}'),glue('Jul-{report_year%%100}'),glue('Aug-{report_year%%100}'),glue('Sep-{report_year%%100}'))
 
 styler <- StylingClass$new()

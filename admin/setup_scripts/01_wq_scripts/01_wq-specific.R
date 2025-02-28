@@ -21,11 +21,7 @@ WQRRIClass <- R6Class(
                            stop('Invalid time period; must be \'on months\' or \'off months\'')
       )
       
-      df_do <- self$df_raw %>%
-        filter((Site == 'RRI') & (Analyte == 'DissolvedOxygen')) %>%
-        dplyr::mutate(Month = lubridate::month(Date, label = TRUE, abbr = FALSE),
-                      Month = factor(Month, levels = month_order),
-                      Month_num = as.numeric(Month))
+      df_do <- self$df_raw %>% filter((Site == 'RRI') & (Analyte == 'DissolvedOxygen')) 
       
       df_filt <- left_join(df_do, df_rl, by = 'Month') %>%
         dplyr::filter(Month %in% rel_months)
@@ -66,14 +62,11 @@ WQRRIClass <- R6Class(
       
       df_rls <- read_quiet_csv(here::here('admin/figures-tables/cwq/stockton_DO_limits.csv'))
 
-      df_do <- df_do %>%
-        dplyr::mutate(Month = lubridate::month(Date, label = TRUE, abbr = FALSE),
-                      Month = factor(Month, levels = month_order),
-                      Month_num = as.numeric(Month))
-
       df_rls <- df_rls %>%
-        dplyr::mutate(Month = factor(Month, levels = month_order),
-                      Month_num = as.numeric(Month))
+        mutate(
+          Month = factor(Month, levels = levels(df_do$Month)),
+          Month_num = as.numeric(Month)
+        )
       
       plt_do <- ggplot() +
         geom_boxplot(df_do, mapping = aes(Month, Value)) +

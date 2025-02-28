@@ -15,6 +15,7 @@ obj_dwq$
   remove_EZ()$
   assign_analyte_meta()$
   assign_regions('DEMP')$
+  add_month()$
   replace_nondetect()
 
 # Create Current/Previous Year Objects ------------------------------------
