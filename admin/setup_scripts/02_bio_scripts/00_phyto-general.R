@@ -193,8 +193,122 @@ PhytoFigureClass <- R6Class(
       super$initialize(df_raw)
     }, 
   
-    # Algal Tree Plots - placeholder
-    
+    # Algal Tree Plots
+    plt_algal_tree = function(threshold = 1) {
+      # Calculate overall sampling frequency for each AlgalGroup
+      df_summ <- self$summarize_phyto()
+      
+      # Define AlgalGroup categories -
+      # 'Other' category are AlgalGroups in less than 1% of samples
+      algal_cat <- private$def_alg_cat(type = "name", threshold = threshold)
+      
+      # Create data frames for each tree plot
+      df_main <- df_summ %>% 
+        # Combine AlgalGroups in "Other" category
+        mutate(AlgalGroup = if_else(AlgalGroup %in% algal_cat$other, "Other", AlgalGroup)) %>% 
+        summarize(dplyr::across(c(per, sum), sum), .by = AlgalGroup)
+      
+      df_main_no_cyano <- df_main %>% 
+        filter(AlgalGroup != "Cyanobacteria") %>% 
+        mutate(
+          sum_all = sum(sum),
+          per_area = sum / sum_all * 100
+        )
+      
+      df_other <- df_summ %>% 
+        filter(AlgalGroup %in% algal_cat$other) %>% 
+        mutate(
+          sum_all = sum(sum),
+          per_area = sum / sum_all * 100
+        )
+      
+      # Assign coloring
+      uni_groups <- c(df_main$AlgalGroup, df_other$AlgalGroup)
+      area_colors <- setNames(
+        c(brewer.pal(8, 'Set2'), brewer.pal(8, 'Dark2'))[1:length(uni_groups)], 
+        uni_groups
+      )
+      
+      # Define plot formatting to be used globally
+      ls_plt_format <- list(
+        treemapify::geom_treemap(),
+        treemapify::geom_treemap_text(
+          place = "center",
+          size = 10,
+          min.size = 3,
+          reflow = TRUE
+        ),
+        treemapify::geom_treemap_subgroup_border(color = "black", size = 1),
+        scale_fill_manual(values = area_colors),
+        theme(
+          legend.position = "none", 
+          plot.title = element_text(face = "bold", size = 16, hjust = 0.5),
+          plot.subtitle = element_text(hjust = 0.5)
+        )
+      )
+      
+      # Generate tree plots for main AlgalGroups
+      # With Cyanobacteria
+      plt_main <- df_main %>% 
+        ggplot(
+          aes(
+            area = per, 
+            fill = AlgalGroup, 
+            label = paste0(AlgalGroup, "\n", round(per, 1), "%"),
+            subgroup = AlgalGroup
+          )
+        ) +
+        labs(subtitle = "Including Cyanobacteria") +
+        ls_plt_format
+      
+      # Without Cyanobacteria
+      plt_main_no_cyano <- df_main_no_cyano %>% 
+        ggplot(
+          aes(
+            area = per_area, 
+            fill = AlgalGroup, 
+            label = paste0(AlgalGroup, "\n", round(per, 1), "%"),
+            subgroup = AlgalGroup
+          )
+        ) +
+        labs(subtitle = "Without Cyanobacteria") +
+        ls_plt_format
+      
+      # Generate tree plot for other AlgalGroups
+      plt_other <- df_other %>%
+        ggplot(
+          aes(
+            area = per_area, 
+            fill = AlgalGroup, 
+            label = paste0(AlgalGroup, "\n", round(per, 2), "%"), 
+            subgroup = AlgalGroup
+          )
+        ) +
+        ggtitle('"Other" Algal Groups') +
+        ls_plt_format
+      
+      # Combine tree plots - Main tree plots first
+      plt_main_c <- plt_main + plt_main_no_cyano + plot_layout(widths = c(2.5, 1))
+      
+      # Add Other tree plot to Main tree plots and set formatting
+      plt_comb <- plt_main_c / plt_other + 
+        plot_annotation(
+          title = "Main Algal Groups",
+          theme = theme(plot.title = element_text(face = "bold", size = 16, hjust = 0.5))
+        ) +
+        plot_layout(
+          design = c(
+            patchwork::area(1, 1, 1, 6), 
+            patchwork::area(2, 2, 2, 5)
+          )
+        )
+      
+      ggsave(
+        here::here("admin/figures-tables/phyto/phyto_tree.png"),
+        plt_comb, 
+        width = 7.5, height = 7, units = 'in'
+      )
+    }
   )
 )
 

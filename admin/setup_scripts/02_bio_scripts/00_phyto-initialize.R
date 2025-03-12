@@ -52,20 +52,22 @@ strings_pwq_cur <- WQStringClass$new(obj_pwq_cur$df_raw)
 # Create Figure Classes ---------------------------------------------------
 
 fig_pwq <- WQFigureClass$new(obj_pwq_cur$df_raw)
-
-fig_phyto <- PhytoFigureClass$new(obj_phyto_cur$df_raw)
+fig_phyto_density <- BioFigureClass$new(obj_phyto_cur$df_raw)
+fig_phyto_tree <- PhytoFigureClass$new(obj_phyto_cur$df_raw)
 
 # Generate Figures --------------------------------------------------------
 
-create_figs_phyto <- function(){
+fig_phyto_tree$plt_algal_tree()
+
+create_figs_phyto <- function() {
   phyto_regions <- fig_pwq$df_raw %>%
-        pull(Region) %>%
-        unique()
+    pull(Region) %>%
+    unique()
   
-  for (region in phyto_regions){
+  for (region in phyto_regions) {
    plt_wq <- fig_pwq$phyto_return_plt(region)[1][[1]]
   
-   plt_phyto <- fig_phyto$plt_org_density_TEST(region, 'AlgalGroup')
+   plt_phyto <- fig_phyto_density$plt_org_density(region, program = "Phyto")
   
    fp_name <- gsub(' ', '', tolower(region))
    fp_name <- gsub('&','', fp_name)
