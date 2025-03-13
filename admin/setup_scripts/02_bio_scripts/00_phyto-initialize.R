@@ -24,10 +24,6 @@ obj_phyto$
 obj_phyto_cur <- obj_phyto$clone(deep=TRUE)
 obj_phyto_cur$filter_years(report_year)
 
-# Create Current Year Stats -----------------------------------------------
-
-stats_phyto_cur <- PhytoStatsClass$new(obj_phyto_cur$df_raw)
-
 # Create Current Year Text Strings ----------------------------------------
 
 strings_phyto_cur <- PhytoStringClass$new(obj_phyto_cur$df_raw)

@@ -17,63 +17,52 @@ BioFigureClass <- R6Class(
     plt_org_density = function(filt_val, program = c("Phyto", "Benthic")) {
       program <- match.arg(program)
       
-      # Define unique variables and values for each program
       if (program == "Phyto") {
-        # Define unique variables for data set
-        filt_var <- sym("Region")
+        # Data preparation unique to Phytoplankton
+        # Define AlgalGroup categories for filt_val (Region) -
+        # 'Other' category are AlgalGroups in less than 1% of samples
+        alg_cat <- self$df_raw %>% private$def_alg_cat(filt_val, threshold = 1)
+        
+        df_summ <- self$df_raw %>% 
+          # Combine 'Other' AlgalGroup categories into one
+          mutate(AlgalGroup = if_else(AlgalGroup %in% alg_cat$other, 'Other', AlgalGroup)) %>% 
+          private$summarize_phyto(filt_val, summ_grps = c("AlgalGroup", "Month"))
+        
+        # Define unique group variable for data set
         group_var <- sym("AlgalGroup")
-        value_var <- sym("Units_per_mL")
         
         # Define unique values for plot labels
         y_axis_lab <- "Organisms per mL"
         plt_title <- glue("{filt_val} Phytoplankton Densities")
         
       } else if (program == "Benthic") {
-        # Define unique variables for data set
-        filt_var <- sym("Station")
+        # Data preparation unique to Benthic
+        # Filter to station
+        df_filt <- self$df_raw %>% filter(Station == filt_val)
+        
+        # Count number of sampling events for each month during the report year
+        num_se_month <- df_filt %>% 
+          distinct(Station, Month) %>% 
+          count(Month, name = "num_se")
+        
+        # Calculate monthly total densities for each Phylum and normalize them by
+          # the total number of sampling events during each month
+        df_summ <- df_filt %>%
+          summarize(total_val = sum(MeanCPUE, na.rm = TRUE), .by = c(Month, Phylum)) %>% 
+          left_join(num_se_month, by = "Month") %>% 
+          mutate(avg = total_val / num_se)
+        
+        # Define unique group variable for data set
         group_var <- sym("Phylum")
-        value_var <- sym("MeanCPUE")
         
         # Define unique values for plot labels
         y_axis_lab <- "CPUE"
         plt_title <- glue("{filt_val} Benthic Organism Densities")
       }
       
-      # Filter to filt_val (either Region or Station)
-      df_filt <- self$df_raw %>% filter(!!filt_var == filt_val)
-      
-      # Data preparation unique to Phytoplankton
-      if (program == "Phyto") {
-        # Define AlgalGroup categories for filt_val (Region) -
-        # 'Other' category are AlgalGroups in less than 1% of samples
-        algal_cat <- private$def_alg_cat(filt_val, type = "name", threshold = 1)
-        
-        df_filt <- df_filt %>% 
-          # Combine 'Other' AlgalGroup categories into one
-          mutate("{{group_var}}" := if_else(!!group_var %in% algal_cat$other, 'Other', !!group_var))
-      }
-      
-      # Calculate total number of stations sampled for each month
-      df_num_stations <- df_filt %>% 
-        distinct(Month, Station) %>% 
-        count(Month)
-      
-      # Calculate monthly total densities for each group_var and normalize them by
-        # the total number of stations sampled during each month
-      df_summ <- df_filt %>%
-        summarize(
-          total_val = sum(!!value_var, na.rm = TRUE),
-          .by = c(Month, !!group_var)
-        ) %>% 
-        left_join(df_num_stations, by = "Month") %>% 
-        mutate(norm_val = total_val / n)
-      
       # Calculate overall averages of group_var for reordering the group_var
       group_var_levels <- df_summ %>%
-        summarize(
-          avg_val = mean(norm_val, na.rm = TRUE), 
-          .by = !!group_var
-        ) %>% 
+        summarize(avg_val = mean(avg, na.rm = TRUE), .by = !!group_var) %>% 
         arrange(avg_val) %>% 
         pull(!!group_var)
       
@@ -82,14 +71,13 @@ BioFigureClass <- R6Class(
         c(brewer.pal(8, 'Set2'), brewer.pal(8, 'Dark2'))[1:length(group_var_levels)], 
         rev(group_var_levels)
       )
-      
       # Reorder the levels of group_var based on the averages
       df_summ_c <- df_summ %>% 
         mutate("{{group_var}}" := factor(!!group_var, levels = group_var_levels))
       
       # Create stacked barplot of monthly densities
       plt_stacked <- df_summ_c %>% 
-        ggplot(aes(Month, norm_val, fill = !!group_var)) +
+        ggplot(aes(Month, avg, fill = !!group_var)) +
         geom_col(color = 'black') +
         theme_bw() +
         scale_y_continuous(name = y_axis_lab, labels = scales::label_comma()) +
