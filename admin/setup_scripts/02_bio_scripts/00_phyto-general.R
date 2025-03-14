@@ -21,7 +21,7 @@ PhytoStatsClass <- R6Class(
       
       # Calculate sampling frequency for each specified phytoplankton group
       df_freq <- df_data %>%
-        group_by(dplyr::pick({{ summ_grps }})) %>% 
+        group_by(pick({{ summ_grps }})) %>% 
         summarize(sum_units = sum(Units_per_mL, na.rm = TRUE), .groups = "drop") %>% 
         mutate(
           total_units = sum(sum_units, na.rm = TRUE),
@@ -47,8 +47,8 @@ PhytoStatsClass <- R6Class(
       df_sd <- df_data %>% 
         left_join(df_norm_dens_c, by = summ_grps) %>% 
         mutate(diff2 = (Units_per_mL - avg)^2) %>% 
-        group_by(dplyr::pick({{ summ_grps }})) %>% 
-        dplyr::reframe(sd = sqrt(sum(diff2, na.rm = TRUE) / (num_se - 1))) %>% 
+        group_by(pick({{ summ_grps }})) %>% 
+        reframe(sd = sqrt(sum(diff2, na.rm = TRUE) / (num_se - 1))) %>% 
         distinct()
       
       # Combine all summary statistics
@@ -67,7 +67,7 @@ PhytoStatsClass <- R6Class(
         main = filter(df_per, per >= threshold),
         other = filter(df_per, per < threshold)
       ) %>% 
-        purrr::map(\(x) pull(x, AlgalGroup))
+        map(\(x) pull(x, AlgalGroup))
     }
   )
 )
@@ -113,7 +113,7 @@ PhytoStringClass <- R6Class(
       
       gen_list <- self$styling$bullet_list(top_genus)
       
-      output <- glue::glue('The 10 most common genera collected in water year {report_year} were, in order:<br />
+      output <- glue('The 10 most common genera collected in water year {report_year} were, in order:<br />
                               {gen_list}<br />')
       
       return(output)
@@ -126,7 +126,7 @@ PhytoStringClass <- R6Class(
       # 'Other' category are AlgalGroups in less than 1% of samples
       main_cat <- private$def_alg_cat(self$df_raw, threshold = threshold)$main
       main_list <- sort(tolower(main_cat))
-      main_list_combined <- knitr::combine_words(main_list)
+      main_list_combined <- combine_words(main_list)
       
       df_per_main <- df_per %>% filter(AlgalGroup %in% main_cat)
       main_per_sum <- round(sum(df_per_main$per, na.rm = TRUE), 2)
@@ -142,7 +142,7 @@ PhytoStringClass <- R6Class(
         private$summarize_phyto(region, summ_grps = "AlgalGroup") %>% 
         mutate(
           per = round(per, 1),
-          dplyr::across(c(avg, sd), \(x) round(x, 0))
+          across(c(avg, sd), \(x) round(x, 0))
         )
       
       # 'Other' category are AlgalGroups in less than 1% of samples
@@ -152,26 +152,26 @@ PhytoStringClass <- R6Class(
       other_groups <- filter(df_summ, AlgalGroup %in% alg_cat$other)
       
       main_txt <-
-        purrr::map2_chr(main_groups$AlgalGroup, 1:nrow(main_groups), function(group, idx) {
+        map2_chr(main_groups$AlgalGroup, 1:nrow(main_groups), function(group, idx) {
           # website
-          if (knitr::is_html_output()) {
+          if (is_html_output()) {
             glue(
               '{tolower(group)} ({main_groups$per[idx]}% of organisms, µ = {main_groups$avg[idx]} ± {main_groups$sd[idx]} organisms/mL)'
             )
           
           # pdf
-          } else if (knitr::is_latex_output()) {
+          } else if (is_latex_output()) {
             glue(
               '{tolower(group)} ({main_groups$per[idx]}% of organisms, $\\mu$ = {main_groups$avg[idx]} ± {main_groups$sd[idx]} organisms/mL)'
             )
           }
         })
       
-      main_txt_combined <- knitr::combine_words(main_txt)
+      main_txt_combined <- combine_words(main_txt)
       
       other_txt <- if (nrow(other_groups) > 0) {
         other_list <- sort(tolower(other_groups$AlgalGroup))
-        other_list_combined <- knitr::combine_words(other_list)
+        other_list_combined <- combine_words(other_list)
         glue(
           'The remaining {sum(other_groups$per)}% of organisms were comprised of {other_list_combined}'
         )

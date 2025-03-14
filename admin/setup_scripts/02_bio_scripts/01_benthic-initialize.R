@@ -1,11 +1,11 @@
 
 # Read in Data ------------------------------------------------------------
 
-df_raw_ben <- read_quiet_csv(here::here('admin/test-data/EMP_Benthic.csv'))
+df_raw_ben <- read_quiet_csv(here('admin/test-data/EMP_Benthic.csv'))
 
-df_units <- read_quiet_csv(here::here('admin/figures-tables/admin/analyte_table.csv'), locale = readr::locale(encoding = 'UTF-8'))
+df_units <- read_quiet_csv(here('admin/figures-tables/admin/analyte_table.csv'), locale = locale(encoding = 'UTF-8'))
 
-df_regions <- read_quiet_csv(here::here('admin/figures-tables/admin/station_table.csv'))
+df_regions <- read_quiet_csv(here('admin/figures-tables/admin/station_table.csv'))
 
 # Create Base Benthic Object ----------------------------------------------
 
@@ -91,7 +91,7 @@ create_figs_benthic <- function() {
     # save time series for all stations
     plt_benthic_ts_all <- fig_ben_all$plt_ben_ts(station, scope = "historical")
   
-    ggsave(here::here(paste0(emp_path, '/timeseries_all/benthic_tsall_', fp_name, '.png')),
+    ggsave(here(paste0(emp_path, '/timeseries_all/benthic_tsall_', fp_name, '.png')),
            plt_benthic_ts_all, width = 25, height = exp_height, unit = 'cm')
     
     # save time series by station
@@ -99,13 +99,13 @@ create_figs_benthic <- function() {
       plt_benthic <- fig_ben_cur$plt_org_density(station, program = "Benthic")
       plt_benthic_ts <- fig_ben_cur$plt_ben_ts(station, scope = "current")
   
-      ggsave(here::here(paste0('admin/figures-tables/benthic/benthic_bar_', fp_name, '.png')),
+      ggsave(here(paste0('admin/figures-tables/benthic/benthic_bar_', fp_name, '.png')),
               plt_benthic, width = 25, height = exp_height, unit = 'cm')
   
-      ggsave(here::here(paste0(emp_path, '/bargraphs/benthic_bar_', fp_name, '.png')),
+      ggsave(here(paste0(emp_path, '/bargraphs/benthic_bar_', fp_name, '.png')),
               plt_benthic, width = 25, height = exp_height, unit = 'cm')
   
-      ggsave(here::here(paste0(emp_path, '/timeseries/benthic_ts_', fp_name, '.png')),
+      ggsave(here(paste0(emp_path, '/timeseries/benthic_ts_', fp_name, '.png')),
               plt_benthic_ts, width = 25, height = exp_height, unit = 'cm')
   
       }

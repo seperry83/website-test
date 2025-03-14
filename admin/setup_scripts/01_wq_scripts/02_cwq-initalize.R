@@ -1,7 +1,7 @@
 
 # Read in Data ------------------------------------------------------------
 
-df_raw_cwq <- read_quiet_csv(here::here('admin/test-data/EMP_CWQ_data-long.csv'))
+df_raw_cwq <- read_quiet_csv(here('admin/test-data/EMP_CWQ_data-long.csv'))
 
 # Create Base CWQ Object --------------------------------------------------
 
@@ -55,7 +55,7 @@ fig_cwq <- WQFigureClass$new(obj_cwq_cur$df_raw)
 
 # Generate Figures --------------------------------------------------------
 
-create_figs_cwq <- function(){
+create_figs_cwq <- function() {
   # main figures
   cwq_analytes <- df_analytes %>%
     filter(str_detect(Program, '\\bCEMP\\b')) %>%
@@ -71,7 +71,7 @@ create_figs_cwq <- function(){
     
     exp_height <- ceiling(height_factor/2)*2
     
-    ggsave(here::here(paste0('admin/figures-tables/cwq/cwq_ts_', tolower(param), '.png')),
+    ggsave(here(paste0('admin/figures-tables/cwq/cwq_ts_', tolower(param), '.png')),
            plt, width = 6*.8, height = exp_height*.8, unit = 'in')
   }
   

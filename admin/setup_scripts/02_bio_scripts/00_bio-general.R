@@ -80,7 +80,7 @@ BioFigureClass <- R6Class(
         ggplot(aes(Month, avg, fill = !!group_var)) +
         geom_col(color = 'black') +
         theme_bw() +
-        scale_y_continuous(name = y_axis_lab, labels = scales::label_comma()) +
+        scale_y_continuous(name = y_axis_lab, labels = label_comma()) +
         scale_x_discrete(name = NULL, labels = label_order) +
         scale_fill_manual(values = col_colors) +
         guides(fill = "none")
@@ -121,7 +121,7 @@ BioFigureClass <- R6Class(
       df_main <- df_summ %>% 
         # Combine AlgalGroups in "Other" category
         mutate(AlgalGroup = if_else(AlgalGroup %in% algal_cat$other, "Other", AlgalGroup)) %>% 
-        summarize(dplyr::across(c(per, sum_units), sum), .by = AlgalGroup)
+        summarize(across(c(per, sum_units), sum), .by = AlgalGroup)
       
       df_main_no_cyano <- df_main %>% 
         filter(AlgalGroup != "Cyanobacteria") %>% 
@@ -146,14 +146,14 @@ BioFigureClass <- R6Class(
       
       # Define plot formatting to be used globally
       ls_plt_format <- list(
-        treemapify::geom_treemap(),
-        treemapify::geom_treemap_text(
+        geom_treemap(),
+        geom_treemap_text(
           place = "center",
           size = 10,
           min.size = 3,
           reflow = TRUE
         ),
-        treemapify::geom_treemap_subgroup_border(color = "black", size = 1),
+        geom_treemap_subgroup_border(color = "black", size = 1),
         scale_fill_manual(values = area_colors),
         theme(
           legend.position = "none", 
@@ -213,13 +213,13 @@ BioFigureClass <- R6Class(
         ) +
         plot_layout(
           design = c(
-            patchwork::area(1, 1, 1, 6), 
-            patchwork::area(2, 2, 2, 5)
+            area(1, 1, 1, 6), 
+            area(2, 2, 2, 5)
           )
         )
       
       ggsave(
-        here::here("admin/figures-tables/phyto/phyto_tree.png"),
+        here("admin/figures-tables/phyto/phyto_tree.png"),
         plt_comb,
         width = 7.5, height = 7, units = 'in'
       )
@@ -303,7 +303,7 @@ BioFigureClass <- R6Class(
         geom_line(na.rm = TRUE) +
         geom_point(size = 2, na.rm = TRUE) +
         theme_bw() +
-        scale_y_continuous(name = "CPUE", labels = scales::label_comma()) +
+        scale_y_continuous(name = "CPUE", labels = label_comma()) +
         scale_x_date(name = NULL, date_labels = '%m-%y', date_breaks = x_axis_break) +
         scale_color_manual(values = col_colors) +
         guides(color = "none")
