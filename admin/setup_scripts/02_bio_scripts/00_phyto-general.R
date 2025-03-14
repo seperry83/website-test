@@ -74,7 +74,7 @@ PhytoStringClass <- R6Class(
     df_raw = NULL,
     styling = NULL,
     
-    initialize = function(df_raw, styling) {
+    initialize = function(df_raw) {
       self$df_raw <- df_raw
       self$styling <- StylingClass$new()
     },
