@@ -128,7 +128,7 @@ map2_chr <- purrr::map2_chr
 
 geom_borderline <- ggborderline::geom_borderline
 
-scales <- scales::label_comma
+label_comma <- scales::label_comma
 
 geom_treemap <- treemapify::geom_treemap
 geom_treemap_text <- treemapify::geom_treemap_text
