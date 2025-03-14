@@ -363,6 +363,7 @@ WQFigureClass <- R6Class(
     df_raw = NULL,
     
     initialize = function(df_raw) {
+      super$initialize(df_regionhex)
       self$df_raw <- df_raw
     },
 

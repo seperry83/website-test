@@ -10,7 +10,7 @@ BioFigureClass <- R6Class(
     df_raw = NULL,
     
     initialize = function(df_raw) {
-      super$initialize(df_raw)
+      self$df_raw <- df_raw
     }, 
     
     # Organism density bar plots for both Phyto and Benthic

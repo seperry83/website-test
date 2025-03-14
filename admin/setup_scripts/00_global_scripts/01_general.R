@@ -96,7 +96,7 @@ StylingClass <- R6Class(
     df_regionhex = NULL,
     
     initialize = function(df_regionhex) {
-      self$df_regionhex <- read_csv(here::here('admin/figures-tables/admin/region_table.csv'), show_col_types = FALSE)
+      self$df_regionhex <- read_csv(here('admin/figures-tables/admin/region_table.csv'), show_col_types = FALSE)
     },
     
     # TABLES

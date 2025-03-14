@@ -3,19 +3,10 @@
 PhytoStatsClass <- R6Class(
   'PhytoStatsClass',
   
-  public = list(
-    df_raw = NULL,
-    
-    initialize = function(df_raw) {
-      self$df_raw <- df_raw
-    }
-  ),
-  
   private = list(
     # Calculate summary statistics for each specified phytoplankton group -
       # either overall or by region (defaults to all regions)
     summarize_phyto = function(df_data, region = NULL, summ_grps) {
-      # df_data <- self$df_raw
       
       if (!is.null(region)) df_data <- filter(df_data, Region == region)
       
@@ -83,8 +74,8 @@ PhytoStringClass <- R6Class(
     df_raw = NULL,
     styling = NULL,
     
-    initialize = function(df_raw) {
-      super$initialize(df_raw)
+    initialize = function(df_raw, styling) {
+      self$df_raw <- df_raw
       self$styling <- StylingClass$new()
     },
     
