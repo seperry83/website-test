@@ -43,15 +43,11 @@ table_cwq <- WQTableClass$new(obj_cwq_cur$df_raw)
 
 # Create Current Year Plots -----------------------------------------------
 
-plt_cwq <- WQFigureClass$new(obj_cwq_cur$df_raw)
+fig_cwq <- WQFigureClass$new(obj_cwq_cur$df_raw)
 
 # Create RRI DO Object ----------------------------------------------------
 
 obj_rri <- WQRRIClass$new(obj_cwq_cur$df_raw)
-
-# Create Figure Object ----------------------------------------------------
-
-fig_cwq <- WQFigureClass$new(obj_cwq_cur$df_raw)
 
 # Generate Figures --------------------------------------------------------
 
