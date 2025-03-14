@@ -425,20 +425,16 @@ WQFigureClass <- R6Class(
     # Process the water quality data for a specific region
     phyto_wq_processing = function(region) {
       region_data <- self$df_raw %>%
-        dplyr::filter(Analyte %in% c('Chla', 'Pheoa'), Region == region)
+        filter(Analyte %in% c('Chla', 'Pheoa'), Region == region)
       
       region_monthly_data <- region_data %>%
-        dplyr::group_by(Analyte, Month, Month_num, Region) %>%
-        dplyr::summarize(
+        group_by(Analyte, Month, Region) %>%
+        summarize(
           avg_val = median(Value, na.rm = TRUE),
           DetectStatus = ifelse(any(avg_val <= Value[DetectStatus == 'Nondetect']), 'Nondetect', 'Detect'),
           .groups = 'drop'
         ) %>%
         rename(Value = avg_val)
-      
-      if (region == 'San Pablo Bay'){
-        df_chlatest <<- region_monthly_data
-      }
       
       return(region_monthly_data)
     },
