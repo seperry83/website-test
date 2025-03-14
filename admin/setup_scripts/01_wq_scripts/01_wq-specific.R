@@ -13,7 +13,7 @@ WQRRIClass <- R6Class(
     
     # text string for CWQ RRI DO
     disp_RRI_months = function(time_period) {
-      df_rl <- read_quiet_csv(here::here('admin/figures-tables/cwq/stockton_DO_limits.csv'))
+      df_rl <- read_quiet_csv(here('admin/figures-tables/cwq/stockton_DO_limits.csv'))
       
       rel_months <- switch(time_period,
                            'off months' = df_rl %>% filter(Type == 'Off') %>% pull(Month),
@@ -21,18 +21,14 @@ WQRRIClass <- R6Class(
                            stop('Invalid time period; must be \'on months\' or \'off months\'')
       )
       
-      df_do <- self$df_raw %>%
-        filter((Site == 'RRI') & (Analyte == 'DissolvedOxygen')) %>%
-        dplyr::mutate(Month = lubridate::month(Date, label = TRUE, abbr = FALSE),
-                      Month = factor(Month, levels = month_order),
-                      Month_num = as.numeric(Month))
+      df_do <- self$df_raw %>% filter((Site == 'RRI') & (Analyte == 'DissolvedOxygen')) 
       
       df_filt <- left_join(df_do, df_rl, by = 'Month') %>%
-        dplyr::filter(Month %in% rel_months)
+        filter(Month %in% rel_months)
 
       months_below <- df_filt %>%
-        dplyr::filter(Value < Limit) %>%
-        dplyr::pull(Month) %>%
+        filter(Value < Limit) %>%
+        pull(Month) %>%
         unique()
       
       rl_limit <- unique(df_filt$Limit)
@@ -53,7 +49,7 @@ WQRRIClass <- R6Class(
               panel.grid.minor = element_blank(),
               axis.line = element_blank(),
               axis.title.x = element_blank(),
-              axis.text.x = element_text(angle = 45, vjust = 0.5, margin = ggplot2::margin(t = 1)),
+              axis.text.x = element_text(angle = 45, vjust = 0.5, margin = margin(t = 1)),
               text = element_text(size = 8),
               axis.text = element_text(size = 8*0.8))
       
@@ -64,16 +60,13 @@ WQRRIClass <- R6Class(
     create_rri_plt = function() {
       df_do <- self$df_raw %>% filter((Site == 'RRI') & (Analyte == 'DissolvedOxygen'))
       
-      df_rls <- read_quiet_csv(here::here('admin/figures-tables/cwq/stockton_DO_limits.csv'))
-
-      df_do <- df_do %>%
-        dplyr::mutate(Month = lubridate::month(Date, label = TRUE, abbr = FALSE),
-                      Month = factor(Month, levels = month_order),
-                      Month_num = as.numeric(Month))
+      df_rls <- read_quiet_csv(here('admin/figures-tables/cwq/stockton_DO_limits.csv'))
 
       df_rls <- df_rls %>%
-        dplyr::mutate(Month = factor(Month, levels = month_order),
-                      Month_num = as.numeric(Month))
+        mutate(
+          Month = factor(Month, levels = levels(df_do$Month)),
+          Month_num = as.numeric(Month)
+        )
       
       plt_do <- ggplot() +
         geom_boxplot(df_do, mapping = aes(Month, Value)) +
@@ -95,8 +88,8 @@ WQRRIClass <- R6Class(
         scale_x_discrete(labels = label_order)
       
       plt_do <- self$style_RRI_plt(plt_do)
-    
-      ggsave(here::here('admin/figures-tables/cwq/cwq_rri_do.png'), plt_do, width = 3.5, height = 2.5, unit = 'in')
+      
+      ggsave(here('admin/figures-tables/cwq/cwq_rri_do.png'), plt_do, width = 3.5, height = 2.5, unit = 'in')
     }
   )
 )

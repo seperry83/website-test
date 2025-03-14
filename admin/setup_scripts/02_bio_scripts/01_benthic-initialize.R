@@ -1,11 +1,11 @@
 
 # Read in Data ------------------------------------------------------------
 
-df_raw_ben <- read_quiet_csv(here::here('admin/test-data/EMP_Benthic.csv'))
+df_raw_ben <- read_quiet_csv(here('admin/test-data/EMP_Benthic.csv'))
 
-df_units <- read_quiet_csv(here::here('admin/figures-tables/admin/analyte_table.csv'), locale = readr::locale(encoding = 'UTF-8'))
+df_units <- read_quiet_csv(here('admin/figures-tables/admin/analyte_table.csv'), locale = locale(encoding = 'UTF-8'))
 
-df_regions <- read_quiet_csv(here::here('admin/figures-tables/admin/station_table.csv'))
+df_regions <- read_quiet_csv(here('admin/figures-tables/admin/station_table.csv'))
 
 # Create Base Benthic Object ----------------------------------------------
 
@@ -16,6 +16,8 @@ obj_ben$remove_EZ()
 obj_ben$simplify_stations()
 
 obj_ben$assign_regions('Benthic')
+
+obj_ben$add_month()
 
 # Create Current Year Object ----------------------------------------------
 
@@ -59,11 +61,14 @@ wkbk_ben$calc_station_year('species', 'wkbk')
 
 wkbk_ben$calc_station_month('species', 'wkbk')
 
-wkbk_ben$export_wkbk(abs_path_data(glue::glue('Admin/Annual Report Docs/Benthic/annual_report_{report_year}.xlsx')))
+wkbk_ben$export_wkbk(abs_path_data(glue('Admin/Annual Report Docs/Benthic/annual_report_{report_year}.xlsx')))
 
 # Create/Export Figures ---------------------------------------------------
 
-create_figs_benthic <- function(){
+fig_ben_cur <- BioFigureClass$new(obj_ben_cur$df_raw)
+fig_ben_all <- BioFigureClass$new(obj_ben_all$df_raw)
+
+create_figs_benthic <- function() {
   benthic_stations <- obj_ben_all$df_raw %>%
     pull(Station) %>%
     unique()
@@ -84,23 +89,23 @@ create_figs_benthic <- function(){
     emp_path <- abs_path_data('Admin/Annual Report Docs/Benthic/figures')
     
     # save time series for all stations
-    plt_benthic_ts_all <- obj_ben_all$plt_phy_timeseries_all_TEST(station)
+    plt_benthic_ts_all <- fig_ben_all$plt_ben_ts(station, scope = "historical")
   
-    ggsave(here::here(paste0(emp_path, '/timeseries_all/benthic_tsall_', fp_name, '.png')),
+    ggsave(here(paste0(emp_path, '/timeseries_all/benthic_tsall_', fp_name, '.png')),
            plt_benthic_ts_all, width = 25, height = exp_height, unit = 'cm')
     
     # save time series by station
-    if (station %in% unique(obj_ben_cur$df_raw$Station)){
-      plt_benthic <- obj_ben_cur$plt_phy_density_TEST(station, 'Phylum')
-      plt_benthic_ts <- obj_ben_cur$plt_phy_timeseries_TEST(station)
+    if (station %in% unique(obj_ben_cur$df_raw$Station)) {
+      plt_benthic <- fig_ben_cur$plt_org_density(station, program = "Benthic")
+      plt_benthic_ts <- fig_ben_cur$plt_ben_ts(station, scope = "current")
   
-      ggsave(here::here(paste0('admin/figures-tables/benthic/benthic_bar_', fp_name, '.png')),
+      ggsave(here(paste0('admin/figures-tables/benthic/benthic_bar_', fp_name, '.png')),
               plt_benthic, width = 25, height = exp_height, unit = 'cm')
   
-      ggsave(here::here(paste0(emp_path, '/bargraphs/benthic_bar_', fp_name, '.png')),
+      ggsave(here(paste0(emp_path, '/bargraphs/benthic_bar_', fp_name, '.png')),
               plt_benthic, width = 25, height = exp_height, unit = 'cm')
   
-      ggsave(here::here(paste0(emp_path, '/timeseries/benthic_ts_', fp_name, '.png')),
+      ggsave(here(paste0(emp_path, '/timeseries/benthic_ts_', fp_name, '.png')),
               plt_benthic_ts, width = 25, height = exp_height, unit = 'cm')
   
       }
